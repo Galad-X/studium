@@ -1,0 +1,9 @@
+class: Notification
+table: notifications
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  message: String
+  relatedId: int?, # Optional ID for related content (e.g., study, subscription)
+  type: String # e.g., 'subscription', 'study_reminder', 'new_content'
+  isRead: bool, default=false
+  createdAt: DateTime

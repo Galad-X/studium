@@ -1,0 +1,5 @@
+# A class to bundle user profile and subscription data for efficient fetching.
+class: UserProfileBundle
+fields:
+  profile: UserProfile
+  subscription: Subscription?

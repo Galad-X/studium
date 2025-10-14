@@ -1,0 +1,14 @@
+# Summary model for storing AI-generated summaries
+class: Summary
+table: summaries
+fields:
+  studyMaterialId: int, relation(parent=study_materials) # Links to StudyMaterial
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  isPremium: bool # True for detailed summaries, false for brief
+  subject: String
+  topic: String
+  wordCount: int?
+  introduction: String?
+  subtopics: List<String> # JSON or serialized list of subtopics
+  nuggets: List<String> # JSON or serialized list of key points
+  createdAt: DateTime

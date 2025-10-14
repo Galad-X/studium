@@ -1,0 +1,6 @@
+class: Tag
+table: tags
+fields:
+  name: String
+  studyMaterialId: int, relation(parent=study_materials) # Links to StudyMaterial
+  createdAt: DateTime

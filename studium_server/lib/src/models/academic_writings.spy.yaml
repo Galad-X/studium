@@ -1,0 +1,13 @@
+# AcademicWriting model for storing AI-generated academic documents (premium feature)
+class: AcademicWriting
+table: academic_writings
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  studyMaterialId: int?, relation(parent=study_materials) # Optional link to StudyMaterial
+  type: String # e.g., 'undergraduate_project', 'field_trip_report', 'dissertation', 'business_plan'
+  title: String
+  wordCount: int?
+  content: String # Full document content
+  format: String # e.g., 'docx', 'pdf'
+  fileUrl: String # URL to generated document
+  createdAt: DateTime

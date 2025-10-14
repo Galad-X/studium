@@ -1,0 +1,9 @@
+class: Answer
+table: answers
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  questionId: int, relation(parent=questions) # Links to Question
+  answerText: String
+  score: double? # AI-evaluated score (0-100)
+  feedback: String? # AI-generated feedback
+  submittedAt: DateTime

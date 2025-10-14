@@ -1,0 +1,9 @@
+class: FileProcessing
+table: file_processing
+fields:
+  studyMaterialId: int, relation(parent=study_materials) # Links to StudyMaterial
+  status: String # e.g., 'pending', 'processing', 'completed', 'failed'
+  processedText: String? # Extracted text after processing
+  errorMessage: String? # Error details if processing fails
+  createdAt: DateTime
+  updatedAt: DateTime

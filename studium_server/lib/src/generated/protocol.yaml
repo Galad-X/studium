@@ -1,0 +1,40 @@
+academicWriting:
+  - generateWriting:
+  - getWritings:
+  - deleteWriting:
+ai:
+  - generateQuestions:
+  - submitAnswer:
+  - generateSummary:
+  - generateSampleSummary:
+  - generateAcademicWriting:
+  - generateResearchComparison:
+analytics:
+  - logAction:
+  - getAnalytics:
+notification:
+  - getNotifications:
+  - markNotificationRead:
+question:
+  - getSampleQuestions:
+studyMaterial:
+  - uploadMaterial:
+  - getMaterials:
+  - getSampleMaterial:
+  - deleteMaterial:
+  - updateMaterial:
+  - getProcessingStatus:
+  - getMaterialsByType:
+  - searchMaterials:
+  - getMaterialStats:
+subscription:
+  - createSubscription:
+  - cancelSubscription:
+  - getSubscriptionStatus:
+summary:
+  - getSummaries:
+user:
+  - getProfileBundle:
+  - updateProfile:
+  - getDashboardBundle:
+  - createStudyHistory:

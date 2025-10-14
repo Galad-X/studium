@@ -1,0 +1,7 @@
+class: UserAnalytics
+table: user_analytics
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  action: String # e.g., 'question_answered', 'summary_viewed', 'document_downloaded'
+  timestamp: DateTime
+  metadata: String? # JSON/serialized additional data (e.g., question type)

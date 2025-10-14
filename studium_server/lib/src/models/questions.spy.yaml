@@ -1,0 +1,18 @@
+# Question model for storing AI-generated questions
+# Updated Question model with enhanced fields
+class: Question
+table: questions
+fields:
+  studyMaterialId: int, relation(parent=study_materials) # Links to StudyMaterial
+  type: String # e.g., 'saq', 'essay', 'true_false', 'matching', 'fill_in_blank', 'problem_solving', 'diagram_labeling', 'case_study', 'long_answer'
+  questionText: String
+  correctAnswer: String? # For questions with definitive answers
+  options: List<String>? # For multiple choice/matching questions
+  explanation: String? # Detailed explanation of the correct answer
+  difficulty: String # 'easy', 'medium', 'hard'
+  bloomsLevel: String # 'remember', 'understand', 'apply', 'analyze', 'evaluate', 'create'
+  estimatedTime: int # Estimated time to answer in minutes
+  tags: List<String>? # Subject tags or keywords
+  diagramImageUrl: String? # URL to diagram image for diagram_labeling questions
+  labelingPoints: List<String>? # JSON/serialized list of label coordinates or descriptions
+  createdAt: DateTime

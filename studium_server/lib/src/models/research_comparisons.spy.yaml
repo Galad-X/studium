@@ -1,0 +1,8 @@
+class: ResearchComparison
+table: research_comparisons
+fields:
+  summaryId: int?, relation(parent=summaries) # Optional link to Summary
+  studyMaterialId: int, relation(parent=study_materials) # Links to StudyMaterial
+  newerFindings: String # Text summarizing newer findings
+  unsolvedProblems: List<String> # JSON/serialized list of unsolved problems
+  createdAt: DateTime

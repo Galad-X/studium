@@ -1,0 +1,10 @@
+class: StudyMaterial
+table: study_materials
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  title: String
+  fileType: String # e.g., 'pdf', 'docx', 'pptx', 'link', 'video'
+  fileUrl: String # URL to stored file (e.g., cloud storage)
+  uploadDate: DateTime
+  size: int?
+  contentText: String? # Extracted text from file for AI processing

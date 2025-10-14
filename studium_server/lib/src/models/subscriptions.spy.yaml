@@ -1,0 +1,11 @@
+# Subscription model for tracking premium subscriptions
+class: Subscription
+table: subscriptions
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  gateway: String # e.g., 'stripe', 'paystack'
+  subscriptionId: String # External ID from payment gateway
+  gatewayToken: String? # Token for payment gateway
+  status: String # e.g., 'active', 'canceled', 'pending'
+  startDate: DateTime
+  endDate: DateTime?

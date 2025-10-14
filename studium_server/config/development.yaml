@@ -1,0 +1,72 @@
+# This is the configuration file for your local development environment. By
+# default, it runs a single server on port 8080. To set up your server, you will
+# need to add the name of the database you are connecting to and the user name.
+# The password for the database is stored in the config/passwords.yaml.
+#
+# When running your server locally, the server ports are the same as the public
+# facing ports.
+
+# Configuration for the main API server.
+apiServer:
+  port: 7080
+  publicHost: localhost
+  publicPort: 7080
+  publicScheme: http
+
+# Configuration for the Insights server.
+insightsServer:
+  port: 7081
+  publicHost: localhost
+  publicPort: 7081
+  publicScheme: http
+
+# Configuration for the web server.
+webServer:
+  port: 7082
+  publicHost: localhost
+  publicPort: 7082
+  publicScheme: http
+
+# This is the database setup for your server.
+database:
+  host: localhost
+  port: 7090
+  name: studium
+  user: postgres
+  #requireSsl: true # defaults to false
+  #isUnixSocket: true # defaults to false
+
+# This is the setup for Redis.
+redis:
+  enabled: false
+  host: localhost
+  port: 7091
+  #user: # defaults to empty
+
+maxRequestSize: 524288 # The maximum size of requests allowed in bytes
+
+sessionLogs:
+  persistentEnabled: true
+  consoleEnabled: true
+
+apiKeys:
+  openAI: !secret openAi
+  stripe: !secret stripe
+  paystack: !secret paystackSecretKey
+
+  
+email:
+  # For development, use Ethereal (https://ethereal.email) to catch emails.
+  # Create a new account there and copy the SMTP credentials.
+  smtpServer: smtp.ethereal.email
+  smtpPort: 587
+  smtpUser: your-ethereal-username@ethereal.email
+  smtpPass: !secret ethereal_password # Store this in passwords.yaml
+  # This is the "from" address that will appear in emails.
+  fromEmail: no-reply@studium.ai
+  fromName: Studium AI Support
+# futureCallExecutionEnabled: true # Defaults to true
+
+#futureCall:
+#  concurrencyLimit: 1 # Defaults to 1, a negative or null value removes the limit
+#  scanInterval: 5000 # Defaults to 5000

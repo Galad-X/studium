@@ -1,0 +1,8 @@
+# A class to bundle data for the user dashboard.
+class: DashboardBundle
+fields:
+  history: StudyHistory
+  # We'll fetch the full objects for the 3 most recent items of each type.
+  recentMaterials: List<StudyMaterial>
+  recentSummaries: List<Summary>
+  # You can add recentQuestions, recentWritings etc. here as well

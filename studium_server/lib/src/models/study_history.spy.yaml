@@ -1,0 +1,17 @@
+
+# StudyHistory model for tracking user study progress (logged-in users only)
+class: StudyHistory
+table: study_history
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Links to User
+  materialIds: List<int> # JSON or serialized list of StudyMaterial IDs
+  questionIds: List<int> # JSON or serialized list of Question IDs
+  summaryIds: List<int> # JSON or serialized list of Summary IDs
+  writingIds: List<int> # JSON or serialized list of AcademicWriting IDs
+  progress: double?
+  lastUpdated: DateTime
+
+indexes:
+  unique_user:
+    fields: userId
+    unique: true

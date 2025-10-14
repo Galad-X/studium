@@ -1,0 +1,345 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "notifications",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "relatedId",
+            "columnType": 6,
+            "isNullable": true,
+            "dartType": "int?"
+          }
+        ],
+        "deleteColumns": [],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "tableDropped",
+            "message": "One or more columns are added to table \"questions\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+            "table": "questions",
+            "columns": [
+              "difficulty"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_stripe_customer_id_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "stripeCustomerId"
+            ],
+            "destrucive": false
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_paystack_customer_code_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "paystackCustomerCode"
+            ],
+            "destrucive": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "deleteTable",
+      "deleteTable": "questions"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "questions",
+        "dartName": "Question",
+        "module": "studium",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('questions_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "studyMaterialId",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "type",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "questionText",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "correctAnswer",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "options",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<String>?"
+          },
+          {
+            "name": "explanation",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "difficulty",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "bloomsLevel",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "estimatedTime",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "tags",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<String>?"
+          },
+          {
+            "name": "diagramImageUrl",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "labelingPoints",
+            "columnType": 8,
+            "isNullable": true,
+            "dartType": "List<String>?"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "constraintName": "questions_fk_0",
+            "columns": [
+              "studyMaterialId"
+            ],
+            "referenceTable": "study_materials",
+            "referenceTableSchema": "public",
+            "referenceColumns": [
+              "id"
+            ],
+            "onUpdate": 3,
+            "onDelete": 3
+          }
+        ],
+        "indexes": [
+          {
+            "indexName": "questions_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    },
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "subscriptions",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "gatewayToken",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          }
+        ],
+        "deleteColumns": [],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "tableDropped",
+            "message": "One or more columns are added to table \"questions\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+            "table": "questions",
+            "columns": [
+              "difficulty"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_stripe_customer_id_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "stripeCustomerId"
+            ],
+            "destrucive": false
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_paystack_customer_code_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "paystackCustomerCode"
+            ],
+            "destrucive": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "user_profile",
+        "schema": "public",
+        "addColumns": [
+          {
+            "name": "stripeCustomerId",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          },
+          {
+            "name": "paystackCustomerCode",
+            "columnType": 0,
+            "isNullable": true,
+            "dartType": "String?"
+          }
+        ],
+        "deleteColumns": [],
+        "modifyColumns": [],
+        "addIndexes": [
+          {
+            "indexName": "user_profile_stripe_customer_id_idx",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "stripeCustomerId"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": false
+          },
+          {
+            "indexName": "user_profile_paystack_customer_code_idx",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "paystackCustomerCode"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": false
+          }
+        ],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "tableDropped",
+            "message": "One or more columns are added to table \"questions\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+            "table": "questions",
+            "columns": [
+              "difficulty"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_stripe_customer_id_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "stripeCustomerId"
+            ],
+            "destrucive": false
+          },
+          {
+            "type": "uniqueIndexCreated",
+            "message": "Unique index \"user_profile_paystack_customer_code_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+            "table": "user_profile",
+            "columns": [
+              "paystackCustomerCode"
+            ],
+            "destrucive": false
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"questions\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "questions",
+      "columns": [
+        "difficulty"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "uniqueIndexCreated",
+      "message": "Unique index \"user_profile_stripe_customer_id_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+      "table": "user_profile",
+      "columns": [
+        "stripeCustomerId"
+      ],
+      "destrucive": false
+    },
+    {
+      "type": "uniqueIndexCreated",
+      "message": "Unique index \"user_profile_paystack_customer_code_idx\" is added to table \"user_profile\". If there are existing rows with duplicate values, this migration will fail.",
+      "table": "user_profile",
+      "columns": [
+        "paystackCustomerCode"
+      ],
+      "destrucive": false
+    }
+  ],
+  "migrationApiVersion": 1
+}

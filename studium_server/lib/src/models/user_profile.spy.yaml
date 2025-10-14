@@ -1,0 +1,22 @@
+class: UserProfile
+table: user_profile
+fields:
+  userId: int, relation(parent=serverpod_user_info) # Foreign key to Serverpod's User table
+  name: String?
+  role: String, default='free'
+  subscriptionId: String?
+  studyHistoryId: int?
+  stripeCustomerId: String? # The unique customer ID from Stripe, created during the first subscription attempt.
+  paystackCustomerCode: String? # The unique customer code from Paystack.
+indexes:
+  user_profile_user_id_idx:
+    fields: userId
+    unique: true
+
+  user_profile_stripe_customer_id_idx:
+      fields: stripeCustomerId
+      unique: true  
+
+  user_profile_paystack_customer_code_idx:
+    fields: paystackCustomerCode
+    unique: true
