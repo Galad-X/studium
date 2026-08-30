@@ -5,5 +5,8 @@ fields:
   status: String # e.g., 'pending', 'processing', 'completed', 'failed'
   processedText: String? # Extracted text after processing
   errorMessage: String? # Error details if processing fails
+  attempts: int
+  maxAttempts: int
+  lastStartedAt: DateTime?
   createdAt: DateTime
   updatedAt: DateTime

@@ -1,0 +1,17 @@
+class: Challenge
+table: challenges
+fields:
+  roomId: int?, relation(parent=study_rooms)
+  ownerId: int, relation(parent=serverpod_user_info)
+  title: String
+  problemStatement: String
+  field: String
+  tags: List<String>
+  difficulty: String
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  challenge_room_status_idx:
+    fields: roomId, status
+

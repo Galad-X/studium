@@ -1,0 +1,13 @@
+class: StudySessionParticipant
+table: study_session_participants
+fields:
+  sessionId: int, relation(parent=scheduled_study_sessions)
+  userId: int, relation(parent=serverpod_user_info)
+  status: String
+  joinedAt: DateTime
+indexes:
+  study_session_participant_unique_idx:
+    fields: sessionId, userId
+    unique: true
+  study_session_participant_user_idx:
+    fields: userId, status

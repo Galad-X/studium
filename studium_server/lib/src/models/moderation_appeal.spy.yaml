@@ -1,0 +1,17 @@
+class: ModerationAppeal
+table: moderation_appeals
+fields:
+  reportId: int, relation(parent=content_reports)
+  appellantId: int, relation(parent=serverpod_user_info)
+  reason: String
+  status: String
+  reviewerId: int?, relation(parent=serverpod_user_info)
+  reviewNotes: String?
+  createdAt: DateTime
+  reviewedAt: DateTime?
+indexes:
+  moderation_appeal_report_appellant_idx:
+    fields: reportId, appellantId
+    unique: true
+  moderation_appeal_status_created_idx:
+    fields: status, createdAt

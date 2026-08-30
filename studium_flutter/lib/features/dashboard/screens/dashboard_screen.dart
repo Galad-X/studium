@@ -1042,7 +1042,7 @@ class _NeuralContinueStudyingState extends State<_NeuralContinueStudying>
                         ),
                         delay: Duration(milliseconds: index * 100),
                         onTap: () {
-                         HapticFeedback.lightImpact();
+                          HapticFeedback.lightImpact();
 
                           context.pushNamed(
                             'summaryDetails',

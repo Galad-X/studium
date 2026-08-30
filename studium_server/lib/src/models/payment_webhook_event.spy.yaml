@@ -1,0 +1,17 @@
+class: PaymentWebhookEvent
+table: payment_webhook_events
+fields:
+  gateway: String
+  eventId: String
+  eventType: String
+  payload: String
+  status: String
+  errorMessage: String?
+  receivedAt: DateTime
+  processedAt: DateTime?
+indexes:
+  payment_webhook_gateway_event_idx:
+    fields: gateway, eventId
+    unique: true
+  payment_webhook_received_idx:
+    fields: receivedAt

@@ -2,14 +2,15 @@
 import 'dart:typed_data';
 import 'dart:convert';
 
-import 'package:serverpod/serverpod.dart';
-import 'package:http/http.dart' as http;
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 import 'package:docx_template_fork/docx_template_fork.dart';
-
+import 'package:serverpod/serverpod.dart';
+import 'package:http/http.dart' as http;
 import '../generated/protocol.dart';
 import '../services/aws_s3_service.dart';
+import '../services/background_job_service.dart';
+import '../services/push_notification_service.dart';
 import '../util/endpoint_utils.dart';
 
 class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
@@ -97,6 +98,8 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       final fileProcessing = FileProcessing(
         studyMaterialId: savedMaterial.id!,
         status: 'pending',
+        attempts: 0,
+        maxAttempts: 3,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
@@ -107,11 +110,11 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
           materialIds: [savedMaterial.id!]);
 
       // Start background processing
-      _scheduleFileProcessing(savedMaterial.id!);
+      await _scheduleFileProcessing(session, savedMaterial.id!);
 
       return savedMaterial;
     } catch (e) {
-      print('Error uploading material: $e');
+      session.log('Error uploading material: $e', level: LogLevel.error);
       throw Exception('Failed to upload material: ${e.toString()}');
     }
   }
@@ -126,9 +129,10 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
         where: (t) => t.userId.equals(userId),
         orderBy: (t) => t.uploadDate,
         orderDescending: true,
+        limit: 500,
       );
     } catch (e) {
-      print('Error fetching materials: $e');
+      session.log('Error fetching materials: $e', level: LogLevel.error);
       throw Exception('Failed to fetch materials');
     }
   }
@@ -136,16 +140,18 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
   /// Get sample material for demo purposes
   Future<StudyMaterial> getSampleMaterial(Session session) async {
     try {
+      final userId = await getAuthenticatedUserId(session);
       var sample = await StudyMaterial.db.findFirstRow(session,
-          where: (t) => t.title.equals('Sample Material'));
+          where: (t) =>
+              t.title.equals('Sample Material') & t.userId.equals(userId));
 
       if (sample == null) {
         // Create sample material if it doesn't exist
         sample = StudyMaterial(
-          userId: 0, // System user
+          userId: userId,
           title: 'Sample Material',
           fileType: 'pdf',
-          fileUrl: 'https://example.com/sample.pdf',
+          fileUrl: 'inline://sample-material',
           uploadDate: DateTime.now(),
           size: 1024000, // 1MB
           contentText: '''
@@ -174,7 +180,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return sample;
     } catch (e) {
-      print('Error getting sample material: $e');
+      session.log('Error getting sample material: $e', level: LogLevel.error);
       throw Exception('Failed to get sample material');
     }
   }
@@ -192,7 +198,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       try {
         final s3service = AwsS3Service.fromConfig(session.serverpod);
         final objectKey = Uri.parse(material.fileUrl).path.substring(1);
-        await s3service.deleteFile(objectKey);
+        await s3service.deleteFile(objectKey, session: session);
       } catch (e) {
         // Log the error but don't prevent the database record from being deleted
         session.log(
@@ -213,7 +219,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       // Delete the material
       await StudyMaterial.db.deleteRow(session, material);
     } catch (e) {
-      print('Error deleting material: $e');
+      session.log('Error deleting material: $e', level: LogLevel.error);
       throw Exception('Failed to delete material: ${e.toString()}');
     }
   }
@@ -236,7 +242,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return await StudyMaterial.db.updateRow(session, updatedMaterial);
     } catch (e) {
-      print('Error updating material: $e');
+      session.log('Error updating material: $e', level: LogLevel.error);
       throw Exception('Failed to update material: ${e.toString()}');
     }
   }
@@ -258,7 +264,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
         where: (t) => t.studyMaterialId.equals(materialId),
       );
     } catch (e) {
-      print('Error getting processing status: $e');
+      session.log('Error getting processing status: $e', level: LogLevel.error);
       return null;
     }
   }
@@ -275,9 +281,11 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
             t.userId.equals(userId) & t.fileType.equals(fileType.toLowerCase()),
         orderBy: (t) => t.uploadDate,
         orderDescending: true,
+        limit: 500,
       );
     } catch (e) {
-      print('Error fetching materials by type: $e');
+      session.log('Error fetching materials by type: $e',
+          level: LogLevel.error);
       return [];
     }
   }
@@ -298,9 +306,10 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
             t.userId.equals(userId) & t.title.like('%${query.toLowerCase()}%'),
         orderBy: (t) => t.uploadDate,
         orderDescending: true,
+        limit: 500,
       );
     } catch (e) {
-      print('Error searching materials: $e');
+      session.log('Error searching materials: $e', level: LogLevel.error);
       return [];
     }
   }
@@ -329,7 +338,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
             : null,
       };
     } catch (e) {
-      print('Error getting material stats: $e');
+      session.log('Error getting material stats: $e', level: LogLevel.error);
       return {
         'totalMaterials': 0,
         'totalSize': 0,
@@ -341,9 +350,54 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
   }
 
   /// Schedule file processing with proper background task management
-  void _scheduleFileProcessing(int materialId) {
-    // Schedule background processing
-    Future.microtask(() => _processFileInBackground(materialId));
+  Future<void> _scheduleFileProcessing(Session session, int materialId) async {
+    final job = await BackgroundJobService.enqueue(
+      session,
+      jobType: 'study_material.process',
+      payload: {'materialId': materialId},
+    );
+    Future.microtask(() => _processQueuedFile(job.id!));
+  }
+
+  Future<void> _processQueuedFile(int jobId) async {
+    final backgroundSession = await createBackgroundSession();
+    final lockToken = '${DateTime.now().microsecondsSinceEpoch}-$jobId';
+    try {
+      final job = await BackgroundJobService.claim(
+        backgroundSession,
+        jobId,
+        lockToken,
+      );
+      if (job == null) {
+        return;
+      }
+      final payload = jsonDecode(job.payload) as Map<String, dynamic>;
+      final materialId = payload['materialId'] as int?;
+      if (materialId == null) {
+        throw Exception('Invalid processing job payload.');
+      }
+      await _processFileInBackground(materialId);
+      final processing = await FileProcessing.db.findFirstRow(
+        backgroundSession,
+        where: (t) => t.studyMaterialId.equals(materialId),
+      );
+      if (processing?.status == 'completed') {
+        await BackgroundJobService.complete(backgroundSession, job);
+      } else {
+        await BackgroundJobService.fail(
+          backgroundSession,
+          job,
+          processing?.errorMessage ?? 'File processing failed.',
+        );
+      }
+    } catch (error) {
+      final job = await BackgroundJob.db.findById(backgroundSession, jobId);
+      if (job != null && job.status == 'processing') {
+        await BackgroundJobService.fail(backgroundSession, job, error);
+      }
+    } finally {
+      await backgroundSession.close();
+    }
   }
 
   /// Background file processing with session management
@@ -352,9 +406,29 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
     final backgroundSession = await createBackgroundSession();
 
     try {
-      // Update status to processing
-      await _updateProcessingStatus(
-          backgroundSession, materialId, 'processing');
+      final processing = await FileProcessing.db.findFirstRow(
+        backgroundSession,
+        where: (t) => t.studyMaterialId.equals(materialId),
+      );
+      if (processing == null || processing.status == 'completed') return;
+      if (processing.attempts >= processing.maxAttempts) {
+        await _updateProcessingStatus(
+          backgroundSession,
+          materialId,
+          'dead_letter',
+          errorMessage: 'Maximum processing attempts reached.',
+        );
+        return;
+      }
+      await FileProcessing.db.updateRow(
+        backgroundSession,
+        processing.copyWith(
+          status: 'processing',
+          attempts: processing.attempts + 1,
+          lastStartedAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+      );
 
       // Get the material
       final material =
@@ -364,7 +438,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       }
 
       // Process the file
-      final processedContent = await _processFile(material);
+      final processedContent = await _processFile(backgroundSession, material);
 
       // Update the material with extracted content
       final updatedMaterial = material.copyWith(
@@ -373,31 +447,33 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       await StudyMaterial.db.updateRow(backgroundSession, updatedMaterial);
 
       // Update processing record
-      final processing = await FileProcessing.db.findFirstRow(
+      final processingRecord = await FileProcessing.db.findFirstRow(
         backgroundSession,
         where: (t) => t.studyMaterialId.equals(materialId),
       );
-
-      if (processing != null) {
-        final updatedProcessing = processing.copyWith(
-          status: 'completed',
-          processedText: processedContent.extractedText,
-          updatedAt: DateTime.now(),
-        );
-        await FileProcessing.db.updateRow(backgroundSession, updatedProcessing);
+      if (processingRecord == null) {
+        throw Exception('Processing record not found');
       }
+      final updatedProcessing = processingRecord.copyWith(
+        status: 'completed',
+        processedText: processedContent.extractedText,
+        updatedAt: DateTime.now(),
+      );
+      await FileProcessing.db.updateRow(backgroundSession, updatedProcessing);
 
       // // Generate AI content
       // await _generateAIContent(
       //     backgroundSession, material, processedContent.extractedText);
 
-      print('File processing completed for material ID: $materialId');
+      backgroundSession.log(
+          'File processing completed for material ID: $materialId',
+          level: LogLevel.info);
 
       // Optionally send notification to user
       await _sendProcessingNotification(
           backgroundSession, material.userId, materialId, 'completed');
     } catch (e) {
-      print('Error processing file: $e');
+      backgroundSession.log('Error processing file: $e', level: LogLevel.error);
 
       // Update status to failed
       await _updateProcessingStatus(backgroundSession, materialId, 'failed',
@@ -414,6 +490,38 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       // Close background session
       await backgroundSession.close();
     }
+  }
+
+  /// Requeues a failed or dead-lettered material for its owner.
+  Future<FileProcessing> retryFileProcessing(
+      Session session, int materialId) async {
+    final userId = await getAuthenticatedUserId(session);
+    final material = await StudyMaterial.db.findById(session, materialId);
+    if (material == null || material.userId != userId) {
+      throw Exception('Material not found');
+    }
+    final processing = await FileProcessing.db.findFirstRow(
+      session,
+      where: (t) => t.studyMaterialId.equals(materialId),
+    );
+    if (processing == null) throw Exception('Processing record not found');
+    if (processing.status == 'processing') {
+      throw Exception('Material is already processing');
+    }
+    if (processing.status == 'completed') {
+      throw Exception('Material is already processed');
+    }
+    final requeued = await FileProcessing.db.updateRow(
+      session,
+      processing.copyWith(
+        status: 'pending',
+        attempts: 0,
+        errorMessage: null,
+        updatedAt: DateTime.now(),
+      ),
+    );
+    await _scheduleFileProcessing(session, materialId);
+    return requeued;
   }
 
   /// Create a background session for database operations
@@ -435,42 +543,49 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       );
 
       if (processing != null) {
+        final effectiveStatus =
+            status == 'failed' && processing.attempts >= processing.maxAttempts
+                ? 'dead_letter'
+                : status;
         final updatedProcessing = processing.copyWith(
-          status: status,
+          status: effectiveStatus,
           errorMessage: errorMessage,
           updatedAt: DateTime.now(),
         );
         await FileProcessing.db.updateRow(session, updatedProcessing);
       }
     } catch (e) {
-      print('Error updating processing status: $e');
+      session.log('Error updating processing status: $e',
+          level: LogLevel.error);
     }
   }
 
   /// Process individual file - extract text based on file type
-  Future<FileProcessingResult> _processFile(StudyMaterial material) async {
+  Future<FileProcessingResult> _processFile(
+      Session session, StudyMaterial material) async {
     try {
       String extractedText = '';
 
       switch (material.fileType.toLowerCase()) {
         case 'pdf':
-          extractedText = await _extractTextFromPDF(material.fileUrl);
+          extractedText = await _extractTextFromPDF(session, material.fileUrl);
           break;
         case 'docx':
-          extractedText = await _extractTextFromDocx(material.fileUrl);
+          extractedText = await _extractTextFromDocx(session, material.fileUrl);
           break;
         case 'pptx':
-          extractedText = await _extractTextFromPptx(material.fileUrl);
+          extractedText = await _extractTextFromPptx(session, material.fileUrl);
           break;
         case 'ppt':
-          extractedText = await _extractTextFromPpt(material.fileUrl);
+          extractedText = await _extractTextFromPpt(session, material.fileUrl);
           break;
         case 'txt':
         case 'md':
           extractedText = await _extractTextFromPlainText(material.fileUrl);
           break;
         case 'xlsx':
-          extractedText = await _extractTextFromExcel(material.fileUrl);
+          extractedText =
+              await _extractTextFromExcel(session, material.fileUrl);
           break;
         default:
           throw Exception('Unsupported file type: ${material.fileType}');
@@ -488,7 +603,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
   /// Extract text from PDF file
   /// Extract text from PDF file using basic PDF parsing
-  Future<String> _extractTextFromPDF(String fileUrl) async {
+  Future<String> _extractTextFromPDF(Session session, String fileUrl) async {
     try {
       // Download the PDF file
       final response = await http.get(Uri.parse(fileUrl));
@@ -497,7 +612,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
       }
 
       // Parse PDF content using basic text extraction
-      final extractedText = _parseBasicPDFText(response.bodyBytes);
+      final extractedText = _parseBasicPDFText(session, response.bodyBytes);
 
       if (extractedText.trim().isEmpty) {
         return 'PDF file appears to be empty or contains no extractable text (e.g., it might be an image-only PDF).';
@@ -505,12 +620,12 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return _cleanExtractedText(extractedText);
     } catch (e) {
-      print('Error extracting PDF text: $e');
+      session.log('Error extracting PDF text: $e', level: LogLevel.error);
       return 'Failed to process PDF file. Please ensure it is a valid PDF. Error: ${e.toString()}';
     }
   }
 
-  String _parseBasicPDFText(Uint8List pdfBytes) {
+  String _parseBasicPDFText(Session session, Uint8List pdfBytes) {
     try {
       // Convert bytes to string for pattern matching
       final pdfContent = String.fromCharCodes(pdfBytes);
@@ -536,7 +651,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return textBuffer.toString();
     } catch (e) {
-      print('Error parsing PDF content: $e');
+      session.log('Error parsing PDF content: $e', level: LogLevel.error);
       return '';
     }
   }
@@ -661,7 +776,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
   }
 
   /// Extract text from Word document
-  Future<String> _extractTextFromDocx(String fileUrl) async {
+  Future<String> _extractTextFromDocx(Session session, String fileUrl) async {
     try {
       // Download the file
       final fileBytes = await _downloadFile(fileUrl);
@@ -678,7 +793,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return _cleanExtractedText(extractedText);
     } catch (e) {
-      print('Error extracting DOCX text: $e');
+      session.log('Error extracting DOCX text: $e', level: LogLevel.error);
       return 'Error extracting text from DOCX file. Please ensure the file is not corrupted. Error: ${e.toString()}';
     }
   }
@@ -697,15 +812,14 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
   /// Extracts text from DocxTemplate object
   Future<String> _extractTextFromDocxTemplate(DocxTemplate docx) async {
     try {
-      final content =
-          docx.toString(); 
+      final content = docx.toString();
       return content;
     } catch (e) {
       throw Exception('Failed to extract text from DOCX template: $e');
     }
   }
 
-  Future<String> _extractTextFromPptx(String fileUrl) async {
+  Future<String> _extractTextFromPptx(Session session, String fileUrl) async {
     try {
       // Download the PPTX file
       final response = await http.get(Uri.parse(fileUrl));
@@ -783,7 +897,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return _cleanExtractedText(result);
     } catch (e) {
-      print('Error extracting PPTX text: $e');
+      session.log('Error extracting PPTX text: $e', level: LogLevel.error);
       return 'Error extracting text from PPTX file. Please ensure the file is not corrupted. Error: ${e.toString()}';
     }
   }
@@ -807,7 +921,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
     }
   }
 
-  Future<String> _extractTextFromPpt(String fileUrl) async {
+  Future<String> _extractTextFromPpt(Session session, String fileUrl) async {
     try {
       // Download the PPT file
       final response = await http.get(Uri.parse(fileUrl));
@@ -824,7 +938,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return _cleanExtractedText(extractedText);
     } catch (e) {
-      print('Error extracting PPT text: $e');
+      session.log('Error extracting PPT text: $e', level: LogLevel.error);
       return 'Error processing PPT file. Please convert to PPTX format for better compatibility. Error: ${e.toString()}';
     }
   }
@@ -896,7 +1010,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
   }
 
   /// Extract text from Excel file
-  Future<String> _extractTextFromExcel(String fileUrl) async {
+  Future<String> _extractTextFromExcel(Session session, String fileUrl) async {
     try {
       final response = await http.get(Uri.parse(fileUrl));
       if (response.statusCode != 200) {
@@ -938,7 +1052,8 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
             sharedStrings.add(textBuffer.toString());
           });
         } catch (e) {
-          print('Error parsing shared strings: $e');
+          session.log('Error parsing shared strings: $e',
+              level: LogLevel.error);
         }
       }
 
@@ -965,7 +1080,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
             }
           });
         } catch (e) {
-          print('Error parsing workbook: $e');
+          session.log('Error parsing workbook: $e', level: LogLevel.error);
         }
       }
 
@@ -1010,7 +1125,8 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
           extractedText.writeln();
         } catch (e) {
-          print('Error processing sheet $sheetName: $e');
+          session.log('Error processing sheet $sheetName: $e',
+              level: LogLevel.error);
           extractedText.writeln('Error processing sheet $sheetName');
           extractedText.writeln();
         }
@@ -1023,7 +1139,7 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       return _cleanExtractedText(result);
     } catch (e) {
-      print('Error extracting Excel text: $e');
+      session.log('Error extracting Excel text: $e', level: LogLevel.error);
       return 'Error extracting text from Excel file. Please ensure the file is not corrupted. Error: ${e.toString()}';
     }
   }
@@ -1124,6 +1240,14 @@ class StudyMaterialEndpoint extends Endpoint with EndpointUtils {
 
       // Insert the notification into the database
       await Notification.db.insertRow(session, notification);
+      await PushNotificationService.dispatch(
+        session,
+        userId: userId,
+        title: 'Study material update',
+        message: message,
+        type: type,
+        relatedId: materialId,
+      );
 
       session.log(
         'Notification created for user $userId: Material $materialId processing $status',

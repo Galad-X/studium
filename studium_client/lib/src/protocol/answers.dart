@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class Answer implements _i1.SerializableModel {
@@ -40,8 +42,9 @@ abstract class Answer implements _i1.SerializableModel {
       answerText: jsonSerialization['answerText'] as String,
       score: (jsonSerialization['score'] as num?)?.toDouble(),
       feedback: jsonSerialization['feedback'] as String?,
-      submittedAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['submittedAt']),
+      submittedAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['submittedAt'],
+      ),
     );
   }
 
@@ -77,6 +80,7 @@ abstract class Answer implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Answer',
       if (id != null) 'id': id,
       'userId': userId,
       'questionId': questionId,
@@ -105,14 +109,14 @@ class _AnswerImpl extends Answer {
     String? feedback,
     required DateTime submittedAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          questionId: questionId,
-          answerText: answerText,
-          score: score,
-          feedback: feedback,
-          submittedAt: submittedAt,
-        );
+         id: id,
+         userId: userId,
+         questionId: questionId,
+         answerText: answerText,
+         score: score,
+         feedback: feedback,
+         submittedAt: submittedAt,
+       );
 
   /// Returns a shallow copy of this [Answer]
   /// with some or all fields replaced by the given arguments.

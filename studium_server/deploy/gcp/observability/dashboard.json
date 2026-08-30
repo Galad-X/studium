@@ -1,0 +1,46 @@
+{
+  "displayName": "Studium backend operations",
+  "gridLayout": {
+    "columns": "2",
+    "widgets": [
+      {
+        "title": "Dead-lettered background jobs",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "metric.type=\"logging.googleapis.com/user/studium_dead_letter_jobs\" resource.type=\"global\"",
+                  "aggregation": {
+                    "alignmentPeriod": "300s",
+                    "perSeriesAligner": "ALIGN_RATE"
+                  }
+                }
+              },
+              "plotType": "LINE"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Failed opportunity refreshes",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "metric.type=\"logging.googleapis.com/user/studium_opportunity_refresh_failures\" resource.type=\"global\"",
+                  "aggregation": {
+                    "alignmentPeriod": "300s",
+                    "perSeriesAligner": "ALIGN_RATE"
+                  }
+                }
+              },
+              "plotType": "LINE"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

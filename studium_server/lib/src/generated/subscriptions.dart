@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class Subscription
@@ -43,8 +45,9 @@ abstract class Subscription
       subscriptionId: jsonSerialization['subscriptionId'] as String,
       gatewayToken: jsonSerialization['gatewayToken'] as String?,
       status: jsonSerialization['status'] as String,
-      startDate:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['startDate']),
+      startDate: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['startDate'],
+      ),
       endDate: jsonSerialization['endDate'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['endDate']),
@@ -91,6 +94,7 @@ abstract class Subscription
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Subscription',
       if (id != null) 'id': id,
       'userId': userId,
       'gateway': gateway,
@@ -105,6 +109,7 @@ abstract class Subscription
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Subscription',
       if (id != null) 'id': id,
       'userId': userId,
       'gateway': gateway,
@@ -159,15 +164,15 @@ class _SubscriptionImpl extends Subscription {
     required DateTime startDate,
     DateTime? endDate,
   }) : super._(
-          id: id,
-          userId: userId,
-          gateway: gateway,
-          subscriptionId: subscriptionId,
-          gatewayToken: gatewayToken,
-          status: status,
-          startDate: startDate,
-          endDate: endDate,
-        );
+         id: id,
+         userId: userId,
+         gateway: gateway,
+         subscriptionId: subscriptionId,
+         gatewayToken: gatewayToken,
+         status: status,
+         startDate: startDate,
+         endDate: endDate,
+       );
 
   /// Returns a shallow copy of this [Subscription]
   /// with some or all fields replaced by the given arguments.
@@ -196,8 +201,52 @@ class _SubscriptionImpl extends Subscription {
   }
 }
 
+class SubscriptionUpdateTable extends _i1.UpdateTable<SubscriptionTable> {
+  SubscriptionUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
+    table.gateway,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> subscriptionId(String value) =>
+      _i1.ColumnValue(
+        table.subscriptionId,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> gatewayToken(String? value) =>
+      _i1.ColumnValue(
+        table.gatewayToken,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
+    table.status,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> startDate(DateTime value) =>
+      _i1.ColumnValue(
+        table.startDate,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> endDate(DateTime? value) =>
+      _i1.ColumnValue(
+        table.endDate,
+        value,
+      );
+}
+
 class SubscriptionTable extends _i1.Table<int?> {
   SubscriptionTable({super.tableRelation}) : super(tableName: 'subscriptions') {
+    updateTable = SubscriptionUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -228,6 +277,8 @@ class SubscriptionTable extends _i1.Table<int?> {
     );
   }
 
+  late final SubscriptionUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnString gateway;
@@ -244,15 +295,15 @@ class SubscriptionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        gateway,
-        subscriptionId,
-        gatewayToken,
-        status,
-        startDate,
-        endDate,
-      ];
+    id,
+    userId,
+    gateway,
+    subscriptionId,
+    gatewayToken,
+    status,
+    startDate,
+    endDate,
+  ];
 }
 
 class SubscriptionInclude extends _i1.IncludeObject {
@@ -311,7 +362,7 @@ class SubscriptionRepository {
   /// );
   /// ```
   Future<List<Subscription>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<SubscriptionTable>? where,
     int? limit,
     int? offset,
@@ -319,6 +370,8 @@ class SubscriptionRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<SubscriptionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<Subscription>(
       where: where?.call(Subscription.t),
@@ -328,6 +381,8 @@ class SubscriptionRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -349,13 +404,15 @@ class SubscriptionRepository {
   /// );
   /// ```
   Future<Subscription?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<SubscriptionTable>? where,
     int? offset,
     _i1.OrderByBuilder<SubscriptionTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<SubscriptionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<Subscription>(
       where: where?.call(Subscription.t),
@@ -364,18 +421,24 @@ class SubscriptionRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [Subscription] by its [id] or null if no such row exists.
   Future<Subscription?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<Subscription>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -385,14 +448,20 @@ class SubscriptionRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<Subscription>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Subscription> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<Subscription>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -400,7 +469,7 @@ class SubscriptionRepository {
   ///
   /// The returned [Subscription] will have its `id` field set.
   Future<Subscription> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Subscription row, {
     _i1.Transaction? transaction,
   }) async {
@@ -416,7 +485,7 @@ class SubscriptionRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<Subscription>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Subscription> rows, {
     _i1.ColumnSelections<SubscriptionTable>? columns,
     _i1.Transaction? transaction,
@@ -432,7 +501,7 @@ class SubscriptionRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<Subscription> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Subscription row, {
     _i1.ColumnSelections<SubscriptionTable>? columns,
     _i1.Transaction? transaction,
@@ -444,11 +513,51 @@ class SubscriptionRepository {
     );
   }
 
+  /// Updates a single [Subscription] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Subscription?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<SubscriptionUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Subscription>(
+      id,
+      columnValues: columnValues(Subscription.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Subscription]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Subscription>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<SubscriptionUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<SubscriptionTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<SubscriptionTable>? orderBy,
+    _i1.OrderByListBuilder<SubscriptionTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Subscription>(
+      columnValues: columnValues(Subscription.t.updateTable),
+      where: where(Subscription.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Subscription.t),
+      orderByList: orderByList?.call(Subscription.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [Subscription]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Subscription>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Subscription> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -460,7 +569,7 @@ class SubscriptionRepository {
 
   /// Deletes a single [Subscription].
   Future<Subscription> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Subscription row, {
     _i1.Transaction? transaction,
   }) async {
@@ -472,7 +581,7 @@ class SubscriptionRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<Subscription>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<SubscriptionTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -485,7 +594,7 @@ class SubscriptionRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<SubscriptionTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -493,6 +602,22 @@ class SubscriptionRepository {
     return session.db.count<Subscription>(
       where: where?.call(Subscription.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [Subscription] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<SubscriptionTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<Subscription>(
+      where: where(Subscription.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

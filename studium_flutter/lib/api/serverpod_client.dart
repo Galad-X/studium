@@ -7,20 +7,22 @@ late SessionManager sessionManager;
 late Client client;
 
 Future<void> initializeServerpodClient() async {
-  // Configure server URL from environment or default to localhost
-  // const serverUrlFromEnv = String.fromEnvironment('SERVERPOD_URL');
-  // final serverUrl =
-  //     serverUrlFromEnv.isEmpty ? 'http://$localhost:7080/' : serverUrlFromEnv;
+  const configuredServerUrl = String.fromEnvironment('SERVERPOD_URL');
+  if (configuredServerUrl.isEmpty) {
+    throw StateError(
+      'SERVERPOD_URL must be provided with --dart-define for every build.',
+    );
+  }
+  final serverUrl = configuredServerUrl;
 
   // Initialize the GLOBAL client variable
   try {
-    client = Client(
-      'http://$localhost:7080/', // Use the configured serverUrl variable
-      authenticationKeyManager: FlutterAuthenticationKeyManager(),
-    )..connectivityMonitor = FlutterConnectivityMonitor();
+    client = Client(serverUrl)
+      ..authKeyProvider = FlutterAuthenticationKeyManager()
+      ..connectivityMonitor = FlutterConnectivityMonitor();
   } catch (e) {
     debugPrint('Failed to initialize Serverpod client: $e');
-    return;
+    rethrow;
   }
 
   // Initialize session manager

@@ -1,0 +1,13 @@
+class: ConversationReadReceipt
+table: conversation_read_receipts
+fields:
+  conversationId: int, relation(parent=conversations)
+  userId: int, relation(parent=serverpod_user_info)
+  lastReadMessageId: int, relation(parent=direct_messages)
+  updatedAt: DateTime
+indexes:
+  conversation_read_receipt_unique_idx:
+    fields: conversationId, userId
+    unique: true
+  conversation_read_receipt_user_idx:
+    fields: userId, updatedAt

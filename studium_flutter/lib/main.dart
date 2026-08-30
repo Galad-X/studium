@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -9,17 +8,18 @@ import 'core/providers/theme_provider.dart';
 import 'routing/app_router.dart';
 import 'theme/app_theme.dart';
 
- 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-   Stripe.publishableKey = 'pk_test_YOUR_PUBLISHABLE_KEY_HERE';
+  const stripePublishableKey = String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
+  if (stripePublishableKey.isNotEmpty) {
+    Stripe.publishableKey = stripePublishableKey;
+  }
 
   runApp(const ProviderScope(child: AppInitializer()));
 }
 
 class AppInitializer extends ConsumerStatefulWidget {
-  
   const AppInitializer({super.key});
 
   @override
@@ -37,7 +37,6 @@ class _AppInitializerState extends ConsumerState<AppInitializer> {
 
   Future<void> _initializeApp() async {
     await initializeServerpodClient();
-   
   }
 
   void _retryInitialization() {
@@ -46,7 +45,7 @@ class _AppInitializerState extends ConsumerState<AppInitializer> {
     });
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _initialization,
@@ -163,7 +162,7 @@ class _AppInitializerState extends ConsumerState<AppInitializer> {
                 color: theme.colorScheme.error,
               ),
               const SizedBox(height: 24),
-               Text(
+              Text(
                 'Failed to initialize app',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
@@ -192,7 +191,7 @@ class StudiumApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
-final router = ref.watch(routerProvider);
+    final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
       title: 'Studium AI',

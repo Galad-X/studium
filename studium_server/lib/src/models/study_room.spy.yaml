@@ -1,0 +1,17 @@
+class: StudyRoom
+table: study_rooms
+fields:
+  institutionId: int?, relation(parent=institutions)
+  ownerId: int, relation(parent=serverpod_user_info)
+  title: String
+  description: String
+  subject: String?
+  visibility: String
+  membershipPolicy: String
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  study_room_institution_status_idx:
+    fields: institutionId, status
+

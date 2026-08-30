@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:studium_client/studium_client.dart';
 import '../../../core/providers/service_providers.dart';
 import '../../../core/widgets/empty_state_widget.dart';
+import '../../../core/widgets/neural_widgets.dart';
 import '../../ai_tools/screens/research_comparison_screen.dart';
 import '../../ai_tools/screens/summary_screen.dart';
 import '../../dashboard/providers/dashboard_provider.dart';
@@ -65,9 +66,11 @@ class _SearchAppBarState extends ConsumerState<_SearchAppBar> {
         IconButton(
             icon: const Icon(Icons.search),
             onPressed: () => setState(() => _isSearching = true)),
-        IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => ref.invalidate(studyMaterialProvider)),
+        NeuralIconButton(
+          icon: Icons.refresh,
+          tooltip: 'Refresh materials',
+          onPressed: () => ref.invalidate(studyMaterialProvider),
+        ),
       ],
     );
   }
@@ -165,23 +168,7 @@ class MyMaterialsScreen extends ConsumerWidget {
 
   Widget _buildErrorView(
       BuildContext context, String error, VoidCallback onRetry) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.cloud_off, size: 64, color: Colors.grey),
-          const SizedBox(height: 16),
-          const Text('Failed to load materials',
-              style: TextStyle(fontSize: 18)),
-          const SizedBox(height: 8),
-          Text(error,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.grey)),
-          const SizedBox(height: 16),
-          ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
-        ],
-      ),
-    );
+    return NeuralErrorState(message: error, onRetry: onRetry);
   }
 }
 
@@ -210,20 +197,18 @@ class _FilterChips extends ConsumerWidget {
             ),
             const SizedBox(width: 8),
             // Chips for each file type
-            ..._chipTypes
-                .map((type) => Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: FilterChip(
-                        label: Text(type.toUpperCase()),
-                        selected: filterState.fileTypeFilter == type,
-                        onSelected: (selected) {
-                          if (selected) {
-                            filterNotifier.setFileTypeFilter(type);
-                          }
-                        },
-                      ),
-                    ))
-                ,
+            ..._chipTypes.map((type) => Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: FilterChip(
+                    label: Text(type.toUpperCase()),
+                    selected: filterState.fileTypeFilter == type,
+                    onSelected: (selected) {
+                      if (selected) {
+                        filterNotifier.setFileTypeFilter(type);
+                      }
+                    },
+                  ),
+                )),
           ],
         ),
       ),

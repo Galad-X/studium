@@ -1,0 +1,24 @@
+{
+  "displayName": "Studium opportunity refresh failures",
+  "combiner": "OR",
+  "enabled": true,
+  "conditions": [
+    {
+      "displayName": "Opportunity refresh failures are above zero",
+      "conditionThreshold": {
+        "filter": "metric.type=\"logging.googleapis.com/user/studium_opportunity_refresh_failures\" resource.type=\"global\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 0,
+        "duration": "0s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "300s",
+            "perSeriesAligner": "ALIGN_RATE",
+            "crossSeriesReducer": "REDUCE_SUM"
+          }
+        ]
+      }
+    }
+  ],
+  "notificationChannels": ["__NOTIFICATION_CHANNEL__"]
+}

@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class PaymentTransaction implements _i1.SerializableModel {
@@ -17,6 +19,11 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
     required this.subscriptionId,
     required this.userId,
     required this.amount,
+    this.currency,
+    this.settlementAmount,
+    this.settlementCurrency,
+    this.exchangeRate,
+    this.settlementSource,
     required this.status,
     required this.gateway,
     required this.transactionId,
@@ -28,6 +35,11 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
     required int subscriptionId,
     required int userId,
     required double amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     required String status,
     required String gateway,
     required String transactionId,
@@ -40,11 +52,18 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
       subscriptionId: jsonSerialization['subscriptionId'] as int,
       userId: jsonSerialization['userId'] as int,
       amount: (jsonSerialization['amount'] as num).toDouble(),
+      currency: jsonSerialization['currency'] as String?,
+      settlementAmount: (jsonSerialization['settlementAmount'] as num?)
+          ?.toDouble(),
+      settlementCurrency: jsonSerialization['settlementCurrency'] as String?,
+      exchangeRate: (jsonSerialization['exchangeRate'] as num?)?.toDouble(),
+      settlementSource: jsonSerialization['settlementSource'] as String?,
       status: jsonSerialization['status'] as String,
       gateway: jsonSerialization['gateway'] as String,
       transactionId: jsonSerialization['transactionId'] as String,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -58,6 +77,16 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
   int userId;
 
   double amount;
+
+  String? currency;
+
+  double? settlementAmount;
+
+  String? settlementCurrency;
+
+  double? exchangeRate;
+
+  String? settlementSource;
 
   String status;
 
@@ -75,6 +104,11 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
     int? subscriptionId,
     int? userId,
     double? amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     String? status,
     String? gateway,
     String? transactionId,
@@ -83,10 +117,16 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PaymentTransaction',
       if (id != null) 'id': id,
       'subscriptionId': subscriptionId,
       'userId': userId,
       'amount': amount,
+      if (currency != null) 'currency': currency,
+      if (settlementAmount != null) 'settlementAmount': settlementAmount,
+      if (settlementCurrency != null) 'settlementCurrency': settlementCurrency,
+      if (exchangeRate != null) 'exchangeRate': exchangeRate,
+      if (settlementSource != null) 'settlementSource': settlementSource,
       'status': status,
       'gateway': gateway,
       'transactionId': transactionId,
@@ -108,20 +148,30 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     required int subscriptionId,
     required int userId,
     required double amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     required String status,
     required String gateway,
     required String transactionId,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          subscriptionId: subscriptionId,
-          userId: userId,
-          amount: amount,
-          status: status,
-          gateway: gateway,
-          transactionId: transactionId,
-          createdAt: createdAt,
-        );
+         id: id,
+         subscriptionId: subscriptionId,
+         userId: userId,
+         amount: amount,
+         currency: currency,
+         settlementAmount: settlementAmount,
+         settlementCurrency: settlementCurrency,
+         exchangeRate: exchangeRate,
+         settlementSource: settlementSource,
+         status: status,
+         gateway: gateway,
+         transactionId: transactionId,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [PaymentTransaction]
   /// with some or all fields replaced by the given arguments.
@@ -132,6 +182,11 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     int? subscriptionId,
     int? userId,
     double? amount,
+    Object? currency = _Undefined,
+    Object? settlementAmount = _Undefined,
+    Object? settlementCurrency = _Undefined,
+    Object? exchangeRate = _Undefined,
+    Object? settlementSource = _Undefined,
     String? status,
     String? gateway,
     String? transactionId,
@@ -142,6 +197,17 @@ class _PaymentTransactionImpl extends PaymentTransaction {
       subscriptionId: subscriptionId ?? this.subscriptionId,
       userId: userId ?? this.userId,
       amount: amount ?? this.amount,
+      currency: currency is String? ? currency : this.currency,
+      settlementAmount: settlementAmount is double?
+          ? settlementAmount
+          : this.settlementAmount,
+      settlementCurrency: settlementCurrency is String?
+          ? settlementCurrency
+          : this.settlementCurrency,
+      exchangeRate: exchangeRate is double? ? exchangeRate : this.exchangeRate,
+      settlementSource: settlementSource is String?
+          ? settlementSource
+          : this.settlementSource,
       status: status ?? this.status,
       gateway: gateway ?? this.gateway,
       transactionId: transactionId ?? this.transactionId,

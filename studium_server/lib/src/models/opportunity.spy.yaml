@@ -1,0 +1,29 @@
+class: Opportunity
+table: opportunities
+fields:
+  title: String
+  opportunityType: String
+  provider: String
+  country: String
+  eligibilityRegion: String?
+  field: String
+  educationLevel: String
+  deadline: DateTime
+  fundingDetails: String
+  officialUrl: String
+  verificationStatus: String
+  sourceId: int?, relation(parent=opportunity_sources)
+  externalId: String?
+  submittedById: int?, relation(parent=serverpod_user_info)
+  lastSeenAt: DateTime?
+  staleAt: DateTime?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  opportunity_status_deadline_idx:
+    fields: verificationStatus, deadline
+  opportunity_filter_idx:
+    fields: country, field, educationLevel
+  opportunity_source_external_idx:
+    fields: sourceId, externalId
+    unique: true

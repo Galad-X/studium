@@ -1,0 +1,12 @@
+class: UserRestriction
+table: user_restrictions
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  restrictionType: String
+  reason: String
+  expiresAt: DateTime?
+  active: bool
+  createdAt: DateTime
+indexes:
+  user_restriction_user_active_idx:
+    fields: userId, active

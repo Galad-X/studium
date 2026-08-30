@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'package:studium_server/src/generated/protocol.dart' as _i2;
 
 abstract class Question
     implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
@@ -54,22 +57,27 @@ abstract class Question
       type: jsonSerialization['type'] as String,
       questionText: jsonSerialization['questionText'] as String,
       correctAnswer: jsonSerialization['correctAnswer'] as String?,
-      options: (jsonSerialization['options'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      options: jsonSerialization['options'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(
+              jsonSerialization['options'],
+            ),
       explanation: jsonSerialization['explanation'] as String?,
       difficulty: jsonSerialization['difficulty'] as String,
       bloomsLevel: jsonSerialization['bloomsLevel'] as String,
       estimatedTime: jsonSerialization['estimatedTime'] as int,
-      tags: (jsonSerialization['tags'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      tags: jsonSerialization['tags'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(jsonSerialization['tags']),
       diagramImageUrl: jsonSerialization['diagramImageUrl'] as String?,
-      labelingPoints: (jsonSerialization['labelingPoints'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      labelingPoints: jsonSerialization['labelingPoints'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(
+              jsonSerialization['labelingPoints'],
+            ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -131,6 +139,7 @@ abstract class Question
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Question',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'type': type,
@@ -151,6 +160,7 @@ abstract class Question
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Question',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'type': type,
@@ -217,21 +227,21 @@ class _QuestionImpl extends Question {
     List<String>? labelingPoints,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          studyMaterialId: studyMaterialId,
-          type: type,
-          questionText: questionText,
-          correctAnswer: correctAnswer,
-          options: options,
-          explanation: explanation,
-          difficulty: difficulty,
-          bloomsLevel: bloomsLevel,
-          estimatedTime: estimatedTime,
-          tags: tags,
-          diagramImageUrl: diagramImageUrl,
-          labelingPoints: labelingPoints,
-          createdAt: createdAt,
-        );
+         id: id,
+         studyMaterialId: studyMaterialId,
+         type: type,
+         questionText: questionText,
+         correctAnswer: correctAnswer,
+         options: options,
+         explanation: explanation,
+         difficulty: difficulty,
+         bloomsLevel: bloomsLevel,
+         estimatedTime: estimatedTime,
+         tags: tags,
+         diagramImageUrl: diagramImageUrl,
+         labelingPoints: labelingPoints,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Question]
   /// with some or all fields replaced by the given arguments.
@@ -258,8 +268,9 @@ class _QuestionImpl extends Question {
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       type: type ?? this.type,
       questionText: questionText ?? this.questionText,
-      correctAnswer:
-          correctAnswer is String? ? correctAnswer : this.correctAnswer,
+      correctAnswer: correctAnswer is String?
+          ? correctAnswer
+          : this.correctAnswer,
       options: options is List<String>?
           ? options
           : this.options?.map((e0) => e0).toList(),
@@ -268,8 +279,9 @@ class _QuestionImpl extends Question {
       bloomsLevel: bloomsLevel ?? this.bloomsLevel,
       estimatedTime: estimatedTime ?? this.estimatedTime,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
-      diagramImageUrl:
-          diagramImageUrl is String? ? diagramImageUrl : this.diagramImageUrl,
+      diagramImageUrl: diagramImageUrl is String?
+          ? diagramImageUrl
+          : this.diagramImageUrl,
       labelingPoints: labelingPoints is List<String>?
           ? labelingPoints
           : this.labelingPoints?.map((e0) => e0).toList(),
@@ -278,8 +290,85 @@ class _QuestionImpl extends Question {
   }
 }
 
+class QuestionUpdateTable extends _i1.UpdateTable<QuestionTable> {
+  QuestionUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
+    table.studyMaterialId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
+    table.type,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> questionText(String value) => _i1.ColumnValue(
+    table.questionText,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> correctAnswer(String? value) =>
+      _i1.ColumnValue(
+        table.correctAnswer,
+        value,
+      );
+
+  _i1.ColumnValue<List<String>, List<String>> options(List<String>? value) =>
+      _i1.ColumnValue(
+        table.options,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> explanation(String? value) => _i1.ColumnValue(
+    table.explanation,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> difficulty(String value) => _i1.ColumnValue(
+    table.difficulty,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> bloomsLevel(String value) => _i1.ColumnValue(
+    table.bloomsLevel,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> estimatedTime(int value) => _i1.ColumnValue(
+    table.estimatedTime,
+    value,
+  );
+
+  _i1.ColumnValue<List<String>, List<String>> tags(List<String>? value) =>
+      _i1.ColumnValue(
+        table.tags,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> diagramImageUrl(String? value) =>
+      _i1.ColumnValue(
+        table.diagramImageUrl,
+        value,
+      );
+
+  _i1.ColumnValue<List<String>, List<String>> labelingPoints(
+    List<String>? value,
+  ) => _i1.ColumnValue(
+    table.labelingPoints,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+}
+
 class QuestionTable extends _i1.Table<int?> {
   QuestionTable({super.tableRelation}) : super(tableName: 'questions') {
+    updateTable = QuestionUpdateTable(this);
     studyMaterialId = _i1.ColumnInt(
       'studyMaterialId',
       this,
@@ -296,7 +385,7 @@ class QuestionTable extends _i1.Table<int?> {
       'correctAnswer',
       this,
     );
-    options = _i1.ColumnSerializable(
+    options = _i1.ColumnSerializable<List<String>>(
       'options',
       this,
     );
@@ -316,7 +405,7 @@ class QuestionTable extends _i1.Table<int?> {
       'estimatedTime',
       this,
     );
-    tags = _i1.ColumnSerializable(
+    tags = _i1.ColumnSerializable<List<String>>(
       'tags',
       this,
     );
@@ -324,7 +413,7 @@ class QuestionTable extends _i1.Table<int?> {
       'diagramImageUrl',
       this,
     );
-    labelingPoints = _i1.ColumnSerializable(
+    labelingPoints = _i1.ColumnSerializable<List<String>>(
       'labelingPoints',
       this,
     );
@@ -334,6 +423,8 @@ class QuestionTable extends _i1.Table<int?> {
     );
   }
 
+  late final QuestionUpdateTable updateTable;
+
   late final _i1.ColumnInt studyMaterialId;
 
   late final _i1.ColumnString type;
@@ -342,7 +433,7 @@ class QuestionTable extends _i1.Table<int?> {
 
   late final _i1.ColumnString correctAnswer;
 
-  late final _i1.ColumnSerializable options;
+  late final _i1.ColumnSerializable<List<String>> options;
 
   late final _i1.ColumnString explanation;
 
@@ -352,31 +443,31 @@ class QuestionTable extends _i1.Table<int?> {
 
   late final _i1.ColumnInt estimatedTime;
 
-  late final _i1.ColumnSerializable tags;
+  late final _i1.ColumnSerializable<List<String>> tags;
 
   late final _i1.ColumnString diagramImageUrl;
 
-  late final _i1.ColumnSerializable labelingPoints;
+  late final _i1.ColumnSerializable<List<String>> labelingPoints;
 
   late final _i1.ColumnDateTime createdAt;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        studyMaterialId,
-        type,
-        questionText,
-        correctAnswer,
-        options,
-        explanation,
-        difficulty,
-        bloomsLevel,
-        estimatedTime,
-        tags,
-        diagramImageUrl,
-        labelingPoints,
-        createdAt,
-      ];
+    id,
+    studyMaterialId,
+    type,
+    questionText,
+    correctAnswer,
+    options,
+    explanation,
+    difficulty,
+    bloomsLevel,
+    estimatedTime,
+    tags,
+    diagramImageUrl,
+    labelingPoints,
+    createdAt,
+  ];
 }
 
 class QuestionInclude extends _i1.IncludeObject {
@@ -435,7 +526,7 @@ class QuestionRepository {
   /// );
   /// ```
   Future<List<Question>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<QuestionTable>? where,
     int? limit,
     int? offset,
@@ -443,6 +534,8 @@ class QuestionRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<QuestionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<Question>(
       where: where?.call(Question.t),
@@ -452,6 +545,8 @@ class QuestionRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -473,13 +568,15 @@ class QuestionRepository {
   /// );
   /// ```
   Future<Question?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<QuestionTable>? where,
     int? offset,
     _i1.OrderByBuilder<QuestionTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<QuestionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<Question>(
       where: where?.call(Question.t),
@@ -488,18 +585,24 @@ class QuestionRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [Question] by its [id] or null if no such row exists.
   Future<Question?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<Question>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -509,14 +612,20 @@ class QuestionRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<Question>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Question> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<Question>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -524,7 +633,7 @@ class QuestionRepository {
   ///
   /// The returned [Question] will have its `id` field set.
   Future<Question> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Question row, {
     _i1.Transaction? transaction,
   }) async {
@@ -540,7 +649,7 @@ class QuestionRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<Question>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Question> rows, {
     _i1.ColumnSelections<QuestionTable>? columns,
     _i1.Transaction? transaction,
@@ -556,7 +665,7 @@ class QuestionRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<Question> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Question row, {
     _i1.ColumnSelections<QuestionTable>? columns,
     _i1.Transaction? transaction,
@@ -568,11 +677,51 @@ class QuestionRepository {
     );
   }
 
+  /// Updates a single [Question] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Question?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<QuestionUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Question>(
+      id,
+      columnValues: columnValues(Question.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Question]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Question>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<QuestionUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<QuestionTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<QuestionTable>? orderBy,
+    _i1.OrderByListBuilder<QuestionTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Question>(
+      columnValues: columnValues(Question.t.updateTable),
+      where: where(Question.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Question.t),
+      orderByList: orderByList?.call(Question.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [Question]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Question>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Question> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -584,7 +733,7 @@ class QuestionRepository {
 
   /// Deletes a single [Question].
   Future<Question> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Question row, {
     _i1.Transaction? transaction,
   }) async {
@@ -596,7 +745,7 @@ class QuestionRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<Question>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<QuestionTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -609,7 +758,7 @@ class QuestionRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<QuestionTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -617,6 +766,22 @@ class QuestionRepository {
     return session.db.count<Question>(
       where: where?.call(Question.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [Question] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<QuestionTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<Question>(
+      where: where(Question.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

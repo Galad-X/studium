@@ -1,0 +1,14 @@
+class: ChallengeMilestone
+table: challenge_milestones
+fields:
+  teamId: int, relation(parent=challenge_teams)
+  title: String
+  description: String?
+  status: String
+  dueAt: DateTime?
+  completedAt: DateTime?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  challenge_milestone_team_idx:
+    fields: teamId, status

@@ -1,0 +1,48 @@
+{
+  "__className__": "serverpod.DatabaseMigration",
+  "actions": [
+    {
+      "__className__": "serverpod.DatabaseMigrationAction",
+      "type": "alterTable",
+      "alterTable": {
+        "__className__": "serverpod.TableMigration",
+        "name": "room_resource_chunks",
+        "schema": "public",
+        "addColumns": [],
+        "deleteColumns": [
+          "embeddingVector"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "__className__": "serverpod.DatabaseMigrationWarning",
+            "type": "columnDropped",
+            "message": "Column \"embeddingVector\" of table \"room_resource_chunks\" will be dropped.",
+            "table": "room_resource_chunks",
+            "columns": [
+              "embeddingVector"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "__className__": "serverpod.DatabaseMigrationWarning",
+      "type": "columnDropped",
+      "message": "Column \"embeddingVector\" of table \"room_resource_chunks\" will be dropped.",
+      "table": "room_resource_chunks",
+      "columns": [
+        "embeddingVector"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

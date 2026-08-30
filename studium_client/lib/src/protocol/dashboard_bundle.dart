@@ -7,12 +7,15 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'study_history.dart' as _i2;
 import 'study_materials.dart' as _i3;
 import 'summaries.dart' as _i4;
+import 'package:studium_client/src/protocol/protocol.dart' as _i5;
 
 abstract class DashboardBundle implements _i1.SerializableModel {
   DashboardBundle._({
@@ -29,14 +32,15 @@ abstract class DashboardBundle implements _i1.SerializableModel {
 
   factory DashboardBundle.fromJson(Map<String, dynamic> jsonSerialization) {
     return DashboardBundle(
-      history: _i2.StudyHistory.fromJson(
-          (jsonSerialization['history'] as Map<String, dynamic>)),
-      recentMaterials: (jsonSerialization['recentMaterials'] as List)
-          .map((e) => _i3.StudyMaterial.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      recentSummaries: (jsonSerialization['recentSummaries'] as List)
-          .map((e) => _i4.Summary.fromJson((e as Map<String, dynamic>)))
-          .toList(),
+      history: _i5.Protocol().deserialize<_i2.StudyHistory>(
+        jsonSerialization['history'],
+      ),
+      recentMaterials: _i5.Protocol().deserialize<List<_i3.StudyMaterial>>(
+        jsonSerialization['recentMaterials'],
+      ),
+      recentSummaries: _i5.Protocol().deserialize<List<_i4.Summary>>(
+        jsonSerialization['recentSummaries'],
+      ),
     );
   }
 
@@ -57,6 +61,7 @@ abstract class DashboardBundle implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'DashboardBundle',
       'history': history.toJson(),
       'recentMaterials': recentMaterials.toJson(valueToJson: (v) => v.toJson()),
       'recentSummaries': recentSummaries.toJson(valueToJson: (v) => v.toJson()),
@@ -75,10 +80,10 @@ class _DashboardBundleImpl extends DashboardBundle {
     required List<_i3.StudyMaterial> recentMaterials,
     required List<_i4.Summary> recentSummaries,
   }) : super._(
-          history: history,
-          recentMaterials: recentMaterials,
-          recentSummaries: recentSummaries,
-        );
+         history: history,
+         recentMaterials: recentMaterials,
+         recentSummaries: recentSummaries,
+       );
 
   /// Returns a shallow copy of this [DashboardBundle]
   /// with some or all fields replaced by the given arguments.
@@ -91,9 +96,11 @@ class _DashboardBundleImpl extends DashboardBundle {
   }) {
     return DashboardBundle(
       history: history ?? this.history.copyWith(),
-      recentMaterials: recentMaterials ??
+      recentMaterials:
+          recentMaterials ??
           this.recentMaterials.map((e0) => e0.copyWith()).toList(),
-      recentSummaries: recentSummaries ??
+      recentSummaries:
+          recentSummaries ??
           this.recentSummaries.map((e0) => e0.copyWith()).toList(),
     );
   }

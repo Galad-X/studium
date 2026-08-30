@@ -12,9 +12,118 @@ ai:
 analytics:
   - logAction:
   - getAnalytics:
+billingWebhook:
+  - handleWebhook:
+collaboration:
+  - getMyReputation:
+  - searchInstitutions:
+  - submitInstitution:
+  - reviewInstitution:
+  - getPendingInstitutionReviews:
+  - getMyMemberships:
+  - getMyVerificationRequests:
+  - getAcademicProfile:
+  - upsertAcademicProfile:
+  - createInstitutionInvite:
+  - acceptInstitutionInvite:
+  - getInstitutionMembers:
+  - getInstitutionVerificationRequests:
+  - updateInstitutionMember:
+  - requestMembership:
+  - submitVerificationEvidence:
+  - reviewMembership:
+  - getRooms:
+  - createRoom:
+  - joinRoom:
+  - getMyRoomMembership:
+  - getRoomPosts:
+  - createPost:
+  - getChallenges:
+  - createChallenge:
+  - getRoomResources:
+  - addRoomResource:
+  - uploadRoomResource:
+  - getRoomResourceChunks:
+  - indexRoomResourceEmbeddings:
+  - searchRoomKnowledge:
+  - getChallengeTeams:
+  - getChallengeTeamMembers:
+  - createChallengeTeam:
+  - joinChallengeTeam:
+  - createChallengeTeamInvite:
+  - acceptChallengeTeamInvite:
+  - getTeamMilestones:
+  - createMilestone:
+  - updateChallengeMilestone:
+  - updateChallengeTeamMember:
+  - getTeamUpdates:
+  - postChallengeUpdate:
+  - getPostComments:
+  - createComment:
+  - acceptPostComment:
+  - setPostReaction:
+  - roomPostStream:
+  - getRoomChatMessages:
+  - roomChatStream:
+  - createRoomChatMessage:
+  - getRoomAiAnswers:
+  - askRoom:
+  - updateRoomPresence:
+  - getRoomPresence:
+  - getRoomStudySessions:
+  - createStudySession:
+  - joinStudySession:
+  - reportContent:
+  - getOpenReports:
+  - getMyContentReports:
+  - getAuditEvents:
+  - getInstitutionAuditEvents:
+  - submitModerationAppeal:
+  - getMyModerationAppeals:
+  - getPendingModerationAppeals:
+  - reviewModerationAppeal:
+  - resolveReport:
+  - getRoomDocuments:
+  - documentStream:
+  - createDocument:
+  - updateDocument:
+messaging:
+  - getMyPrivacySettings:
+  - updateMyPrivacySettings:
+  - setSafetyRelationship:
+  - removeSafetyRelationship:
+  - getMySafetyRelationships:
+  - createConversation:
+  - getMyConversations:
+  - getConversationMessages:
+  - markConversationRead:
+  - getConversationReadReceipts:
+  - conversationStream:
+  - sendMessage:
 notification:
   - getNotifications:
   - markNotificationRead:
+  - markAllNotificationsRead:
+  - registerPushDevice:
+  - unregisterPushDevice:
+operations:
+  - getQueueHealth:
+  - getSchedulerHealth:
+opportunity:
+  - registerOpportunitySource:
+  - ingestOpportunity:
+  - syncOpportunitySource:
+  - getOpportunities:
+  - submitOpportunity:
+  - saveOpportunity:
+  - getSavedOpportunities:
+  - reviewOpportunity:
+  - getPendingOpportunityReviews:
+  - createOpportunityAlert:
+  - getOpportunityAlerts:
+  - deactivateOpportunityAlert:
+  - getApplicationTrackers:
+  - upsertApplicationTracker:
 question:
   - getSampleQuestions:
 studyMaterial:
@@ -27,12 +136,14 @@ studyMaterial:
   - getMaterialsByType:
   - searchMaterials:
   - getMaterialStats:
+  - retryFileProcessing:
 subscription:
   - createSubscription:
   - cancelSubscription:
   - getSubscriptionStatus:
 summary:
   - getSummaries:
+  - deleteSummary:
 user:
   - getProfileBundle:
   - updateProfile:

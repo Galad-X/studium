@@ -1,0 +1,17 @@
+class: OpportunityAlert
+table: opportunity_alerts
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  country: String?
+  field: String?
+  educationLevel: String?
+  opportunityTypes: List<String>
+  deadlineWithinDays: int
+  active: bool
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  opportunity_alert_user_active_idx:
+    fields: userId, active
+  opportunity_alert_user_updated_idx:
+    fields: userId, updatedAt

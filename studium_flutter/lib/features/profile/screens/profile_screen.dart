@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studium_client/studium_client.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/layout/responsive.dart';
 import '../../settings/screens/settings_screen.dart';
 import '../../subscription/screens/subscription_management_screen.dart';
 import '../../subscription/screens/subscription_screen.dart';
+import '../../collaboration/providers/collaboration_provider.dart';
+import '../../collaboration/widgets/reputation_badges.dart';
 import '../providers/profile_provider.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -87,6 +90,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
     BuildContext context,
   ) {
     final profileAsync = ref.watch(profileProvider);
+    final reputation = ref.watch(myReputationProvider).valueOrNull;
     final theme = Theme.of(context);
 
     return Container(
@@ -109,22 +113,38 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
             profileAsync.when<Widget>(
               data: (UserProfileBundle bundle) => SlideTransition(
                 position: _slideAnimation,
-                child: ResponsiveScaffold(
-                  mobile: _ProfileMobileLayout(
-                    bundle: bundle,
-                    pulseAnimation: _pulseAnimation,
-                    logoRotation: _logoRotation,
-                  ),
-                  tablet: _ProfileTabletLayout(
-                    bundle: bundle,
-                    pulseAnimation: _pulseAnimation,
-                    logoRotation: _logoRotation,
-                  ),
-                  desktop: _ProfileDesktopLayout(
-                    bundle: bundle,
-                    pulseAnimation: _pulseAnimation,
-                    logoRotation: _logoRotation,
-                  ),
+                child: Column(
+                  children: [
+                    if (reputation != null)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                        child: ReputationSummary(
+                          score: reputation.score,
+                          acceptedSolutions: reputation.acceptedSolutions,
+                          verifiedContributions:
+                              reputation.verifiedContributions,
+                        ),
+                      ),
+                    Expanded(
+                      child: ResponsiveScaffold(
+                        mobile: _ProfileMobileLayout(
+                          bundle: bundle,
+                          pulseAnimation: _pulseAnimation,
+                          logoRotation: _logoRotation,
+                        ),
+                        tablet: _ProfileTabletLayout(
+                          bundle: bundle,
+                          pulseAnimation: _pulseAnimation,
+                          logoRotation: _logoRotation,
+                        ),
+                        desktop: _ProfileDesktopLayout(
+                          bundle: bundle,
+                          pulseAnimation: _pulseAnimation,
+                          logoRotation: _logoRotation,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               loading: () => _buildLoadingState(theme),
@@ -916,7 +936,7 @@ class _ActionList extends ConsumerWidget {
         subtitle: 'Get neural assistance and answers',
         onTap: () {
           HapticFeedback.lightImpact();
-          // TODO: Navigate to Help screen
+          _openHelp(context);
         },
       ),
       _ActionItem(
@@ -925,7 +945,7 @@ class _ActionList extends ConsumerWidget {
         subtitle: 'Help us improve the neural network',
         onTap: () {
           HapticFeedback.lightImpact();
-          // TODO: Open feedback form
+          _openFeedback(context);
         },
       ),
     ];
@@ -1034,6 +1054,45 @@ class _ActionList extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  static Future<void> _openHelp(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Studium Help & Support'),
+        content: const Text(
+          'For account, study-room, or collaboration help, contact your institution administrator or email support@studium.app.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Close'),
+          ),
+          FilledButton(
+            onPressed: () async {
+              await launchUrl(Uri(scheme: 'mailto', path: 'support@studium.app'));
+            },
+            child: const Text('Email support'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Future<void> _openFeedback(BuildContext context) async {
+    final launched = await launchUrl(
+      Uri(
+        scheme: 'mailto',
+        path: 'feedback@studium.app',
+        queryParameters: {'subject': 'Studium feedback'},
+      ),
+    );
+    if (!launched && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not open the feedback form.')),
+      );
+    }
   }
 
   Future<bool?> _showSignOutDialog(BuildContext context) {

@@ -1,0 +1,14 @@
+class: VerificationRequest
+table: verification_requests
+fields:
+  membershipId: int, relation(parent=institution_memberships)
+  method: String
+  evidenceUrl: String?
+  status: String
+  reviewerId: int?, relation(parent=serverpod_user_info)
+  createdAt: DateTime
+  reviewedAt: DateTime?
+indexes:
+  verification_request_membership_idx:
+    fields: membershipId
+    unique: true

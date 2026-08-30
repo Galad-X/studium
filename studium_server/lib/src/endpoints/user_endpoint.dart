@@ -1,4 +1,4 @@
-import 'package:serverpod/serverpod.dart';
+import 'package:serverpod/server.dart';
 import '../generated/protocol.dart';
 import '../util/endpoint_utils.dart'; // Our shared mixin
 
@@ -22,7 +22,7 @@ class UserEndpoint extends Endpoint with EndpointUtils {
       if (profile == null) {
         // Get the user's basic info from Serverpod's user table to populate name
         // Note: session.authenticated IS a Future that needs to be awaited
-        final userInfo = await session.authenticated;
+        final userInfo = session.authenticated;
 
         profile = UserProfile(
           userId: userId,
@@ -64,7 +64,6 @@ class UserEndpoint extends Endpoint with EndpointUtils {
   Future<UserProfile> updateProfile(
     Session session, {
     String? name,
-    String? role,
   }) async {
     try {
       final userId = await getAuthenticatedUserId(session);
@@ -80,7 +79,7 @@ class UserEndpoint extends Endpoint with EndpointUtils {
         profile = UserProfile(
           userId: userId,
           name: name ?? 'User',
-          role: role ?? 'free',
+          role: 'free',
           subscriptionId: null,
           studyHistoryId: null,
           stripeCustomerId: null, // Add this field
@@ -91,7 +90,6 @@ class UserEndpoint extends Endpoint with EndpointUtils {
         // Update existing profile
         final updatedProfile = profile.copyWith(
           name: name ?? profile.name,
-          role: role ?? profile.role,
         );
         return await UserProfile.db.updateRow(session, updatedProfile);
       }
@@ -188,7 +186,8 @@ class UserEndpoint extends Endpoint with EndpointUtils {
   }
 
   /// Helper method to create initial study history for new users
-  Future<StudyHistory> createStudyHistory(Session session, int userId) async {
+  Future<StudyHistory> createStudyHistory(Session session) async {
+    final userId = await getAuthenticatedUserId(session);
     final history = StudyHistory(
       userId: userId,
       materialIds: <int>[],

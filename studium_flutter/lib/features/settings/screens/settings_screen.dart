@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../api/serverpod_client.dart';
 import '../../../core/providers/theme_provider.dart';
 import '../../profile/providers/profile_provider.dart';
+import '../../../services/export_service.dart';
+
+const _privacyUrl = String.fromEnvironment('STUDIUM_PRIVACY_URL');
+const _termsUrl = String.fromEnvironment('STUDIUM_TERMS_URL');
+const _supportEmail = String.fromEnvironment(
+  'STUDIUM_SUPPORT_EMAIL',
+  defaultValue: 'support@studium.app',
+);
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -19,6 +29,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   late Animation<Offset> _slideAnimation;
   late Animation<double> _backgroundAnimation;
   final _nameController = TextEditingController();
+  final _preferences = SharedPreferencesAsync();
+  bool _pushAlerts = true;
+  bool _progressReports = false;
+  bool _studyReminders = true;
+  bool _analyticsOptOut = false;
 
   @override
   void initState() {
@@ -27,6 +42,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     if (profile != null) {
       _nameController.text = profile.name ?? '';
     }
+    _loadSettings();
 
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 600),
@@ -52,6 +68,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     );
 
     _slideController.forward();
+  }
+
+  Future<void> _loadSettings() async {
+    final values = await Future.wait<bool?>([
+      _preferences.getBool('settings.push_alerts'),
+      _preferences.getBool('settings.progress_reports'),
+      _preferences.getBool('settings.study_reminders'),
+      _preferences.getBool('settings.analytics_opt_out'),
+    ]);
+    if (!mounted) return;
+    setState(() {
+      _pushAlerts = values[0] ?? true;
+      _progressReports = values[1] ?? false;
+      _studyReminders = values[2] ?? true;
+      _analyticsOptOut = values[3] ?? false;
+    });
+  }
+
+  Future<void> _setPreference(String key, bool value) async {
+    await _preferences.setBool(key, value);
   }
 
   @override
@@ -233,7 +269,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF00D4AA).withOpacity(0.3),
+          color: const Color(0xFF00D4AA).withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -241,7 +277,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF00D4AA).withOpacity(0.2),
+              color: const Color(0xFF00D4AA).withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: AnimatedBuilder(
@@ -300,7 +336,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: const Color(0xFF00D4AA).withOpacity(0.3),
+                    color: const Color(0xFF00D4AA).withValues(alpha: 0.3),
                   ),
                 ),
                 child: TextField(
@@ -365,40 +401,106 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           title: 'Neural Push Alerts',
           subtitle: 'Get notified about AI analysis results',
           trailing: Switch(
-            value: true,
-            onChanged: (value) {
+            value: _pushAlerts,
+            onChanged: (value) async {
               HapticFeedback.lightImpact();
-              // TODO: Implement neural notification settings
+              setState(() => _pushAlerts = value);
+              await _setPreference('settings.push_alerts', value);
             },
-            activeColor: const Color(0xFF00D4AA),
+            activeThumbColor: const Color(0xFF00D4AA),
           ),
         ),
         _NeuralSettingsTile(
           title: 'Neural Progress Reports',
           subtitle: 'Weekly AI-powered learning insights',
           trailing: Switch(
-            value: false,
-            onChanged: (value) {
+            value: _progressReports,
+            onChanged: (value) async {
               HapticFeedback.lightImpact();
-              // TODO: Implement neural email settings
+              setState(() => _progressReports = value);
+              await _setPreference('settings.progress_reports', value);
             },
-            activeColor: const Color(0xFF00D4AA),
+            activeThumbColor: const Color(0xFF00D4AA),
           ),
         ),
         _NeuralSettingsTile(
           title: 'Neural Study Reminders',
           subtitle: 'AI-optimized study session alerts',
           trailing: Switch(
-            value: true,
-            onChanged: (value) {
+            value: _studyReminders,
+            onChanged: (value) async {
               HapticFeedback.lightImpact();
-              // TODO: Implement neural reminder settings
+              setState(() => _studyReminders = value);
+              await _setPreference('settings.study_reminders', value);
             },
-            activeColor: const Color(0xFF00D4AA),
+            activeThumbColor: const Color(0xFF00D4AA),
           ),
         ),
       ],
     );
+  }
+
+  Future<void> _showInfoDialog(String title, String message) async {
+    if (!mounted) return;
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _exportAccountData() async {
+    try {
+      final profile = ref.read(profileProvider).valueOrNull?.profile;
+      final content = [
+        'Studium account export',
+        'Name: ${profile?.name ?? 'Unknown'}',
+        'Role: ${profile?.role ?? 'Unknown'}',
+        'Notifications: push=$_pushAlerts, progress=$_progressReports, reminders=$_studyReminders',
+        'Analytics opt-out: $_analyticsOptOut',
+      ].join('\n');
+      final path = await ExportService().exportDocument(
+        title: 'studium_account_export',
+        content: content,
+        format: ExportFormat.pdf,
+      );
+      if (!mounted) return;
+      _showSuccessSnackBar('Account export created.');
+      await ExportService().openFile(path);
+    } catch (error) {
+      if (mounted) _showErrorSnackBar('Export failed: $error');
+    }
+  }
+
+  Future<void> _openConfiguredLink(String url, String title) async {
+    if (url.isEmpty) {
+      await _showInfoDialog(
+        title,
+        '$title is not configured for this build. Please contact your institution administrator.',
+      );
+      return;
+    }
+    final launched = await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    );
+    if (!launched && mounted) _showErrorSnackBar('Could not open $title.');
+  }
+
+  Future<void> _openSupport() async {
+    final launched = await launchUrl(
+      Uri(scheme: 'mailto', path: _supportEmail),
+      mode: LaunchMode.externalApplication,
+    );
+    if (!launched && mounted) _showErrorSnackBar('Could not open support email.');
   }
 
   Widget _buildNeuralPrivacySection() {
@@ -412,17 +514,32 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           trailing: const Icon(Icons.lock_rounded, color: Color(0xFF00D4AA)),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Show encryption details
+            _showInfoDialog(
+              'Data encryption',
+              'Studium uses encrypted transport for API calls. Stored account and collaboration data is protected by the server database and access-control policies.',
+            );
           },
         ),
         _NeuralSettingsTile(
           title: 'Neural Analytics Opt-out',
           subtitle: 'Control AI learning data usage',
           trailing:
-              const Icon(Icons.chevron_right_rounded, color: Color(0xFFB0B0B0)),
+              Switch(
+                value: _analyticsOptOut,
+                onChanged: (value) async {
+                  HapticFeedback.lightImpact();
+                  setState(() => _analyticsOptOut = value);
+                  await _setPreference('settings.analytics_opt_out', value);
+                },
+              ),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Show analytics settings
+            _showInfoDialog(
+              'Analytics controls',
+              _analyticsOptOut
+                  ? 'Optional product analytics are disabled on this device.'
+                  : 'Optional product analytics are enabled. You can disable them with the switch.',
+            );
           },
         ),
         _NeuralSettingsTile(
@@ -432,7 +549,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               const Icon(Icons.download_rounded, color: Color(0xFF00D4AA)),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Implement data export
+            _exportAccountData();
           },
         ),
       ],
@@ -449,7 +566,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           subtitle: 'v2.1.0 (Neural Build 42)',
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Show version details
+            _showInfoDialog(
+              'System information',
+              'Studium collaboration client\nBuild metadata is supplied by the release pipeline.',
+            );
           },
         ),
         _NeuralSettingsTile(
@@ -459,7 +579,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               const Icon(Icons.chevron_right_rounded, color: Color(0xFFB0B0B0)),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Open neural privacy policy
+            _openConfiguredLink(_privacyUrl, 'Privacy policy');
           },
         ),
         _NeuralSettingsTile(
@@ -469,7 +589,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               const Icon(Icons.chevron_right_rounded, color: Color(0xFFB0B0B0)),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Open neural terms
+            _openConfiguredLink(_termsUrl, 'Terms of service');
           },
         ),
         _NeuralSettingsTile(
@@ -479,7 +599,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               const Icon(Icons.support_agent_rounded, color: Color(0xFF00D4AA)),
           onTap: () {
             HapticFeedback.lightImpact();
-            // TODO: Open support
+            _openSupport();
           },
         ),
       ],
@@ -512,7 +632,7 @@ class _NeuralSettingsSection extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFF00D4AA).withOpacity(0.3),
+          color: const Color(0xFF00D4AA).withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -567,10 +687,10 @@ class _NeuralSettingsTile extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF0A0A0F).withOpacity(0.3),
+              color: const Color(0xFF0A0A0F).withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color(0xFF00D4AA).withOpacity(0.1),
+                color: const Color(0xFF00D4AA).withValues(alpha: 0.1),
               ),
             ),
             child: Row(
@@ -659,13 +779,14 @@ class _NeuralThemeSelector extends StatelessWidget {
                       ],
                     )
                   : null,
-              color:
-                  isSelected ? null : const Color(0xFF0A0A0F).withOpacity(0.3),
+              color: isSelected
+                  ? null
+                  : const Color(0xFF0A0A0F).withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isSelected
                     ? const Color(0xFF00D4AA)
-                    : const Color(0xFF00D4AA).withOpacity(0.1),
+                    : const Color(0xFF00D4AA).withValues(alpha: 0.1),
                 width: isSelected ? 2 : 1,
               ),
             ),
@@ -682,8 +803,8 @@ class _NeuralThemeSelector extends StatelessWidget {
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? Colors.white.withOpacity(0.2)
-                              : const Color(0xFF00D4AA).withOpacity(0.2),
+                              ? Colors.white.withValues(alpha: 0.2)
+                              : const Color(0xFF00D4AA).withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -713,7 +834,7 @@ class _NeuralThemeSelector extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: isSelected
-                                    ? Colors.white.withOpacity(0.8)
+                                    ? Colors.white.withValues(alpha: 0.8)
                                     : const Color(0xFFB0B0B0),
                               ),
                             ),
@@ -761,12 +882,12 @@ class NeuralNetworkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF00D4AA).withOpacity(0.1)
+      ..color = const Color(0xFF00D4AA).withValues(alpha: 0.1)
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 
     final nodePaint = Paint()
-      ..color = const Color(0xFF00D4AA).withOpacity(0.3)
+      ..color = const Color(0xFF00D4AA).withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     // Draw neural network connections

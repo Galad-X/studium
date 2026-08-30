@@ -1,7 +1,7 @@
 // SUBSCRIPTION ENDPOINT
-import 'package:serverpod/serverpod.dart';
+import 'package:serverpod/server.dart';
 import 'package:http/http.dart' as http;
-import 'package:serverpod_auth_server/module.dart';
+import 'package:serverpod_auth_server/serverpod_auth_server.dart';
 import 'dart:convert';
 import '../generated/protocol.dart';
 import '../util/endpoint_utils.dart';
@@ -10,43 +10,116 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
   @override
   bool get requireLogin => true;
 
-   static const _stripeApiUrl = 'https://api.stripe.com/v1';
+  static const _stripeApiUrl = 'https://api.stripe.com/v1';
   static const _paystackApiUrl = 'https://api.paystack.co';
 
-
   Future<Subscription> createSubscription(
-      Session session, String gateway, String paymentToken) async {
+      Session session, String gateway, String paymentToken,
+      [String? idempotencyKey]) async {
     final userId = await getAuthenticatedUserId(session);
 
-    var userProfile = await UserProfile.db
+    if (!{'stripe', 'paystack'}.contains(gateway)) {
+      throw Exception('Invalid payment gateway specified');
+    }
+    final userProfile = await UserProfile.db
         .findFirstRow(session, where: (t) => t.userId.equals(userId));
     final userInfo = await UserInfo.db
         .findFirstRow(session, where: (t) => t.id.equals(userId));
 
-   if (userProfile == null || userInfo == null) {
+    if (userProfile == null || userInfo == null) {
       throw Exception('User profile not found');
     }
 
-    String subscriptionId;
+    final normalizedKey = idempotencyKey?.trim();
+    SubscriptionOperation? operation;
+    if (normalizedKey != null && normalizedKey.isNotEmpty) {
+      if (normalizedKey.length < 16 || normalizedKey.length > 200) {
+        throw Exception(
+            'Idempotency key must be between 16 and 200 characters.');
+      }
+      operation = await session.db.transaction((transaction) async {
+        final existing = await SubscriptionOperation.db.findFirstRow(
+          session,
+          where: (t) =>
+              t.userId.equals(userId) &
+              t.gateway.equals(gateway) &
+              t.idempotencyKey.equals(normalizedKey),
+          transaction: transaction,
+        );
+        if (existing != null) {
+          if (existing.status == 'completed' &&
+              existing.subscriptionId != null) {
+            return existing;
+          }
+          if (existing.status == 'processing') {
+            throw Exception('This subscription request is already processing.');
+          }
+          existing.status = 'processing';
+          existing.errorMessage = null;
+          existing.updatedAt = DateTime.now();
+          return SubscriptionOperation.db.updateRow(
+            session,
+            existing,
+            transaction: transaction,
+          );
+        }
+        final now = DateTime.now();
+        return SubscriptionOperation.db.insertRow(
+          session,
+          SubscriptionOperation(
+            userId: userId,
+            gateway: gateway,
+            idempotencyKey: normalizedKey,
+            status: 'processing',
+            createdAt: now,
+            updatedAt: now,
+          ),
+          transaction: transaction,
+        );
+      });
+      final completedOperation = operation;
+      if (completedOperation != null &&
+          completedOperation.subscriptionId != null &&
+          completedOperation.status == 'completed') {
+        final existingSubscription = await Subscription.db.findById(
+          session,
+          completedOperation.subscriptionId!,
+        );
+        if (existingSubscription != null) return existingSubscription;
+        throw Exception('Idempotent subscription record is incomplete.');
+      }
+    }
+
+    String subscriptionId = '';
     String? gatewayToken;
     DateTime? endDate;
 
-    switch (gateway) {
-      case 'stripe':
-        final stripeResult =
-            await _createStripeSubscription(session, userProfile, paymentToken);
-        subscriptionId = stripeResult['subscriptionId']!;
-        endDate = stripeResult['endDate'];
-        break;
-      case 'paystack':
-        final paystackResult = await _createPaystackSubscription(
-            session, userProfile, paymentToken);
-        subscriptionId = paystackResult['subscriptionId']!;
-        gatewayToken = paystackResult['gatewayToken'];
-        endDate = paystackResult['endDate'];
-        break;
-      default:
-        throw Exception('Invalid payment gateway specified');
+    try {
+      switch (gateway) {
+        case 'stripe':
+          final stripeResult = await _createStripeSubscription(
+              session, userProfile, paymentToken);
+          subscriptionId = stripeResult['subscriptionId']!;
+          endDate = stripeResult['endDate'];
+          break;
+        case 'paystack':
+          final paystackResult = await _createPaystackSubscription(
+              session, userProfile, paymentToken);
+          subscriptionId = paystackResult['subscriptionId']!;
+          gatewayToken = paystackResult['gatewayToken'];
+          endDate = paystackResult['endDate'];
+          break;
+      }
+    } catch (error) {
+      if (operation != null) {
+        operation.status = 'failed';
+        operation.errorMessage = error
+            .toString()
+            .substring(0, error.toString().length.clamp(0, 2000));
+        operation.updatedAt = DateTime.now();
+        await SubscriptionOperation.db.updateRow(session, operation);
+      }
+      rethrow;
     }
 
     final subscription = Subscription(
@@ -54,18 +127,20 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
       gateway: gateway,
       subscriptionId: subscriptionId,
       gatewayToken: gatewayToken,
-      status: 'active',
+      // Gateway callbacks are the source of truth for entitlement activation.
+      status: 'pending',
       startDate: DateTime.now(),
       endDate: endDate,
     );
-  
-   final savedSubscription =
-        await Subscription.db.insertRow(session, subscription);
-      // Update user profile to premium
-    userProfile = userProfile.copyWith(role: 'premium', subscriptionId: subscriptionId);
-    await UserProfile.db.updateRow(session, userProfile);
 
-    return savedSubscription;
+    final created = await Subscription.db.insertRow(session, subscription);
+    if (operation != null) {
+      operation.status = 'completed';
+      operation.subscriptionId = created.id;
+      operation.updatedAt = DateTime.now();
+      await SubscriptionOperation.db.updateRow(session, operation);
+    }
+    return created;
   }
 
   /// Creates a Stripe subscription.
@@ -77,32 +152,44 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
     // 1. Get or create a Stripe Customer
     var stripeCustomerId = userProfile.stripeCustomerId;
     if (stripeCustomerId == null) {
-      final userInfo = await UserInfo.db.findFirstRow(session, where: (t) => t.id.equals(userProfile.userId));
-      final customer = await _createStripeCustomer(session, stripeApiKey, userInfo!.email, userProfile.name);
+      final userInfo = await UserInfo.db
+          .findFirstRow(session, where: (t) => t.id.equals(userProfile.userId));
+      final customer = await _createStripeCustomer(
+          session, stripeApiKey, userInfo!.email, userProfile.name);
       stripeCustomerId = customer['id'];
-      
+
       // Save the new customer ID to the user's profile
-      await UserProfile.db.updateRow(session, userProfile.copyWith(stripeCustomerId: stripeCustomerId));
+      await UserProfile.db.updateRow(
+          session, userProfile.copyWith(stripeCustomerId: stripeCustomerId));
     }
 
     // 2. Attach PaymentMethod to the Customer
     await http.post(
       Uri.parse('$_stripeApiUrl/payment_methods/$paymentMethodId/attach'),
-      headers: {'Authorization': 'Bearer $stripeApiKey', 'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {
+        'Authorization': 'Bearer $stripeApiKey',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       body: {'customer': stripeCustomerId},
     );
 
     // 3. Set the new PaymentMethod as the default for the customer
     await http.post(
       Uri.parse('$_stripeApiUrl/customers/$stripeCustomerId'),
-      headers: {'Authorization': 'Bearer $stripeApiKey', 'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {
+        'Authorization': 'Bearer $stripeApiKey',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       body: {'invoice_settings[default_payment_method]': paymentMethodId},
     );
 
     // 4. Create the subscription
     final response = await http.post(
       Uri.parse('$_stripeApiUrl/subscriptions'),
-      headers: {'Authorization': 'Bearer $stripeApiKey', 'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {
+        'Authorization': 'Bearer $stripeApiKey',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       body: {
         'customer': stripeCustomerId,
         'items[0][price]': stripePriceId,
@@ -117,11 +204,12 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
     final responseData = jsonDecode(response.body);
     return {
       'subscriptionId': responseData['id'],
-      'endDate': DateTime.fromMillisecondsSinceEpoch(responseData['current_period_end'] * 1000),
+      'endDate': DateTime.fromMillisecondsSinceEpoch(
+          responseData['current_period_end'] * 1000),
     };
   }
 
-   /// Helper to create a Stripe Customer.
+  /// Helper to create a Stripe Customer.
   Future<Map<String, dynamic>> _createStripeCustomer(
       Session session, String apiKey, String? email, String? name) async {
     final response = await http.post(
@@ -189,7 +277,7 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
     };
   }
 
-   /// Helper to create a Paystack Customer.
+  /// Helper to create a Paystack Customer.
   Future<Map<String, dynamic>> _createPaystackCustomer(
       Session session, String apiKey, String? email, String? name) async {
     final response = await http.post(
@@ -211,9 +299,7 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
     return jsonDecode(response.body);
   }
 
-
-
- /// Cancels the user's active subscription.
+  /// Cancels the user's active subscription.
   Future<bool> cancelSubscription(Session session) async {
     final userId = await getAuthenticatedUserId(session);
     var userProfile = await UserProfile.db
@@ -276,6 +362,7 @@ class SubscriptionEndpoint extends Endpoint with EndpointUtils {
   Future<Subscription?> getSubscriptionStatus(Session session) async {
     final userId = await getAuthenticatedUserId(session);
     return await Subscription.db.findFirstRow(session,
-        where: (t) => t.userId.equals(userId) & t.status.equals('active'));
+        where: (t) =>
+            t.userId.equals(userId) & t.status.inSet({'active', 'pending'}));
   }
 }

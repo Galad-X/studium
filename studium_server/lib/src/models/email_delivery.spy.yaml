@@ -1,0 +1,25 @@
+class: EmailDelivery
+table: email_deliveries
+fields:
+  recipient: String
+  subject: String
+  htmlBody: String
+  dedupeKey: String?
+  status: String # pending, processing, sent, failed, dead_letter
+  attempts: int
+  maxAttempts: int
+  availableAt: DateTime
+  lockedAt: DateTime?
+  lockToken: String?
+  lastError: String?
+  sentAt: DateTime?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  email_delivery_claim_idx:
+    fields: status, availableAt, createdAt
+  email_delivery_lock_idx:
+    fields: lockToken
+  email_delivery_dedupe_idx:
+    fields: dedupeKey
+    unique: true

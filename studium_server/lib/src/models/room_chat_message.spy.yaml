@@ -1,0 +1,11 @@
+class: RoomChatMessage
+table: room_chat_messages
+fields:
+  roomId: int, relation(parent=study_rooms)
+  authorId: int, relation(parent=serverpod_user_info)
+  body: String
+  status: String
+  createdAt: DateTime
+indexes:
+  room_chat_room_created_idx:
+    fields: roomId, createdAt

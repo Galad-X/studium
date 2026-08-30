@@ -1,0 +1,17 @@
+class: ChallengeTeamInvite
+table: challenge_team_invites
+fields:
+  teamId: int, relation(parent=challenge_teams)
+  inviterId: int, relation(parent=serverpod_user_info)
+  inviteeId: int, relation(parent=serverpod_user_info)
+  tokenHash: String
+  status: String
+  expiresAt: DateTime
+  createdAt: DateTime
+  acceptedAt: DateTime?
+indexes:
+  challenge_team_invite_token_idx:
+    fields: tokenHash
+    unique: true
+  challenge_team_invite_target_idx:
+    fields: teamId, inviteeId, status

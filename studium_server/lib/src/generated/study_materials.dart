@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class StudyMaterial
@@ -42,8 +44,9 @@ abstract class StudyMaterial
       title: jsonSerialization['title'] as String,
       fileType: jsonSerialization['fileType'] as String,
       fileUrl: jsonSerialization['fileUrl'] as String,
-      uploadDate:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['uploadDate']),
+      uploadDate: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['uploadDate'],
+      ),
       size: jsonSerialization['size'] as int?,
       contentText: jsonSerialization['contentText'] as String?,
     );
@@ -89,6 +92,7 @@ abstract class StudyMaterial
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'StudyMaterial',
       if (id != null) 'id': id,
       'userId': userId,
       'title': title,
@@ -103,6 +107,7 @@ abstract class StudyMaterial
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'StudyMaterial',
       if (id != null) 'id': id,
       'userId': userId,
       'title': title,
@@ -157,15 +162,15 @@ class _StudyMaterialImpl extends StudyMaterial {
     int? size,
     String? contentText,
   }) : super._(
-          id: id,
-          userId: userId,
-          title: title,
-          fileType: fileType,
-          fileUrl: fileUrl,
-          uploadDate: uploadDate,
-          size: size,
-          contentText: contentText,
-        );
+         id: id,
+         userId: userId,
+         title: title,
+         fileType: fileType,
+         fileUrl: fileUrl,
+         uploadDate: uploadDate,
+         size: size,
+         contentText: contentText,
+       );
 
   /// Returns a shallow copy of this [StudyMaterial]
   /// with some or all fields replaced by the given arguments.
@@ -194,9 +199,50 @@ class _StudyMaterialImpl extends StudyMaterial {
   }
 }
 
+class StudyMaterialUpdateTable extends _i1.UpdateTable<StudyMaterialTable> {
+  StudyMaterialUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
+    table.title,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> fileType(String value) => _i1.ColumnValue(
+    table.fileType,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> fileUrl(String value) => _i1.ColumnValue(
+    table.fileUrl,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> uploadDate(DateTime value) =>
+      _i1.ColumnValue(
+        table.uploadDate,
+        value,
+      );
+
+  _i1.ColumnValue<int, int> size(int? value) => _i1.ColumnValue(
+    table.size,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> contentText(String? value) => _i1.ColumnValue(
+    table.contentText,
+    value,
+  );
+}
+
 class StudyMaterialTable extends _i1.Table<int?> {
   StudyMaterialTable({super.tableRelation})
-      : super(tableName: 'study_materials') {
+    : super(tableName: 'study_materials') {
+    updateTable = StudyMaterialUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -227,6 +273,8 @@ class StudyMaterialTable extends _i1.Table<int?> {
     );
   }
 
+  late final StudyMaterialUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnString title;
@@ -243,15 +291,15 @@ class StudyMaterialTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        title,
-        fileType,
-        fileUrl,
-        uploadDate,
-        size,
-        contentText,
-      ];
+    id,
+    userId,
+    title,
+    fileType,
+    fileUrl,
+    uploadDate,
+    size,
+    contentText,
+  ];
 }
 
 class StudyMaterialInclude extends _i1.IncludeObject {
@@ -310,7 +358,7 @@ class StudyMaterialRepository {
   /// );
   /// ```
   Future<List<StudyMaterial>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyMaterialTable>? where,
     int? limit,
     int? offset,
@@ -318,6 +366,8 @@ class StudyMaterialRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<StudyMaterialTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<StudyMaterial>(
       where: where?.call(StudyMaterial.t),
@@ -327,6 +377,8 @@ class StudyMaterialRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -348,13 +400,15 @@ class StudyMaterialRepository {
   /// );
   /// ```
   Future<StudyMaterial?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyMaterialTable>? where,
     int? offset,
     _i1.OrderByBuilder<StudyMaterialTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<StudyMaterialTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<StudyMaterial>(
       where: where?.call(StudyMaterial.t),
@@ -363,18 +417,24 @@ class StudyMaterialRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [StudyMaterial] by its [id] or null if no such row exists.
   Future<StudyMaterial?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<StudyMaterial>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -384,14 +444,20 @@ class StudyMaterialRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<StudyMaterial>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyMaterial> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<StudyMaterial>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -399,7 +465,7 @@ class StudyMaterialRepository {
   ///
   /// The returned [StudyMaterial] will have its `id` field set.
   Future<StudyMaterial> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyMaterial row, {
     _i1.Transaction? transaction,
   }) async {
@@ -415,7 +481,7 @@ class StudyMaterialRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<StudyMaterial>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyMaterial> rows, {
     _i1.ColumnSelections<StudyMaterialTable>? columns,
     _i1.Transaction? transaction,
@@ -431,7 +497,7 @@ class StudyMaterialRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<StudyMaterial> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyMaterial row, {
     _i1.ColumnSelections<StudyMaterialTable>? columns,
     _i1.Transaction? transaction,
@@ -443,11 +509,51 @@ class StudyMaterialRepository {
     );
   }
 
+  /// Updates a single [StudyMaterial] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<StudyMaterial?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<StudyMaterialUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<StudyMaterial>(
+      id,
+      columnValues: columnValues(StudyMaterial.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [StudyMaterial]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<StudyMaterial>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<StudyMaterialUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<StudyMaterialTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StudyMaterialTable>? orderBy,
+    _i1.OrderByListBuilder<StudyMaterialTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<StudyMaterial>(
+      columnValues: columnValues(StudyMaterial.t.updateTable),
+      where: where(StudyMaterial.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(StudyMaterial.t),
+      orderByList: orderByList?.call(StudyMaterial.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [StudyMaterial]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<StudyMaterial>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyMaterial> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -459,7 +565,7 @@ class StudyMaterialRepository {
 
   /// Deletes a single [StudyMaterial].
   Future<StudyMaterial> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyMaterial row, {
     _i1.Transaction? transaction,
   }) async {
@@ -471,7 +577,7 @@ class StudyMaterialRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<StudyMaterial>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<StudyMaterialTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -484,7 +590,7 @@ class StudyMaterialRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyMaterialTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -492,6 +598,22 @@ class StudyMaterialRepository {
     return session.db.count<StudyMaterial>(
       where: where?.call(StudyMaterial.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [StudyMaterial] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<StudyMaterialTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<StudyMaterial>(
+      where: where(StudyMaterial.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

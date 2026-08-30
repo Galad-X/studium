@@ -1,0 +1,17 @@
+class: InstitutionInvite
+table: institution_invites
+fields:
+  institutionId: int, relation(parent=institutions)
+  createdById: int, relation(parent=serverpod_user_info)
+  tokenHash: String
+  expiresAt: DateTime
+  maxUses: int
+  uses: int
+  status: String
+  createdAt: DateTime
+indexes:
+  institution_invite_token_idx:
+    fields: tokenHash
+    unique: true
+  institution_invite_institution_status_idx:
+    fields: institutionId, status, expiresAt

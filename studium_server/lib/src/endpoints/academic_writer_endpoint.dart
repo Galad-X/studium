@@ -1,5 +1,5 @@
 // lib/src/endpoints/academic_writing_endpoint.dart
-import 'package:serverpod/serverpod.dart';
+import 'package:serverpod/server.dart';
 import '../generated/protocol.dart';
 import 'ai_endpoint.dart';
 
@@ -9,8 +9,8 @@ class AcademicWritingEndpoint extends Endpoint {
 
   // Helper method to get authenticated user ID
   Future<int?> _getAuthenticatedUserId(Session session) async {
-    final authInfo = await session.authenticated;
-    return authInfo?.userId;
+    final authInfo = session.authenticated;
+    return int.tryParse(authInfo?.userIdentifier ?? '');
   }
 
   Future<bool> _isPremiumUser(Session session) async {
@@ -41,7 +41,6 @@ class AcademicWritingEndpoint extends Endpoint {
         .find(session, where: (t) => t.userId.equals(userId));
   }
 
- 
   // helper to delete a writing
   Future<bool> deleteWriting(Session session, int writingId) async {
     final userId = await _getAuthenticatedUserId(session);
@@ -55,6 +54,4 @@ class AcademicWritingEndpoint extends Endpoint {
     await AcademicWriting.db.deleteRow(session, writing);
     return true;
   }
-
-  
 }

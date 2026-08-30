@@ -6,8 +6,6 @@ import 'package:studium_client/studium_client.dart';
 import '../../../core/layout/responsive.dart';
 import '../providers/quiz_provider.dart';
 
-
-
 class QuizScreen extends ConsumerStatefulWidget {
   const QuizScreen({super.key});
 
@@ -106,7 +104,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     ref.listen<QuizState>(quizProvider, (previous, next) {
       if (next.status == QuizStatus.completed) {
-       context.goNamed('quizResults');
+        context.goNamed('quizResults');
       }
 
       // Animate progress when question changes
@@ -190,7 +188,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             child: Column(
               children: [
                 // Progress section
-                _buildProgressSection(theme, currentNumber, totalQuestions, screenWidth),
+                _buildProgressSection(
+                    theme, currentNumber, totalQuestions, screenWidth),
 
                 // Question content
                 Expanded(
@@ -203,14 +202,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _buildQuestionCard(theme, currentQuestion, screenWidth),
+                            _buildQuestionCard(
+                                theme, currentQuestion, screenWidth),
                             SizedBox(height: screenWidth >= 768 ? 40 : 32),
                             _AnswerInputWidget(
                               key: _answerWidgetKey, // Add key here
                               question: currentQuestion,
                               onAnswerSubmitted: () {
                                 // Small delay to ensure smooth animation
-                                Future.delayed(const Duration(milliseconds: 100), () {
+                                Future.delayed(
+                                    const Duration(milliseconds: 100), () {
                                   _animateToNextQuestion();
                                 });
                               },
@@ -230,7 +231,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  PreferredSizeWidget _buildAppBar(ThemeData theme, QuizState quizState, double screenWidth) {
+  PreferredSizeWidget _buildAppBar(
+      ThemeData theme, QuizState quizState, double screenWidth) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -257,10 +259,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  Widget _buildProgressSection(ThemeData theme, int current, int total, double screenWidth) {
+  Widget _buildProgressSection(
+      ThemeData theme, int current, int total, double screenWidth) {
     final padding = screenWidth >= 768 ? 32.0 : 24.0;
     final borderRadius = screenWidth >= 768 ? 32.0 : 24.0;
-    
+
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
@@ -320,11 +323,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  Widget _buildQuestionCard(ThemeData theme, Question question, double screenWidth) {
+  Widget _buildQuestionCard(
+      ThemeData theme, Question question, double screenWidth) {
     final padding = screenWidth >= 768 ? 32.0 : 24.0;
     final borderRadius = screenWidth >= 768 ? 24.0 : 20.0;
     final iconSize = screenWidth >= 768 ? 24.0 : 20.0;
-    
+
     return Container(
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
@@ -357,7 +361,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                 padding: EdgeInsets.all(screenWidth >= 768 ? 10 : 8),
                 decoration: BoxDecoration(
                   color: _getQuestionTypeColor(question.type).withAlpha(26),
-                  borderRadius: BorderRadius.circular(screenWidth >= 768 ? 10 : 8),
+                  borderRadius:
+                      BorderRadius.circular(screenWidth >= 768 ? 10 : 8),
                 ),
                 child: Icon(
                   _getQuestionTypeIcon(question.type),
@@ -384,7 +389,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w600,
               height: 1.4,
-              fontSize: screenWidth >= 1200 ? 28 : screenWidth >= 768 ? 24 : 20,
+              fontSize: screenWidth >= 1200
+                  ? 28
+                  : screenWidth >= 768
+                      ? 24
+                      : 20,
             ),
           ),
         ],
@@ -432,7 +441,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           ),
           FilledButton(
             onPressed: () {
-             context.goNamed('dashboard');
+              context.goNamed('dashboard');
             },
             style: FilledButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,
@@ -572,7 +581,7 @@ class _TextInputState extends ConsumerState<_TextInput> {
           .read(quizProvider.notifier)
           .submitAnswer(_answerController.text.trim());
       _answerController.clear();
-      
+
       // Check if we're still in the same quiz and not completed
       final currentState = ref.read(quizProvider);
       if (currentState.status == QuizStatus.active) {

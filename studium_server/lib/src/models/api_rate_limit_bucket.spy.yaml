@@ -1,0 +1,13 @@
+class: ApiRateLimitBucket
+table: api_rate_limit_buckets
+fields:
+  scopeKey: String
+  windowStart: DateTime
+  requestCount: int
+  updatedAt: DateTime
+indexes:
+  api_rate_limit_bucket_unique_idx:
+    fields: scopeKey, windowStart
+    unique: true
+  api_rate_limit_bucket_cleanup_idx:
+    fields: updatedAt

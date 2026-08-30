@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class FileProcessing
@@ -19,6 +21,9 @@ abstract class FileProcessing
     required this.status,
     this.processedText,
     this.errorMessage,
+    required this.attempts,
+    required this.maxAttempts,
+    this.lastStartedAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -29,6 +34,9 @@ abstract class FileProcessing
     required String status,
     String? processedText,
     String? errorMessage,
+    required int attempts,
+    required int maxAttempts,
+    DateTime? lastStartedAt,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _FileProcessingImpl;
@@ -40,10 +48,19 @@ abstract class FileProcessing
       status: jsonSerialization['status'] as String,
       processedText: jsonSerialization['processedText'] as String?,
       errorMessage: jsonSerialization['errorMessage'] as String?,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
-      updatedAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      attempts: jsonSerialization['attempts'] as int,
+      maxAttempts: jsonSerialization['maxAttempts'] as int,
+      lastStartedAt: jsonSerialization['lastStartedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['lastStartedAt'],
+            ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
+      updatedAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['updatedAt'],
+      ),
     );
   }
 
@@ -62,6 +79,12 @@ abstract class FileProcessing
 
   String? errorMessage;
 
+  int attempts;
+
+  int maxAttempts;
+
+  DateTime? lastStartedAt;
+
   DateTime createdAt;
 
   DateTime updatedAt;
@@ -78,17 +101,24 @@ abstract class FileProcessing
     String? status,
     String? processedText,
     String? errorMessage,
+    int? attempts,
+    int? maxAttempts,
+    DateTime? lastStartedAt,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'FileProcessing',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'status': status,
       if (processedText != null) 'processedText': processedText,
       if (errorMessage != null) 'errorMessage': errorMessage,
+      'attempts': attempts,
+      'maxAttempts': maxAttempts,
+      if (lastStartedAt != null) 'lastStartedAt': lastStartedAt?.toJson(),
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -97,11 +127,15 @@ abstract class FileProcessing
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'FileProcessing',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'status': status,
       if (processedText != null) 'processedText': processedText,
       if (errorMessage != null) 'errorMessage': errorMessage,
+      'attempts': attempts,
+      'maxAttempts': maxAttempts,
+      if (lastStartedAt != null) 'lastStartedAt': lastStartedAt?.toJson(),
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -146,17 +180,23 @@ class _FileProcessingImpl extends FileProcessing {
     required String status,
     String? processedText,
     String? errorMessage,
+    required int attempts,
+    required int maxAttempts,
+    DateTime? lastStartedAt,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-          id: id,
-          studyMaterialId: studyMaterialId,
-          status: status,
-          processedText: processedText,
-          errorMessage: errorMessage,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-        );
+         id: id,
+         studyMaterialId: studyMaterialId,
+         status: status,
+         processedText: processedText,
+         errorMessage: errorMessage,
+         attempts: attempts,
+         maxAttempts: maxAttempts,
+         lastStartedAt: lastStartedAt,
+         createdAt: createdAt,
+         updatedAt: updatedAt,
+       );
 
   /// Returns a shallow copy of this [FileProcessing]
   /// with some or all fields replaced by the given arguments.
@@ -168,6 +208,9 @@ class _FileProcessingImpl extends FileProcessing {
     String? status,
     Object? processedText = _Undefined,
     Object? errorMessage = _Undefined,
+    int? attempts,
+    int? maxAttempts,
+    Object? lastStartedAt = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -175,18 +218,79 @@ class _FileProcessingImpl extends FileProcessing {
       id: id is int? ? id : this.id,
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       status: status ?? this.status,
-      processedText:
-          processedText is String? ? processedText : this.processedText,
+      processedText: processedText is String?
+          ? processedText
+          : this.processedText,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
+      attempts: attempts ?? this.attempts,
+      maxAttempts: maxAttempts ?? this.maxAttempts,
+      lastStartedAt: lastStartedAt is DateTime?
+          ? lastStartedAt
+          : this.lastStartedAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
 
+class FileProcessingUpdateTable extends _i1.UpdateTable<FileProcessingTable> {
+  FileProcessingUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
+    table.studyMaterialId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
+    table.status,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> processedText(String? value) =>
+      _i1.ColumnValue(
+        table.processedText,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> errorMessage(String? value) =>
+      _i1.ColumnValue(
+        table.errorMessage,
+        value,
+      );
+
+  _i1.ColumnValue<int, int> attempts(int value) => _i1.ColumnValue(
+    table.attempts,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> maxAttempts(int value) => _i1.ColumnValue(
+    table.maxAttempts,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> lastStartedAt(DateTime? value) =>
+      _i1.ColumnValue(
+        table.lastStartedAt,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> updatedAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.updatedAt,
+        value,
+      );
+}
+
 class FileProcessingTable extends _i1.Table<int?> {
   FileProcessingTable({super.tableRelation})
-      : super(tableName: 'file_processing') {
+    : super(tableName: 'file_processing') {
+    updateTable = FileProcessingUpdateTable(this);
     studyMaterialId = _i1.ColumnInt(
       'studyMaterialId',
       this,
@@ -203,6 +307,18 @@ class FileProcessingTable extends _i1.Table<int?> {
       'errorMessage',
       this,
     );
+    attempts = _i1.ColumnInt(
+      'attempts',
+      this,
+    );
+    maxAttempts = _i1.ColumnInt(
+      'maxAttempts',
+      this,
+    );
+    lastStartedAt = _i1.ColumnDateTime(
+      'lastStartedAt',
+      this,
+    );
     createdAt = _i1.ColumnDateTime(
       'createdAt',
       this,
@@ -213,6 +329,8 @@ class FileProcessingTable extends _i1.Table<int?> {
     );
   }
 
+  late final FileProcessingUpdateTable updateTable;
+
   late final _i1.ColumnInt studyMaterialId;
 
   late final _i1.ColumnString status;
@@ -221,20 +339,29 @@ class FileProcessingTable extends _i1.Table<int?> {
 
   late final _i1.ColumnString errorMessage;
 
+  late final _i1.ColumnInt attempts;
+
+  late final _i1.ColumnInt maxAttempts;
+
+  late final _i1.ColumnDateTime lastStartedAt;
+
   late final _i1.ColumnDateTime createdAt;
 
   late final _i1.ColumnDateTime updatedAt;
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        studyMaterialId,
-        status,
-        processedText,
-        errorMessage,
-        createdAt,
-        updatedAt,
-      ];
+    id,
+    studyMaterialId,
+    status,
+    processedText,
+    errorMessage,
+    attempts,
+    maxAttempts,
+    lastStartedAt,
+    createdAt,
+    updatedAt,
+  ];
 }
 
 class FileProcessingInclude extends _i1.IncludeObject {
@@ -293,7 +420,7 @@ class FileProcessingRepository {
   /// );
   /// ```
   Future<List<FileProcessing>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<FileProcessingTable>? where,
     int? limit,
     int? offset,
@@ -301,6 +428,8 @@ class FileProcessingRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<FileProcessingTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<FileProcessing>(
       where: where?.call(FileProcessing.t),
@@ -310,6 +439,8 @@ class FileProcessingRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -331,13 +462,15 @@ class FileProcessingRepository {
   /// );
   /// ```
   Future<FileProcessing?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<FileProcessingTable>? where,
     int? offset,
     _i1.OrderByBuilder<FileProcessingTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<FileProcessingTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<FileProcessing>(
       where: where?.call(FileProcessing.t),
@@ -346,18 +479,24 @@ class FileProcessingRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [FileProcessing] by its [id] or null if no such row exists.
   Future<FileProcessing?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<FileProcessing>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -367,14 +506,20 @@ class FileProcessingRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<FileProcessing>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<FileProcessing> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<FileProcessing>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -382,7 +527,7 @@ class FileProcessingRepository {
   ///
   /// The returned [FileProcessing] will have its `id` field set.
   Future<FileProcessing> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     FileProcessing row, {
     _i1.Transaction? transaction,
   }) async {
@@ -398,7 +543,7 @@ class FileProcessingRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<FileProcessing>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<FileProcessing> rows, {
     _i1.ColumnSelections<FileProcessingTable>? columns,
     _i1.Transaction? transaction,
@@ -414,7 +559,7 @@ class FileProcessingRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<FileProcessing> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     FileProcessing row, {
     _i1.ColumnSelections<FileProcessingTable>? columns,
     _i1.Transaction? transaction,
@@ -426,11 +571,51 @@ class FileProcessingRepository {
     );
   }
 
+  /// Updates a single [FileProcessing] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<FileProcessing?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<FileProcessingUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<FileProcessing>(
+      id,
+      columnValues: columnValues(FileProcessing.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [FileProcessing]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<FileProcessing>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<FileProcessingUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<FileProcessingTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<FileProcessingTable>? orderBy,
+    _i1.OrderByListBuilder<FileProcessingTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<FileProcessing>(
+      columnValues: columnValues(FileProcessing.t.updateTable),
+      where: where(FileProcessing.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(FileProcessing.t),
+      orderByList: orderByList?.call(FileProcessing.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [FileProcessing]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<FileProcessing>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<FileProcessing> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -442,7 +627,7 @@ class FileProcessingRepository {
 
   /// Deletes a single [FileProcessing].
   Future<FileProcessing> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     FileProcessing row, {
     _i1.Transaction? transaction,
   }) async {
@@ -454,7 +639,7 @@ class FileProcessingRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<FileProcessing>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<FileProcessingTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -467,7 +652,7 @@ class FileProcessingRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<FileProcessingTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -475,6 +660,22 @@ class FileProcessingRepository {
     return session.db.count<FileProcessing>(
       where: where?.call(FileProcessing.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [FileProcessing] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<FileProcessingTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<FileProcessing>(
+      where: where(FileProcessing.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

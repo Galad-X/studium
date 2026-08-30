@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class AcademicWriting
@@ -50,8 +52,9 @@ abstract class AcademicWriting
       content: jsonSerialization['content'] as String,
       format: jsonSerialization['format'] as String,
       fileUrl: jsonSerialization['fileUrl'] as String,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -101,6 +104,7 @@ abstract class AcademicWriting
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'AcademicWriting',
       if (id != null) 'id': id,
       'userId': userId,
       if (studyMaterialId != null) 'studyMaterialId': studyMaterialId,
@@ -117,6 +121,7 @@ abstract class AcademicWriting
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'AcademicWriting',
       if (id != null) 'id': id,
       'userId': userId,
       if (studyMaterialId != null) 'studyMaterialId': studyMaterialId,
@@ -175,17 +180,17 @@ class _AcademicWritingImpl extends AcademicWriting {
     required String fileUrl,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          studyMaterialId: studyMaterialId,
-          type: type,
-          title: title,
-          wordCount: wordCount,
-          content: content,
-          format: format,
-          fileUrl: fileUrl,
-          createdAt: createdAt,
-        );
+         id: id,
+         userId: userId,
+         studyMaterialId: studyMaterialId,
+         type: type,
+         title: title,
+         wordCount: wordCount,
+         content: content,
+         format: format,
+         fileUrl: fileUrl,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [AcademicWriting]
   /// with some or all fields replaced by the given arguments.
@@ -206,8 +211,9 @@ class _AcademicWritingImpl extends AcademicWriting {
     return AcademicWriting(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
-      studyMaterialId:
-          studyMaterialId is int? ? studyMaterialId : this.studyMaterialId,
+      studyMaterialId: studyMaterialId is int?
+          ? studyMaterialId
+          : this.studyMaterialId,
       type: type ?? this.type,
       title: title ?? this.title,
       wordCount: wordCount is int? ? wordCount : this.wordCount,
@@ -219,9 +225,60 @@ class _AcademicWritingImpl extends AcademicWriting {
   }
 }
 
+class AcademicWritingUpdateTable extends _i1.UpdateTable<AcademicWritingTable> {
+  AcademicWritingUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> studyMaterialId(int? value) => _i1.ColumnValue(
+    table.studyMaterialId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
+    table.type,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
+    table.title,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> wordCount(int? value) => _i1.ColumnValue(
+    table.wordCount,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> content(String value) => _i1.ColumnValue(
+    table.content,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> format(String value) => _i1.ColumnValue(
+    table.format,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> fileUrl(String value) => _i1.ColumnValue(
+    table.fileUrl,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+}
+
 class AcademicWritingTable extends _i1.Table<int?> {
   AcademicWritingTable({super.tableRelation})
-      : super(tableName: 'academic_writings') {
+    : super(tableName: 'academic_writings') {
+    updateTable = AcademicWritingUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -260,6 +317,8 @@ class AcademicWritingTable extends _i1.Table<int?> {
     );
   }
 
+  late final AcademicWritingUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnInt studyMaterialId;
@@ -280,17 +339,17 @@ class AcademicWritingTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        studyMaterialId,
-        type,
-        title,
-        wordCount,
-        content,
-        format,
-        fileUrl,
-        createdAt,
-      ];
+    id,
+    userId,
+    studyMaterialId,
+    type,
+    title,
+    wordCount,
+    content,
+    format,
+    fileUrl,
+    createdAt,
+  ];
 }
 
 class AcademicWritingInclude extends _i1.IncludeObject {
@@ -349,7 +408,7 @@ class AcademicWritingRepository {
   /// );
   /// ```
   Future<List<AcademicWriting>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AcademicWritingTable>? where,
     int? limit,
     int? offset,
@@ -357,6 +416,8 @@ class AcademicWritingRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<AcademicWritingTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<AcademicWriting>(
       where: where?.call(AcademicWriting.t),
@@ -366,6 +427,8 @@ class AcademicWritingRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -387,13 +450,15 @@ class AcademicWritingRepository {
   /// );
   /// ```
   Future<AcademicWriting?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AcademicWritingTable>? where,
     int? offset,
     _i1.OrderByBuilder<AcademicWritingTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<AcademicWritingTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<AcademicWriting>(
       where: where?.call(AcademicWriting.t),
@@ -402,18 +467,24 @@ class AcademicWritingRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [AcademicWriting] by its [id] or null if no such row exists.
   Future<AcademicWriting?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<AcademicWriting>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -423,14 +494,20 @@ class AcademicWritingRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<AcademicWriting>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<AcademicWriting> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<AcademicWriting>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -438,7 +515,7 @@ class AcademicWritingRepository {
   ///
   /// The returned [AcademicWriting] will have its `id` field set.
   Future<AcademicWriting> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     AcademicWriting row, {
     _i1.Transaction? transaction,
   }) async {
@@ -454,7 +531,7 @@ class AcademicWritingRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<AcademicWriting>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<AcademicWriting> rows, {
     _i1.ColumnSelections<AcademicWritingTable>? columns,
     _i1.Transaction? transaction,
@@ -470,7 +547,7 @@ class AcademicWritingRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<AcademicWriting> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     AcademicWriting row, {
     _i1.ColumnSelections<AcademicWritingTable>? columns,
     _i1.Transaction? transaction,
@@ -482,11 +559,53 @@ class AcademicWritingRepository {
     );
   }
 
+  /// Updates a single [AcademicWriting] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<AcademicWriting?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<AcademicWritingUpdateTable>
+    columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<AcademicWriting>(
+      id,
+      columnValues: columnValues(AcademicWriting.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [AcademicWriting]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<AcademicWriting>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<AcademicWritingUpdateTable>
+    columnValues,
+    required _i1.WhereExpressionBuilder<AcademicWritingTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<AcademicWritingTable>? orderBy,
+    _i1.OrderByListBuilder<AcademicWritingTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<AcademicWriting>(
+      columnValues: columnValues(AcademicWriting.t.updateTable),
+      where: where(AcademicWriting.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(AcademicWriting.t),
+      orderByList: orderByList?.call(AcademicWriting.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [AcademicWriting]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<AcademicWriting>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<AcademicWriting> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -498,7 +617,7 @@ class AcademicWritingRepository {
 
   /// Deletes a single [AcademicWriting].
   Future<AcademicWriting> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     AcademicWriting row, {
     _i1.Transaction? transaction,
   }) async {
@@ -510,7 +629,7 @@ class AcademicWritingRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<AcademicWriting>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<AcademicWritingTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -523,7 +642,7 @@ class AcademicWritingRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AcademicWritingTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -531,6 +650,22 @@ class AcademicWritingRepository {
     return session.db.count<AcademicWriting>(
       where: where?.call(AcademicWriting.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [AcademicWriting] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<AcademicWritingTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<AcademicWriting>(
+      where: where(AcademicWriting.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

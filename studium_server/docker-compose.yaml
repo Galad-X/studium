@@ -1,13 +1,13 @@
 services:
   # Development services
   postgres:
-    image: postgres:16.3
+    image: pgvector/pgvector:pg16
     ports:
       - "7090:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: studium
-      POSTGRES_PASSWORD: "Qv2A0Y1fNuncjHNL9U4gTb-IFPBmcY00"
+      POSTGRES_PASSWORD: "${STUDIUM_DB_PASSWORD:-replace-me}"
     volumes:
       - studium_data:/var/lib/postgresql/data
 
@@ -15,30 +15,43 @@ services:
     image: redis:6.2.6
     ports:
       - "7091:6379"
-    command: redis-server --requirepass "H18MVTAPb7EgIGAkCtq9wjMMrqMxXm-c"
+    command: redis-server --requirepass "${STUDIUM_REDIS_PASSWORD:-replace-me}"
     environment:
-      - REDIS_REPLICATION_MODE=master
+      REDIS_REPLICATION_MODE: master
+      STUDIUM_REDIS_PASSWORD: "${STUDIUM_REDIS_PASSWORD:-replace-me}"
 
   # Test services
   postgres_test:
-    image: postgres:16.3
+    image: pgvector/pgvector:pg16
     ports:
-      - "7092:5432"
+      - "9090:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: studium_test
-      POSTGRES_PASSWORD: "2VtFL9kLQGkde1x64o9-L4XSfaKq8KPp"
+      POSTGRES_PASSWORD: "${STUDIUM_TEST_DB_PASSWORD:-replace-me}"
     volumes:
-      - studium_test_data:/var/lib/postgresql/data
+      - studium_test_data_v2:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d studium_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   redis_test:
     image: redis:6.2.6
     ports:
-      - "7093:6379"
-    command: redis-server --requirepass "2o0WWhpyfaxcOLzmz3LxylT7UU8VSn-Q"
+      - "9091:6379"
+    command: redis-server --requirepass "${STUDIUM_TEST_REDIS_PASSWORD:-replace-me}"
     environment:
-      - REDIS_REPLICATION_MODE=master
+      REDIS_REPLICATION_MODE: master
+      STUDIUM_TEST_REDIS_PASSWORD: "${STUDIUM_TEST_REDIS_PASSWORD:-replace-me}"
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${STUDIUM_TEST_REDIS_PASSWORD:-replace-me}\" ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
 volumes:
   studium_data:
   studium_test_data:
+  studium_test_data_v2:

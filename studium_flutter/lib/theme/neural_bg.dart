@@ -38,7 +38,7 @@ class _NeuralNetworkBackgroundState extends State<NeuralNetworkBackground>
       animation: _controller,
       builder: (context, child) {
         return CustomPaint(
-          painter: NeuralNetworkPainter(
+          painter: _NeuralNetworkPainter(
             animation: _controller.value,
             nodes: nodes,
           ),
@@ -68,11 +68,11 @@ class _NeuralNode {
   }
 }
 
-class NeuralNetworkPainter extends CustomPainter {
+class _NeuralNetworkPainter extends CustomPainter {
   final double animation;
   final List<_NeuralNode> nodes;
 
-  NeuralNetworkPainter({required this.animation, required this.nodes});
+  _NeuralNetworkPainter({required this.animation, required this.nodes});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -99,7 +99,7 @@ class NeuralNetworkPainter extends CustomPainter {
 
         if (distance < 150) {
           final opacity = (1 - distance / 150) * 0.3;
-          paint.color = const Color(0xFF00D4FF).withOpacity(opacity);
+          paint.color = const Color(0xFF00D4FF).withValues(alpha: opacity);
 
           canvas.drawLine(
             Offset(node1.x * size.width, node1.y * size.height),

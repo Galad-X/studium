@@ -1,0 +1,14 @@
+class: ConversationMember
+table: conversation_members
+fields:
+  conversationId: int, relation(parent=conversations)
+  userId: int, relation(parent=serverpod_user_info)
+  role: String
+  status: String
+  joinedAt: DateTime
+indexes:
+  conversation_member_unique_idx:
+    fields: conversationId, userId
+    unique: true
+  conversation_member_user_idx:
+    fields: userId, status

@@ -1,0 +1,15 @@
+class: RoomResourceChunk
+table: room_resource_chunks
+fields:
+  roomResourceId: int, relation(parent=room_resources)
+  chunkIndex: int
+  content: String
+  tokenCount: int
+  embedding: String?
+  createdAt: DateTime
+indexes:
+  room_resource_chunk_unique_idx:
+    fields: roomResourceId, chunkIndex
+    unique: true
+  room_resource_chunk_resource_idx:
+    fields: roomResourceId, chunkIndex

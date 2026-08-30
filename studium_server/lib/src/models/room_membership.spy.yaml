@@ -1,0 +1,13 @@
+class: RoomMembership
+table: room_memberships
+fields:
+  roomId: int, relation(parent=study_rooms)
+  userId: int, relation(parent=serverpod_user_info)
+  role: String
+  status: String
+  joinedAt: DateTime
+indexes:
+  room_membership_room_user_idx:
+    fields: roomId, userId
+    unique: true
+

@@ -1,0 +1,14 @@
+class: CollaborativeDocument
+table: collaborative_documents
+fields:
+  roomId: int, relation(parent=study_rooms)
+  ownerId: int, relation(parent=serverpod_user_info)
+  title: String
+  body: String
+  version: int
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  collaborative_document_room_updated_idx:
+    fields: roomId, updatedAt

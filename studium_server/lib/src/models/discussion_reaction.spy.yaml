@@ -1,0 +1,12 @@
+class: DiscussionReaction
+table: discussion_reactions
+fields:
+  postId: int, relation(parent=discussion_posts)
+  userId: int, relation(parent=serverpod_user_info)
+  reaction: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  discussion_reaction_post_user_idx:
+    fields: postId, userId
+    unique: true

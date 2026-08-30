@@ -1,0 +1,13 @@
+class: DiscussionPost
+table: discussion_posts
+fields:
+  roomId: int, relation(parent=study_rooms)
+  authorId: int, relation(parent=serverpod_user_info)
+  acceptedCommentId: int?, relation(parent=comments)
+  body: String
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  discussion_post_room_created_idx:
+    fields: roomId, createdAt

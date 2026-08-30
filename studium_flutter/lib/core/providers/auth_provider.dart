@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:serverpod_auth_client/module.dart'; // For UserInfo
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 
-
-
 /// A simple provider that gives access to the global [SessionManager] instance.
 ///
 /// This allows other providers and widgets to access the session manager
@@ -15,6 +13,7 @@ final sessionManagerProvider = FutureProvider<SessionManager>((ref) async {
   await manager.initialize();
   return manager;
 });
+
 /// A stream provider that exposes the authentication state of the user.
 ///
 /// Widgets can listen to this provider to reactively rebuild when the user

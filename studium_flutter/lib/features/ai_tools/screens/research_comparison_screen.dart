@@ -56,7 +56,9 @@ class _ResearchComparisonScreenState
   }
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     final comparisonAsync =
         ref.watch(researchComparisonProvider(widget.studyMaterialId));
     final theme = Theme.of(context);

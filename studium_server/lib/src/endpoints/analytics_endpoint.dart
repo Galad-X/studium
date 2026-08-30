@@ -1,5 +1,5 @@
 // ANALYTICS ENDPOINT
-import 'package:serverpod/serverpod.dart';
+import 'package:serverpod/server.dart';
 import '../generated/protocol.dart';
 
 class AnalyticsEndpoint extends Endpoint {
@@ -7,9 +7,9 @@ class AnalyticsEndpoint extends Endpoint {
   bool get requireLogin => true;
 
   Future<bool> _isPremiumUser(Session session) async {
-   final authInfo = await session.authenticated;
-    final userId = authInfo?.userId;
-   
+    final authInfo = session.authenticated;
+    final userId = int.tryParse(authInfo?.userIdentifier ?? '');
+
     if (userId == null) return false;
 
     final userProfile = await UserProfile.db
@@ -19,12 +19,12 @@ class AnalyticsEndpoint extends Endpoint {
 
   Future<bool> logAction(
       Session session, String action, String? metadata) async {
-   final authInfo = await session.authenticated;
-    final userId = authInfo?.userId;
-    if (authInfo?.userId == null) throw Exception('User not authenticated');
+    final authInfo = session.authenticated;
+    final userId = int.tryParse(authInfo?.userIdentifier ?? '');
+    if (userId == null) throw Exception('User not authenticated');
 
     final analytics = UserAnalytics(
-      userId: userId!,
+      userId: userId,
       action: action,
       metadata: metadata,
       timestamp: DateTime.now(),
@@ -39,10 +39,10 @@ class AnalyticsEndpoint extends Endpoint {
       throw Exception('Premium access required');
     }
 
-   final authInfo = await session.authenticated;
-    final userId = authInfo?.userId;
-    if (authInfo?.userId == null) throw Exception('User not authenticated');
+    final authInfo = session.authenticated;
+    final userId = int.tryParse(authInfo?.userIdentifier ?? '');
+    if (userId == null) throw Exception('User not authenticated');
     return await UserAnalytics.db
-        .find(session, where: (t) => t.userId.equals(userId));
+        .find(session, where: (t) => t.userId.equals(userId), limit: 500);
   }
 }

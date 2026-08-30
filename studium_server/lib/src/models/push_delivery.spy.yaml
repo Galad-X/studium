@@ -1,0 +1,23 @@
+class: PushDelivery
+table: push_deliveries
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  title: String
+  message: String
+  type: String?
+  relatedId: int?
+  status: String # pending, processing, sent, dead_letter
+  attempts: int
+  maxAttempts: int
+  availableAt: DateTime
+  lockedAt: DateTime?
+  lockToken: String?
+  lastError: String?
+  sentAt: DateTime?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  push_delivery_claim_idx:
+    fields: status, availableAt, createdAt
+  push_delivery_lock_idx:
+    fields: lockToken

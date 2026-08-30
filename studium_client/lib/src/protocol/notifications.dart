@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class Notification implements _i1.SerializableModel {
@@ -39,9 +41,12 @@ abstract class Notification implements _i1.SerializableModel {
       message: jsonSerialization['message'] as String,
       relatedId: jsonSerialization['relatedId'] as int?,
       type: jsonSerialization['type'] as String,
-      isRead: jsonSerialization['isRead'] as bool,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      isRead: jsonSerialization['isRead'] == null
+          ? null
+          : _i1.BoolJsonExtension.fromJson(jsonSerialization['isRead']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -77,6 +82,7 @@ abstract class Notification implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Notification',
       if (id != null) 'id': id,
       'userId': userId,
       'message': message,
@@ -105,14 +111,14 @@ class _NotificationImpl extends Notification {
     bool? isRead,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          message: message,
-          relatedId: relatedId,
-          type: type,
-          isRead: isRead,
-          createdAt: createdAt,
-        );
+         id: id,
+         userId: userId,
+         message: message,
+         relatedId: relatedId,
+         type: type,
+         isRead: isRead,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Notification]
   /// with some or all fields replaced by the given arguments.

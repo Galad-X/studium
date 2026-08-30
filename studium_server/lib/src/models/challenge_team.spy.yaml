@@ -1,0 +1,13 @@
+class: ChallengeTeam
+table: challenge_teams
+fields:
+  challengeId: int, relation(parent=challenges)
+  ownerId: int, relation(parent=serverpod_user_info)
+  name: String
+  description: String?
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  challenge_team_challenge_idx:
+    fields: challengeId, status

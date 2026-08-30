@@ -117,8 +117,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen>
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color:
-                      _getFileColor(widget.material.fileType).withAlpha(26),
+                  color: _getFileColor(widget.material.fileType).withAlpha(26),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(
@@ -192,7 +191,7 @@ class _MaterialDetailScreenState extends State<MaterialDetailScreen>
         isPremium: false,
         onTap: () {
           HapticFeedback.lightImpact();
-           context.pushNamed(
+          context.pushNamed(
             'startQuiz',
             pathParameters: {'id': widget.material.id!.toString()},
             extra: widget.material,

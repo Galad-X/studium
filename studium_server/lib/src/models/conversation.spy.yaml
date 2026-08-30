@@ -1,0 +1,11 @@
+class: Conversation
+table: conversations
+fields:
+  conversationType: String
+  title: String?
+  createdById: int, relation(parent=serverpod_user_info)
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  conversation_updated_idx:
+    fields: updatedAt

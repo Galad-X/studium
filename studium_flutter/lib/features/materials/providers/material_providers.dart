@@ -12,7 +12,7 @@ final materialsProvider =
     return await client.studyMaterial.getMaterials();
   } catch (e) {
     // Handle potential exceptions from the server call
-   debugPrint('Failed to fetch materials: $e');
+    debugPrint('Failed to fetch materials: $e');
     return []; // Return empty list on error to prevent UI crash
   }
 });

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:studium_client/studium_client.dart';
+import '../../../services/export_service.dart';
 import '../../history/providers/history_providers.dart';
+import '../../../core/providers/service_providers.dart';
 
 class UserAnalyticsScreen extends ConsumerStatefulWidget {
   const UserAnalyticsScreen({super.key});
@@ -66,7 +68,9 @@ class _UserAnalyticsScreenState extends ConsumerState<UserAnalyticsScreen>
   }
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     final analyticsAsync = ref.watch(userAnalyticsProvider);
     final theme = Theme.of(context);
 
@@ -106,12 +110,47 @@ class _UserAnalyticsScreenState extends ConsumerState<UserAnalyticsScreen>
         IconButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            // TODO: Add export functionality
+            final analytics = ref.read(userAnalyticsProvider).valueOrNull;
+            if (analytics == null || analytics.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('No activity to export.')),
+              );
+              return;
+            }
+            _exportAnalytics(analytics);
           },
           icon: const Icon(Icons.download_rounded),
         ),
       ],
     );
+  }
+
+  Future<void> _exportAnalytics(List<UserAnalytics> analytics) async {
+    try {
+      final content = analytics.map((item) =>
+          '${DateFormat.yMMMd().add_jm().format(item.timestamp)} • ${item.action}${item.metadata == null ? '' : ' • ${item.metadata}'}').join('\n');
+      final path = await ref.read(exportServiceProvider).exportDocument(
+            title: 'Studium_Activity_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
+            content: content,
+            format: ExportFormat.pdf,
+          );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Activity exported.'),
+          action: SnackBarAction(
+            label: 'Open',
+            onPressed: () => ref.read(exportServiceProvider).openFile(path),
+          ),
+        ),
+      );
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Export failed: $error')),
+        );
+      }
+    }
   }
 
   Widget _buildStatsHeader(
@@ -554,9 +593,8 @@ class _FilterChip extends StatelessWidget {
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
         ),
         side: BorderSide(
-          color: isSelected
-              ? chipColor
-              : theme.colorScheme.outline.withAlpha(77),
+          color:
+              isSelected ? chipColor : theme.colorScheme.outline.withAlpha(77),
         ),
       ),
     );

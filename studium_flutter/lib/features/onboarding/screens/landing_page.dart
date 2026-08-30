@@ -1819,13 +1819,21 @@ class _ModernFooter extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _FooterLink(text: 'Features', onPressed: () {},
+                      _FooterLink(
+                        text: 'Features',
+                        onPressed: () {},
                       ),
-                      _FooterLink(text: 'Pricing', onPressed: () {},
+                      _FooterLink(
+                        text: 'Pricing',
+                        onPressed: () {},
                       ),
-                      _FooterLink(text: 'About', onPressed: () {},
+                      _FooterLink(
+                        text: 'About',
+                        onPressed: () {},
                       ),
-                      _FooterLink(text: 'Contact', onPressed: () {},
+                      _FooterLink(
+                        text: 'Contact',
+                        onPressed: () {},
                       ),
                     ],
                   ),
@@ -1856,14 +1864,19 @@ class _ModernFooter extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          _FooterLink(text: 'Privacy Policy', onPressed: () {},
-                          ),
-                          const SizedBox(width: 24),
-                          _FooterLink(text: 'Terms of Service',
+                          _FooterLink(
+                            text: 'Privacy Policy',
                             onPressed: () {},
                           ),
                           const SizedBox(width: 24),
-                          _FooterLink(text: 'Cookie Policy', onPressed: () {},
+                          _FooterLink(
+                            text: 'Terms of Service',
+                            onPressed: () {},
+                          ),
+                          const SizedBox(width: 24),
+                          _FooterLink(
+                            text: 'Cookie Policy',
+                            onPressed: () {},
                           ),
                         ],
                       ),
@@ -1882,14 +1895,19 @@ class _ModernFooter extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _FooterLink(text: 'Privacy', onPressed: () {
-                            
-                          },),
-                          const SizedBox(width: 16),
-                          _FooterLink(text: 'Terms', onPressed: () {},
+                          _FooterLink(
+                            text: 'Privacy',
+                            onPressed: () {},
                           ),
                           const SizedBox(width: 16),
-                          _FooterLink(text: 'Cookies', onPressed: () {},
+                          _FooterLink(
+                            text: 'Terms',
+                            onPressed: () {},
+                          ),
+                          const SizedBox(width: 16),
+                          _FooterLink(
+                            text: 'Cookies',
+                            onPressed: () {},
                           ),
                         ],
                       ),
@@ -1927,7 +1945,9 @@ class _FooterColumn extends StatelessWidget {
         const SizedBox(height: 16),
         ...links.map((link) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: _FooterLink(text: link, onPressed: () {},
+              child: _FooterLink(
+                text: link,
+                onPressed: () {},
               ),
             )),
       ],
@@ -2223,7 +2243,7 @@ class _FooterLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:  onPressed,
+      onTap: onPressed,
       borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:intl/intl.dart';
 import 'package:studium_client/studium_client.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../core/providers/service_providers.dart';
 import '../../../services/export_service.dart';
 import '../providers/history_providers.dart';
@@ -22,6 +23,7 @@ class _MySummariesScreenState extends ConsumerState<MySummariesScreen>
   late Animation<Offset> _slideAnimation;
   String _searchQuery = '';
   String _selectedSubject = 'all';
+  bool _sortNewestFirst = true;
 
   final Map<String, SubjectInfo> _subjects = {
     'mathematics': SubjectInfo(
@@ -115,8 +117,10 @@ class _MySummariesScreenState extends ConsumerState<MySummariesScreen>
         IconButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            // TODO: Add sort options
+            setState(() => _sortNewestFirst = !_sortNewestFirst);
           },
+          tooltip: _sortNewestFirst ? 'Sort oldest first' : 'Sort newest first',
+          color: _sortNewestFirst ? theme.colorScheme.primary : null,
           icon: const Icon(Icons.sort_rounded),
         ),
         IconButton(
@@ -315,7 +319,10 @@ class _MySummariesScreenState extends ConsumerState<MySummariesScreen>
       final matchesSubject = _selectedSubject == 'all' ||
           summary.subject.toLowerCase() == _selectedSubject;
       return matchesSearch && matchesSubject;
-    }).toList();
+    }).cast<Summary>().toList()
+      ..sort((a, b) => _sortNewestFirst
+          ? b.createdAt.compareTo(a.createdAt)
+          : a.createdAt.compareTo(b.createdAt));
 
     if (filteredSummaries.isEmpty) {
       return _buildNoResultsState(theme);
@@ -881,10 +888,10 @@ class _SummaryPreviewSheet extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () {
+                child: OutlinedButton.icon(
+                    onPressed: () async {
                       HapticFeedback.lightImpact();
-                      // TODO: Share summary
+                      await _shareSummary(context);
                     },
                     icon: const Icon(Icons.share_rounded),
                     label: const Text('Share'),
@@ -892,10 +899,10 @@ class _SummaryPreviewSheet extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: FilledButton.icon(
-                    onPressed: () {
+                child: FilledButton.icon(
+                    onPressed: () async {
                       HapticFeedback.lightImpact();
-                      // TODO: Export summary
+                      await _exportSummary(context);
                     },
                     icon: const Icon(Icons.download_rounded),
                     label: const Text('Export'),
@@ -907,5 +914,42 @@ class _SummaryPreviewSheet extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _summaryText() => [
+        'Topic: ${summary.topic}',
+        'Subject: ${summary.subject}',
+        '',
+        summary.content ?? '',
+      ].join('\n');
+
+  Future<void> _shareSummary(BuildContext context) async {
+    await SharePlus.instance.share(ShareParams(text: _summaryText(), subject: summary.topic));
+  }
+
+  Future<void> _exportSummary(BuildContext context) async {
+    try {
+      final path = await ExportService().exportDocument(
+        title: summary.topic,
+        content: _summaryText(),
+        format: ExportFormat.pdf,
+      );
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Summary exported.'),
+          action: SnackBarAction(
+            label: 'Open',
+            onPressed: () => ExportService().openFile(path),
+          ),
+        ),
+      );
+    } catch (error) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Export failed: $error')),
+        );
+      }
+    }
   }
 }

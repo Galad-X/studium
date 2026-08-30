@@ -8,6 +8,7 @@ import 'dart:math' as math;
 
 import '../../../core/providers/service_providers.dart';
 import '../../../theme/neural_bg.dart';
+import '../../../core/widgets/neural_widgets.dart';
 import '../providers/material_providers.dart';
 
 class MaterialsScreen extends ConsumerWidget {
@@ -45,8 +46,8 @@ class MaterialsScreen extends ConsumerWidget {
                         return _buildMaterialsList(materials);
                       },
                       loading: () => const _NeuralLoadingState(),
-                      error: (err, stack) => _NeuralErrorState(
-                        error: err.toString(),
+                      error: (err, stack) => NeuralErrorState(
+                        message: err.toString(),
                         onRetry: () => ref.invalidate(materialsProvider),
                       ),
                     ),
@@ -593,101 +594,6 @@ class _NeuralSkeletonCardState extends State<_NeuralSkeletonCard>
           ),
         );
       },
-    );
-  }
-}
-
-class _NeuralErrorState extends StatelessWidget {
-  final String error;
-  final VoidCallback onRetry;
-
-  const _NeuralErrorState({
-    required this.error,
-    required this.onRetry,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.red.withAlpha(52),
-                    Colors.orange.withAlpha(52),
-                  ],
-                ),
-                border: Border.all(
-                  color: Colors.red.withAlpha(128),
-                  width: 2,
-                ),
-              ),
-              child: const Icon(
-                Icons.error_outline_rounded,
-                size: 60,
-                color: Colors.red,
-              ),
-            ),
-            const SizedBox(height: 24),
-            ShaderMask(
-              shaderCallback: (bounds) => LinearGradient(
-                colors: [Colors.red, Colors.orange],
-              ).createShader(bounds),
-              child: const Text(
-                'Neural Error Detected',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Neural network connection failed.\nPlease check your connection and try again.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white.withAlpha(178),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF00D4FF), Color(0xFF7B68EE)],
-                ),
-              ),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  HapticFeedback.lightImpact();
-                  onRetry();
-                },
-                icon: const Icon(Icons.refresh_rounded, color: Colors.white),
-                label: const Text(
-                  'Reconnect Neural Network',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

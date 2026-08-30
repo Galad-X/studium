@@ -1,0 +1,12 @@
+class: ChallengeTeamMember
+table: challenge_team_members
+fields:
+  teamId: int, relation(parent=challenge_teams)
+  userId: int, relation(parent=serverpod_user_info)
+  role: String
+  status: String
+  joinedAt: DateTime
+indexes:
+  challenge_team_member_unique_idx:
+    fields: teamId, userId
+    unique: true

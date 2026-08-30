@@ -198,7 +198,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: Colors.red.withOpacity(0.3)),
+          side: BorderSide(color: Colors.red.withValues(alpha: 0.3)),
         ),
       ),
     );
@@ -225,12 +225,12 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
             ),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: const Color(0xFF00D4FF).withOpacity(0.3),
+              color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF00D4FF).withOpacity(0.2),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.2),
                 blurRadius: 30,
                 spreadRadius: 5,
               ),
@@ -253,13 +253,14 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                const Color(0xFF00D4FF).withOpacity(0.2),
-                                const Color(0xFF0099CC).withOpacity(0.1),
+                                const Color(0xFF00D4FF).withValues(alpha: 0.2),
+                                const Color(0xFF0099CC).withValues(alpha: 0.1),
                               ],
                             ),
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: const Color(0xFF00D4FF).withOpacity(0.5),
+                              color: const Color(0xFF00D4FF)
+                                  .withValues(alpha: 0.5),
                               width: 2,
                             ),
                           ),
@@ -273,7 +274,8 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF00D4FF).withOpacity(0.4),
+                                color: const Color(0xFF00D4FF)
+                                    .withValues(alpha: 0.4),
                                 blurRadius: 20,
                                 spreadRadius: 2,
                               ),
@@ -311,7 +313,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                 ),
               ),
               const SizedBox(height: 32),
@@ -325,7 +327,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF00D4FF).withOpacity(0.4),
+                      color: const Color(0xFF00D4FF).withValues(alpha: 0.4),
                       blurRadius: 15,
                       offset: const Offset(0, 5),
                     ),
@@ -430,8 +432,8 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF1A1A2E).withOpacity(0.9),
-              const Color(0xFF16213E).withOpacity(0.8),
+              const Color(0xFF1A1A2E).withValues(alpha: 0.9),
+              const Color(0xFF16213E).withValues(alpha: 0.8),
             ],
           ),
         ),
@@ -452,7 +454,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF00D4FF).withOpacity(0.3),
+                        color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                         blurRadius: 12,
                         spreadRadius: 2,
                       ),
@@ -495,18 +497,18 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFF00D4FF).withOpacity(0.1),
-            const Color(0xFF0099CC).withOpacity(0.05),
+            const Color(0xFF00D4FF).withValues(alpha: 0.1),
+            const Color(0xFF0099CC).withValues(alpha: 0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D4FF).withOpacity(0.1),
+            color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -523,7 +525,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF00D4FF).withOpacity(0.4),
+                  color: const Color(0xFF00D4FF).withValues(alpha: 0.4),
                   blurRadius: 15,
                   offset: const Offset(0, 5),
                 ),
@@ -555,7 +557,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
             'Upload your documents to the neural network for AI-powered analysis and processing',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -574,27 +576,27 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
           gradient: _pickedFile != null
               ? LinearGradient(
                   colors: [
-                    const Color(0xFF00D4FF).withOpacity(0.2),
-                    const Color(0xFF0099CC).withOpacity(0.1),
+                    const Color(0xFF00D4FF).withValues(alpha: 0.2),
+                    const Color(0xFF0099CC).withValues(alpha: 0.1),
                   ],
                 )
               : LinearGradient(
                   colors: [
-                    Colors.white.withOpacity(0.1),
-                    Colors.white.withOpacity(0.05),
+                    Colors.white.withValues(alpha: 0.1),
+                    Colors.white.withValues(alpha: 0.05),
                   ],
                 ),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: _pickedFile != null
                 ? const Color(0xFF00D4FF)
-                : Colors.white.withOpacity(0.3),
+                : Colors.white.withValues(alpha: 0.3),
             width: _pickedFile != null ? 2 : 1,
           ),
           boxShadow: _pickedFile != null
               ? [
                   BoxShadow(
-                    color: const Color(0xFF00D4FF).withOpacity(0.2),
+                    color: const Color(0xFF00D4FF).withValues(alpha: 0.2),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -611,13 +613,13 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            const Color(0xFF00D4FF).withOpacity(0.2),
-                            const Color(0xFF0099CC).withOpacity(0.1),
+                            const Color(0xFF00D4FF).withValues(alpha: 0.2),
+                            const Color(0xFF0099CC).withValues(alpha: 0.1),
                           ],
                         ),
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: const Color(0xFF00D4FF).withOpacity(0.3),
+                          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                         ),
                       ),
                       child: const Icon(
@@ -640,7 +642,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                       'Neural Supported: PDF, DOCX, PPTX, TXT',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.white.withOpacity(0.7),
+                        color: Colors.white.withValues(alpha: 0.7),
                       ),
                     ),
                   ],
@@ -657,7 +659,8 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF00D4FF).withOpacity(0.4),
+                            color:
+                                const Color(0xFF00D4FF).withValues(alpha: 0.4),
                             blurRadius: 15,
                             offset: const Offset(0, 5),
                           ),
@@ -689,10 +692,10 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF00D4FF).withOpacity(0.2),
+                        color: const Color(0xFF00D4FF).withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: const Color(0xFF00D4FF).withOpacity(0.3),
+                          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                         ),
                       ),
                       child: Text(
@@ -723,7 +726,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D4FF).withOpacity(0.1),
+            color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -737,7 +740,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
           labelText: label,
           labelStyle: const TextStyle(color: Color(0xFF00D4FF)),
           hintText: hint,
-          hintStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
+          hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.6)),
           prefixIcon: Icon(icon, color: const Color(0xFF00D4FF)),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
@@ -746,7 +749,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: const Color(0xFF00D4FF).withOpacity(0.3),
+              color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -757,7 +760,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
             ),
           ),
           filled: true,
-          fillColor: Colors.white.withOpacity(0.1),
+          fillColor: Colors.white.withValues(alpha: 0.1),
         ),
       ),
     );
@@ -773,8 +776,8 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
         gradient: isLoading
             ? LinearGradient(
                 colors: [
-                  Colors.grey.withOpacity(0.3),
-                  Colors.grey.withOpacity(0.2),
+                  Colors.grey.withValues(alpha: 0.3),
+                  Colors.grey.withValues(alpha: 0.2),
                 ],
               )
             : const LinearGradient(
@@ -784,7 +787,7 @@ class _UploadMaterialScreenState extends ConsumerState<UploadMaterialScreen>
             ? null
             : [
                 BoxShadow(
-                  color: const Color(0xFF00D4FF).withOpacity(0.4),
+                  color: const Color(0xFF00D4FF).withValues(alpha: 0.4),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -883,12 +886,12 @@ class _NeuralNetworkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF00D4FF).withOpacity(0.1)
+      ..color = const Color(0xFF00D4FF).withValues(alpha: 0.1)
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 
     final nodePaint = Paint()
-      ..color = const Color(0xFF00D4FF).withOpacity(0.3)
+      ..color = const Color(0xFF00D4FF).withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     // Generate neural network nodes
@@ -907,7 +910,7 @@ class _NeuralNetworkPainter extends CustomPainter {
         final distance = (nodes[i] - nodes[j]).distance;
         if (distance < 150) {
           final opacity = (1 - distance / 150) * 0.3;
-          paint.color = const Color(0xFF00D4FF).withOpacity(opacity);
+          paint.color = const Color(0xFF00D4FF).withValues(alpha: opacity);
           canvas.drawLine(nodes[i], nodes[j], paint);
         }
       }

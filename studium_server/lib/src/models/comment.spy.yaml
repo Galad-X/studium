@@ -1,0 +1,15 @@
+class: Comment
+table: comments
+fields:
+  postId: int, relation(parent=discussion_posts)
+  authorId: int, relation(parent=serverpod_user_info)
+  parentCommentId: int?, relation(parent=comments)
+  body: String
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  comment_post_created_idx:
+    fields: postId, createdAt
+  comment_parent_idx:
+    fields: parentCommentId

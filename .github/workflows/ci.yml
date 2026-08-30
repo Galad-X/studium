@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: studium_client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: dart analyze
+      - run: dart test
+
+  flutter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: studium_flutter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.8'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze --no-fatal-infos
+      - run: flutter test
+
+  server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: studium_server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - name: Verify generated Serverpod protocol
+        run: |
+          dart pub global activate serverpod_cli 3.4.12
+          dart pub global run serverpod_cli:serverpod generate
+          git diff --exit-code -- lib/src/generated ../studium_client/lib/src/generated
+      - run: dart analyze
+      - name: Compile standalone worker
+        run: dart compile exe bin/worker.dart -o /tmp/studium-worker
+      - name: Validate Cloud Run deployment script
+        run: bash -n deploy/gcp/deploy-cloud-run.sh
+      - name: Validate observability deployment script
+        run: bash -n deploy/gcp/configure-observability.sh
+      - name: Prepare test configuration
+        run: cp config/passwords.yaml.example config/passwords.yaml
+      - name: Start integration dependencies
+        run: docker compose up -d --wait postgres_test redis_test
+      - name: Run integration tests
+        env:
+          STUDIUM_STRIPE_WEBHOOK_SECRET: studium-test-webhook-secret
+          STUDIUM_PAYSTACK_WEBHOOK_SECRET: studium-test-paystack-webhook-secret
+        run: dart test test/integration/collaboration_endpoint_test.dart
+      - name: Stop integration dependencies
+        if: always()
+        run: docker compose down -v

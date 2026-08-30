@@ -1,0 +1,16 @@
+class: OpportunityApplicationTracker
+table: opportunity_application_trackers
+fields:
+  opportunityId: int, relation(parent=opportunities)
+  userId: int, relation(parent=serverpod_user_info)
+  status: String
+  notes: String?
+  applicationUrl: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  opportunity_tracker_user_opportunity_idx:
+    fields: userId, opportunityId
+    unique: true
+  opportunity_tracker_user_updated_idx:
+    fields: userId, updatedAt

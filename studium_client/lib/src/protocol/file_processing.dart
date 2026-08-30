@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class FileProcessing implements _i1.SerializableModel {
@@ -18,6 +20,9 @@ abstract class FileProcessing implements _i1.SerializableModel {
     required this.status,
     this.processedText,
     this.errorMessage,
+    required this.attempts,
+    required this.maxAttempts,
+    this.lastStartedAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -28,6 +33,9 @@ abstract class FileProcessing implements _i1.SerializableModel {
     required String status,
     String? processedText,
     String? errorMessage,
+    required int attempts,
+    required int maxAttempts,
+    DateTime? lastStartedAt,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _FileProcessingImpl;
@@ -39,10 +47,19 @@ abstract class FileProcessing implements _i1.SerializableModel {
       status: jsonSerialization['status'] as String,
       processedText: jsonSerialization['processedText'] as String?,
       errorMessage: jsonSerialization['errorMessage'] as String?,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
-      updatedAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      attempts: jsonSerialization['attempts'] as int,
+      maxAttempts: jsonSerialization['maxAttempts'] as int,
+      lastStartedAt: jsonSerialization['lastStartedAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['lastStartedAt'],
+            ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
+      updatedAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['updatedAt'],
+      ),
     );
   }
 
@@ -59,6 +76,12 @@ abstract class FileProcessing implements _i1.SerializableModel {
 
   String? errorMessage;
 
+  int attempts;
+
+  int maxAttempts;
+
+  DateTime? lastStartedAt;
+
   DateTime createdAt;
 
   DateTime updatedAt;
@@ -72,17 +95,24 @@ abstract class FileProcessing implements _i1.SerializableModel {
     String? status,
     String? processedText,
     String? errorMessage,
+    int? attempts,
+    int? maxAttempts,
+    DateTime? lastStartedAt,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'FileProcessing',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'status': status,
       if (processedText != null) 'processedText': processedText,
       if (errorMessage != null) 'errorMessage': errorMessage,
+      'attempts': attempts,
+      'maxAttempts': maxAttempts,
+      if (lastStartedAt != null) 'lastStartedAt': lastStartedAt?.toJson(),
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -103,17 +133,23 @@ class _FileProcessingImpl extends FileProcessing {
     required String status,
     String? processedText,
     String? errorMessage,
+    required int attempts,
+    required int maxAttempts,
+    DateTime? lastStartedAt,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-          id: id,
-          studyMaterialId: studyMaterialId,
-          status: status,
-          processedText: processedText,
-          errorMessage: errorMessage,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-        );
+         id: id,
+         studyMaterialId: studyMaterialId,
+         status: status,
+         processedText: processedText,
+         errorMessage: errorMessage,
+         attempts: attempts,
+         maxAttempts: maxAttempts,
+         lastStartedAt: lastStartedAt,
+         createdAt: createdAt,
+         updatedAt: updatedAt,
+       );
 
   /// Returns a shallow copy of this [FileProcessing]
   /// with some or all fields replaced by the given arguments.
@@ -125,6 +161,9 @@ class _FileProcessingImpl extends FileProcessing {
     String? status,
     Object? processedText = _Undefined,
     Object? errorMessage = _Undefined,
+    int? attempts,
+    int? maxAttempts,
+    Object? lastStartedAt = _Undefined,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -132,9 +171,15 @@ class _FileProcessingImpl extends FileProcessing {
       id: id is int? ? id : this.id,
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       status: status ?? this.status,
-      processedText:
-          processedText is String? ? processedText : this.processedText,
+      processedText: processedText is String?
+          ? processedText
+          : this.processedText,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
+      attempts: attempts ?? this.attempts,
+      maxAttempts: maxAttempts ?? this.maxAttempts,
+      lastStartedAt: lastStartedAt is DateTime?
+          ? lastStartedAt
+          : this.lastStartedAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

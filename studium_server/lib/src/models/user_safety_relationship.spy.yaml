@@ -1,0 +1,15 @@
+class: UserSafetyRelationship
+table: user_safety_relationships
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  targetUserId: int, relation(parent=serverpod_user_info)
+  relationshipType: String
+  active: bool
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  user_safety_relationship_unique_idx:
+    fields: userId, targetUserId, relationshipType
+    unique: true
+  user_safety_relationship_user_idx:
+    fields: userId, relationshipType, active

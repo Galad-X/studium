@@ -1,0 +1,17 @@
+class: AuditEvent
+table: audit_events
+fields:
+  actorId: int, relation(parent=serverpod_user_info)
+  institutionId: int?, relation(parent=institutions)
+  action: String
+  targetType: String
+  targetId: int
+  metadata: String?
+  createdAt: DateTime
+indexes:
+  audit_event_target_idx:
+    fields: targetType, targetId, createdAt
+  audit_event_actor_idx:
+    fields: actorId, createdAt
+  audit_event_institution_idx:
+    fields: institutionId, createdAt

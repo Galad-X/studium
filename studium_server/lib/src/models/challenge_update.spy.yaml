@@ -1,0 +1,11 @@
+class: ChallengeProgressUpdate
+table: challenge_updates
+fields:
+  teamId: int, relation(parent=challenge_teams)
+  authorId: int, relation(parent=serverpod_user_info)
+  body: String
+  status: String
+  createdAt: DateTime
+indexes:
+  challenge_update_team_created_idx:
+    fields: teamId, createdAt

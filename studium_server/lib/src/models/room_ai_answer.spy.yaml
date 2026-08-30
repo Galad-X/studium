@@ -1,0 +1,16 @@
+class: RoomAiAnswer
+table: room_ai_answers
+fields:
+  roomId: int, relation(parent=study_rooms)
+  askerId: int, relation(parent=serverpod_user_info)
+  question: String
+  answer: String
+  sourceResourceIds: List<int>
+  citations: List<String>
+  confidence: String
+  createdAt: DateTime
+indexes:
+  room_ai_answer_room_created_idx:
+    fields: roomId, createdAt
+  room_ai_answer_asker_created_idx:
+    fields: askerId, createdAt

@@ -1,0 +1,11 @@
+class: UserPrivacySettings
+table: user_privacy_settings
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  isMinor: bool, default=false
+  allowUnknownDirectMessages: bool, default=true
+  updatedAt: DateTime
+indexes:
+  user_privacy_settings_user_idx:
+    fields: userId
+    unique: true

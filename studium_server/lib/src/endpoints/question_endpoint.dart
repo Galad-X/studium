@@ -5,11 +5,9 @@ import 'dart:convert';
 import '../generated/protocol.dart';
 import '../util/endpoint_utils.dart';
 
-class QuestionEndpoint extends Endpoint  with EndpointUtils {
+class QuestionEndpoint extends Endpoint with EndpointUtils {
   @override
   bool get requireLogin => true;
-
-  
 
   /// Generate sample questions for unauthorized/demo users
   Future<List<Question>> getSampleQuestions(Session session, int count) async {
@@ -41,20 +39,19 @@ class QuestionEndpoint extends Endpoint  with EndpointUtils {
                 type: q['type'] ?? 'saq',
                 questionText: q['text'] ?? 'Sample question',
                 correctAnswer: q['correctAnswer'],
-                createdAt: DateTime.now(), 
-                difficulty: '', 
-                bloomsLevel: '', 
+                createdAt: DateTime.now(),
+                difficulty: '',
+                bloomsLevel: '',
                 estimatedTime: 5,
               ))
           .toList();
     } catch (e) {
-      print('Error generating sample questions: $e');
+      session.log('Error generating sample questions: $e',
+          level: LogLevel.error);
       // Return fallback sample questions
       return _getFallbackSampleQuestions(limitedCount);
     }
   }
-
-  
 
   // Helper methods
   String _buildQuestionPrompt(
@@ -87,8 +84,6 @@ Return the response as a JSON object with this exact structure:
 }
 ''';
   }
-
- 
 
   List<Question> _getFallbackSampleQuestions(int count) {
     final fallbackQuestions = [
@@ -129,7 +124,6 @@ Return the response as a JSON object with this exact structure:
   }
 
   Future<String> _callLlmApi(Session session, String prompt) async {
-    
     final apiKey = await getApiKey(session, 'openAI');
 
     try {
@@ -162,10 +156,8 @@ Return the response as a JSON object with this exact structure:
       final responseData = jsonDecode(response.body);
       return responseData['choices'][0]['message']['content'];
     } catch (e) {
-      print('LLM API call failed: $e');
+      session.log('LLM API call failed: $e', level: LogLevel.error);
       rethrow;
     }
   }
-
- 
 }

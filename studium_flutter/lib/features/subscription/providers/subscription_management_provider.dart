@@ -34,6 +34,8 @@ class SubscriptionManagementNotifier
           status: CancellationStatus.error, errorMessage: e.toString());
     }
   }
+
+  Future<void> retryCancellation() => cancelSubscription();
 }
 
 final subscriptionManagementProvider = StateNotifierProvider.autoDispose<

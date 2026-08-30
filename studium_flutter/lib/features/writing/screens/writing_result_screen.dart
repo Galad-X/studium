@@ -128,7 +128,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: Colors.red.withOpacity(0.3)),
+          side: BorderSide(color: Colors.red.withValues(alpha: 0.3)),
         ),
       ),
     );
@@ -194,8 +194,8 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF1A1A2E).withOpacity(0.9),
-              const Color(0xFF16213E).withOpacity(0.8),
+              const Color(0xFF1A1A2E).withValues(alpha: 0.9),
+              const Color(0xFF16213E).withValues(alpha: 0.8),
             ],
           ),
         ),
@@ -216,7 +216,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF00D4FF).withOpacity(0.3),
+                        color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                         blurRadius: 12,
                         spreadRadius: 2,
                       ),
@@ -257,10 +257,10 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
           icon: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF00D4FF).withOpacity(0.2),
+              color: const Color(0xFF00D4FF).withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color(0xFF00D4FF).withOpacity(0.3),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
               ),
             ),
             child: const Icon(
@@ -283,18 +283,18 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFF00D4FF).withOpacity(0.1),
-            const Color(0xFF0099CC).withOpacity(0.05),
+            const Color(0xFF00D4FF).withValues(alpha: 0.1),
+            const Color(0xFF0099CC).withValues(alpha: 0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D4FF).withOpacity(0.1),
+            color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -316,7 +316,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF00D4FF).withOpacity(0.4),
+                        color: const Color(0xFF00D4FF).withValues(alpha: 0.4),
                         blurRadius: 20,
                         spreadRadius: 2,
                       ),
@@ -351,7 +351,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
             'Your AI-powered document has been successfully created using advanced neural networks',
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -367,17 +367,17 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.1),
-            Colors.white.withOpacity(0.05),
+            Colors.white.withValues(alpha: 0.1),
+            Colors.white.withValues(alpha: 0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF00D4FF).withOpacity(0.1),
+            color: const Color(0xFF00D4FF).withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -391,8 +391,8 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xFF00D4FF).withOpacity(0.2),
-                  const Color(0xFF0099CC).withOpacity(0.1),
+                  const Color(0xFF00D4FF).withValues(alpha: 0.2),
+                  const Color(0xFF0099CC).withValues(alpha: 0.1),
                 ],
               ),
               borderRadius: const BorderRadius.only(
@@ -430,10 +430,10 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF00D4FF).withOpacity(0.2),
+                    color: const Color(0xFF00D4FF).withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFF00D4FF).withOpacity(0.3),
+                      color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                     ),
                   ),
                   child: Text(
@@ -456,7 +456,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                 widget.writing.content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                   height: 1.6,
                 ),
               ),
@@ -477,13 +477,13 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF00D4FF).withOpacity(0.1),
-            const Color(0xFF0099CC).withOpacity(0.05),
+            const Color(0xFF00D4FF).withValues(alpha: 0.1),
+            const Color(0xFF0099CC).withValues(alpha: 0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -565,7 +565,7 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF00D4FF).withOpacity(0.4),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.4),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -609,13 +609,13 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.white.withOpacity(0.05),
+                      Colors.white.withValues(alpha: 0.1),
+                      Colors.white.withValues(alpha: 0.05),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: const Color(0xFF00D4FF).withOpacity(0.3),
+                    color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                   ),
                 ),
                 child: Material(
@@ -654,13 +654,13 @@ class _WritingResultScreenState extends ConsumerState<WritingResultScreen>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.white.withOpacity(0.05),
+                      Colors.white.withValues(alpha: 0.1),
+                      Colors.white.withValues(alpha: 0.05),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: const Color(0xFF00D4FF).withOpacity(0.3),
+                    color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
                   ),
                 ),
                 child: Material(
@@ -737,13 +737,13 @@ class _NeuralStatCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            color.withOpacity(0.2),
-            color.withOpacity(0.1),
+            color.withValues(alpha: 0.2),
+            color.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: color.withOpacity(0.3),
+          color: color.withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -767,7 +767,7 @@ class _NeuralStatCard extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -803,12 +803,12 @@ class _NeuralNetworkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF00D4FF).withOpacity(0.1)
+      ..color = const Color(0xFF00D4FF).withValues(alpha: 0.1)
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 
     final nodePaint = Paint()
-      ..color = const Color(0xFF00D4FF).withOpacity(0.3)
+      ..color = const Color(0xFF00D4FF).withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     // Generate neural network nodes
@@ -827,7 +827,7 @@ class _NeuralNetworkPainter extends CustomPainter {
         final distance = (nodes[i] - nodes[j]).distance;
         if (distance < 150) {
           final opacity = (1 - distance / 150) * 0.3;
-          paint.color = const Color(0xFF00D4FF).withOpacity(opacity);
+          paint.color = const Color(0xFF00D4FF).withValues(alpha: opacity);
           canvas.drawLine(nodes[i], nodes[j], paint);
         }
       }
@@ -864,7 +864,7 @@ class _NeuralShareSheet extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
         ),
       ),
       child: Padding(
@@ -876,7 +876,7 @@ class _NeuralShareSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: const Color(0xFF00D4FF).withOpacity(0.5),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -942,7 +942,7 @@ class _NeuralEditSheet extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFF00D4FF).withOpacity(0.3),
+          color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
         ),
       ),
       child: Padding(
@@ -954,7 +954,7 @@ class _NeuralEditSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: const Color(0xFF00D4FF).withOpacity(0.5),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -1035,13 +1035,13 @@ class _NeuralShareOptionState extends State<_NeuralShareOption> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xFF00D4FF).withOpacity(0.1),
-                const Color(0xFF0099CC).withOpacity(0.05),
+                const Color(0xFF00D4FF).withValues(alpha: 0.1),
+                const Color(0xFF0099CC).withValues(alpha: 0.05),
               ],
             ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: const Color(0xFF00D4FF).withOpacity(0.3),
+              color: const Color(0xFF00D4FF).withValues(alpha: 0.3),
             ),
           ),
           child: Row(
@@ -1077,7 +1077,7 @@ class _NeuralShareOptionState extends State<_NeuralShareOption> {
                     Text(
                       widget.subtitle,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
+                        color: Colors.white.withValues(alpha: 0.7),
                         fontSize: 14,
                       ),
                     ),
@@ -1086,7 +1086,7 @@ class _NeuralShareOptionState extends State<_NeuralShareOption> {
               ),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: const Color(0xFF00D4FF).withOpacity(0.7),
+                color: const Color(0xFF00D4FF).withValues(alpha: 0.7),
                 size: 16,
               ),
             ],

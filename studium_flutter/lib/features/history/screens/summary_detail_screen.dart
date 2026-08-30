@@ -18,8 +18,8 @@ class SummaryDetailScreen extends ConsumerStatefulWidget {
       _SummaryDetailScreenState();
 }
 
-class _SummaryDetailScreenState
-    extends ConsumerState<SummaryDetailScreen> with TickerProviderStateMixin {
+class _SummaryDetailScreenState extends ConsumerState<SummaryDetailScreen>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late AnimationController _fabController;
   late ScrollController _scrollController;
@@ -503,7 +503,8 @@ class _SummaryDetailScreenState
                   margin: const EdgeInsets.only(bottom: 8),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest.withAlpha(77),
+                    color:
+                        theme.colorScheme.surfaceContainerHighest.withAlpha(77),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -615,8 +616,8 @@ class _SummaryDetailScreenState
         _copyToClipboard();
         break;
       case 'export':
-         _showExportDialog(context);
-      break;
+        _showExportDialog(context);
+        break;
     }
   }
 
@@ -632,13 +633,10 @@ class _SummaryDetailScreenState
     // Optional: Handle the result
     switch (result.status) {
       case ShareResultStatus.success:
-        print('Content shared successfully');
         break;
       case ShareResultStatus.dismissed:
-        print('Share sheet was dismissed');
         break;
       case ShareResultStatus.unavailable:
-        print('Share functionality unavailable');
         break;
     }
   }
@@ -680,7 +678,7 @@ class _SummaryDetailScreenState
     );
   }
 
- Future<void> _exportSummary(ExportFormat format) async {
+  Future<void> _exportSummary(ExportFormat format) async {
     try {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Generating document...')),
@@ -697,6 +695,8 @@ class _SummaryDetailScreenState
         format: format,
       );
 
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -709,13 +709,13 @@ class _SummaryDetailScreenState
         ),
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Export failed: $e')),
       );
     }
   }
-
 
   String _buildShareContent() {
     final buffer = StringBuffer();

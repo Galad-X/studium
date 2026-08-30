@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class StudyMaterial implements _i1.SerializableModel {
@@ -41,8 +43,9 @@ abstract class StudyMaterial implements _i1.SerializableModel {
       title: jsonSerialization['title'] as String,
       fileType: jsonSerialization['fileType'] as String,
       fileUrl: jsonSerialization['fileUrl'] as String,
-      uploadDate:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['uploadDate']),
+      uploadDate: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['uploadDate'],
+      ),
       size: jsonSerialization['size'] as int?,
       contentText: jsonSerialization['contentText'] as String?,
     );
@@ -83,6 +86,7 @@ abstract class StudyMaterial implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'StudyMaterial',
       if (id != null) 'id': id,
       'userId': userId,
       'title': title,
@@ -113,15 +117,15 @@ class _StudyMaterialImpl extends StudyMaterial {
     int? size,
     String? contentText,
   }) : super._(
-          id: id,
-          userId: userId,
-          title: title,
-          fileType: fileType,
-          fileUrl: fileUrl,
-          uploadDate: uploadDate,
-          size: size,
-          contentText: contentText,
-        );
+         id: id,
+         userId: userId,
+         title: title,
+         fileType: fileType,
+         fileUrl: fileUrl,
+         uploadDate: uploadDate,
+         size: size,
+         contentText: contentText,
+       );
 
   /// Returns a shallow copy of this [StudyMaterial]
   /// with some or all fields replaced by the given arguments.

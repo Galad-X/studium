@@ -1,7 +1,8 @@
 import 'package:serverpod/serverpod.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
+import 'package:mailer/mailer.dart' as mailer;
+import 'package:mailer/smtp_server.dart' as mailer;
 import 'dart:io';
+import 'configuration_secrets.dart';
 
 // Custom email configuration class
 class EmailConfig {
@@ -23,11 +24,19 @@ class EmailConfig {
   static EmailConfig fromEnvironment() {
     return EmailConfig(
       smtpServer: Platform.environment['SMTP_SERVER'] ?? 'smtp.gmail.com',
-      smtpPort: int.parse(Platform.environment['SMTP_PORT'] ?? '587'),
-      smtpUser: Platform.environment['SMTP_USER'] ?? '',
-      fromEmail: Platform.environment['FROM_EMAIL'] ?? 'noreply@yourdomain.com',
-      fromName: Platform.environment['FROM_NAME'] ?? 'Your App',
+      smtpPort: int.tryParse(Platform.environment['SMTP_PORT'] ?? '587') ?? 587,
+      smtpUser: _requiredEnvironment('SMTP_USER'),
+      fromEmail: _requiredEnvironment('FROM_EMAIL'),
+      fromName: Platform.environment['FROM_NAME'] ?? 'Studium',
     );
+  }
+
+  static String _requiredEnvironment(String name) {
+    final value = Platform.environment[name]?.trim();
+    if (value == null || value.isEmpty) {
+      throw Exception('Email configuration value "$name" is not configured.');
+    }
+    return value;
   }
 }
 
@@ -43,13 +52,16 @@ class EmailSender {
     final config = emailConfig ?? EmailConfig.fromEnvironment();
 
     // Get password from Serverpod's password management
-    final password = session.serverpod.getPassword('smtpPassword');
+    final password = ConfigurationSecrets.read(session, 'smtpPassword') ??
+        ConfigurationSecrets.read(session, 'ethereal_password');
 
-    if (password == null) {
+    if (password == null ||
+        password.trim().isEmpty ||
+        password == 'replace-me') {
       throw Exception('SMTP password not configured in passwords.yaml');
     }
 
-    final smtpServer = SmtpServer(
+    final smtpServer = mailer.SmtpServer(
       config.smtpServer,
       port: config.smtpPort,
       username: config.smtpUser,
@@ -58,14 +70,14 @@ class EmailSender {
       ssl: config.smtpPort == 465,
     );
 
-    final message = Message()
-      ..from = Address(config.fromEmail, config.fromName)
+    final message = mailer.Message()
+      ..from = mailer.Address(config.fromEmail, config.fromName)
       ..recipients.add(to)
       ..subject = subject
       ..html = htmlBody;
 
     try {
-      final sendReport = await send(message, smtpServer);
+      final sendReport = await mailer.send(message, smtpServer);
       session.log('Email sent: ${sendReport.toString()}', level: LogLevel.info);
     } catch (e) {
       session.log('Failed to send email: $e', level: LogLevel.error);

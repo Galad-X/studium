@@ -613,4 +613,3 @@ class _NeuralFeatureItem extends StatelessWidget {
     );
   }
 }
-

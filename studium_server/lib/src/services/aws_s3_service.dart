@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:http/http.dart' as http;
 import 'package:serverpod/serverpod.dart';
+import 'package:http/http.dart' as http;
 
 /// A service for interacting with an AWS S3 bucket.
 ///
@@ -18,19 +18,22 @@ class AwsS3Service {
   final String _service = 's3';
 
   AwsS3Service.fromConfig(Serverpod serverpod)
-      : _accessKey = serverpod.getPassword('aws_access_key_id')!,
-        _secretKey = serverpod.getPassword('aws_secret_access_key')!,
+      : _accessKey = _getConfigValue(serverpod, 'aws_access_key_id'),
+        _secretKey = _getConfigValue(serverpod, 'aws_secret_access_key'),
         _region = _getConfigValue(serverpod, 'aws_region'),
         _bucketName = _getConfigValue(serverpod, 'aws_s3_bucket'),
         _host = 's3.${_getConfigValue(serverpod, 'aws_region')}.amazonaws.com';
 
   /// Helper method to get configuration values
   static String _getConfigValue(Serverpod serverpod, String key) {
-    
     final value = serverpod.getPassword(key);
-    if (value != null) return value;
+    if (value != null &&
+        value.trim().isNotEmpty &&
+        value != 'replace-me' &&
+        !value.startsWith('your_')) {
+      return value;
+    }
 
-    
     throw Exception('Configuration value for "$key" not found. '
         'Please add it to passwords.yaml file or update the configuration access method.');
   }
@@ -82,7 +85,7 @@ class AwsS3Service {
   }
 
   /// Deletes a file from the S3 bucket.
-  Future<void> deleteFile(String filePath) async {
+  Future<void> deleteFile(String filePath, {Session? session}) async {
     final uri = Uri.https(_host, '/$_bucketName/$filePath');
     final now = DateTime.now().toUtc();
 
@@ -104,8 +107,11 @@ class AwsS3Service {
     if (response.statusCode != 204) {
       // Log as a warning instead of throwing an exception, as a failed delete
       // is often less critical than a failed upload.
-      print(
-          'Warning: Failed to delete file from S3. Status: ${response.statusCode}, Body: ${response.body}');
+      session?.log(
+        'Warning: Failed to delete file from S3. Status: ${response.statusCode}, '
+        'Body: ${response.body}',
+        level: LogLevel.warning,
+      );
     }
   }
 

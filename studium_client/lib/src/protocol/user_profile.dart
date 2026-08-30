@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class UserProfile implements _i1.SerializableModel {
@@ -39,7 +41,7 @@ abstract class UserProfile implements _i1.SerializableModel {
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       name: jsonSerialization['name'] as String?,
-      role: jsonSerialization['role'] as String,
+      role: jsonSerialization['role'] as String?,
       subscriptionId: jsonSerialization['subscriptionId'] as String?,
       studyHistoryId: jsonSerialization['studyHistoryId'] as int?,
       stripeCustomerId: jsonSerialization['stripeCustomerId'] as String?,
@@ -83,6 +85,7 @@ abstract class UserProfile implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'UserProfile',
       if (id != null) 'id': id,
       'userId': userId,
       if (name != null) 'name': name,
@@ -114,15 +117,15 @@ class _UserProfileImpl extends UserProfile {
     String? stripeCustomerId,
     String? paystackCustomerCode,
   }) : super._(
-          id: id,
-          userId: userId,
-          name: name,
-          role: role,
-          subscriptionId: subscriptionId,
-          studyHistoryId: studyHistoryId,
-          stripeCustomerId: stripeCustomerId,
-          paystackCustomerCode: paystackCustomerCode,
-        );
+         id: id,
+         userId: userId,
+         name: name,
+         role: role,
+         subscriptionId: subscriptionId,
+         studyHistoryId: studyHistoryId,
+         stripeCustomerId: stripeCustomerId,
+         paystackCustomerCode: paystackCustomerCode,
+       );
 
   /// Returns a shallow copy of this [UserProfile]
   /// with some or all fields replaced by the given arguments.
@@ -143,10 +146,12 @@ class _UserProfileImpl extends UserProfile {
       userId: userId ?? this.userId,
       name: name is String? ? name : this.name,
       role: role ?? this.role,
-      subscriptionId:
-          subscriptionId is String? ? subscriptionId : this.subscriptionId,
-      studyHistoryId:
-          studyHistoryId is int? ? studyHistoryId : this.studyHistoryId,
+      subscriptionId: subscriptionId is String?
+          ? subscriptionId
+          : this.subscriptionId,
+      studyHistoryId: studyHistoryId is int?
+          ? studyHistoryId
+          : this.studyHistoryId,
       stripeCustomerId: stripeCustomerId is String?
           ? stripeCustomerId
           : this.stripeCustomerId,

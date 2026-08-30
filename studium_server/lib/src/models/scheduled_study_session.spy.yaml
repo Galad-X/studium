@@ -1,0 +1,18 @@
+class: ScheduledStudySession
+table: scheduled_study_sessions
+fields:
+  roomId: int, relation(parent=study_rooms)
+  organizerId: int, relation(parent=serverpod_user_info)
+  title: String
+  description: String?
+  startsAt: DateTime
+  endsAt: DateTime
+  meetingUrl: String?
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  scheduled_session_room_start_idx:
+    fields: roomId, startsAt
+  scheduled_session_organizer_idx:
+    fields: organizerId, startsAt

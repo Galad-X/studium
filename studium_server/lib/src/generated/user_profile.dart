@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class UserProfile
@@ -40,7 +42,7 @@ abstract class UserProfile
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       name: jsonSerialization['name'] as String?,
-      role: jsonSerialization['role'] as String,
+      role: jsonSerialization['role'] as String?,
       subscriptionId: jsonSerialization['subscriptionId'] as String?,
       studyHistoryId: jsonSerialization['studyHistoryId'] as int?,
       stripeCustomerId: jsonSerialization['stripeCustomerId'] as String?,
@@ -89,6 +91,7 @@ abstract class UserProfile
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'UserProfile',
       if (id != null) 'id': id,
       'userId': userId,
       if (name != null) 'name': name,
@@ -104,6 +107,7 @@ abstract class UserProfile
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'UserProfile',
       if (id != null) 'id': id,
       'userId': userId,
       if (name != null) 'name': name,
@@ -159,15 +163,15 @@ class _UserProfileImpl extends UserProfile {
     String? stripeCustomerId,
     String? paystackCustomerCode,
   }) : super._(
-          id: id,
-          userId: userId,
-          name: name,
-          role: role,
-          subscriptionId: subscriptionId,
-          studyHistoryId: studyHistoryId,
-          stripeCustomerId: stripeCustomerId,
-          paystackCustomerCode: paystackCustomerCode,
-        );
+         id: id,
+         userId: userId,
+         name: name,
+         role: role,
+         subscriptionId: subscriptionId,
+         studyHistoryId: studyHistoryId,
+         stripeCustomerId: stripeCustomerId,
+         paystackCustomerCode: paystackCustomerCode,
+       );
 
   /// Returns a shallow copy of this [UserProfile]
   /// with some or all fields replaced by the given arguments.
@@ -188,10 +192,12 @@ class _UserProfileImpl extends UserProfile {
       userId: userId ?? this.userId,
       name: name is String? ? name : this.name,
       role: role ?? this.role,
-      subscriptionId:
-          subscriptionId is String? ? subscriptionId : this.subscriptionId,
-      studyHistoryId:
-          studyHistoryId is int? ? studyHistoryId : this.studyHistoryId,
+      subscriptionId: subscriptionId is String?
+          ? subscriptionId
+          : this.subscriptionId,
+      studyHistoryId: studyHistoryId is int?
+          ? studyHistoryId
+          : this.studyHistoryId,
       stripeCustomerId: stripeCustomerId is String?
           ? stripeCustomerId
           : this.stripeCustomerId,
@@ -202,8 +208,51 @@ class _UserProfileImpl extends UserProfile {
   }
 }
 
+class UserProfileUpdateTable extends _i1.UpdateTable<UserProfileTable> {
+  UserProfileUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> name(String? value) => _i1.ColumnValue(
+    table.name,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> role(String value) => _i1.ColumnValue(
+    table.role,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> subscriptionId(String? value) =>
+      _i1.ColumnValue(
+        table.subscriptionId,
+        value,
+      );
+
+  _i1.ColumnValue<int, int> studyHistoryId(int? value) => _i1.ColumnValue(
+    table.studyHistoryId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> stripeCustomerId(String? value) =>
+      _i1.ColumnValue(
+        table.stripeCustomerId,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> paystackCustomerCode(String? value) =>
+      _i1.ColumnValue(
+        table.paystackCustomerCode,
+        value,
+      );
+}
+
 class UserProfileTable extends _i1.Table<int?> {
   UserProfileTable({super.tableRelation}) : super(tableName: 'user_profile') {
+    updateTable = UserProfileUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -235,6 +284,8 @@ class UserProfileTable extends _i1.Table<int?> {
     );
   }
 
+  late final UserProfileUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnString name;
@@ -251,15 +302,15 @@ class UserProfileTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        name,
-        role,
-        subscriptionId,
-        studyHistoryId,
-        stripeCustomerId,
-        paystackCustomerCode,
-      ];
+    id,
+    userId,
+    name,
+    role,
+    subscriptionId,
+    studyHistoryId,
+    stripeCustomerId,
+    paystackCustomerCode,
+  ];
 }
 
 class UserProfileInclude extends _i1.IncludeObject {
@@ -318,7 +369,7 @@ class UserProfileRepository {
   /// );
   /// ```
   Future<List<UserProfile>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserProfileTable>? where,
     int? limit,
     int? offset,
@@ -326,6 +377,8 @@ class UserProfileRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserProfileTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<UserProfile>(
       where: where?.call(UserProfile.t),
@@ -335,6 +388,8 @@ class UserProfileRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -356,13 +411,15 @@ class UserProfileRepository {
   /// );
   /// ```
   Future<UserProfile?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserProfileTable>? where,
     int? offset,
     _i1.OrderByBuilder<UserProfileTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserProfileTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<UserProfile>(
       where: where?.call(UserProfile.t),
@@ -371,18 +428,24 @@ class UserProfileRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [UserProfile] by its [id] or null if no such row exists.
   Future<UserProfile?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<UserProfile>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -392,14 +455,20 @@ class UserProfileRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<UserProfile>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserProfile> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<UserProfile>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -407,7 +476,7 @@ class UserProfileRepository {
   ///
   /// The returned [UserProfile] will have its `id` field set.
   Future<UserProfile> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserProfile row, {
     _i1.Transaction? transaction,
   }) async {
@@ -423,7 +492,7 @@ class UserProfileRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<UserProfile>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserProfile> rows, {
     _i1.ColumnSelections<UserProfileTable>? columns,
     _i1.Transaction? transaction,
@@ -439,7 +508,7 @@ class UserProfileRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<UserProfile> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserProfile row, {
     _i1.ColumnSelections<UserProfileTable>? columns,
     _i1.Transaction? transaction,
@@ -451,11 +520,51 @@ class UserProfileRepository {
     );
   }
 
+  /// Updates a single [UserProfile] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<UserProfile?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<UserProfileUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<UserProfile>(
+      id,
+      columnValues: columnValues(UserProfile.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [UserProfile]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<UserProfile>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<UserProfileUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<UserProfileTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<UserProfileTable>? orderBy,
+    _i1.OrderByListBuilder<UserProfileTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<UserProfile>(
+      columnValues: columnValues(UserProfile.t.updateTable),
+      where: where(UserProfile.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(UserProfile.t),
+      orderByList: orderByList?.call(UserProfile.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [UserProfile]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<UserProfile>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserProfile> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -467,7 +576,7 @@ class UserProfileRepository {
 
   /// Deletes a single [UserProfile].
   Future<UserProfile> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserProfile row, {
     _i1.Transaction? transaction,
   }) async {
@@ -479,7 +588,7 @@ class UserProfileRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<UserProfile>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<UserProfileTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -492,7 +601,7 @@ class UserProfileRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserProfileTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -500,6 +609,22 @@ class UserProfileRepository {
     return session.db.count<UserProfile>(
       where: where?.call(UserProfile.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [UserProfile] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<UserProfileTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<UserProfile>(
+      where: where(UserProfile.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

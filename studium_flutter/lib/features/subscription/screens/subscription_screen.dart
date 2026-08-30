@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'dart:math' as math;
 import '../../../core/layout/responsive.dart';
-import '../../../core/providers/service_providers.dart';
 import '../../dashboard/providers/dashboard_provider.dart';
 import '../../profile/providers/profile_provider.dart';
 import '../providers/subscription_provider.dart';
@@ -461,7 +460,7 @@ class _NeuralNetworkPainter extends CustomPainter {
         final distance = (nodes[i] - nodes[j]).distance;
         if (distance < 150) {
           final opacity = (1 - distance / 150) * 0.3;
-          paint.color = const Color(0xFF00D4FF).withOpacity(opacity);
+          paint.color = const Color(0xFF00D4FF).withValues(alpha: opacity);
           canvas.drawLine(nodes[i], nodes[j], paint);
         }
       }
@@ -881,8 +880,17 @@ class _NeuralPaymentCardState extends ConsumerState<_NeuralPaymentCard> {
   CardFieldInputDetails? _cardDetails;
   bool _isProcessing = false;
   String? _cardError;
+  String? _lastPaymentMethodId;
 
   Future<void> _handleNeuralSubscribe() async {
+    const stripePublishableKey =
+        String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
+    if (stripePublishableKey.isEmpty) {
+      setState(() => _cardError =
+          'Payments are not configured for this build. Please contact support.');
+      return;
+    }
+
     if (_cardDetails?.complete != true) {
       setState(
           () => _cardError = 'Please enter complete neural payment details.');
@@ -902,11 +910,11 @@ class _NeuralPaymentCardState extends ConsumerState<_NeuralPaymentCard> {
           paymentMethodData: PaymentMethodData(),
         ),
       );
+      _lastPaymentMethodId = paymentMethod.id;
 
-      await ref.read(subscriptionServiceProvider).createSubscription(
-            gateway: 'stripe',
-            paymentToken: paymentMethod.id,
-          );
+      await ref
+          .read(subscriptionProvider.notifier)
+          .createSubscription(paymentMethod.id);
     } on StripeException catch (e) {
       setState(() => _cardError =
           'Neural Payment Error: ${e.error.localizedMessage ?? 'Connection failed'}');
@@ -918,6 +926,13 @@ class _NeuralPaymentCardState extends ConsumerState<_NeuralPaymentCard> {
         setState(() => _isProcessing = false);
       }
     }
+  }
+
+  Future<void> _retrySubscription() async {
+    final token = _lastPaymentMethodId;
+    if (token == null || token.isEmpty) return;
+    setState(() => _cardError = null);
+    await ref.read(subscriptionProvider.notifier).createSubscription(token);
   }
 
   @override
@@ -1068,20 +1083,33 @@ class _NeuralPaymentCardState extends ConsumerState<_NeuralPaymentCard> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.red.withAlpha(77)),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      const Icon(Icons.error_outline,
-                          color: Colors.red, size: 16),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          _cardError!,
-                          style: const TextStyle(
-                            color: Colors.red,
-                            fontSize: 12,
+                      Row(
+                        children: [
+                          const Icon(Icons.error_outline,
+                              color: Colors.red, size: 16),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              _cardError!,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_lastPaymentMethodId != null)
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton.icon(
+                            onPressed: isLoading ? null : _retrySubscription,
+                            icon: const Icon(Icons.refresh),
+                            label: const Text('Retry payment'),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),

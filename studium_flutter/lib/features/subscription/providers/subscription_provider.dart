@@ -6,9 +6,12 @@ enum SubscriptionStatus { initial, loading, success, error }
 class SubscriptionState {
   final SubscriptionStatus status;
   final String? errorMessage;
+  final String? lastPaymentMethodToken;
 
   SubscriptionState(
-      {this.status = SubscriptionStatus.initial, this.errorMessage});
+      {this.status = SubscriptionStatus.initial,
+      this.errorMessage,
+      this.lastPaymentMethodToken});
 }
 
 class SubscriptionNotifier extends StateNotifier<SubscriptionState> {
@@ -16,18 +19,32 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionState> {
   SubscriptionNotifier(this._ref) : super(SubscriptionState());
 
   Future<void> createSubscription(String paymentMethodToken) async {
-    state = SubscriptionState(status: SubscriptionStatus.loading);
+    state = SubscriptionState(
+      status: SubscriptionStatus.loading,
+      lastPaymentMethodToken: paymentMethodToken,
+    );
     try {
       await _ref.read(subscriptionServiceProvider).createSubscription(
             gateway: 'stripe',
-            paymentToken:
-               paymentMethodToken, 
+            paymentToken: paymentMethodToken,
           );
-      state = SubscriptionState(status: SubscriptionStatus.success);
+      state = SubscriptionState(
+        status: SubscriptionStatus.success,
+        lastPaymentMethodToken: paymentMethodToken,
+      );
     } catch (e) {
       state = SubscriptionState(
-          status: SubscriptionStatus.error, errorMessage: e.toString());
+        status: SubscriptionStatus.error,
+        errorMessage: e.toString(),
+        lastPaymentMethodToken: paymentMethodToken,
+      );
     }
+  }
+
+  Future<void> retryLastSubscription() async {
+    final token = state.lastPaymentMethodToken;
+    if (token == null || token.isEmpty) return;
+    await createSubscription(token);
   }
 }
 

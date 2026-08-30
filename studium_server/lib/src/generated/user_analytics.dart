@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class UserAnalytics
@@ -34,8 +36,9 @@ abstract class UserAnalytics
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       action: jsonSerialization['action'] as String,
-      timestamp:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['timestamp']),
+      timestamp: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['timestamp'],
+      ),
       metadata: jsonSerialization['metadata'] as String?,
     );
   }
@@ -71,6 +74,7 @@ abstract class UserAnalytics
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'UserAnalytics',
       if (id != null) 'id': id,
       'userId': userId,
       'action': action,
@@ -82,6 +86,7 @@ abstract class UserAnalytics
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'UserAnalytics',
       if (id != null) 'id': id,
       'userId': userId,
       'action': action,
@@ -130,12 +135,12 @@ class _UserAnalyticsImpl extends UserAnalytics {
     required DateTime timestamp,
     String? metadata,
   }) : super._(
-          id: id,
-          userId: userId,
-          action: action,
-          timestamp: timestamp,
-          metadata: metadata,
-        );
+         id: id,
+         userId: userId,
+         action: action,
+         timestamp: timestamp,
+         metadata: metadata,
+       );
 
   /// Returns a shallow copy of this [UserAnalytics]
   /// with some or all fields replaced by the given arguments.
@@ -158,9 +163,35 @@ class _UserAnalyticsImpl extends UserAnalytics {
   }
 }
 
+class UserAnalyticsUpdateTable extends _i1.UpdateTable<UserAnalyticsTable> {
+  UserAnalyticsUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> action(String value) => _i1.ColumnValue(
+    table.action,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> timestamp(DateTime value) =>
+      _i1.ColumnValue(
+        table.timestamp,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> metadata(String? value) => _i1.ColumnValue(
+    table.metadata,
+    value,
+  );
+}
+
 class UserAnalyticsTable extends _i1.Table<int?> {
   UserAnalyticsTable({super.tableRelation})
-      : super(tableName: 'user_analytics') {
+    : super(tableName: 'user_analytics') {
+    updateTable = UserAnalyticsUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -179,6 +210,8 @@ class UserAnalyticsTable extends _i1.Table<int?> {
     );
   }
 
+  late final UserAnalyticsUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnString action;
@@ -189,12 +222,12 @@ class UserAnalyticsTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        action,
-        timestamp,
-        metadata,
-      ];
+    id,
+    userId,
+    action,
+    timestamp,
+    metadata,
+  ];
 }
 
 class UserAnalyticsInclude extends _i1.IncludeObject {
@@ -253,7 +286,7 @@ class UserAnalyticsRepository {
   /// );
   /// ```
   Future<List<UserAnalytics>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserAnalyticsTable>? where,
     int? limit,
     int? offset,
@@ -261,6 +294,8 @@ class UserAnalyticsRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserAnalyticsTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<UserAnalytics>(
       where: where?.call(UserAnalytics.t),
@@ -270,6 +305,8 @@ class UserAnalyticsRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -291,13 +328,15 @@ class UserAnalyticsRepository {
   /// );
   /// ```
   Future<UserAnalytics?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserAnalyticsTable>? where,
     int? offset,
     _i1.OrderByBuilder<UserAnalyticsTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<UserAnalyticsTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<UserAnalytics>(
       where: where?.call(UserAnalytics.t),
@@ -306,18 +345,24 @@ class UserAnalyticsRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [UserAnalytics] by its [id] or null if no such row exists.
   Future<UserAnalytics?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<UserAnalytics>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -327,14 +372,20 @@ class UserAnalyticsRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<UserAnalytics>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserAnalytics> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<UserAnalytics>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -342,7 +393,7 @@ class UserAnalyticsRepository {
   ///
   /// The returned [UserAnalytics] will have its `id` field set.
   Future<UserAnalytics> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserAnalytics row, {
     _i1.Transaction? transaction,
   }) async {
@@ -358,7 +409,7 @@ class UserAnalyticsRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<UserAnalytics>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserAnalytics> rows, {
     _i1.ColumnSelections<UserAnalyticsTable>? columns,
     _i1.Transaction? transaction,
@@ -374,7 +425,7 @@ class UserAnalyticsRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<UserAnalytics> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserAnalytics row, {
     _i1.ColumnSelections<UserAnalyticsTable>? columns,
     _i1.Transaction? transaction,
@@ -386,11 +437,51 @@ class UserAnalyticsRepository {
     );
   }
 
+  /// Updates a single [UserAnalytics] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<UserAnalytics?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<UserAnalyticsUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<UserAnalytics>(
+      id,
+      columnValues: columnValues(UserAnalytics.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [UserAnalytics]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<UserAnalytics>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<UserAnalyticsUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<UserAnalyticsTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<UserAnalyticsTable>? orderBy,
+    _i1.OrderByListBuilder<UserAnalyticsTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<UserAnalytics>(
+      columnValues: columnValues(UserAnalytics.t.updateTable),
+      where: where(UserAnalytics.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(UserAnalytics.t),
+      orderByList: orderByList?.call(UserAnalytics.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [UserAnalytics]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<UserAnalytics>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<UserAnalytics> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -402,7 +493,7 @@ class UserAnalyticsRepository {
 
   /// Deletes a single [UserAnalytics].
   Future<UserAnalytics> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     UserAnalytics row, {
     _i1.Transaction? transaction,
   }) async {
@@ -414,7 +505,7 @@ class UserAnalyticsRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<UserAnalytics>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<UserAnalyticsTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -427,7 +518,7 @@ class UserAnalyticsRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<UserAnalyticsTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -435,6 +526,22 @@ class UserAnalyticsRepository {
     return session.db.count<UserAnalytics>(
       where: where?.call(UserAnalytics.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [UserAnalytics] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<UserAnalyticsTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<UserAnalytics>(
+      where: where(UserAnalytics.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

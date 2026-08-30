@@ -1,0 +1,13 @@
+class: ModerationLog
+table: moderation_logs
+fields:
+  reportId: int, relation(parent=content_reports)
+  moderatorId: int, relation(parent=serverpod_user_info)
+  action: String
+  targetType: String
+  targetId: int
+  note: String?
+  createdAt: DateTime
+indexes:
+  moderation_log_report_idx:
+    fields: reportId, createdAt

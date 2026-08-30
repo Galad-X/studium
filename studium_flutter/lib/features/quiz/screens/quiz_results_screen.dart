@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,7 +72,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildMobileLayout(BuildContext context, QuizState quizState, ThemeData theme) {
+  Widget _buildMobileLayout(
+      BuildContext context, QuizState quizState, ThemeData theme) {
     final double finalScore = quizState.totalScore;
     final int correctAnswers = quizState.userAnswers.values
         .where((answer) => (answer.score ?? 0) > 70)
@@ -87,7 +86,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildHeroScoreSection(theme, finalScore, correctAnswers, totalQuestions, false),
+            _buildHeroScoreSection(
+                theme, finalScore, correctAnswers, totalQuestions, false),
             _buildPerformanceInsights(theme, finalScore, quizState, false),
             _buildDetailedBreakdown(theme, quizState, false),
             _buildActionButtons(theme, ref, false),
@@ -98,7 +98,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildTabletLayout(BuildContext context, QuizState quizState, ThemeData theme) {
+  Widget _buildTabletLayout(
+      BuildContext context, QuizState quizState, ThemeData theme) {
     final double finalScore = quizState.totalScore;
     final int correctAnswers = quizState.userAnswers.values
         .where((answer) => (answer.score ?? 0) > 70)
@@ -120,8 +121,10 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
                     flex: 2,
                     child: Column(
                       children: [
-                        _buildHeroScoreSection(theme, finalScore, correctAnswers, totalQuestions, true),
-                        _buildPerformanceInsights(theme, finalScore, quizState, true),
+                        _buildHeroScoreSection(theme, finalScore,
+                            correctAnswers, totalQuestions, true),
+                        _buildPerformanceInsights(
+                            theme, finalScore, quizState, true),
                       ],
                     ),
                   ),
@@ -141,7 +144,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildDesktopLayout(BuildContext context, QuizState quizState, ThemeData theme) {
+  Widget _buildDesktopLayout(
+      BuildContext context, QuizState quizState, ThemeData theme) {
     final double finalScore = quizState.totalScore;
     final int correctAnswers = quizState.userAnswers.values
         .where((answer) => (answer.score ?? 0) > 70)
@@ -167,9 +171,11 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
                         flex: 2,
                         child: Column(
                           children: [
-                            _buildHeroScoreSection(theme, finalScore, correctAnswers, totalQuestions, true),
+                            _buildHeroScoreSection(theme, finalScore,
+                                correctAnswers, totalQuestions, true),
                             const SizedBox(height: 24),
-                            _buildPerformanceInsights(theme, finalScore, quizState, true),
+                            _buildPerformanceInsights(
+                                theme, finalScore, quizState, true),
                             const SizedBox(height: 24),
                             _buildActionButtons(theme, ref, true),
                           ],
@@ -215,8 +221,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildHeroScoreSection(
-      ThemeData theme, double finalScore, int correct, int total, bool isWideScreen) {
+  Widget _buildHeroScoreSection(ThemeData theme, double finalScore, int correct,
+      int total, bool isWideScreen) {
     final double containerPadding = isWideScreen ? 40 : 32;
     final double circleSize = isWideScreen ? 140 : 120;
 
@@ -288,9 +294,10 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
                           children: [
                             Text(
                               '${finalScore.toInt()}%',
-                              style: (isWideScreen 
-                                  ? theme.textTheme.displaySmall 
-                                  : theme.textTheme.headlineLarge)?.copyWith(
+                              style: (isWideScreen
+                                      ? theme.textTheme.displaySmall
+                                      : theme.textTheme.headlineLarge)
+                                  ?.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -318,9 +325,10 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
           // Performance message
           Text(
             _getPerformanceMessage(finalScore),
-            style: (isWideScreen 
-                ? theme.textTheme.headlineMedium 
-                : theme.textTheme.headlineSmall)?.copyWith(
+            style: (isWideScreen
+                    ? theme.textTheme.headlineMedium
+                    : theme.textTheme.headlineSmall)
+                ?.copyWith(
               fontWeight: FontWeight.bold,
               color: _getScoreColor(finalScore),
             ),
@@ -393,10 +401,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
   Widget _buildPerformanceInsights(
       ThemeData theme, double score, QuizState quizState, bool isWideScreen) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: isWideScreen ? 16 : 24, 
-        vertical: 8
-      ),
+      margin:
+          EdgeInsets.symmetric(horizontal: isWideScreen ? 16 : 24, vertical: 8),
       padding: EdgeInsets.all(isWideScreen ? 24 : 20),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHighest,
@@ -414,9 +420,10 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
               const SizedBox(width: 12),
               Text(
                 'Performance Insights',
-                style: (isWideScreen 
-                    ? theme.textTheme.headlineSmall 
-                    : theme.textTheme.titleLarge)?.copyWith(
+                style: (isWideScreen
+                        ? theme.textTheme.headlineSmall
+                        : theme.textTheme.titleLarge)
+                    ?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -427,9 +434,11 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
           // Question type breakdown
           ...(_getQuestionTypeBreakdown(quizState).entries.map((entry) {
             final correctCount = entry.value['correct'] ?? 0;
-            final totalCount = entry.value['total'] ?? 1; // Prevent division by zero
-            final percentage = totalCount > 0 ? (correctCount / totalCount * 100).round() : 0;
-            
+            final totalCount =
+                entry.value['total'] ?? 1; // Prevent division by zero
+            final percentage =
+                totalCount > 0 ? (correctCount / totalCount * 100).round() : 0;
+
             return Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
@@ -465,12 +474,11 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildDetailedBreakdown(ThemeData theme, QuizState quizState, bool isWideScreen) {
+  Widget _buildDetailedBreakdown(
+      ThemeData theme, QuizState quizState, bool isWideScreen) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: isWideScreen ? 16 : 24, 
-        vertical: 8
-      ),
+      margin:
+          EdgeInsets.symmetric(horizontal: isWideScreen ? 16 : 24, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -485,9 +493,10 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
                 const SizedBox(width: 12),
                 Text(
                   'Detailed Breakdown',
-                  style: (isWideScreen 
-                      ? theme.textTheme.headlineSmall 
-                      : theme.textTheme.titleLarge)?.copyWith(
+                  style: (isWideScreen
+                          ? theme.textTheme.headlineSmall
+                          : theme.textTheme.titleLarge)
+                      ?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -541,7 +550,8 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
     );
   }
 
-  Widget _buildActionButtons(ThemeData theme, WidgetRef ref, bool isWideScreen) {
+  Widget _buildActionButtons(
+      ThemeData theme, WidgetRef ref, bool isWideScreen) {
     return Padding(
       padding: EdgeInsets.all(isWideScreen ? 16 : 24),
       child: isWideScreen
@@ -567,7 +577,7 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
   }
 
   Widget _buildRetakeButton(ThemeData theme, WidgetRef ref) {
-     final quizState = ref.watch(quizProvider);
+    final quizState = ref.watch(quizProvider);
 
     return Container(
       width: double.infinity,
@@ -586,9 +596,9 @@ class _QuizResultsScreenState extends ConsumerState<QuizResultsScreen>
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: () {
-             HapticFeedback.mediumImpact();
+            HapticFeedback.mediumImpact();
             ref.read(quizProvider.notifier).resetQuiz();
-            
+
             if (context.canPop()) {
               context.pop();
             } else {
@@ -853,12 +863,8 @@ class _AnswerBreakdownCard extends StatelessWidget {
         data: theme.copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           tilePadding: EdgeInsets.all(isWideScreen ? 24 : 20),
-          childrenPadding: EdgeInsets.fromLTRB(
-            isWideScreen ? 24 : 20, 
-            0, 
-            isWideScreen ? 24 : 20, 
-            isWideScreen ? 24 : 20
-          ),
+          childrenPadding: EdgeInsets.fromLTRB(isWideScreen ? 24 : 20, 0,
+              isWideScreen ? 24 : 20, isWideScreen ? 24 : 20),
           leading: Container(
             width: isWideScreen ? 48 : 40,
             height: isWideScreen ? 48 : 40,
@@ -869,9 +875,10 @@ class _AnswerBreakdownCard extends StatelessWidget {
             child: Center(
               child: Text(
                 '$questionNumber',
-                style: (isWideScreen 
-                    ? theme.textTheme.titleLarge 
-                    : theme.textTheme.titleMedium)?.copyWith(
+                style: (isWideScreen
+                        ? theme.textTheme.titleLarge
+                        : theme.textTheme.titleMedium)
+                    ?.copyWith(
                   color: scoreColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -880,9 +887,10 @@ class _AnswerBreakdownCard extends StatelessWidget {
           ),
           title: Text(
             question.questionText,
-            style: (isWideScreen 
-                ? theme.textTheme.titleLarge 
-                : theme.textTheme.titleMedium)?.copyWith(
+            style: (isWideScreen
+                    ? theme.textTheme.titleLarge
+                    : theme.textTheme.titleMedium)
+                ?.copyWith(
               fontWeight: FontWeight.w600,
             ),
             maxLines: isWideScreen ? 3 : 2,
@@ -914,18 +922,18 @@ class _AnswerBreakdownCard extends StatelessWidget {
           ),
           trailing: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: isWideScreen ? 16 : 12, 
-              vertical: isWideScreen ? 8 : 6
-            ),
+                horizontal: isWideScreen ? 16 : 12,
+                vertical: isWideScreen ? 8 : 6),
             decoration: BoxDecoration(
               color: scoreColor.withAlpha(26),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               '${score.toInt()}%',
-              style: (isWideScreen 
-                  ? theme.textTheme.titleSmall 
-                  : theme.textTheme.labelLarge)?.copyWith(
+              style: (isWideScreen
+                      ? theme.textTheme.titleSmall
+                      : theme.textTheme.labelLarge)
+                  ?.copyWith(
                 color: scoreColor,
                 fontWeight: FontWeight.bold,
               ),

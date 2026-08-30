@@ -7,11 +7,14 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'user_profile.dart' as _i2;
 import 'subscriptions.dart' as _i3;
+import 'package:studium_server/src/generated/protocol.dart' as _i4;
 
 abstract class UserProfileBundle
     implements _i1.SerializableModel, _i1.ProtocolSerialization {
@@ -27,12 +30,14 @@ abstract class UserProfileBundle
 
   factory UserProfileBundle.fromJson(Map<String, dynamic> jsonSerialization) {
     return UserProfileBundle(
-      profile: _i2.UserProfile.fromJson(
-          (jsonSerialization['profile'] as Map<String, dynamic>)),
+      profile: _i4.Protocol().deserialize<_i2.UserProfile>(
+        jsonSerialization['profile'],
+      ),
       subscription: jsonSerialization['subscription'] == null
           ? null
-          : _i3.Subscription.fromJson(
-              (jsonSerialization['subscription'] as Map<String, dynamic>)),
+          : _i4.Protocol().deserialize<_i3.Subscription>(
+              jsonSerialization['subscription'],
+            ),
     );
   }
 
@@ -50,6 +55,7 @@ abstract class UserProfileBundle
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'UserProfileBundle',
       'profile': profile.toJson(),
       if (subscription != null) 'subscription': subscription?.toJson(),
     };
@@ -58,6 +64,7 @@ abstract class UserProfileBundle
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'UserProfileBundle',
       'profile': profile.toJsonForProtocol(),
       if (subscription != null)
         'subscription': subscription?.toJsonForProtocol(),
@@ -77,9 +84,9 @@ class _UserProfileBundleImpl extends UserProfileBundle {
     required _i2.UserProfile profile,
     _i3.Subscription? subscription,
   }) : super._(
-          profile: profile,
-          subscription: subscription,
-        );
+         profile: profile,
+         subscription: subscription,
+       );
 
   /// Returns a shallow copy of this [UserProfileBundle]
   /// with some or all fields replaced by the given arguments.

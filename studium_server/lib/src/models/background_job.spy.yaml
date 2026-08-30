@@ -1,0 +1,19 @@
+class: BackgroundJob
+table: background_jobs
+fields:
+  jobType: String
+  payload: String
+  status: String
+  attempts: int
+  maxAttempts: int
+  availableAt: DateTime
+  lockedAt: DateTime?
+  lockToken: String?
+  lastError: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  background_job_claim_idx:
+    fields: status, availableAt, createdAt
+  background_job_lock_idx:
+    fields: lockToken

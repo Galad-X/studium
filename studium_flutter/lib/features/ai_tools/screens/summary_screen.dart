@@ -55,7 +55,9 @@ class _SummaryScreenState extends ConsumerState<SummaryScreen>
   }
 
   @override
-  Widget build(BuildContext context, ) {
+  Widget build(
+    BuildContext context,
+  ) {
     final summaryAsync = ref.watch(summaryProvider(widget.materialId));
     final theme = Theme.of(context);
 

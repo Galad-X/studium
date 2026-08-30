@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'package:studium_client/src/protocol/protocol.dart' as _i2;
 
 abstract class Question implements _i1.SerializableModel {
   Question._({
@@ -53,22 +56,27 @@ abstract class Question implements _i1.SerializableModel {
       type: jsonSerialization['type'] as String,
       questionText: jsonSerialization['questionText'] as String,
       correctAnswer: jsonSerialization['correctAnswer'] as String?,
-      options: (jsonSerialization['options'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      options: jsonSerialization['options'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(
+              jsonSerialization['options'],
+            ),
       explanation: jsonSerialization['explanation'] as String?,
       difficulty: jsonSerialization['difficulty'] as String,
       bloomsLevel: jsonSerialization['bloomsLevel'] as String,
       estimatedTime: jsonSerialization['estimatedTime'] as int,
-      tags: (jsonSerialization['tags'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
+      tags: jsonSerialization['tags'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(jsonSerialization['tags']),
       diagramImageUrl: jsonSerialization['diagramImageUrl'] as String?,
-      labelingPoints: (jsonSerialization['labelingPoints'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      labelingPoints: jsonSerialization['labelingPoints'] == null
+          ? null
+          : _i2.Protocol().deserialize<List<String>>(
+              jsonSerialization['labelingPoints'],
+            ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -125,6 +133,7 @@ abstract class Question implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Question',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'type': type,
@@ -167,21 +176,21 @@ class _QuestionImpl extends Question {
     List<String>? labelingPoints,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          studyMaterialId: studyMaterialId,
-          type: type,
-          questionText: questionText,
-          correctAnswer: correctAnswer,
-          options: options,
-          explanation: explanation,
-          difficulty: difficulty,
-          bloomsLevel: bloomsLevel,
-          estimatedTime: estimatedTime,
-          tags: tags,
-          diagramImageUrl: diagramImageUrl,
-          labelingPoints: labelingPoints,
-          createdAt: createdAt,
-        );
+         id: id,
+         studyMaterialId: studyMaterialId,
+         type: type,
+         questionText: questionText,
+         correctAnswer: correctAnswer,
+         options: options,
+         explanation: explanation,
+         difficulty: difficulty,
+         bloomsLevel: bloomsLevel,
+         estimatedTime: estimatedTime,
+         tags: tags,
+         diagramImageUrl: diagramImageUrl,
+         labelingPoints: labelingPoints,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Question]
   /// with some or all fields replaced by the given arguments.
@@ -208,8 +217,9 @@ class _QuestionImpl extends Question {
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       type: type ?? this.type,
       questionText: questionText ?? this.questionText,
-      correctAnswer:
-          correctAnswer is String? ? correctAnswer : this.correctAnswer,
+      correctAnswer: correctAnswer is String?
+          ? correctAnswer
+          : this.correctAnswer,
       options: options is List<String>?
           ? options
           : this.options?.map((e0) => e0).toList(),
@@ -218,8 +228,9 @@ class _QuestionImpl extends Question {
       bloomsLevel: bloomsLevel ?? this.bloomsLevel,
       estimatedTime: estimatedTime ?? this.estimatedTime,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
-      diagramImageUrl:
-          diagramImageUrl is String? ? diagramImageUrl : this.diagramImageUrl,
+      diagramImageUrl: diagramImageUrl is String?
+          ? diagramImageUrl
+          : this.diagramImageUrl,
       labelingPoints: labelingPoints is List<String>?
           ? labelingPoints
           : this.labelingPoints?.map((e0) => e0).toList(),

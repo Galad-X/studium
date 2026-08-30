@@ -15,9 +15,10 @@ class AppLayout extends ConsumerWidget {
 
   int _calculateSelectedIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith('/materials')) return 1;
-    if (location.startsWith('/writer')) return 2;
-    if (location.startsWith('/profile')) return 3;
+    if (location.startsWith('/collaboration')) return 1;
+    if (location.startsWith('/materials')) return 2;
+    if (location.startsWith('/writer')) return 3;
+    if (location.startsWith('/profile')) return 4;
     return 0;
   }
 
@@ -256,12 +257,15 @@ class _MobileLayoutState extends State<_MobileLayout>
         context.go('/');
         break;
       case 1:
-        context.go('/materials');
+        context.go('/collaboration');
         break;
       case 2:
-        context.go('/writer');
+        context.go('/materials');
         break;
       case 3:
+        context.go('/writer');
+        break;
+      case 4:
         context.go('/profile');
         break;
     }
@@ -367,26 +371,33 @@ class _MobileLayoutState extends State<_MobileLayout>
                   onTap: () => _onItemTapped(context, 0),
                 ),
                 _NeuralMobileNavItem(
+                  icon: Icons.groups_outlined,
+                  selectedIcon: Icons.groups_rounded,
+                  label: 'Communities',
+                  isSelected: widget.selectedIndex == 1,
+                  onTap: () => _onItemTapped(context, 1),
+                ),
+                _NeuralMobileNavItem(
                   icon: Icons.folder_copy_outlined,
                   selectedIcon: Icons.folder_copy_rounded,
                   label: 'Data Bank',
-                  isSelected: widget.selectedIndex == 1,
-                  onTap: () => _onItemTapped(context, 1),
+                  isSelected: widget.selectedIndex == 2,
+                  onTap: () => _onItemTapped(context, 2),
                 ),
                 _NeuralMobileNavItem(
                   icon: Icons.edit_document,
                   selectedIcon: Icons.edit_document,
                   label: 'AI Writer',
-                  isSelected: widget.selectedIndex == 2,
-                  onTap: () => _onItemTapped(context, 2),
+                  isSelected: widget.selectedIndex == 3,
+                  onTap: () => _onItemTapped(context, 3),
                   hasNewBadge: true,
                 ),
                 _NeuralMobileNavItem(
                   icon: Icons.person_outlined,
                   selectedIcon: Icons.person_rounded,
                   label: 'Neural ID',
-                  isSelected: widget.selectedIndex == 3,
-                  onTap: () => _onItemTapped(context, 3),
+                  isSelected: widget.selectedIndex == 4,
+                  onTap: () => _onItemTapped(context, 4),
                 ),
               ],
             ),
@@ -473,8 +484,7 @@ class _NeuralMobileNavItemState extends State<_NeuralMobileNavItem>
                         boxShadow: widget.isSelected
                             ? [
                                 BoxShadow(
-                                  color:
-                                      const Color(0xFF4FC3F7).withAlpha(104),
+                                  color: const Color(0xFF4FC3F7).withAlpha(104),
                                   blurRadius: 8,
                                   offset: const Offset(0, 4),
                                 ),
@@ -572,12 +582,15 @@ class _TabletLayoutState extends State<_TabletLayout>
         context.go('/');
         break;
       case 1:
-        context.go('/materials');
+        context.go('/collaboration');
         break;
       case 2:
-        context.go('/writer');
+        context.go('/materials');
         break;
       case 3:
+        context.go('/writer');
+        break;
+      case 4:
         context.go('/profile');
         break;
     }
@@ -667,6 +680,11 @@ class _TabletLayoutState extends State<_TabletLayout>
                         icon: Icon(Icons.dashboard_outlined),
                         selectedIcon: Icon(Icons.dashboard_rounded),
                         label: Text('Neural Hub'),
+                      ),
+                      const NavigationRailDestination(
+                        icon: Icon(Icons.groups_outlined),
+                        selectedIcon: Icon(Icons.groups_rounded),
+                        label: Text('Communities'),
                       ),
                       const NavigationRailDestination(
                         icon: Icon(Icons.folder_copy_outlined),
@@ -814,12 +832,15 @@ class _DesktopLayoutState extends ConsumerState<_DesktopLayout>
         context.go('/');
         break;
       case 1:
-        context.go('/materials');
+        context.go('/collaboration');
         break;
       case 2:
-        context.go('/writer');
+        context.go('/materials');
         break;
       case 3:
+        context.go('/writer');
+        break;
+      case 4:
         context.go('/profile');
         break;
     }
@@ -1005,26 +1026,33 @@ class _DesktopLayoutState extends ConsumerState<_DesktopLayout>
                               onTap: () => _onItemTapped(context, 0),
                             ),
                             _NeuralDesktopNavItem(
+                              icon: Icons.groups_outlined,
+                              selectedIcon: Icons.groups_rounded,
+                              label: 'Study Communities',
+                              isSelected: widget.selectedIndex == 1,
+                              onTap: () => _onItemTapped(context, 1),
+                            ),
+                            _NeuralDesktopNavItem(
                               icon: Icons.folder_copy_outlined,
                               selectedIcon: Icons.folder_copy_rounded,
                               label: 'Neural Data Bank',
-                              isSelected: widget.selectedIndex == 1,
-                              onTap: () => _onItemTapped(context, 1),
+                              isSelected: widget.selectedIndex == 2,
+                              onTap: () => _onItemTapped(context, 2),
                             ),
                             _NeuralDesktopNavItem(
                               icon: Icons.edit_document,
                               selectedIcon: Icons.edit_document,
                               label: 'AI Neural Writer',
-                              isSelected: widget.selectedIndex == 2,
-                              onTap: () => _onItemTapped(context, 2),
+                              isSelected: widget.selectedIndex == 3,
+                              onTap: () => _onItemTapped(context, 3),
                               badge: 'NEW',
                             ),
                             _NeuralDesktopNavItem(
                               icon: Icons.person_outlined,
                               selectedIcon: Icons.person_rounded,
                               label: 'Neural Profile',
-                              isSelected: widget.selectedIndex == 3,
-                              onTap: () => _onItemTapped(context, 3),
+                              isSelected: widget.selectedIndex == 4,
+                              onTap: () => _onItemTapped(context, 4),
                             ),
                           ],
                         ),
@@ -1600,8 +1628,9 @@ class _NeuralNetworkPainter extends CustomPainter {
         final distance = (nodes[i] - nodes[j]).distance;
         if (distance < 80) {
           final opacity = (1 - distance / 80) * 0.1;
-          paint.color = connectionColor.withOpacity(opacity *
-              (0.5 + 0.5 * math.sin(animation.value * 2 * math.pi + i)));
+          paint.color = connectionColor.withValues(
+              alpha: opacity *
+                  (0.5 + 0.5 * math.sin(animation.value * 2 * math.pi + i)));
           canvas.drawLine(nodes[i], nodes[j], paint);
         }
       }

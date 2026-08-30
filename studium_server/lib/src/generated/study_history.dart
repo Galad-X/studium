@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'package:studium_server/src/generated/protocol.dart' as _i2;
 
 abstract class StudyHistory
     implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
@@ -39,21 +42,22 @@ abstract class StudyHistory
     return StudyHistory(
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
-      materialIds: (jsonSerialization['materialIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      questionIds: (jsonSerialization['questionIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      summaryIds: (jsonSerialization['summaryIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      writingIds: (jsonSerialization['writingIds'] as List)
-          .map((e) => e as int)
-          .toList(),
+      materialIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['materialIds'],
+      ),
+      questionIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['questionIds'],
+      ),
+      summaryIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['summaryIds'],
+      ),
+      writingIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['writingIds'],
+      ),
       progress: (jsonSerialization['progress'] as num?)?.toDouble(),
-      lastUpdated:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['lastUpdated']),
+      lastUpdated: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['lastUpdated'],
+      ),
     );
   }
 
@@ -97,6 +101,7 @@ abstract class StudyHistory
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'StudyHistory',
       if (id != null) 'id': id,
       'userId': userId,
       'materialIds': materialIds.toJson(),
@@ -111,6 +116,7 @@ abstract class StudyHistory
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'StudyHistory',
       if (id != null) 'id': id,
       'userId': userId,
       'materialIds': materialIds.toJson(),
@@ -165,15 +171,15 @@ class _StudyHistoryImpl extends StudyHistory {
     double? progress,
     required DateTime lastUpdated,
   }) : super._(
-          id: id,
-          userId: userId,
-          materialIds: materialIds,
-          questionIds: questionIds,
-          summaryIds: summaryIds,
-          writingIds: writingIds,
-          progress: progress,
-          lastUpdated: lastUpdated,
-        );
+         id: id,
+         userId: userId,
+         materialIds: materialIds,
+         questionIds: questionIds,
+         summaryIds: summaryIds,
+         writingIds: writingIds,
+         progress: progress,
+         lastUpdated: lastUpdated,
+       );
 
   /// Returns a shallow copy of this [StudyHistory]
   /// with some or all fields replaced by the given arguments.
@@ -202,25 +208,70 @@ class _StudyHistoryImpl extends StudyHistory {
   }
 }
 
+class StudyHistoryUpdateTable extends _i1.UpdateTable<StudyHistoryTable> {
+  StudyHistoryUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<List<int>, List<int>> materialIds(List<int> value) =>
+      _i1.ColumnValue(
+        table.materialIds,
+        value,
+      );
+
+  _i1.ColumnValue<List<int>, List<int>> questionIds(List<int> value) =>
+      _i1.ColumnValue(
+        table.questionIds,
+        value,
+      );
+
+  _i1.ColumnValue<List<int>, List<int>> summaryIds(List<int> value) =>
+      _i1.ColumnValue(
+        table.summaryIds,
+        value,
+      );
+
+  _i1.ColumnValue<List<int>, List<int>> writingIds(List<int> value) =>
+      _i1.ColumnValue(
+        table.writingIds,
+        value,
+      );
+
+  _i1.ColumnValue<double, double> progress(double? value) => _i1.ColumnValue(
+    table.progress,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> lastUpdated(DateTime value) =>
+      _i1.ColumnValue(
+        table.lastUpdated,
+        value,
+      );
+}
+
 class StudyHistoryTable extends _i1.Table<int?> {
   StudyHistoryTable({super.tableRelation}) : super(tableName: 'study_history') {
+    updateTable = StudyHistoryUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
     );
-    materialIds = _i1.ColumnSerializable(
+    materialIds = _i1.ColumnSerializable<List<int>>(
       'materialIds',
       this,
     );
-    questionIds = _i1.ColumnSerializable(
+    questionIds = _i1.ColumnSerializable<List<int>>(
       'questionIds',
       this,
     );
-    summaryIds = _i1.ColumnSerializable(
+    summaryIds = _i1.ColumnSerializable<List<int>>(
       'summaryIds',
       this,
     );
-    writingIds = _i1.ColumnSerializable(
+    writingIds = _i1.ColumnSerializable<List<int>>(
       'writingIds',
       this,
     );
@@ -234,15 +285,17 @@ class StudyHistoryTable extends _i1.Table<int?> {
     );
   }
 
+  late final StudyHistoryUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
-  late final _i1.ColumnSerializable materialIds;
+  late final _i1.ColumnSerializable<List<int>> materialIds;
 
-  late final _i1.ColumnSerializable questionIds;
+  late final _i1.ColumnSerializable<List<int>> questionIds;
 
-  late final _i1.ColumnSerializable summaryIds;
+  late final _i1.ColumnSerializable<List<int>> summaryIds;
 
-  late final _i1.ColumnSerializable writingIds;
+  late final _i1.ColumnSerializable<List<int>> writingIds;
 
   late final _i1.ColumnDouble progress;
 
@@ -250,15 +303,15 @@ class StudyHistoryTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        materialIds,
-        questionIds,
-        summaryIds,
-        writingIds,
-        progress,
-        lastUpdated,
-      ];
+    id,
+    userId,
+    materialIds,
+    questionIds,
+    summaryIds,
+    writingIds,
+    progress,
+    lastUpdated,
+  ];
 }
 
 class StudyHistoryInclude extends _i1.IncludeObject {
@@ -317,7 +370,7 @@ class StudyHistoryRepository {
   /// );
   /// ```
   Future<List<StudyHistory>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyHistoryTable>? where,
     int? limit,
     int? offset,
@@ -325,6 +378,8 @@ class StudyHistoryRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<StudyHistoryTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<StudyHistory>(
       where: where?.call(StudyHistory.t),
@@ -334,6 +389,8 @@ class StudyHistoryRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -355,13 +412,15 @@ class StudyHistoryRepository {
   /// );
   /// ```
   Future<StudyHistory?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyHistoryTable>? where,
     int? offset,
     _i1.OrderByBuilder<StudyHistoryTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<StudyHistoryTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<StudyHistory>(
       where: where?.call(StudyHistory.t),
@@ -370,18 +429,24 @@ class StudyHistoryRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [StudyHistory] by its [id] or null if no such row exists.
   Future<StudyHistory?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<StudyHistory>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -391,14 +456,20 @@ class StudyHistoryRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<StudyHistory>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyHistory> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<StudyHistory>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -406,7 +477,7 @@ class StudyHistoryRepository {
   ///
   /// The returned [StudyHistory] will have its `id` field set.
   Future<StudyHistory> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyHistory row, {
     _i1.Transaction? transaction,
   }) async {
@@ -422,7 +493,7 @@ class StudyHistoryRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<StudyHistory>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyHistory> rows, {
     _i1.ColumnSelections<StudyHistoryTable>? columns,
     _i1.Transaction? transaction,
@@ -438,7 +509,7 @@ class StudyHistoryRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<StudyHistory> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyHistory row, {
     _i1.ColumnSelections<StudyHistoryTable>? columns,
     _i1.Transaction? transaction,
@@ -450,11 +521,51 @@ class StudyHistoryRepository {
     );
   }
 
+  /// Updates a single [StudyHistory] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<StudyHistory?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<StudyHistoryUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<StudyHistory>(
+      id,
+      columnValues: columnValues(StudyHistory.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [StudyHistory]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<StudyHistory>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<StudyHistoryUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<StudyHistoryTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<StudyHistoryTable>? orderBy,
+    _i1.OrderByListBuilder<StudyHistoryTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<StudyHistory>(
+      columnValues: columnValues(StudyHistory.t.updateTable),
+      where: where(StudyHistory.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(StudyHistory.t),
+      orderByList: orderByList?.call(StudyHistory.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [StudyHistory]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<StudyHistory>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<StudyHistory> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -466,7 +577,7 @@ class StudyHistoryRepository {
 
   /// Deletes a single [StudyHistory].
   Future<StudyHistory> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     StudyHistory row, {
     _i1.Transaction? transaction,
   }) async {
@@ -478,7 +589,7 @@ class StudyHistoryRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<StudyHistory>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<StudyHistoryTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -491,7 +602,7 @@ class StudyHistoryRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<StudyHistoryTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -499,6 +610,22 @@ class StudyHistoryRepository {
     return session.db.count<StudyHistory>(
       where: where?.call(StudyHistory.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [StudyHistory] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<StudyHistoryTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<StudyHistory>(
+      where: where(StudyHistory.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

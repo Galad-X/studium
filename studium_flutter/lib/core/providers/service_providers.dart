@@ -1,5 +1,6 @@
 // lib/core/providers/service_providers.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studium_client/studium_client.dart';
 import '../../api/serverpod_client.dart';
 import '../../features/study_material/providers/study_material_provider.dart';
@@ -12,9 +13,14 @@ import '../services/notification_service.dart';
 import '../services/study_material_service.dart';
 import '../services/summary_service.dart';
 import '../services/user_service.dart'; // Add this import
+import '../../features/collaboration/state/collaboration_cache.dart';
 
 // Provides the global client instance
 final clientProvider = Provider<Client>((ref) => client);
+
+final collaborationCacheProvider = Provider<CollaborationCache>((ref) {
+  return CollaborationCache(SharedPreferencesAsync());
+});
 // Provides the AiService instance
 final aiServiceProvider =
     Provider((ref) => AiService(ref.watch(clientProvider)));
@@ -36,7 +42,6 @@ final studyMaterialProvider =
 final userServiceProvider =
     Provider((ref) => UserService(ref.watch(clientProvider)));
 
-
 final subscriptionServiceProvider = Provider<SubscriptionService>((ref) {
   return SubscriptionService(ref.watch(clientProvider));
 });
@@ -47,8 +52,6 @@ final notificationServiceProvider =
 final analyticsServiceProvider = Provider<AnalyticsService>((ref) {
   return AnalyticsService();
 });
-
-
 
 /// Provider for the document export service.
 final exportServiceProvider = Provider<ExportService>((ref) {

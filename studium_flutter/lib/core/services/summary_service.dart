@@ -32,22 +32,11 @@ class SummaryService {
 
   /// Deletes a specific summary by its ID.
   ///
-  /// This is an example of another method you might add to this service.
-  /// You would need to create a corresponding `deleteSummary` method on the
-  /// `SummaryEndpoint` on your Serverpod backend for this to work.
-  ///
   /// The [summaryId] is the unique identifier of the summary to be deleted.
   /// Throws an [Exception] if the deletion fails.
   Future<void> deleteSummary(int summaryId) async {
     try {
-      // Assuming you have a `deleteSummary` method on your backend endpoint.
-      // await _client.summary.deleteSummary(summaryId);
-      debugPrint(
-          'Service call to delete summary $summaryId (endpoint call commented out).');
-      // This is a placeholder since the endpoint method wasn't defined in the prompt.
-      // In a real app, you would uncomment the line above.
-      await Future.delayed(
-          const Duration(seconds: 1)); // Simulate network delay
+      await _client.summary.deleteSummary(summaryId);
     } catch (e) {
       debugPrint('Error deleting summary $summaryId: $e');
       throw Exception('Failed to delete the summary. Please try again.');

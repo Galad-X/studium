@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class AcademicWriting implements _i1.SerializableModel {
@@ -49,8 +51,9 @@ abstract class AcademicWriting implements _i1.SerializableModel {
       content: jsonSerialization['content'] as String,
       format: jsonSerialization['format'] as String,
       fileUrl: jsonSerialization['fileUrl'] as String,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -95,6 +98,7 @@ abstract class AcademicWriting implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'AcademicWriting',
       if (id != null) 'id': id,
       'userId': userId,
       if (studyMaterialId != null) 'studyMaterialId': studyMaterialId,
@@ -129,17 +133,17 @@ class _AcademicWritingImpl extends AcademicWriting {
     required String fileUrl,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          studyMaterialId: studyMaterialId,
-          type: type,
-          title: title,
-          wordCount: wordCount,
-          content: content,
-          format: format,
-          fileUrl: fileUrl,
-          createdAt: createdAt,
-        );
+         id: id,
+         userId: userId,
+         studyMaterialId: studyMaterialId,
+         type: type,
+         title: title,
+         wordCount: wordCount,
+         content: content,
+         format: format,
+         fileUrl: fileUrl,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [AcademicWriting]
   /// with some or all fields replaced by the given arguments.
@@ -160,8 +164,9 @@ class _AcademicWritingImpl extends AcademicWriting {
     return AcademicWriting(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
-      studyMaterialId:
-          studyMaterialId is int? ? studyMaterialId : this.studyMaterialId,
+      studyMaterialId: studyMaterialId is int?
+          ? studyMaterialId
+          : this.studyMaterialId,
       type: type ?? this.type,
       title: title ?? this.title,
       wordCount: wordCount is int? ? wordCount : this.wordCount,

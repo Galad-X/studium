@@ -1,18 +1,20 @@
 // lib/src/endpoints/ai_endpoint.dart
 import 'package:serverpod/serverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:archive/archive.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'dart:convert';
+import 'dart:typed_data';
 import '../generated/protocol.dart';
+import '../services/aws_s3_service.dart';
 import '../util/endpoint_utils.dart';
 
 class AiEndpoint extends Endpoint with EndpointUtils {
   @override
   bool get requireLogin => true;
 
-
- 
   // Generate questions from study material
- Future<List<Question>> generateQuestions(Session session, int studyMaterialId,
+  Future<List<Question>> generateQuestions(Session session, int studyMaterialId,
       List<String>? questionTypes, int count) async {
     final userId = await getAuthenticatedUserId(session);
     final isPremium = await isPremiumUser(session, userId);
@@ -122,7 +124,7 @@ class AiEndpoint extends Endpoint with EndpointUtils {
 
       return questions;
     } catch (e) {
-      print('Error generating questions: $e');
+      session.log('Error generating questions: $e', level: LogLevel.error);
       throw Exception('Failed to generate questions: ${e.toString()}');
     }
   }
@@ -178,7 +180,7 @@ class AiEndpoint extends Endpoint with EndpointUtils {
     return selectedTypes.toSet().toList(); // Remove duplicates
   }
 
- /// Submit and evaluate an answer
+  /// Submit and evaluate an answer
   Future<Answer> submitAnswer(
       Session session, int questionId, String answerText) async {
     final userId = await getAuthenticatedUserId(session);
@@ -203,7 +205,7 @@ class AiEndpoint extends Endpoint with EndpointUtils {
 
       return await Answer.db.insertRow(session, answer);
     } catch (e) {
-      print('Error evaluating answer: $e');
+      session.log('Error evaluating answer: $e', level: LogLevel.error);
       // Return answer with basic evaluation
       final answer = Answer(
         userId: userId,
@@ -218,7 +220,7 @@ class AiEndpoint extends Endpoint with EndpointUtils {
     }
   }
 
-   String _buildEvaluationPrompt(Question question, String answerText) {
+  String _buildEvaluationPrompt(Question question, String answerText) {
     return '''
 Evaluate this student answer for the given question:
 
@@ -247,10 +249,9 @@ Be constructive and educational in your feedback.
   // Generate summary
   Future<Summary> generateSummary(
       Session session, int studyMaterialId, int? maxWords) async {
-  final userId = await getAuthenticatedUserId(session);
-   
+    final userId = await getAuthenticatedUserId(session);
 
-     final isPremium = await isPremiumUser(session, userId);
+    final isPremium = await isPremiumUser(session, userId);
     final material = await StudyMaterial.db.findById(session, studyMaterialId);
     if (material == null || material.userId != userId) {
       throw Exception('Material not found or unauthorized');
@@ -286,8 +287,11 @@ Be constructive and educational in your feedback.
 
   // Generate sample summary
   Future<Summary> generateSampleSummary(Session session, int maxWords) async {
-    final sampleMaterial = await StudyMaterial.db
-        .findFirstRow(session, where: (t) => t.title.equals('Sample Material'));
+    final userId = await getAuthenticatedUserId(session);
+    final sampleMaterial = await StudyMaterial.db.findFirstRow(
+      session,
+      where: (t) => t.title.equals('Sample Material') & t.userId.equals(userId),
+    );
     if (sampleMaterial == null) throw Exception('Sample material not found');
 
     final prompt = _buildSummaryPrompt(
@@ -299,7 +303,7 @@ Be constructive and educational in your feedback.
 
     return Summary(
       studyMaterialId: sampleMaterial.id!,
-      userId: 0, // Dummy user ID for sample
+      userId: userId,
       isPremium: false,
       subject: summaryData['subject'],
       topic: summaryData['topic'],
@@ -319,12 +323,10 @@ Be constructive and educational in your feedback.
       String title,
       String format,
       int? targetWordCount) async {
-        final userId = await getAuthenticatedUserId(session);
+    final userId = await getAuthenticatedUserId(session);
     if (!await isPremiumUser(session, userId)) {
       throw Exception('Premium access required');
     }
-
-   
 
     String? content;
     if (studyMaterialId != null) {
@@ -345,7 +347,13 @@ Be constructive and educational in your feedback.
     final writingData = jsonDecode(response);
 
     // Generate file (e.g., PDF or DOCX)
-    final fileUrl = await _generateDocument(writingData['content'], format);
+    final fileUrl = await _generateDocument(
+      session,
+      userId,
+      title,
+      writingData['content'],
+      format,
+    );
 
     final writing = AcademicWriting(
       userId: userId,
@@ -367,12 +375,10 @@ Be constructive and educational in your feedback.
   // Generate research comparison (premium only)
   Future<ResearchComparison> generateResearchComparison(
       Session session, int studyMaterialId) async {
-        final userId = await getAuthenticatedUserId(session);
-    if (! await isPremiumUser(session, userId)) {
+    final userId = await getAuthenticatedUserId(session);
+    if (!await isPremiumUser(session, userId)) {
       throw Exception('Premium access required');
     }
-
-    
 
     final material = await StudyMaterial.db.findById(session, studyMaterialId);
     if (material == null || material.userId != userId) {
@@ -400,9 +406,7 @@ Be constructive and educational in your feedback.
 
   // Helper methods
   Future<String> _callLlmApi(Session session, String prompt) async {
-   
     final apiKey = await getApiKey(session, 'openAI');
-
 
     final response = await http.post(
       Uri.parse('https://api.openai.com/v1/chat/completions'),
@@ -425,7 +429,7 @@ Be constructive and educational in your feedback.
     return responseData['choices'][0]['message']['content'];
   }
 
-   Future<void> _updateStudyHistory(Session session, int userId,
+  Future<void> _updateStudyHistory(Session session, int userId,
       {List<int>? materialIds,
       List<int>? questionIds,
       List<int>? summaryIds,
@@ -464,7 +468,7 @@ Be constructive and educational in your feedback.
   }
 
   // Helper methods
- // Enhanced prompt builder for better AI question generation
+  // Enhanced prompt builder for better AI question generation
   String _buildEnhancedQuestionPrompt(
       String content, List<String> types, int count) {
     return '''
@@ -527,7 +531,6 @@ Generate diverse, high-quality questions that test different aspects of the cont
 ''';
   }
 
-
   String _buildSummaryPrompt(String content, int? maxWords, bool isPremium) {
     return '''
 Summarize the following content: 
@@ -554,8 +557,81 @@ Identify newer findings and unsolved problems. Return as a JSON object with fiel
 ''';
   }
 
-  Future<String> _generateDocument(String content, String format) async {
-    // Implement document generation (e.g., using a library like pdf or python-docx via a separate service)
-    return 'https://example.com/generated-document.$format';
+  Future<String> _generateDocument(
+    Session session,
+    int userId,
+    String title,
+    String content,
+    String format,
+  ) async {
+    final normalizedFormat = format.trim().toLowerCase();
+    final Uint8List bytes;
+    final String contentType;
+
+    switch (normalizedFormat) {
+      case 'txt':
+        bytes = Uint8List.fromList(utf8.encode(content));
+        contentType = 'text/plain; charset=utf-8';
+      case 'pdf':
+        final document = pw.Document();
+        document.addPage(
+          pw.MultiPage(
+            build: (context) => [
+              pw.Header(level: 0, text: title),
+              pw.Paragraph(text: content),
+            ],
+          ),
+        );
+        bytes = Uint8List.fromList(await document.save());
+        contentType = 'application/pdf';
+      case 'docx':
+        bytes = _createDocx(title, content);
+        contentType =
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      default:
+        throw Exception('Unsupported export format: $format');
+    }
+
+    final timestamp = DateTime.now().toUtc().millisecondsSinceEpoch;
+    final objectKey = 'academic-writing/$userId/$timestamp.$normalizedFormat';
+    final storage = AwsS3Service.fromConfig(session.serverpod);
+    return storage.uploadFile(objectKey, bytes, contentType);
   }
+
+  Uint8List _createDocx(String title, String content) {
+    final archive = Archive();
+    archive.addFile(ArchiveFile.string(
+      '[Content_Types].xml',
+      '''<?xml version="1.0" encoding="UTF-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+<Default Extension="xml" ContentType="application/xml"/>
+<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>''',
+    ));
+    archive.addFile(ArchiveFile.string(
+      '_rels/.rels',
+      '''<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>''',
+    ));
+    final paragraphs = [title, ...content.split('\n')]
+        .map((line) =>
+            '<w:p><w:r><w:t xml:space="preserve">${_xmlEscape(line)}</w:t></w:r></w:p>')
+        .join();
+    archive.addFile(ArchiveFile.string(
+      'word/document.xml',
+      '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>$paragraphs<w:sectPr/></w:body></w:document>''',
+    ));
+    return Uint8List.fromList(ZipEncoder().encode(archive));
+  }
+
+  String _xmlEscape(String value) => value
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&apos;');
 }

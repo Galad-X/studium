@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class Answer implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
@@ -40,8 +42,9 @@ abstract class Answer implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
       answerText: jsonSerialization['answerText'] as String,
       score: (jsonSerialization['score'] as num?)?.toDouble(),
       feedback: jsonSerialization['feedback'] as String?,
-      submittedAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['submittedAt']),
+      submittedAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['submittedAt'],
+      ),
     );
   }
 
@@ -82,6 +85,7 @@ abstract class Answer implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Answer',
       if (id != null) 'id': id,
       'userId': userId,
       'questionId': questionId,
@@ -95,6 +99,7 @@ abstract class Answer implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Answer',
       if (id != null) 'id': id,
       'userId': userId,
       'questionId': questionId,
@@ -147,14 +152,14 @@ class _AnswerImpl extends Answer {
     String? feedback,
     required DateTime submittedAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          questionId: questionId,
-          answerText: answerText,
-          score: score,
-          feedback: feedback,
-          submittedAt: submittedAt,
-        );
+         id: id,
+         userId: userId,
+         questionId: questionId,
+         answerText: answerText,
+         score: score,
+         feedback: feedback,
+         submittedAt: submittedAt,
+       );
 
   /// Returns a shallow copy of this [Answer]
   /// with some or all fields replaced by the given arguments.
@@ -181,8 +186,44 @@ class _AnswerImpl extends Answer {
   }
 }
 
+class AnswerUpdateTable extends _i1.UpdateTable<AnswerTable> {
+  AnswerUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> questionId(int value) => _i1.ColumnValue(
+    table.questionId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> answerText(String value) => _i1.ColumnValue(
+    table.answerText,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> score(double? value) => _i1.ColumnValue(
+    table.score,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> feedback(String? value) => _i1.ColumnValue(
+    table.feedback,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> submittedAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.submittedAt,
+        value,
+      );
+}
+
 class AnswerTable extends _i1.Table<int?> {
   AnswerTable({super.tableRelation}) : super(tableName: 'answers') {
+    updateTable = AnswerUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -209,6 +250,8 @@ class AnswerTable extends _i1.Table<int?> {
     );
   }
 
+  late final AnswerUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnInt questionId;
@@ -223,14 +266,14 @@ class AnswerTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        questionId,
-        answerText,
-        score,
-        feedback,
-        submittedAt,
-      ];
+    id,
+    userId,
+    questionId,
+    answerText,
+    score,
+    feedback,
+    submittedAt,
+  ];
 }
 
 class AnswerInclude extends _i1.IncludeObject {
@@ -289,7 +332,7 @@ class AnswerRepository {
   /// );
   /// ```
   Future<List<Answer>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AnswerTable>? where,
     int? limit,
     int? offset,
@@ -297,6 +340,8 @@ class AnswerRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<AnswerTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<Answer>(
       where: where?.call(Answer.t),
@@ -306,6 +351,8 @@ class AnswerRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -327,13 +374,15 @@ class AnswerRepository {
   /// );
   /// ```
   Future<Answer?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AnswerTable>? where,
     int? offset,
     _i1.OrderByBuilder<AnswerTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<AnswerTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<Answer>(
       where: where?.call(Answer.t),
@@ -342,18 +391,24 @@ class AnswerRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [Answer] by its [id] or null if no such row exists.
   Future<Answer?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<Answer>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -363,14 +418,20 @@ class AnswerRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<Answer>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Answer> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<Answer>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -378,7 +439,7 @@ class AnswerRepository {
   ///
   /// The returned [Answer] will have its `id` field set.
   Future<Answer> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Answer row, {
     _i1.Transaction? transaction,
   }) async {
@@ -394,7 +455,7 @@ class AnswerRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<Answer>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Answer> rows, {
     _i1.ColumnSelections<AnswerTable>? columns,
     _i1.Transaction? transaction,
@@ -410,7 +471,7 @@ class AnswerRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<Answer> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Answer row, {
     _i1.ColumnSelections<AnswerTable>? columns,
     _i1.Transaction? transaction,
@@ -422,11 +483,51 @@ class AnswerRepository {
     );
   }
 
+  /// Updates a single [Answer] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Answer?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<AnswerUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Answer>(
+      id,
+      columnValues: columnValues(Answer.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Answer]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Answer>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<AnswerUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<AnswerTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<AnswerTable>? orderBy,
+    _i1.OrderByListBuilder<AnswerTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Answer>(
+      columnValues: columnValues(Answer.t.updateTable),
+      where: where(Answer.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Answer.t),
+      orderByList: orderByList?.call(Answer.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [Answer]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Answer>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Answer> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -438,7 +539,7 @@ class AnswerRepository {
 
   /// Deletes a single [Answer].
   Future<Answer> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Answer row, {
     _i1.Transaction? transaction,
   }) async {
@@ -450,7 +551,7 @@ class AnswerRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<Answer>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<AnswerTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -463,7 +564,7 @@ class AnswerRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<AnswerTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -471,6 +572,22 @@ class AnswerRepository {
     return session.db.count<Answer>(
       where: where?.call(Answer.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [Answer] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<AnswerTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<Answer>(
+      where: where(Answer.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  serverpod_flutter: 2.9.1
+  serverpod_flutter: 3.4.12
   studium_client:
     path: ../studium_client
 
@@ -36,16 +36,16 @@ dependencies:
   open_filex: ^4.7.0
   path_provider: ^2.1.5
   share_plus: ^11.0.0
-  serverpod_auth_client: ^2.9.1
+  serverpod_auth_client: ^3.4.12
   flutter_riverpod: ^2.6.1
   provider: ^6.1.5
   google_fonts: ^6.2.1
-  serverpod_auth_shared_flutter: ^2.9.1
+  serverpod_auth_shared_flutter: ^3.4.12
   shimmer: ^3.0.0
   gap: ^3.0.1
   intl: ^0.20.2
   file_picker: ^10.2.0
-  serverpod_auth_email_flutter: ^2.9.1
+  serverpod_auth_email_flutter: ^3.4.12
   url_launcher: ^6.3.1
   flutter_staggered_animations: ^1.1.1
   shared_preferences: ^2.5.3

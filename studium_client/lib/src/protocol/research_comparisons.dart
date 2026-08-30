@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'package:studium_client/src/protocol/protocol.dart' as _i2;
 
 abstract class ResearchComparison implements _i1.SerializableModel {
   ResearchComparison._({
@@ -36,11 +39,12 @@ abstract class ResearchComparison implements _i1.SerializableModel {
       summaryId: jsonSerialization['summaryId'] as int?,
       studyMaterialId: jsonSerialization['studyMaterialId'] as int,
       newerFindings: jsonSerialization['newerFindings'] as String,
-      unsolvedProblems: (jsonSerialization['unsolvedProblems'] as List)
-          .map((e) => e as String)
-          .toList(),
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      unsolvedProblems: _i2.Protocol().deserialize<List<String>>(
+        jsonSerialization['unsolvedProblems'],
+      ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -73,6 +77,7 @@ abstract class ResearchComparison implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'ResearchComparison',
       if (id != null) 'id': id,
       if (summaryId != null) 'summaryId': summaryId,
       'studyMaterialId': studyMaterialId,
@@ -99,13 +104,13 @@ class _ResearchComparisonImpl extends ResearchComparison {
     required List<String> unsolvedProblems,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          summaryId: summaryId,
-          studyMaterialId: studyMaterialId,
-          newerFindings: newerFindings,
-          unsolvedProblems: unsolvedProblems,
-          createdAt: createdAt,
-        );
+         id: id,
+         summaryId: summaryId,
+         studyMaterialId: studyMaterialId,
+         newerFindings: newerFindings,
+         unsolvedProblems: unsolvedProblems,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [ResearchComparison]
   /// with some or all fields replaced by the given arguments.

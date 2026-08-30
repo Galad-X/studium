@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:studium_client/studium_client.dart';
 import 'package:intl/intl.dart';
-import '../../../api/serverpod_client.dart';
 import '../providers/notification_provider.dart';
+import '../../../core/providers/service_providers.dart';
 
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({super.key});
@@ -75,6 +76,18 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen>
         ),
       ),
       actions: [
+        IconButton(
+          tooltip: 'Mark all as read',
+          icon: const Icon(Icons.done_all_rounded),
+          onPressed: () async {
+            HapticFeedback.lightImpact();
+            await ref
+                .read(notificationServiceProvider)
+                .markAllNotificationsRead();
+            ref.invalidate(notificationProvider);
+            ref.invalidate(unreadNotificationCountProvider);
+          },
+        ),
         IconButton(
           icon: const Icon(Icons.refresh_rounded),
           onPressed: () {
@@ -291,17 +304,19 @@ class _NotificationTileState extends ConsumerState<_NotificationTile>
               borderRadius: BorderRadius.circular(16),
               onTap: () async {
                 HapticFeedback.lightImpact();
-                
+
                 try {
-                  await client.notification
-                      .markNotificationRead(widget.notification.id!);
+                  await ref
+                      .read(notificationServiceProvider)
+                      .markAsRead(widget.notification.id!);
                   ref.invalidate(notificationProvider); // Refresh the list
                   ref.invalidate(
                       unreadNotificationCountProvider); // Refresh the badge count
                 } catch (e) {
-                  print("Failed to mark notification as read: $e");
+                  debugPrint('Failed to mark notification as read: $e');
                 }
-                // TODO: Handle navigation based on notification type
+                if (!context.mounted) return;
+                _openRelatedNotification(context, widget.notification);
               },
               child: Padding(
                 padding: const EdgeInsets.all(20),
@@ -373,6 +388,30 @@ class _NotificationTileState extends ConsumerState<_NotificationTile>
         ),
       ),
     );
+  }
+
+  void _openRelatedNotification(
+    BuildContext context,
+    Notification notification,
+  ) {
+    final relatedId = notification.relatedId;
+    if (relatedId == null) return;
+    switch (notification.type) {
+      case 'room_post':
+      case 'room_chat':
+      case 'study_session':
+        context.push('/collaboration/rooms/$relatedId');
+      case 'challenge':
+      case 'challenge_team':
+        context.push('/collaboration/challenges/$relatedId');
+      case 'institution_membership':
+      case 'moderation_report':
+        context.push('/collaboration/institutions');
+      case 'moderation_appeal':
+        context.push('/moderation/appeals');
+      default:
+        break;
+    }
   }
 
   IconData _getIconForType(String type) {

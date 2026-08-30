@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
 abstract class Subscription implements _i1.SerializableModel {
@@ -42,8 +44,9 @@ abstract class Subscription implements _i1.SerializableModel {
       subscriptionId: jsonSerialization['subscriptionId'] as String,
       gatewayToken: jsonSerialization['gatewayToken'] as String?,
       status: jsonSerialization['status'] as String,
-      startDate:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['startDate']),
+      startDate: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['startDate'],
+      ),
       endDate: jsonSerialization['endDate'] == null
           ? null
           : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['endDate']),
@@ -85,6 +88,7 @@ abstract class Subscription implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Subscription',
       if (id != null) 'id': id,
       'userId': userId,
       'gateway': gateway,
@@ -115,15 +119,15 @@ class _SubscriptionImpl extends Subscription {
     required DateTime startDate,
     DateTime? endDate,
   }) : super._(
-          id: id,
-          userId: userId,
-          gateway: gateway,
-          subscriptionId: subscriptionId,
-          gatewayToken: gatewayToken,
-          status: status,
-          startDate: startDate,
-          endDate: endDate,
-        );
+         id: id,
+         userId: userId,
+         gateway: gateway,
+         subscriptionId: subscriptionId,
+         gatewayToken: gatewayToken,
+         status: status,
+         startDate: startDate,
+         endDate: endDate,
+       );
 
   /// Returns a shallow copy of this [Subscription]
   /// with some or all fields replaced by the given arguments.

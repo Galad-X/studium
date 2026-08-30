@@ -1,0 +1,15 @@
+class: InstitutionMembership
+table: institution_memberships
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  institutionId: int, relation(parent=institutions)
+  role: String
+  verificationMethod: String
+  status: String
+  createdAt: DateTime
+  verifiedAt: DateTime?
+indexes:
+  institution_membership_user_institution_idx:
+    fields: userId, institutionId
+    unique: true
+

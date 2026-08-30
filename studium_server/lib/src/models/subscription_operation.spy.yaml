@@ -1,0 +1,17 @@
+class: SubscriptionOperation
+table: subscription_operations
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  gateway: String
+  idempotencyKey: String
+  status: String
+  subscriptionId: int?, relation(parent=subscriptions)
+  errorMessage: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  subscription_operation_unique_idx:
+    fields: userId, gateway, idempotencyKey
+    unique: true
+  subscription_operation_updated_idx:
+    fields: updatedAt

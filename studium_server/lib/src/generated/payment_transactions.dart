@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class PaymentTransaction
@@ -18,6 +20,11 @@ abstract class PaymentTransaction
     required this.subscriptionId,
     required this.userId,
     required this.amount,
+    this.currency,
+    this.settlementAmount,
+    this.settlementCurrency,
+    this.exchangeRate,
+    this.settlementSource,
     required this.status,
     required this.gateway,
     required this.transactionId,
@@ -29,6 +36,11 @@ abstract class PaymentTransaction
     required int subscriptionId,
     required int userId,
     required double amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     required String status,
     required String gateway,
     required String transactionId,
@@ -41,11 +53,18 @@ abstract class PaymentTransaction
       subscriptionId: jsonSerialization['subscriptionId'] as int,
       userId: jsonSerialization['userId'] as int,
       amount: (jsonSerialization['amount'] as num).toDouble(),
+      currency: jsonSerialization['currency'] as String?,
+      settlementAmount: (jsonSerialization['settlementAmount'] as num?)
+          ?.toDouble(),
+      settlementCurrency: jsonSerialization['settlementCurrency'] as String?,
+      exchangeRate: (jsonSerialization['exchangeRate'] as num?)?.toDouble(),
+      settlementSource: jsonSerialization['settlementSource'] as String?,
       status: jsonSerialization['status'] as String,
       gateway: jsonSerialization['gateway'] as String,
       transactionId: jsonSerialization['transactionId'] as String,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -61,6 +80,16 @@ abstract class PaymentTransaction
   int userId;
 
   double amount;
+
+  String? currency;
+
+  double? settlementAmount;
+
+  String? settlementCurrency;
+
+  double? exchangeRate;
+
+  String? settlementSource;
 
   String status;
 
@@ -81,6 +110,11 @@ abstract class PaymentTransaction
     int? subscriptionId,
     int? userId,
     double? amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     String? status,
     String? gateway,
     String? transactionId,
@@ -89,10 +123,16 @@ abstract class PaymentTransaction
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'PaymentTransaction',
       if (id != null) 'id': id,
       'subscriptionId': subscriptionId,
       'userId': userId,
       'amount': amount,
+      if (currency != null) 'currency': currency,
+      if (settlementAmount != null) 'settlementAmount': settlementAmount,
+      if (settlementCurrency != null) 'settlementCurrency': settlementCurrency,
+      if (exchangeRate != null) 'exchangeRate': exchangeRate,
+      if (settlementSource != null) 'settlementSource': settlementSource,
       'status': status,
       'gateway': gateway,
       'transactionId': transactionId,
@@ -103,10 +143,16 @@ abstract class PaymentTransaction
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'PaymentTransaction',
       if (id != null) 'id': id,
       'subscriptionId': subscriptionId,
       'userId': userId,
       'amount': amount,
+      if (currency != null) 'currency': currency,
+      if (settlementAmount != null) 'settlementAmount': settlementAmount,
+      if (settlementCurrency != null) 'settlementCurrency': settlementCurrency,
+      if (exchangeRate != null) 'exchangeRate': exchangeRate,
+      if (settlementSource != null) 'settlementSource': settlementSource,
       'status': status,
       'gateway': gateway,
       'transactionId': transactionId,
@@ -152,20 +198,30 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     required int subscriptionId,
     required int userId,
     required double amount,
+    String? currency,
+    double? settlementAmount,
+    String? settlementCurrency,
+    double? exchangeRate,
+    String? settlementSource,
     required String status,
     required String gateway,
     required String transactionId,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          subscriptionId: subscriptionId,
-          userId: userId,
-          amount: amount,
-          status: status,
-          gateway: gateway,
-          transactionId: transactionId,
-          createdAt: createdAt,
-        );
+         id: id,
+         subscriptionId: subscriptionId,
+         userId: userId,
+         amount: amount,
+         currency: currency,
+         settlementAmount: settlementAmount,
+         settlementCurrency: settlementCurrency,
+         exchangeRate: exchangeRate,
+         settlementSource: settlementSource,
+         status: status,
+         gateway: gateway,
+         transactionId: transactionId,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [PaymentTransaction]
   /// with some or all fields replaced by the given arguments.
@@ -176,6 +232,11 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     int? subscriptionId,
     int? userId,
     double? amount,
+    Object? currency = _Undefined,
+    Object? settlementAmount = _Undefined,
+    Object? settlementCurrency = _Undefined,
+    Object? exchangeRate = _Undefined,
+    Object? settlementSource = _Undefined,
     String? status,
     String? gateway,
     String? transactionId,
@@ -186,6 +247,17 @@ class _PaymentTransactionImpl extends PaymentTransaction {
       subscriptionId: subscriptionId ?? this.subscriptionId,
       userId: userId ?? this.userId,
       amount: amount ?? this.amount,
+      currency: currency is String? ? currency : this.currency,
+      settlementAmount: settlementAmount is double?
+          ? settlementAmount
+          : this.settlementAmount,
+      settlementCurrency: settlementCurrency is String?
+          ? settlementCurrency
+          : this.settlementCurrency,
+      exchangeRate: exchangeRate is double? ? exchangeRate : this.exchangeRate,
+      settlementSource: settlementSource is String?
+          ? settlementSource
+          : this.settlementSource,
       status: status ?? this.status,
       gateway: gateway ?? this.gateway,
       transactionId: transactionId ?? this.transactionId,
@@ -194,9 +266,81 @@ class _PaymentTransactionImpl extends PaymentTransaction {
   }
 }
 
+class PaymentTransactionUpdateTable
+    extends _i1.UpdateTable<PaymentTransactionTable> {
+  PaymentTransactionUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> subscriptionId(int value) => _i1.ColumnValue(
+    table.subscriptionId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> amount(double value) => _i1.ColumnValue(
+    table.amount,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> currency(String? value) => _i1.ColumnValue(
+    table.currency,
+    value,
+  );
+
+  _i1.ColumnValue<double, double> settlementAmount(double? value) =>
+      _i1.ColumnValue(
+        table.settlementAmount,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> settlementCurrency(String? value) =>
+      _i1.ColumnValue(
+        table.settlementCurrency,
+        value,
+      );
+
+  _i1.ColumnValue<double, double> exchangeRate(double? value) =>
+      _i1.ColumnValue(
+        table.exchangeRate,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> settlementSource(String? value) =>
+      _i1.ColumnValue(
+        table.settlementSource,
+        value,
+      );
+
+  _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
+    table.status,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
+    table.gateway,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> transactionId(String value) =>
+      _i1.ColumnValue(
+        table.transactionId,
+        value,
+      );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+}
+
 class PaymentTransactionTable extends _i1.Table<int?> {
   PaymentTransactionTable({super.tableRelation})
-      : super(tableName: 'payment_transactions') {
+    : super(tableName: 'payment_transactions') {
+    updateTable = PaymentTransactionUpdateTable(this);
     subscriptionId = _i1.ColumnInt(
       'subscriptionId',
       this,
@@ -207,6 +351,26 @@ class PaymentTransactionTable extends _i1.Table<int?> {
     );
     amount = _i1.ColumnDouble(
       'amount',
+      this,
+    );
+    currency = _i1.ColumnString(
+      'currency',
+      this,
+    );
+    settlementAmount = _i1.ColumnDouble(
+      'settlementAmount',
+      this,
+    );
+    settlementCurrency = _i1.ColumnString(
+      'settlementCurrency',
+      this,
+    );
+    exchangeRate = _i1.ColumnDouble(
+      'exchangeRate',
+      this,
+    );
+    settlementSource = _i1.ColumnString(
+      'settlementSource',
       this,
     );
     status = _i1.ColumnString(
@@ -227,11 +391,23 @@ class PaymentTransactionTable extends _i1.Table<int?> {
     );
   }
 
+  late final PaymentTransactionUpdateTable updateTable;
+
   late final _i1.ColumnInt subscriptionId;
 
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnDouble amount;
+
+  late final _i1.ColumnString currency;
+
+  late final _i1.ColumnDouble settlementAmount;
+
+  late final _i1.ColumnString settlementCurrency;
+
+  late final _i1.ColumnDouble exchangeRate;
+
+  late final _i1.ColumnString settlementSource;
 
   late final _i1.ColumnString status;
 
@@ -243,15 +419,20 @@ class PaymentTransactionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        subscriptionId,
-        userId,
-        amount,
-        status,
-        gateway,
-        transactionId,
-        createdAt,
-      ];
+    id,
+    subscriptionId,
+    userId,
+    amount,
+    currency,
+    settlementAmount,
+    settlementCurrency,
+    exchangeRate,
+    settlementSource,
+    status,
+    gateway,
+    transactionId,
+    createdAt,
+  ];
 }
 
 class PaymentTransactionInclude extends _i1.IncludeObject {
@@ -310,7 +491,7 @@ class PaymentTransactionRepository {
   /// );
   /// ```
   Future<List<PaymentTransaction>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<PaymentTransactionTable>? where,
     int? limit,
     int? offset,
@@ -318,6 +499,8 @@ class PaymentTransactionRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<PaymentTransactionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<PaymentTransaction>(
       where: where?.call(PaymentTransaction.t),
@@ -327,6 +510,8 @@ class PaymentTransactionRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -348,13 +533,15 @@ class PaymentTransactionRepository {
   /// );
   /// ```
   Future<PaymentTransaction?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<PaymentTransactionTable>? where,
     int? offset,
     _i1.OrderByBuilder<PaymentTransactionTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<PaymentTransactionTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<PaymentTransaction>(
       where: where?.call(PaymentTransaction.t),
@@ -363,18 +550,24 @@ class PaymentTransactionRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [PaymentTransaction] by its [id] or null if no such row exists.
   Future<PaymentTransaction?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<PaymentTransaction>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -384,14 +577,20 @@ class PaymentTransactionRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<PaymentTransaction>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<PaymentTransaction> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<PaymentTransaction>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -399,7 +598,7 @@ class PaymentTransactionRepository {
   ///
   /// The returned [PaymentTransaction] will have its `id` field set.
   Future<PaymentTransaction> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     PaymentTransaction row, {
     _i1.Transaction? transaction,
   }) async {
@@ -415,7 +614,7 @@ class PaymentTransactionRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<PaymentTransaction>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<PaymentTransaction> rows, {
     _i1.ColumnSelections<PaymentTransactionTable>? columns,
     _i1.Transaction? transaction,
@@ -431,7 +630,7 @@ class PaymentTransactionRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<PaymentTransaction> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     PaymentTransaction row, {
     _i1.ColumnSelections<PaymentTransactionTable>? columns,
     _i1.Transaction? transaction,
@@ -443,11 +642,53 @@ class PaymentTransactionRepository {
     );
   }
 
+  /// Updates a single [PaymentTransaction] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<PaymentTransaction?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<PaymentTransactionUpdateTable>
+    columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<PaymentTransaction>(
+      id,
+      columnValues: columnValues(PaymentTransaction.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [PaymentTransaction]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<PaymentTransaction>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<PaymentTransactionUpdateTable>
+    columnValues,
+    required _i1.WhereExpressionBuilder<PaymentTransactionTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<PaymentTransactionTable>? orderBy,
+    _i1.OrderByListBuilder<PaymentTransactionTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<PaymentTransaction>(
+      columnValues: columnValues(PaymentTransaction.t.updateTable),
+      where: where(PaymentTransaction.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(PaymentTransaction.t),
+      orderByList: orderByList?.call(PaymentTransaction.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [PaymentTransaction]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<PaymentTransaction>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<PaymentTransaction> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -459,7 +700,7 @@ class PaymentTransactionRepository {
 
   /// Deletes a single [PaymentTransaction].
   Future<PaymentTransaction> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     PaymentTransaction row, {
     _i1.Transaction? transaction,
   }) async {
@@ -471,7 +712,7 @@ class PaymentTransactionRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<PaymentTransaction>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<PaymentTransactionTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -484,7 +725,7 @@ class PaymentTransactionRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<PaymentTransactionTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -492,6 +733,22 @@ class PaymentTransactionRepository {
     return session.db.count<PaymentTransaction>(
       where: where?.call(PaymentTransaction.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [PaymentTransaction] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<PaymentTransactionTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<PaymentTransaction>(
+      where: where(PaymentTransaction.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

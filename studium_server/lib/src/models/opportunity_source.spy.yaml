@@ -1,0 +1,19 @@
+class: OpportunitySource
+table: opportunity_sources
+fields:
+  name: String
+  provider: String
+  feedUrl: String
+  verificationStatus: String
+  createdById: int, relation(parent=serverpod_user_info)
+  lastSyncedAt: DateTime?
+  nextSyncAt: DateTime?
+  lastSyncStatus: String?
+  lastSyncError: String?
+  staleAt: DateTime?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  opportunity_source_feed_idx:
+    fields: feedUrl
+    unique: true

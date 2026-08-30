@@ -7,8 +7,10 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod/serverpod.dart' as _i1;
 
 abstract class Notification
@@ -40,9 +42,12 @@ abstract class Notification
       message: jsonSerialization['message'] as String,
       relatedId: jsonSerialization['relatedId'] as int?,
       type: jsonSerialization['type'] as String,
-      isRead: jsonSerialization['isRead'] as bool,
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      isRead: jsonSerialization['isRead'] == null
+          ? null
+          : _i1.BoolJsonExtension.fromJson(jsonSerialization['isRead']),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -83,6 +88,7 @@ abstract class Notification
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Notification',
       if (id != null) 'id': id,
       'userId': userId,
       'message': message,
@@ -96,6 +102,7 @@ abstract class Notification
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'Notification',
       if (id != null) 'id': id,
       'userId': userId,
       'message': message,
@@ -148,14 +155,14 @@ class _NotificationImpl extends Notification {
     bool? isRead,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          userId: userId,
-          message: message,
-          relatedId: relatedId,
-          type: type,
-          isRead: isRead,
-          createdAt: createdAt,
-        );
+         id: id,
+         userId: userId,
+         message: message,
+         relatedId: relatedId,
+         type: type,
+         isRead: isRead,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Notification]
   /// with some or all fields replaced by the given arguments.
@@ -182,8 +189,44 @@ class _NotificationImpl extends Notification {
   }
 }
 
+class NotificationUpdateTable extends _i1.UpdateTable<NotificationTable> {
+  NotificationUpdateTable(super.table);
+
+  _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
+    table.userId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> message(String value) => _i1.ColumnValue(
+    table.message,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> relatedId(int? value) => _i1.ColumnValue(
+    table.relatedId,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
+    table.type,
+    value,
+  );
+
+  _i1.ColumnValue<bool, bool> isRead(bool value) => _i1.ColumnValue(
+    table.isRead,
+    value,
+  );
+
+  _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
+      _i1.ColumnValue(
+        table.createdAt,
+        value,
+      );
+}
+
 class NotificationTable extends _i1.Table<int?> {
   NotificationTable({super.tableRelation}) : super(tableName: 'notifications') {
+    updateTable = NotificationUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
       this,
@@ -211,6 +254,8 @@ class NotificationTable extends _i1.Table<int?> {
     );
   }
 
+  late final NotificationUpdateTable updateTable;
+
   late final _i1.ColumnInt userId;
 
   late final _i1.ColumnString message;
@@ -225,14 +270,14 @@ class NotificationTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        userId,
-        message,
-        relatedId,
-        type,
-        isRead,
-        createdAt,
-      ];
+    id,
+    userId,
+    message,
+    relatedId,
+    type,
+    isRead,
+    createdAt,
+  ];
 }
 
 class NotificationInclude extends _i1.IncludeObject {
@@ -291,7 +336,7 @@ class NotificationRepository {
   /// );
   /// ```
   Future<List<Notification>> find(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? limit,
     int? offset,
@@ -299,6 +344,8 @@ class NotificationRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.find<Notification>(
       where: where?.call(Notification.t),
@@ -308,6 +355,8 @@ class NotificationRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -329,13 +378,15 @@ class NotificationRepository {
   /// );
   /// ```
   Future<Notification?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? offset,
     _i1.OrderByBuilder<NotificationTable>? orderBy,
     bool orderDescending = false,
     _i1.OrderByListBuilder<NotificationTable>? orderByList,
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findFirstRow<Notification>(
       where: where?.call(Notification.t),
@@ -344,18 +395,24 @@ class NotificationRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
   /// Finds a single [Notification] by its [id] or null if no such row exists.
   Future<Notification?> findById(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     int id, {
     _i1.Transaction? transaction,
+    _i1.LockMode? lockMode,
+    _i1.LockBehavior? lockBehavior,
   }) async {
     return session.db.findById<Notification>(
       id,
       transaction: transaction,
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
     );
   }
 
@@ -365,14 +422,20 @@ class NotificationRepository {
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
+  ///
+  /// If [ignoreConflicts] is set to `true`, rows that conflict with existing
+  /// rows are silently skipped, and only the successfully inserted rows are
+  /// returned.
   Future<List<Notification>> insert(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Notification> rows, {
     _i1.Transaction? transaction,
+    bool ignoreConflicts = false,
   }) async {
     return session.db.insert<Notification>(
       rows,
       transaction: transaction,
+      ignoreConflicts: ignoreConflicts,
     );
   }
 
@@ -380,7 +443,7 @@ class NotificationRepository {
   ///
   /// The returned [Notification] will have its `id` field set.
   Future<Notification> insertRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
@@ -396,7 +459,7 @@ class NotificationRepository {
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
   Future<List<Notification>> update(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Notification> rows, {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
@@ -412,7 +475,7 @@ class NotificationRepository {
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
   Future<Notification> updateRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Notification row, {
     _i1.ColumnSelections<NotificationTable>? columns,
     _i1.Transaction? transaction,
@@ -424,11 +487,51 @@ class NotificationRepository {
     );
   }
 
+  /// Updates a single [Notification] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<Notification?> updateById(
+    _i1.DatabaseSession session,
+    int id, {
+    required _i1.ColumnValueListBuilder<NotificationUpdateTable> columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<Notification>(
+      id,
+      columnValues: columnValues(Notification.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [Notification]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<Notification>> updateWhere(
+    _i1.DatabaseSession session, {
+    required _i1.ColumnValueListBuilder<NotificationUpdateTable> columnValues,
+    required _i1.WhereExpressionBuilder<NotificationTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<NotificationTable>? orderBy,
+    _i1.OrderByListBuilder<NotificationTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<Notification>(
+      columnValues: columnValues(Notification.t.updateTable),
+      where: where(Notification.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(Notification.t),
+      orderByList: orderByList?.call(Notification.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
   /// Deletes all [Notification]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
   Future<List<Notification>> delete(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     List<Notification> rows, {
     _i1.Transaction? transaction,
   }) async {
@@ -440,7 +543,7 @@ class NotificationRepository {
 
   /// Deletes a single [Notification].
   Future<Notification> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseSession session,
     Notification row, {
     _i1.Transaction? transaction,
   }) async {
@@ -452,7 +555,7 @@ class NotificationRepository {
 
   /// Deletes all rows matching the [where] expression.
   Future<List<Notification>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<NotificationTable> where,
     _i1.Transaction? transaction,
   }) async {
@@ -465,7 +568,7 @@ class NotificationRepository {
   /// Counts the number of rows matching the [where] expression. If omitted,
   /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseSession session, {
     _i1.WhereExpressionBuilder<NotificationTable>? where,
     int? limit,
     _i1.Transaction? transaction,
@@ -473,6 +576,22 @@ class NotificationRepository {
     return session.db.count<Notification>(
       where: where?.call(Notification.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+
+  /// Acquires row-level locks on [Notification] rows matching the [where] expression.
+  Future<void> lockRows(
+    _i1.DatabaseSession session, {
+    required _i1.WhereExpressionBuilder<NotificationTable> where,
+    required _i1.LockMode lockMode,
+    required _i1.Transaction transaction,
+    _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,
+  }) async {
+    return session.db.lockRows<Notification>(
+      where: where(Notification.t),
+      lockMode: lockMode,
+      lockBehavior: lockBehavior,
       transaction: transaction,
     );
   }

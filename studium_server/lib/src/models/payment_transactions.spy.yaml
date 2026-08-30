@@ -4,7 +4,16 @@ fields:
   subscriptionId: int, relation(parent=subscriptions) # Links to Subscription
   userId: int, relation(parent=serverpod_user_info) # Links to User
   amount: double
+  currency: String?
+  settlementAmount: double?
+  settlementCurrency: String?
+  exchangeRate: double?
+  settlementSource: String?
   status: String # e.g., 'success', 'failed', 'pending'
   gateway: String # 'stripe' or 'paystack'
   transactionId: String # External transaction ID
   createdAt: DateTime
+indexes:
+  payment_transaction_gateway_id_idx:
+    fields: gateway, transactionId
+    unique: true

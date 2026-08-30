@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'package:studium_client/src/protocol/protocol.dart' as _i2;
 
 abstract class Summary implements _i1.SerializableModel {
   Summary._({
@@ -45,19 +48,20 @@ abstract class Summary implements _i1.SerializableModel {
       id: jsonSerialization['id'] as int?,
       studyMaterialId: jsonSerialization['studyMaterialId'] as int,
       userId: jsonSerialization['userId'] as int,
-      isPremium: jsonSerialization['isPremium'] as bool,
+      isPremium: _i1.BoolJsonExtension.fromJson(jsonSerialization['isPremium']),
       subject: jsonSerialization['subject'] as String,
       topic: jsonSerialization['topic'] as String,
       wordCount: jsonSerialization['wordCount'] as int?,
       introduction: jsonSerialization['introduction'] as String?,
-      subtopics: (jsonSerialization['subtopics'] as List)
-          .map((e) => e as String)
-          .toList(),
-      nuggets: (jsonSerialization['nuggets'] as List)
-          .map((e) => e as String)
-          .toList(),
-      createdAt:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
+      subtopics: _i2.Protocol().deserialize<List<String>>(
+        jsonSerialization['subtopics'],
+      ),
+      nuggets: _i2.Protocol().deserialize<List<String>>(
+        jsonSerialization['nuggets'],
+      ),
+      createdAt: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['createdAt'],
+      ),
     );
   }
 
@@ -105,6 +109,7 @@ abstract class Summary implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Summary',
       if (id != null) 'id': id,
       'studyMaterialId': studyMaterialId,
       'userId': userId,
@@ -141,18 +146,18 @@ class _SummaryImpl extends Summary {
     required List<String> nuggets,
     required DateTime createdAt,
   }) : super._(
-          id: id,
-          studyMaterialId: studyMaterialId,
-          userId: userId,
-          isPremium: isPremium,
-          subject: subject,
-          topic: topic,
-          wordCount: wordCount,
-          introduction: introduction,
-          subtopics: subtopics,
-          nuggets: nuggets,
-          createdAt: createdAt,
-        );
+         id: id,
+         studyMaterialId: studyMaterialId,
+         userId: userId,
+         isPremium: isPremium,
+         subject: subject,
+         topic: topic,
+         wordCount: wordCount,
+         introduction: introduction,
+         subtopics: subtopics,
+         nuggets: nuggets,
+         createdAt: createdAt,
+       );
 
   /// Returns a shallow copy of this [Summary]
   /// with some or all fields replaced by the given arguments.

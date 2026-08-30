@@ -467,13 +467,13 @@ class _NeuralSubscriptionDetailsCardState
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: const Color(0xFF00D4FF)
-                  .withOpacity(_glowAnimation.value * 0.5),
+                  .withValues(alpha: _glowAnimation.value * 0.5),
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF00D4FF)
-                    .withOpacity(_glowAnimation.value * 0.2),
+                    .withValues(alpha: _glowAnimation.value * 0.2),
                 blurRadius: 20,
                 spreadRadius: 2,
               ),
@@ -709,7 +709,9 @@ class _NeuralCancellationCardState
   }
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     final state = ref.watch(subscriptionManagementProvider);
 
     return Container(
@@ -810,6 +812,35 @@ class _NeuralCancellationCardState
               ),
             ),
             const SizedBox(height: 24),
+            if (state.status == CancellationStatus.error) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.red.withAlpha(26),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.red.withAlpha(77)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.error_outline, color: Colors.red),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        state.errorMessage ?? 'Cancellation failed.',
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => ref
+                          .read(subscriptionManagementProvider.notifier)
+                          .retryCancellation(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
             if (state.status == CancellationStatus.loading) ...[
               AnimatedBuilder(
                 animation: _pulseAnimation,

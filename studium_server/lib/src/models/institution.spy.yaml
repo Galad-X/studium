@@ -1,0 +1,16 @@
+class: Institution
+table: institutions
+fields:
+  name: String
+  country: String
+  region: String?
+  domains: List<String>
+  subjects: List<String>?
+  languages: List<String>?
+  submittedById: int?, relation(parent=serverpod_user_info)
+  logoUrl: String?
+  verificationStatus: String
+  createdAt: DateTime
+indexes:
+  institution_name_idx:
+    fields: name

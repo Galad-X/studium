@@ -115,12 +115,11 @@ class AuthScreenNotifier extends StateNotifier<AuthScreenState> {
     if (password.isEmpty || password.length < 8) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Password must be at least 6 characters long.',
+        errorMessage: 'Password must be at least 8 characters long.',
       );
       return;
     }
-    debugPrint(
-        'Sign-up request for username: $username, email: $email, password: $password');
+    debugPrint('Sign-up request for username: $username, email: $email');
     try {
       // This will trigger our onUserWillBeCreated hook on the server
       bool result = await _emailAuthController.createAccountRequest(

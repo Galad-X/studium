@@ -7,9 +7,12 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'package:studium_client/src/protocol/protocol.dart' as _i2;
 
 abstract class StudyHistory implements _i1.SerializableModel {
   StudyHistory._({
@@ -38,21 +41,22 @@ abstract class StudyHistory implements _i1.SerializableModel {
     return StudyHistory(
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
-      materialIds: (jsonSerialization['materialIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      questionIds: (jsonSerialization['questionIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      summaryIds: (jsonSerialization['summaryIds'] as List)
-          .map((e) => e as int)
-          .toList(),
-      writingIds: (jsonSerialization['writingIds'] as List)
-          .map((e) => e as int)
-          .toList(),
+      materialIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['materialIds'],
+      ),
+      questionIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['questionIds'],
+      ),
+      summaryIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['summaryIds'],
+      ),
+      writingIds: _i2.Protocol().deserialize<List<int>>(
+        jsonSerialization['writingIds'],
+      ),
       progress: (jsonSerialization['progress'] as num?)?.toDouble(),
-      lastUpdated:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['lastUpdated']),
+      lastUpdated: _i1.DateTimeJsonExtension.fromJson(
+        jsonSerialization['lastUpdated'],
+      ),
     );
   }
 
@@ -91,6 +95,7 @@ abstract class StudyHistory implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'StudyHistory',
       if (id != null) 'id': id,
       'userId': userId,
       'materialIds': materialIds.toJson(),
@@ -121,15 +126,15 @@ class _StudyHistoryImpl extends StudyHistory {
     double? progress,
     required DateTime lastUpdated,
   }) : super._(
-          id: id,
-          userId: userId,
-          materialIds: materialIds,
-          questionIds: questionIds,
-          summaryIds: summaryIds,
-          writingIds: writingIds,
-          progress: progress,
-          lastUpdated: lastUpdated,
-        );
+         id: id,
+         userId: userId,
+         materialIds: materialIds,
+         questionIds: questionIds,
+         summaryIds: summaryIds,
+         writingIds: writingIds,
+         progress: progress,
+         lastUpdated: lastUpdated,
+       );
 
   /// Returns a shallow copy of this [StudyHistory]
   /// with some or all fields replaced by the given arguments.

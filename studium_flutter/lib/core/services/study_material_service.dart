@@ -21,14 +21,15 @@ class StudyMaterialService {
 
   Future<FileProcessing?> getProcessingStatus(int materialId) async {
     try {
-     
       return await _client.studyMaterial.getProcessingStatus(materialId);
     } catch (e) {
       // It's okay to return null on failure, the UI can handle it.
-      debugPrint('Failed to get processing status for material $materialId: $e');
+      debugPrint(
+          'Failed to get processing status for material $materialId: $e');
       return null;
     }
   }
+
   Future<void> deleteMaterial(int materialId) async {
     return _client.studyMaterial.deleteMaterial(materialId);
   }

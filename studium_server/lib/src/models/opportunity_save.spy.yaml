@@ -1,0 +1,13 @@
+class: OpportunitySave
+table: opportunity_saves
+fields:
+  opportunityId: int, relation(parent=opportunities)
+  userId: int, relation(parent=serverpod_user_info)
+  alertEnabled: bool
+  savedAt: DateTime
+indexes:
+  opportunity_save_user_opportunity_idx:
+    fields: userId, opportunityId
+    unique: true
+  opportunity_save_user_saved_idx:
+    fields: userId, savedAt

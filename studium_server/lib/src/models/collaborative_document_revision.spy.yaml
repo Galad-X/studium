@@ -1,0 +1,12 @@
+class: CollaborativeDocumentRevision
+table: collaborative_document_revisions
+fields:
+  documentId: int, relation(parent=collaborative_documents)
+  editorId: int, relation(parent=serverpod_user_info)
+  version: int
+  body: String
+  createdAt: DateTime
+indexes:
+  collaborative_revision_document_version_idx:
+    fields: documentId, version
+    unique: true

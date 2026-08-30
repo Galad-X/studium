@@ -1,0 +1,14 @@
+class: CollaborationPresence
+table: collaboration_presence
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  scopeType: String
+  scopeId: int
+  state: String
+  lastSeenAt: DateTime
+indexes:
+  collaboration_presence_unique_idx:
+    fields: userId, scopeType, scopeId
+    unique: true
+  collaboration_presence_scope_seen_idx:
+    fields: scopeType, scopeId, lastSeenAt

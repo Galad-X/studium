@@ -14,12 +14,11 @@ on:
           - 'production'
 
 env:
-  # TODO: Update with your Google Cloud project id. If you have changed the
-  # region and zone in your Terraform configuration, you will need to change
-  # it here too.
-  PROJECT: "<PROJECT ID>"
-  REGION: us-central1
-  ZONE: us-central1-c
+  # Configure deployment values as repository/environment variables rather
+  # than committing project-specific settings.
+  PROJECT: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION || 'us-central1' }}
+  ZONE: ${{ vars.GCP_ZONE || 'us-central1-c' }}
 
 jobs:
   deploy:
@@ -31,6 +30,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+
+      - name: Validate deployment configuration
+        shell: bash
+        run: |
+          test -n "$PROJECT" || { echo "Missing repository variable GCP_PROJECT_ID"; exit 1; }
+          case "$PROJECT" in
+            *'<'*|*'>'*) echo "GCP_PROJECT_ID contains a placeholder"; exit 1 ;;
+          esac
 
       - name: Setting Target Mode from Input
         if: ${{ github.event.inputs.target != '' }}
@@ -59,16 +66,6 @@ jobs:
         with:
           credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}"
 
-      - name: Create passwords file
-        working-directory: studium_server
-        shell: bash
-        env:
-          SERVERPOD_PASSWORDS: ${{ secrets.SERVERPOD_PASSWORDS }}
-        run: |
-          pwd
-          echo "$SERVERPOD_PASSWORDS" > config/passwords.yaml
-          ls config/
-
       - name: Configure Docker
         working-directory: studium_server
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
@@ -84,6 +81,29 @@ jobs:
       - name: Push Docker image
         working-directory: studium_server
         run: docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT }}/${{ env.REPOSITORY }}/$IMAGE_NAME
+
+      - name: Deploy API, Insights, and scheduled worker job
+        if: ${{ vars.GCP_DEPLOY_ENABLED == 'true' }}
+        working-directory: studium_server
+        env:
+          GCP_PROJECT_ID: ${{ env.PROJECT }}
+          GCP_REGION: ${{ env.REGION }}
+          GCP_IMAGE: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}
+          GCP_DATABASE_INSTANCE: ${{ vars.GCP_DATABASE_INSTANCE }}
+          GCP_RUNTIME_SERVICE_ACCOUNT: ${{ secrets.GCP_RUNTIME_SERVICE_ACCOUNT }}
+          GCP_WORKER_INVOKER_SERVICE_ACCOUNT: ${{ secrets.GCP_WORKER_INVOKER_SERVICE_ACCOUNT }}
+          GCP_NOTIFICATION_CHANNEL: ${{ secrets.GCP_NOTIFICATION_CHANNEL }}
+          GCP_PASSWORDS_SECRET: ${{ vars.GCP_PASSWORDS_SECRET_NAME }}
+          GCP_RUNMODE: ${{ env.TARGET }}
+        run: bash deploy/gcp/deploy-cloud-run.sh
+
+      - name: Configure backend metrics, alerts, and dashboard
+        if: ${{ vars.GCP_DEPLOY_ENABLED == 'true' }}
+        working-directory: studium_server
+        env:
+          GCP_PROJECT_ID: ${{ env.PROJECT }}
+          GCP_NOTIFICATION_CHANNEL: ${{ secrets.GCP_NOTIFICATION_CHANNEL }}
+        run: bash deploy/gcp/configure-observability.sh
 
       # Uncomment the following code to automatically restart the servers in the
       # instance group when you push a new version of your code. Before doing

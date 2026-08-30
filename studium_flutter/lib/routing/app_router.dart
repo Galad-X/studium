@@ -13,6 +13,14 @@ import '../core/providers/onboarding_provider.dart';
 import '../features/admin/screens/user_analytics_screen.dart';
 import '../features/auth/screens/auth_screen.dart';
 import '../features/dashboard/screens/dashboard_screen.dart';
+import '../features/collaboration/screens/collaboration_screen.dart';
+import '../features/collaboration/screens/room_detail_screen.dart';
+import '../features/collaboration/screens/challenge_detail_screen.dart';
+import '../features/collaboration/screens/institution_hub_screen.dart';
+import '../features/collaboration/screens/moderation_appeals_screen.dart';
+import '../features/collaboration/screens/moderation_feedback_screen.dart';
+import '../features/collaboration/screens/conversations_screen.dart';
+import '../features/opportunities/screens/opportunities_screen.dart';
 import '../features/history/screens/my_summaries_screen.dart';
 import '../features/history/screens/my_writings_screen.dart';
 import '../features/history/screens/summary_detail_screen.dart';
@@ -50,7 +58,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/landing',
         name: 'landing',
         builder: (context, state) => LandingPage(
-        
           onGetStarted: () => context.goNamed('login'),
           onSignIn: () => context.goNamed('login'),
         ),
@@ -80,6 +87,42 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const MaterialsScreen(),
           ),
           GoRoute(
+            path: '/collaboration',
+            name: 'collaboration',
+            builder: (context, state) => const CollaborationScreen(),
+          ),
+          GoRoute(
+            path: '/collaboration/rooms/:roomId',
+            name: 'roomDiscussion',
+            builder: (context, state) => RoomDetailScreen(
+              roomId: int.parse(state.pathParameters['roomId']!),
+            ),
+          ),
+          GoRoute(
+            path: '/collaboration/challenges/:challengeId',
+            name: 'challengeDetail',
+            builder: (context, state) => ChallengeDetailScreen(
+              challengeId: int.parse(state.pathParameters['challengeId']!),
+              challenge:
+                  state.extra is Challenge ? state.extra as Challenge : null,
+            ),
+          ),
+          GoRoute(
+            path: '/collaboration/institutions',
+            name: 'institutionHub',
+            builder: (context, state) => const InstitutionHubScreen(),
+          ),
+          GoRoute(
+            path: '/collaboration/conversations',
+            name: 'conversations',
+            builder: (context, state) => const ConversationsScreen(),
+          ),
+          GoRoute(
+            path: '/opportunities',
+            name: 'opportunities',
+            builder: (context, state) => const OpportunitiesScreen(),
+          ),
+          GoRoute(
             path: '/writer',
             name: 'writer',
             builder: (context, state) => const StartAcademicWritingScreen(),
@@ -90,6 +133,16 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const ProfileScreen(),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/moderation/appeals',
+        name: 'moderationAppeals',
+        builder: (context, state) => const ModerationAppealsScreen(),
+      ),
+      GoRoute(
+        path: '/moderation/feedback',
+        name: 'moderationFeedback',
+        builder: (context, state) => const ModerationFeedbackScreen(),
       ),
       // Full-screen routes that are pushed on top of the shell
       GoRoute(
@@ -258,7 +311,7 @@ class RouterNotifier extends ChangeNotifier {
     final hasSeenOnboarding = onboarding.valueOrNull ?? false;
     final isGoingToLogin = location == '/login';
     final isGoingToLanding = location == '/landing';
-     final isGoingToOnboarding = location == '/onboarding';
+    final isGoingToOnboarding = location == '/onboarding';
 
     // Rule 1: If not logged in, go to the login page.
     if (!isLoggedIn) {
@@ -270,8 +323,7 @@ class RouterNotifier extends ChangeNotifier {
       return '/landing';
     }
 
-
-   // Rule 2: Handle authenticated users.
+    // Rule 2: Handle authenticated users.
     if (isLoggedIn) {
       // If they are on a page for unauthenticated users, redirect them.
       if (isGoingToLanding || isGoingToLogin) {

@@ -1,0 +1,16 @@
+class: ContentReport
+table: content_reports
+fields:
+  reporterId: int, relation(parent=serverpod_user_info)
+  contentType: String
+  contentId: int
+  reason: String
+  details: String?
+  status: String
+  createdAt: DateTime
+  resolvedAt: DateTime?
+indexes:
+  content_report_status_created_idx:
+    fields: status, createdAt
+  content_report_reporter_idx:
+    fields: reporterId, createdAt

@@ -1,0 +1,11 @@
+class: DirectMessage
+table: direct_messages
+fields:
+  conversationId: int, relation(parent=conversations)
+  authorId: int, relation(parent=serverpod_user_info)
+  body: String
+  status: String
+  createdAt: DateTime
+indexes:
+  direct_message_conversation_created_idx:
+    fields: conversationId, createdAt

@@ -1,0 +1,16 @@
+class: RoomResource
+table: room_resources
+fields:
+  roomId: int, relation(parent=study_rooms)
+  ownerId: int, relation(parent=serverpod_user_info)
+  resourceType: String
+  title: String
+  uri: String?
+  content: String?
+  citation: String?
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  room_resource_room_status_created_idx:
+    fields: roomId, status, createdAt

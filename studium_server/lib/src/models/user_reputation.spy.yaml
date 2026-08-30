@@ -1,0 +1,12 @@
+class: UserReputation
+table: user_reputation
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  score: int, default=0
+  acceptedSolutions: int, default=0
+  verifiedContributions: int, default=0
+  updatedAt: DateTime
+indexes:
+  user_reputation_user_idx:
+    fields: userId
+    unique: true

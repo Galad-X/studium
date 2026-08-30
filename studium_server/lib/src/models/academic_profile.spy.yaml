@@ -1,0 +1,17 @@
+class: AcademicProfile
+table: academic_profiles
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  institutionId: int, relation(parent=institutions)
+  department: String?
+  programme: String?
+  level: String?
+  subjects: List<String>
+  interests: List<String>
+  languages: List<String>
+  availability: String?
+  updatedAt: DateTime
+indexes:
+  academic_profile_user_institution_idx:
+    fields: userId, institutionId
+    unique: true

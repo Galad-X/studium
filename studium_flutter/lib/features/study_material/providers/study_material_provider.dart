@@ -12,7 +12,6 @@ class StudyMaterialState {
   final String? error;
   final Map<int, String> processingStatuses;
 
-
   StudyMaterialState({
     this.materials = const [],
     this.isLoading = false,
@@ -24,7 +23,7 @@ class StudyMaterialState {
     List<StudyMaterial>? materials,
     bool? isLoading,
     String? error,
-     Map<int, String>? processingStatuses,
+    Map<int, String>? processingStatuses,
   }) {
     return StudyMaterialState(
       materials: materials ?? this.materials,
@@ -37,9 +36,9 @@ class StudyMaterialState {
 
 class StudyMaterialNotifier extends StateNotifier<StudyMaterialState> {
   final Ref _ref;
-  Timer? _pollingTimer; 
+  Timer? _pollingTimer;
 
-    StudyMaterialNotifier(this._ref)
+  StudyMaterialNotifier(this._ref)
       : super(StudyMaterialState(isLoading: true)) {
     fetchMaterials();
   }
@@ -86,7 +85,7 @@ class StudyMaterialNotifier extends StateNotifier<StudyMaterialState> {
 
     // Start a timer that runs every 10 seconds.
     _pollingTimer = Timer.periodic(const Duration(seconds: 10), (timer) async {
-     debugPrint("Polling for file processing status...");
+      debugPrint("Polling for file processing status...");
       bool didStateChange = false;
       final currentStatuses = Map<int, String>.from(state.processingStatuses);
 
@@ -136,5 +135,3 @@ final studyMaterialProvider =
     StateNotifierProvider<StudyMaterialNotifier, StudyMaterialState>((ref) {
   return StudyMaterialNotifier(ref);
 });
-
-

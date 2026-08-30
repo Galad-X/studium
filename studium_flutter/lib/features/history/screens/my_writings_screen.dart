@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:studium_client/studium_client.dart';
+import '../../../core/providers/service_providers.dart';
 import '../providers/history_providers.dart';
+import '../../../services/export_service.dart';
 
 class MyWritingsScreen extends ConsumerStatefulWidget {
   const MyWritingsScreen({super.key});
@@ -18,6 +21,7 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
   late Animation<Offset> _slideAnimation;
   String _searchQuery = '';
   String _selectedFilter = 'all';
+  bool _sortNewestFirst = true;
 
   final Map<String, DocumentTypeInfo> _documentTypes = {
     'undergraduate_project': DocumentTypeInfo(
@@ -108,14 +112,22 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
         IconButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            // TODO: Add sort/filter options
+            setState(() => _sortNewestFirst = !_sortNewestFirst);
           },
+          tooltip: _sortNewestFirst ? 'Sort oldest first' : 'Sort newest first',
           icon: const Icon(Icons.sort_rounded),
         ),
         IconButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            // TODO: Add export functionality
+            final writings = ref.read(myWritingsProvider).valueOrNull;
+            if (writings == null || writings.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('No writings to export.')),
+              );
+              return;
+            }
+            _exportAll(writings);
           },
           icon: const Icon(Icons.download_rounded),
         ),
@@ -195,7 +207,10 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
       final matchesFilter =
           _selectedFilter == 'all' || writing.type == _selectedFilter;
       return matchesSearch && matchesFilter;
-    }).toList();
+    }).cast<AcademicWriting>().toList()
+      ..sort((a, b) => _sortNewestFirst
+          ? b.createdAt.compareTo(a.createdAt)
+          : a.createdAt.compareTo(b.createdAt));
 
     if (filteredWritings.isEmpty) {
       return _buildNoResultsState(theme);
@@ -228,6 +243,40 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
         );
       },
     );
+  }
+
+  Future<void> _exportAll(List<AcademicWriting> writings) async {
+    try {
+      final content = writings.map((writing) => [
+            'Title: ${writing.title}',
+            'Type: ${writing.type}',
+            'Created: ${DateFormat.yMMMd().format(writing.createdAt)}',
+            '',
+            writing.content,
+            '\n========================================\n',
+          ].join('\n')).join();
+      final path = await ref.read(exportServiceProvider).exportDocument(
+            title: 'All_Writings_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
+            content: content,
+            format: ExportFormat.pdf,
+          );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Writings exported.'),
+          action: SnackBarAction(
+            label: 'Open',
+            onPressed: () => ref.read(exportServiceProvider).openFile(path),
+          ),
+        ),
+      );
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Export failed: $error')),
+        );
+      }
+    }
   }
 
   Widget _buildEmptyState(ThemeData theme) {

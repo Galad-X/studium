@@ -741,7 +741,7 @@ class _StartAcademicWritingScreenState
             ],
           ),
           child: DropdownButtonFormField<StudyMaterial?>(
-            value: _selectedSourceMaterial,
+            initialValue: _selectedSourceMaterial,
             dropdownColor: const Color(0xFF1A1F2E),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
@@ -1421,8 +1421,9 @@ class _NeuralNetworkPainter extends CustomPainter {
         final distance = (nodes[i] - nodes[j]).distance;
         if (distance < 100) {
           final opacity = (1 - distance / 100) * 0.15;
-          paint.color = connectionColor.withOpacity(opacity *
-              (0.5 + 0.5 * math.sin(animation.value * 2 * math.pi + i)));
+          paint.color = connectionColor.withValues(
+              alpha: opacity *
+                  (0.5 + 0.5 * math.sin(animation.value * 2 * math.pi + i)));
           canvas.drawLine(nodes[i], nodes[j], paint);
         }
       }

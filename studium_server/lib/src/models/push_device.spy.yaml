@@ -1,0 +1,15 @@
+class: PushDevice
+table: push_devices
+fields:
+  userId: int, relation(parent=serverpod_user_info)
+  token: String
+  platform: String
+  active: bool
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  push_device_token_idx:
+    fields: token
+    unique: true
+  push_device_user_active_idx:
+    fields: userId, active
