@@ -112,26 +112,17 @@ class _CollaborationScreenState extends ConsumerState<CollaborationScreen> {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    SegmentedButton<int>(
-                      segments: const [
-                        ButtonSegment(
-                            value: 0,
-                            label: Text('Study rooms'),
-                            icon: Icon(Icons.school)),
-                        ButtonSegment(
-                            value: 1,
-                            label: Text('Challenges'),
-                            icon: Icon(Icons.lightbulb_outline)),
-                      ],
-                      selected: {_tab},
-                      onSelectionChanged: (value) =>
-                          setState(() => _tab = value.first),
+                    _CollaborationTabSelector(
+                      selectedIndex: _tab,
+                      onChanged: (index) => setState(() => _tab = index),
                     ),
                     if (_tab == 1) ...[
                       const SizedBox(height: 12),
                       Flex(
                         direction: isWide ? Axis.horizontal : Axis.vertical,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        crossAxisAlignment: isWide
+                            ? CrossAxisAlignment.start
+                            : CrossAxisAlignment.stretch,
                         children: [
                           if (isWide)
                             Expanded(child: _challengeFieldInput())
@@ -181,21 +172,27 @@ class _CollaborationScreenState extends ConsumerState<CollaborationScreen> {
                     ],
                     const SizedBox(height: 16),
                     Expanded(
-                        child: _tab == 0
-                            ? _RoomsList(
-                                state: rooms,
-                                onRetry: () => ref.invalidate(
-                                    studyRoomsProvider(_subjectFilter)),
-                              )
-                            : _ChallengesList(
-                                state: challenges,
-                                field: _challengeFieldController.text,
-                                language: _challengeLanguageController.text,
-                                difficulty: _challengeDifficulty,
-                                status: _challengeStatus,
-                                onRetry: () =>
-                                    ref.invalidate(challengesProvider),
-                              )),
+                      child: IndexedStack(
+                        index: _tab,
+                        children: [
+                          _RoomsList(
+                            key: const ValueKey('collaboration-rooms'),
+                            state: rooms,
+                            onRetry: () => ref
+                                .invalidate(studyRoomsProvider(_subjectFilter)),
+                          ),
+                          _ChallengesList(
+                            key: const ValueKey('collaboration-challenges'),
+                            state: challenges,
+                            field: _challengeFieldController.text,
+                            language: _challengeLanguageController.text,
+                            difficulty: _challengeDifficulty,
+                            status: _challengeStatus,
+                            onRetry: () => ref.invalidate(challengesProvider),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -279,7 +276,7 @@ class _CollaborationScreenState extends ConsumerState<CollaborationScreen> {
 class _RoomsList extends StatelessWidget {
   final AsyncValue<List<StudyRoom>> state;
   final VoidCallback onRetry;
-  const _RoomsList({required this.state, required this.onRetry});
+  const _RoomsList({required this.state, required this.onRetry, super.key});
 
   @override
   Widget build(BuildContext context) => AsyncValueView<List<StudyRoom>>(
@@ -303,6 +300,78 @@ class _RoomsList extends StatelessWidget {
       );
 }
 
+class _CollaborationTabSelector extends StatelessWidget {
+  const _CollaborationTabSelector({
+    required this.selectedIndex,
+    required this.onChanged,
+  });
+
+  final int selectedIndex;
+  final ValueChanged<int> onChanged;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          Expanded(
+            child: _TabChoice(
+              key: const ValueKey('collaboration-rooms-tab'),
+              icon: Icons.school,
+              label: 'Study rooms',
+              selected: selectedIndex == 0,
+              onTap: () => onChanged(0),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _TabChoice(
+              key: const ValueKey('collaboration-challenges-tab'),
+              icon: Icons.lightbulb_outline,
+              label: 'Challenges',
+              selected: selectedIndex == 1,
+              onTap: () => onChanged(1),
+            ),
+          ),
+        ],
+      );
+}
+
+class _TabChoice extends StatelessWidget {
+  const _TabChoice({
+    required this.icon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+    super.key,
+  });
+
+  final IconData icon;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+        button: true,
+        selected: selected,
+        label: label,
+        child: OutlinedButton.icon(
+          onPressed: onTap,
+          icon: Icon(icon),
+          label: Text(label),
+          style: OutlinedButton.styleFrom(
+            backgroundColor: selected
+                ? Theme.of(context).colorScheme.primary.withAlpha(35)
+                : Colors.transparent,
+            side: BorderSide(
+              color: selected
+                  ? Theme.of(context).colorScheme.primary
+                  : Colors.white24,
+            ),
+          ),
+        ),
+      );
+}
+
 class _ChallengesList extends StatelessWidget {
   final AsyncValue<List<Challenge>> state;
   final String field;
@@ -317,6 +386,7 @@ class _ChallengesList extends StatelessWidget {
     required this.difficulty,
     required this.status,
     required this.onRetry,
+    super.key,
   });
 
   @override

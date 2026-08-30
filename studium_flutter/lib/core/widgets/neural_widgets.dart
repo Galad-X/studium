@@ -121,43 +121,51 @@ class NeuralErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.error_outline_rounded,
-              size: 64,
-              color: Theme.of(context).colorScheme.error,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxHeight < 240;
+        return Center(
+          child: Padding(
+            padding: EdgeInsets.all(compact ? 12 : 32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline_rounded,
+                  size: compact ? 40 : 64,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                SizedBox(height: compact ? 6 : 16),
+                Text(
+                  'Something went wrong',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                SizedBox(height: compact ? 4 : 8),
+                Text(
+                  message,
+                  maxLines: compact ? 2 : 5,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white.withAlpha(170)),
+                ),
+                SizedBox(height: compact ? 8 : 20),
+                FilledButton.icon(
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    onRetry();
+                  },
+                  icon: const Icon(Icons.refresh_rounded),
+                  label: const Text('Try again'),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              'Something went wrong',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white.withAlpha(170)),
-            ),
-            const SizedBox(height: 20),
-            FilledButton.icon(
-              onPressed: () {
-                HapticFeedback.lightImpact();
-                onRetry();
-              },
-              icon: const Icon(Icons.refresh_rounded),
-              label: const Text('Try again'),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

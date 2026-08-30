@@ -2,10 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:studium_client/studium_client.dart';
+import 'package:studium_flutter/core/providers/service_providers.dart';
 
 import 'package:studium_flutter/features/collaboration/providers/collaboration_provider.dart';
 import 'package:studium_flutter/features/collaboration/services/collaboration_service.dart';
 import 'package:studium_flutter/features/collaboration/screens/collaboration_screen.dart';
+import 'package:studium_flutter/features/collaboration/state/collaboration_cache.dart';
 
 class _FakeCollaborationService extends CollaborationService {
   _FakeCollaborationService({
@@ -126,6 +128,7 @@ void main() {
     );
     final container = ProviderContainer(
       overrides: [
+        collaborationCacheProvider.overrideWithValue(CollaborationCache()),
         collaborationServiceProvider.overrideWithValue(
           _FakeCollaborationService(
             institutions: [institution],
@@ -226,6 +229,7 @@ void main() {
 
     final container = ProviderContainer(
       overrides: [
+        collaborationCacheProvider.overrideWithValue(CollaborationCache()),
         collaborationServiceProvider.overrideWithValue(
           _FakeCollaborationService(
             institutions: [institution],
@@ -277,6 +281,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
+          collaborationCacheProvider.overrideWithValue(CollaborationCache()),
           collaborationServiceProvider.overrideWithValue(
             _FakeCollaborationService(rooms: [room], challenges: [challenge]),
           ),

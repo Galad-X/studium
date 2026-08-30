@@ -5,21 +5,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Offline fallback for read-only collaboration data. Server responses stay
 /// authoritative and replace cached data whenever connectivity returns.
 class CollaborationCache {
-  CollaborationCache(this.preferences);
-  final SharedPreferencesAsync preferences;
+  CollaborationCache([this.preferences]);
+  final SharedPreferencesAsync? preferences;
+  final Map<String, String> _memory = {};
 
   Future<void> writeList<T>(
     String key,
     List<T> values,
     Map<String, dynamic> Function(T value) encode,
   ) async {
-    await preferences.setString(
-      key,
-      jsonEncode({
-        'savedAt': DateTime.now().toUtc().toIso8601String(),
-        'items': values.map(encode).toList(),
-      }),
-    );
+    final encoded = jsonEncode({
+      'savedAt': DateTime.now().toUtc().toIso8601String(),
+      'items': values.map(encode).toList(),
+    });
+    if (preferences == null) {
+      _memory[key] = encoded;
+    } else {
+      await preferences!.setString(key, encoded);
+    }
   }
 
   Future<List<T>> readList<T>(
@@ -27,7 +30,8 @@ class CollaborationCache {
     T Function(Map<String, dynamic> value) decode, {
     Duration maxAge = const Duration(hours: 24),
   }) async {
-    final raw = await preferences.getString(key);
+    final raw =
+        preferences == null ? _memory[key] : await preferences!.getString(key);
     if (raw == null) return const [];
     try {
       final value = jsonDecode(raw) as Map<String, dynamic>;
