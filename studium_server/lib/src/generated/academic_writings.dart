@@ -180,17 +180,17 @@ class _AcademicWritingImpl extends AcademicWriting {
     required String fileUrl,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         studyMaterialId: studyMaterialId,
-         type: type,
-         title: title,
-         wordCount: wordCount,
-         content: content,
-         format: format,
-         fileUrl: fileUrl,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          studyMaterialId: studyMaterialId,
+          type: type,
+          title: title,
+          wordCount: wordCount,
+          content: content,
+          format: format,
+          fileUrl: fileUrl,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [AcademicWriting]
   /// with some or all fields replaced by the given arguments.
@@ -211,9 +211,8 @@ class _AcademicWritingImpl extends AcademicWriting {
     return AcademicWriting(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
-      studyMaterialId: studyMaterialId is int?
-          ? studyMaterialId
-          : this.studyMaterialId,
+      studyMaterialId:
+          studyMaterialId is int? ? studyMaterialId : this.studyMaterialId,
       type: type ?? this.type,
       title: title ?? this.title,
       wordCount: wordCount is int? ? wordCount : this.wordCount,
@@ -229,44 +228,44 @@ class AcademicWritingUpdateTable extends _i1.UpdateTable<AcademicWritingTable> {
   AcademicWritingUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> studyMaterialId(int? value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
-    table.type,
-    value,
-  );
+        table.type,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<int, int> wordCount(int? value) => _i1.ColumnValue(
-    table.wordCount,
-    value,
-  );
+        table.wordCount,
+        value,
+      );
 
   _i1.ColumnValue<String, String> content(String value) => _i1.ColumnValue(
-    table.content,
-    value,
-  );
+        table.content,
+        value,
+      );
 
   _i1.ColumnValue<String, String> format(String value) => _i1.ColumnValue(
-    table.format,
-    value,
-  );
+        table.format,
+        value,
+      );
 
   _i1.ColumnValue<String, String> fileUrl(String value) => _i1.ColumnValue(
-    table.fileUrl,
-    value,
-  );
+        table.fileUrl,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -277,7 +276,7 @@ class AcademicWritingUpdateTable extends _i1.UpdateTable<AcademicWritingTable> {
 
 class AcademicWritingTable extends _i1.Table<int?> {
   AcademicWritingTable({super.tableRelation})
-    : super(tableName: 'academic_writings') {
+      : super(tableName: 'academic_writings') {
     updateTable = AcademicWritingUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -339,17 +338,17 @@ class AcademicWritingTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    studyMaterialId,
-    type,
-    title,
-    wordCount,
-    content,
-    format,
-    fileUrl,
-    createdAt,
-  ];
+        id,
+        userId,
+        studyMaterialId,
+        type,
+        title,
+        wordCount,
+        content,
+        format,
+        fileUrl,
+        createdAt,
+      ];
 }
 
 class AcademicWritingInclude extends _i1.IncludeObject {
@@ -565,7 +564,7 @@ class AcademicWritingRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<AcademicWritingUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<AcademicWriting>(
@@ -580,7 +579,7 @@ class AcademicWritingRepository {
   Future<List<AcademicWriting>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<AcademicWritingUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<AcademicWritingTable> where,
     int? limit,
     int? offset,

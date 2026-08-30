@@ -129,16 +129,16 @@ class _ChallengeTeamInviteImpl extends ChallengeTeamInvite {
     required DateTime createdAt,
     DateTime? acceptedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         inviterId: inviterId,
-         inviteeId: inviteeId,
-         tokenHash: tokenHash,
-         status: status,
-         expiresAt: expiresAt,
-         createdAt: createdAt,
-         acceptedAt: acceptedAt,
-       );
+          id: id,
+          teamId: teamId,
+          inviterId: inviterId,
+          inviteeId: inviteeId,
+          tokenHash: tokenHash,
+          status: status,
+          expiresAt: expiresAt,
+          createdAt: createdAt,
+          acceptedAt: acceptedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeamInvite]
   /// with some or all fields replaced by the given arguments.

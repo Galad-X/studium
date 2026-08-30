@@ -148,18 +148,18 @@ class _AcademicProfileImpl extends AcademicProfile {
     String? availability,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         institutionId: institutionId,
-         department: department,
-         programme: programme,
-         level: level,
-         subjects: subjects,
-         interests: interests,
-         languages: languages,
-         availability: availability,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          institutionId: institutionId,
+          department: department,
+          programme: programme,
+          level: level,
+          subjects: subjects,
+          interests: interests,
+          languages: languages,
+          availability: availability,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [AcademicProfile]
   /// with some or all fields replaced by the given arguments.

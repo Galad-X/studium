@@ -101,13 +101,13 @@ class _ChallengeTeamMemberImpl extends ChallengeTeamMember {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          teamId: teamId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeamMember]
   /// with some or all fields replaced by the given arguments.

@@ -119,15 +119,15 @@ class _CommentImpl extends Comment {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         postId: postId,
-         authorId: authorId,
-         parentCommentId: parentCommentId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          postId: postId,
+          authorId: authorId,
+          parentCommentId: parentCommentId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Comment]
   /// with some or all fields replaced by the given arguments.
@@ -147,9 +147,8 @@ class _CommentImpl extends Comment {
       id: id is int? ? id : this.id,
       postId: postId ?? this.postId,
       authorId: authorId ?? this.authorId,
-      parentCommentId: parentCommentId is int?
-          ? parentCommentId
-          : this.parentCommentId,
+      parentCommentId:
+          parentCommentId is int? ? parentCommentId : this.parentCommentId,
       body: body ?? this.body,
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,

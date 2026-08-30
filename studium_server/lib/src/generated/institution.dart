@@ -200,18 +200,18 @@ class _InstitutionImpl extends Institution {
     required String verificationStatus,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         name: name,
-         country: country,
-         region: region,
-         domains: domains,
-         subjects: subjects,
-         languages: languages,
-         submittedById: submittedById,
-         logoUrl: logoUrl,
-         verificationStatus: verificationStatus,
-         createdAt: createdAt,
-       );
+          id: id,
+          name: name,
+          country: country,
+          region: region,
+          domains: domains,
+          subjects: subjects,
+          languages: languages,
+          submittedById: submittedById,
+          logoUrl: logoUrl,
+          verificationStatus: verificationStatus,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Institution]
   /// with some or all fields replaced by the given arguments.
@@ -254,19 +254,19 @@ class InstitutionUpdateTable extends _i1.UpdateTable<InstitutionTable> {
   InstitutionUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> name(String value) => _i1.ColumnValue(
-    table.name,
-    value,
-  );
+        table.name,
+        value,
+      );
 
   _i1.ColumnValue<String, String> country(String value) => _i1.ColumnValue(
-    table.country,
-    value,
-  );
+        table.country,
+        value,
+      );
 
   _i1.ColumnValue<String, String> region(String? value) => _i1.ColumnValue(
-    table.region,
-    value,
-  );
+        table.region,
+        value,
+      );
 
   _i1.ColumnValue<List<String>, List<String>> domains(List<String> value) =>
       _i1.ColumnValue(
@@ -287,14 +287,14 @@ class InstitutionUpdateTable extends _i1.UpdateTable<InstitutionTable> {
       );
 
   _i1.ColumnValue<int, int> submittedById(int? value) => _i1.ColumnValue(
-    table.submittedById,
-    value,
-  );
+        table.submittedById,
+        value,
+      );
 
   _i1.ColumnValue<String, String> logoUrl(String? value) => _i1.ColumnValue(
-    table.logoUrl,
-    value,
-  );
+        table.logoUrl,
+        value,
+      );
 
   _i1.ColumnValue<String, String> verificationStatus(String value) =>
       _i1.ColumnValue(
@@ -378,18 +378,18 @@ class InstitutionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    name,
-    country,
-    region,
-    domains,
-    subjects,
-    languages,
-    submittedById,
-    logoUrl,
-    verificationStatus,
-    createdAt,
-  ];
+        id,
+        name,
+        country,
+        region,
+        domains,
+        subjects,
+        languages,
+        submittedById,
+        logoUrl,
+        verificationStatus,
+        createdAt,
+      ];
 }
 
 class InstitutionInclude extends _i1.IncludeObject {

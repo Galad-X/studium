@@ -84,9 +84,9 @@ class _UserProfileBundleImpl extends UserProfileBundle {
     required _i2.UserProfile profile,
     _i3.Subscription? subscription,
   }) : super._(
-         profile: profile,
-         subscription: subscription,
-       );
+          profile: profile,
+          subscription: subscription,
+        );
 
   /// Returns a shallow copy of this [UserProfileBundle]
   /// with some or all fields replaced by the given arguments.

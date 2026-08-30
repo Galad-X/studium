@@ -130,16 +130,16 @@ class _RoomAiAnswerImpl extends RoomAiAnswer {
     required String confidence,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         askerId: askerId,
-         question: question,
-         answer: answer,
-         sourceResourceIds: sourceResourceIds,
-         citations: citations,
-         confidence: confidence,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomId: roomId,
+          askerId: askerId,
+          question: question,
+          answer: answer,
+          sourceResourceIds: sourceResourceIds,
+          citations: citations,
+          confidence: confidence,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomAiAnswer]
   /// with some or all fields replaced by the given arguments.

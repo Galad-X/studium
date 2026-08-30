@@ -146,13 +146,13 @@ class _DiscussionReactionImpl extends DiscussionReaction {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         postId: postId,
-         userId: userId,
-         reaction: reaction,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          postId: postId,
+          userId: userId,
+          reaction: reaction,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [DiscussionReaction]
   /// with some or all fields replaced by the given arguments.
@@ -182,19 +182,19 @@ class DiscussionReactionUpdateTable
   DiscussionReactionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> postId(int value) => _i1.ColumnValue(
-    table.postId,
-    value,
-  );
+        table.postId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> reaction(String value) => _i1.ColumnValue(
-    table.reaction,
-    value,
-  );
+        table.reaction,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -211,7 +211,7 @@ class DiscussionReactionUpdateTable
 
 class DiscussionReactionTable extends _i1.Table<int?> {
   DiscussionReactionTable({super.tableRelation})
-    : super(tableName: 'discussion_reactions') {
+      : super(tableName: 'discussion_reactions') {
     updateTable = DiscussionReactionUpdateTable(this);
     postId = _i1.ColumnInt(
       'postId',
@@ -249,13 +249,13 @@ class DiscussionReactionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    postId,
-    userId,
-    reaction,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        postId,
+        userId,
+        reaction,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class DiscussionReactionInclude extends _i1.IncludeObject {
@@ -471,7 +471,7 @@ class DiscussionReactionRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<DiscussionReactionUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<DiscussionReaction>(
@@ -486,7 +486,7 @@ class DiscussionReactionRepository {
   Future<List<DiscussionReaction>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<DiscussionReactionUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<DiscussionReactionTable> where,
     int? limit,
     int? offset,

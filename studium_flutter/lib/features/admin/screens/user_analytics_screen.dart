@@ -127,10 +127,13 @@ class _UserAnalyticsScreenState extends ConsumerState<UserAnalyticsScreen>
 
   Future<void> _exportAnalytics(List<UserAnalytics> analytics) async {
     try {
-      final content = analytics.map((item) =>
-          '${DateFormat.yMMMd().add_jm().format(item.timestamp)} • ${item.action}${item.metadata == null ? '' : ' • ${item.metadata}'}').join('\n');
+      final content = analytics
+          .map((item) =>
+              '${DateFormat.yMMMd().add_jm().format(item.timestamp)} • ${item.action}${item.metadata == null ? '' : ' • ${item.metadata}'}')
+          .join('\n');
       final path = await ref.read(exportServiceProvider).exportDocument(
-            title: 'Studium_Activity_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
+            title:
+                'Studium_Activity_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
             content: content,
             format: ExportFormat.pdf,
           );

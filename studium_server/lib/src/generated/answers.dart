@@ -152,14 +152,14 @@ class _AnswerImpl extends Answer {
     String? feedback,
     required DateTime submittedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         questionId: questionId,
-         answerText: answerText,
-         score: score,
-         feedback: feedback,
-         submittedAt: submittedAt,
-       );
+          id: id,
+          userId: userId,
+          questionId: questionId,
+          answerText: answerText,
+          score: score,
+          feedback: feedback,
+          submittedAt: submittedAt,
+        );
 
   /// Returns a shallow copy of this [Answer]
   /// with some or all fields replaced by the given arguments.
@@ -190,29 +190,29 @@ class AnswerUpdateTable extends _i1.UpdateTable<AnswerTable> {
   AnswerUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> questionId(int value) => _i1.ColumnValue(
-    table.questionId,
-    value,
-  );
+        table.questionId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> answerText(String value) => _i1.ColumnValue(
-    table.answerText,
-    value,
-  );
+        table.answerText,
+        value,
+      );
 
   _i1.ColumnValue<double, double> score(double? value) => _i1.ColumnValue(
-    table.score,
-    value,
-  );
+        table.score,
+        value,
+      );
 
   _i1.ColumnValue<String, String> feedback(String? value) => _i1.ColumnValue(
-    table.feedback,
-    value,
-  );
+        table.feedback,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> submittedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -266,14 +266,14 @@ class AnswerTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    questionId,
-    answerText,
-    score,
-    feedback,
-    submittedAt,
-  ];
+        id,
+        userId,
+        questionId,
+        answerText,
+        score,
+        feedback,
+        submittedAt,
+      ];
 }
 
 class AnswerInclude extends _i1.IncludeObject {

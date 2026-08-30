@@ -227,21 +227,21 @@ class _QuestionImpl extends Question {
     List<String>? labelingPoints,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         type: type,
-         questionText: questionText,
-         correctAnswer: correctAnswer,
-         options: options,
-         explanation: explanation,
-         difficulty: difficulty,
-         bloomsLevel: bloomsLevel,
-         estimatedTime: estimatedTime,
-         tags: tags,
-         diagramImageUrl: diagramImageUrl,
-         labelingPoints: labelingPoints,
-         createdAt: createdAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          type: type,
+          questionText: questionText,
+          correctAnswer: correctAnswer,
+          options: options,
+          explanation: explanation,
+          difficulty: difficulty,
+          bloomsLevel: bloomsLevel,
+          estimatedTime: estimatedTime,
+          tags: tags,
+          diagramImageUrl: diagramImageUrl,
+          labelingPoints: labelingPoints,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Question]
   /// with some or all fields replaced by the given arguments.
@@ -268,9 +268,8 @@ class _QuestionImpl extends Question {
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       type: type ?? this.type,
       questionText: questionText ?? this.questionText,
-      correctAnswer: correctAnswer is String?
-          ? correctAnswer
-          : this.correctAnswer,
+      correctAnswer:
+          correctAnswer is String? ? correctAnswer : this.correctAnswer,
       options: options is List<String>?
           ? options
           : this.options?.map((e0) => e0).toList(),
@@ -279,9 +278,8 @@ class _QuestionImpl extends Question {
       bloomsLevel: bloomsLevel ?? this.bloomsLevel,
       estimatedTime: estimatedTime ?? this.estimatedTime,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
-      diagramImageUrl: diagramImageUrl is String?
-          ? diagramImageUrl
-          : this.diagramImageUrl,
+      diagramImageUrl:
+          diagramImageUrl is String? ? diagramImageUrl : this.diagramImageUrl,
       labelingPoints: labelingPoints is List<String>?
           ? labelingPoints
           : this.labelingPoints?.map((e0) => e0).toList(),
@@ -294,19 +292,19 @@ class QuestionUpdateTable extends _i1.UpdateTable<QuestionTable> {
   QuestionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
-    table.type,
-    value,
-  );
+        table.type,
+        value,
+      );
 
   _i1.ColumnValue<String, String> questionText(String value) => _i1.ColumnValue(
-    table.questionText,
-    value,
-  );
+        table.questionText,
+        value,
+      );
 
   _i1.ColumnValue<String, String> correctAnswer(String? value) =>
       _i1.ColumnValue(
@@ -321,24 +319,24 @@ class QuestionUpdateTable extends _i1.UpdateTable<QuestionTable> {
       );
 
   _i1.ColumnValue<String, String> explanation(String? value) => _i1.ColumnValue(
-    table.explanation,
-    value,
-  );
+        table.explanation,
+        value,
+      );
 
   _i1.ColumnValue<String, String> difficulty(String value) => _i1.ColumnValue(
-    table.difficulty,
-    value,
-  );
+        table.difficulty,
+        value,
+      );
 
   _i1.ColumnValue<String, String> bloomsLevel(String value) => _i1.ColumnValue(
-    table.bloomsLevel,
-    value,
-  );
+        table.bloomsLevel,
+        value,
+      );
 
   _i1.ColumnValue<int, int> estimatedTime(int value) => _i1.ColumnValue(
-    table.estimatedTime,
-    value,
-  );
+        table.estimatedTime,
+        value,
+      );
 
   _i1.ColumnValue<List<String>, List<String>> tags(List<String>? value) =>
       _i1.ColumnValue(
@@ -354,10 +352,11 @@ class QuestionUpdateTable extends _i1.UpdateTable<QuestionTable> {
 
   _i1.ColumnValue<List<String>, List<String>> labelingPoints(
     List<String>? value,
-  ) => _i1.ColumnValue(
-    table.labelingPoints,
-    value,
-  );
+  ) =>
+      _i1.ColumnValue(
+        table.labelingPoints,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -453,21 +452,21 @@ class QuestionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    studyMaterialId,
-    type,
-    questionText,
-    correctAnswer,
-    options,
-    explanation,
-    difficulty,
-    bloomsLevel,
-    estimatedTime,
-    tags,
-    diagramImageUrl,
-    labelingPoints,
-    createdAt,
-  ];
+        id,
+        studyMaterialId,
+        type,
+        questionText,
+        correctAnswer,
+        options,
+        explanation,
+        difficulty,
+        bloomsLevel,
+        estimatedTime,
+        tags,
+        diagramImageUrl,
+        labelingPoints,
+        createdAt,
+      ];
 }
 
 class QuestionInclude extends _i1.IncludeObject {

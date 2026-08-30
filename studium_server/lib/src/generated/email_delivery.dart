@@ -233,22 +233,22 @@ class _EmailDeliveryImpl extends EmailDelivery {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         recipient: recipient,
-         subject: subject,
-         htmlBody: htmlBody,
-         dedupeKey: dedupeKey,
-         status: status,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         availableAt: availableAt,
-         lockedAt: lockedAt,
-         lockToken: lockToken,
-         lastError: lastError,
-         sentAt: sentAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          recipient: recipient,
+          subject: subject,
+          htmlBody: htmlBody,
+          dedupeKey: dedupeKey,
+          status: status,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          availableAt: availableAt,
+          lockedAt: lockedAt,
+          lockToken: lockToken,
+          lastError: lastError,
+          sentAt: sentAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [EmailDelivery]
   /// with some or all fields replaced by the given arguments.
@@ -295,39 +295,39 @@ class EmailDeliveryUpdateTable extends _i1.UpdateTable<EmailDeliveryTable> {
   EmailDeliveryUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> recipient(String value) => _i1.ColumnValue(
-    table.recipient,
-    value,
-  );
+        table.recipient,
+        value,
+      );
 
   _i1.ColumnValue<String, String> subject(String value) => _i1.ColumnValue(
-    table.subject,
-    value,
-  );
+        table.subject,
+        value,
+      );
 
   _i1.ColumnValue<String, String> htmlBody(String value) => _i1.ColumnValue(
-    table.htmlBody,
-    value,
-  );
+        table.htmlBody,
+        value,
+      );
 
   _i1.ColumnValue<String, String> dedupeKey(String? value) => _i1.ColumnValue(
-    table.dedupeKey,
-    value,
-  );
+        table.dedupeKey,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> attempts(int value) => _i1.ColumnValue(
-    table.attempts,
-    value,
-  );
+        table.attempts,
+        value,
+      );
 
   _i1.ColumnValue<int, int> maxAttempts(int value) => _i1.ColumnValue(
-    table.maxAttempts,
-    value,
-  );
+        table.maxAttempts,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> availableAt(DateTime value) =>
       _i1.ColumnValue(
@@ -342,14 +342,14 @@ class EmailDeliveryUpdateTable extends _i1.UpdateTable<EmailDeliveryTable> {
       );
 
   _i1.ColumnValue<String, String> lockToken(String? value) => _i1.ColumnValue(
-    table.lockToken,
-    value,
-  );
+        table.lockToken,
+        value,
+      );
 
   _i1.ColumnValue<String, String> lastError(String? value) => _i1.ColumnValue(
-    table.lastError,
-    value,
-  );
+        table.lastError,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> sentAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -372,7 +372,7 @@ class EmailDeliveryUpdateTable extends _i1.UpdateTable<EmailDeliveryTable> {
 
 class EmailDeliveryTable extends _i1.Table<int?> {
   EmailDeliveryTable({super.tableRelation})
-    : super(tableName: 'email_deliveries') {
+      : super(tableName: 'email_deliveries') {
     updateTable = EmailDeliveryUpdateTable(this);
     recipient = _i1.ColumnString(
       'recipient',
@@ -464,22 +464,22 @@ class EmailDeliveryTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    recipient,
-    subject,
-    htmlBody,
-    dedupeKey,
-    status,
-    attempts,
-    maxAttempts,
-    availableAt,
-    lockedAt,
-    lockToken,
-    lastError,
-    sentAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        recipient,
+        subject,
+        htmlBody,
+        dedupeKey,
+        status,
+        attempts,
+        maxAttempts,
+        availableAt,
+        lockedAt,
+        lockToken,
+        lastError,
+        sentAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class EmailDeliveryInclude extends _i1.IncludeObject {

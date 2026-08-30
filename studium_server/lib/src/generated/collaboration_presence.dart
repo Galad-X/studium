@@ -146,13 +146,13 @@ class _CollaborationPresenceImpl extends CollaborationPresence {
     required String state,
     required DateTime lastSeenAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         scopeType: scopeType,
-         scopeId: scopeId,
-         state: state,
-         lastSeenAt: lastSeenAt,
-       );
+          id: id,
+          userId: userId,
+          scopeType: scopeType,
+          scopeId: scopeId,
+          state: state,
+          lastSeenAt: lastSeenAt,
+        );
 
   /// Returns a shallow copy of this [CollaborationPresence]
   /// with some or all fields replaced by the given arguments.
@@ -182,24 +182,24 @@ class CollaborationPresenceUpdateTable
   CollaborationPresenceUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> scopeType(String value) => _i1.ColumnValue(
-    table.scopeType,
-    value,
-  );
+        table.scopeType,
+        value,
+      );
 
   _i1.ColumnValue<int, int> scopeId(int value) => _i1.ColumnValue(
-    table.scopeId,
-    value,
-  );
+        table.scopeId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> state(String value) => _i1.ColumnValue(
-    table.state,
-    value,
-  );
+        table.state,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> lastSeenAt(DateTime value) =>
       _i1.ColumnValue(
@@ -210,7 +210,7 @@ class CollaborationPresenceUpdateTable
 
 class CollaborationPresenceTable extends _i1.Table<int?> {
   CollaborationPresenceTable({super.tableRelation})
-    : super(tableName: 'collaboration_presence') {
+      : super(tableName: 'collaboration_presence') {
     updateTable = CollaborationPresenceUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -248,13 +248,13 @@ class CollaborationPresenceTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    scopeType,
-    scopeId,
-    state,
-    lastSeenAt,
-  ];
+        id,
+        userId,
+        scopeType,
+        scopeId,
+        state,
+        lastSeenAt,
+      ];
 }
 
 class CollaborationPresenceInclude extends _i1.IncludeObject {
@@ -470,7 +470,7 @@ class CollaborationPresenceRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<CollaborationPresenceUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<CollaborationPresence>(
@@ -485,7 +485,7 @@ class CollaborationPresenceRepository {
   Future<List<CollaborationPresence>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<CollaborationPresenceUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<CollaborationPresenceTable> where,
     int? limit,
     int? offset,

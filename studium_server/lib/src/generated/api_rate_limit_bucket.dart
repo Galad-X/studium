@@ -137,12 +137,12 @@ class _ApiRateLimitBucketImpl extends ApiRateLimitBucket {
     required int requestCount,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         scopeKey: scopeKey,
-         windowStart: windowStart,
-         requestCount: requestCount,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          scopeKey: scopeKey,
+          windowStart: windowStart,
+          requestCount: requestCount,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ApiRateLimitBucket]
   /// with some or all fields replaced by the given arguments.
@@ -170,9 +170,9 @@ class ApiRateLimitBucketUpdateTable
   ApiRateLimitBucketUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> scopeKey(String value) => _i1.ColumnValue(
-    table.scopeKey,
-    value,
-  );
+        table.scopeKey,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> windowStart(DateTime value) =>
       _i1.ColumnValue(
@@ -181,9 +181,9 @@ class ApiRateLimitBucketUpdateTable
       );
 
   _i1.ColumnValue<int, int> requestCount(int value) => _i1.ColumnValue(
-    table.requestCount,
-    value,
-  );
+        table.requestCount,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> updatedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -194,7 +194,7 @@ class ApiRateLimitBucketUpdateTable
 
 class ApiRateLimitBucketTable extends _i1.Table<int?> {
   ApiRateLimitBucketTable({super.tableRelation})
-    : super(tableName: 'api_rate_limit_buckets') {
+      : super(tableName: 'api_rate_limit_buckets') {
     updateTable = ApiRateLimitBucketUpdateTable(this);
     scopeKey = _i1.ColumnString(
       'scopeKey',
@@ -226,12 +226,12 @@ class ApiRateLimitBucketTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    scopeKey,
-    windowStart,
-    requestCount,
-    updatedAt,
-  ];
+        id,
+        scopeKey,
+        windowStart,
+        requestCount,
+        updatedAt,
+      ];
 }
 
 class ApiRateLimitBucketInclude extends _i1.IncludeObject {
@@ -447,7 +447,7 @@ class ApiRateLimitBucketRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ApiRateLimitBucketUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ApiRateLimitBucket>(
@@ -462,7 +462,7 @@ class ApiRateLimitBucketRepository {
   Future<List<ApiRateLimitBucket>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ApiRateLimitBucketUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ApiRateLimitBucketTable> where,
     int? limit,
     int? offset,

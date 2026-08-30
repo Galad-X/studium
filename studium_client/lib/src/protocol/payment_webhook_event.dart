@@ -129,16 +129,16 @@ class _PaymentWebhookEventImpl extends PaymentWebhookEvent {
     required DateTime receivedAt,
     DateTime? processedAt,
   }) : super._(
-         id: id,
-         gateway: gateway,
-         eventId: eventId,
-         eventType: eventType,
-         payload: payload,
-         status: status,
-         errorMessage: errorMessage,
-         receivedAt: receivedAt,
-         processedAt: processedAt,
-       );
+          id: id,
+          gateway: gateway,
+          eventId: eventId,
+          eventType: eventType,
+          payload: payload,
+          status: status,
+          errorMessage: errorMessage,
+          receivedAt: receivedAt,
+          processedAt: processedAt,
+        );
 
   /// Returns a shallow copy of this [PaymentWebhookEvent]
   /// with some or all fields replaced by the given arguments.

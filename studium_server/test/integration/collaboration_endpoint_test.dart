@@ -156,7 +156,8 @@ void main() {
         final senderBuilder = sessionBuilder.copyWith(
           authentication: AuthenticationOverride.authenticationInfo('1002', {}),
         );
-        final existingConversation = await endpoints.messaging.createConversation(
+        final existingConversation =
+            await endpoints.messaging.createConversation(
           senderBuilder,
           const [1003],
           'Existing conversation',

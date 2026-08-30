@@ -204,19 +204,19 @@ class _BackgroundJobImpl extends BackgroundJob {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         jobType: jobType,
-         payload: payload,
-         status: status,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         availableAt: availableAt,
-         lockedAt: lockedAt,
-         lockToken: lockToken,
-         lastError: lastError,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          jobType: jobType,
+          payload: payload,
+          status: status,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          availableAt: availableAt,
+          lockedAt: lockedAt,
+          lockToken: lockToken,
+          lastError: lastError,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [BackgroundJob]
   /// with some or all fields replaced by the given arguments.
@@ -257,29 +257,29 @@ class BackgroundJobUpdateTable extends _i1.UpdateTable<BackgroundJobTable> {
   BackgroundJobUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> jobType(String value) => _i1.ColumnValue(
-    table.jobType,
-    value,
-  );
+        table.jobType,
+        value,
+      );
 
   _i1.ColumnValue<String, String> payload(String value) => _i1.ColumnValue(
-    table.payload,
-    value,
-  );
+        table.payload,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> attempts(int value) => _i1.ColumnValue(
-    table.attempts,
-    value,
-  );
+        table.attempts,
+        value,
+      );
 
   _i1.ColumnValue<int, int> maxAttempts(int value) => _i1.ColumnValue(
-    table.maxAttempts,
-    value,
-  );
+        table.maxAttempts,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> availableAt(DateTime value) =>
       _i1.ColumnValue(
@@ -294,14 +294,14 @@ class BackgroundJobUpdateTable extends _i1.UpdateTable<BackgroundJobTable> {
       );
 
   _i1.ColumnValue<String, String> lockToken(String? value) => _i1.ColumnValue(
-    table.lockToken,
-    value,
-  );
+        table.lockToken,
+        value,
+      );
 
   _i1.ColumnValue<String, String> lastError(String? value) => _i1.ColumnValue(
-    table.lastError,
-    value,
-  );
+        table.lastError,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -318,7 +318,7 @@ class BackgroundJobUpdateTable extends _i1.UpdateTable<BackgroundJobTable> {
 
 class BackgroundJobTable extends _i1.Table<int?> {
   BackgroundJobTable({super.tableRelation})
-    : super(tableName: 'background_jobs') {
+      : super(tableName: 'background_jobs') {
     updateTable = BackgroundJobUpdateTable(this);
     jobType = _i1.ColumnString(
       'jobType',
@@ -392,19 +392,19 @@ class BackgroundJobTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    jobType,
-    payload,
-    status,
-    attempts,
-    maxAttempts,
-    availableAt,
-    lockedAt,
-    lockToken,
-    lastError,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        jobType,
+        payload,
+        status,
+        attempts,
+        maxAttempts,
+        availableAt,
+        lockedAt,
+        lockToken,
+        lastError,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class BackgroundJobInclude extends _i1.IncludeObject {

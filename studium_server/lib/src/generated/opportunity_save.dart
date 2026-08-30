@@ -135,12 +135,12 @@ class _OpportunitySaveImpl extends OpportunitySave {
     required bool alertEnabled,
     required DateTime savedAt,
   }) : super._(
-         id: id,
-         opportunityId: opportunityId,
-         userId: userId,
-         alertEnabled: alertEnabled,
-         savedAt: savedAt,
-       );
+          id: id,
+          opportunityId: opportunityId,
+          userId: userId,
+          alertEnabled: alertEnabled,
+          savedAt: savedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunitySave]
   /// with some or all fields replaced by the given arguments.
@@ -167,19 +167,19 @@ class OpportunitySaveUpdateTable extends _i1.UpdateTable<OpportunitySaveTable> {
   OpportunitySaveUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> opportunityId(int value) => _i1.ColumnValue(
-    table.opportunityId,
-    value,
-  );
+        table.opportunityId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> alertEnabled(bool value) => _i1.ColumnValue(
-    table.alertEnabled,
-    value,
-  );
+        table.alertEnabled,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> savedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -190,7 +190,7 @@ class OpportunitySaveUpdateTable extends _i1.UpdateTable<OpportunitySaveTable> {
 
 class OpportunitySaveTable extends _i1.Table<int?> {
   OpportunitySaveTable({super.tableRelation})
-    : super(tableName: 'opportunity_saves') {
+      : super(tableName: 'opportunity_saves') {
     updateTable = OpportunitySaveUpdateTable(this);
     opportunityId = _i1.ColumnInt(
       'opportunityId',
@@ -222,12 +222,12 @@ class OpportunitySaveTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    opportunityId,
-    userId,
-    alertEnabled,
-    savedAt,
-  ];
+        id,
+        opportunityId,
+        userId,
+        alertEnabled,
+        savedAt,
+      ];
 }
 
 class OpportunitySaveInclude extends _i1.IncludeObject {
@@ -443,7 +443,7 @@ class OpportunitySaveRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<OpportunitySaveUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<OpportunitySave>(
@@ -458,7 +458,7 @@ class OpportunitySaveRepository {
   Future<List<OpportunitySave>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<OpportunitySaveUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<OpportunitySaveTable> where,
     int? limit,
     int? offset,

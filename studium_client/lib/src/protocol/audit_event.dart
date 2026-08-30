@@ -117,15 +117,15 @@ class _AuditEventImpl extends AuditEvent {
     String? metadata,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         actorId: actorId,
-         institutionId: institutionId,
-         action: action,
-         targetType: targetType,
-         targetId: targetId,
-         metadata: metadata,
-         createdAt: createdAt,
-       );
+          id: id,
+          actorId: actorId,
+          institutionId: institutionId,
+          action: action,
+          targetType: targetType,
+          targetId: targetId,
+          metadata: metadata,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [AuditEvent]
   /// with some or all fields replaced by the given arguments.

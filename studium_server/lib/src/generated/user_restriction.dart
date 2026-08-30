@@ -155,14 +155,14 @@ class _UserRestrictionImpl extends UserRestriction {
     required bool active,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         restrictionType: restrictionType,
-         reason: reason,
-         expiresAt: expiresAt,
-         active: active,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          restrictionType: restrictionType,
+          reason: reason,
+          expiresAt: expiresAt,
+          active: active,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [UserRestriction]
   /// with some or all fields replaced by the given arguments.
@@ -193,9 +193,9 @@ class UserRestrictionUpdateTable extends _i1.UpdateTable<UserRestrictionTable> {
   UserRestrictionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> restrictionType(String value) =>
       _i1.ColumnValue(
@@ -204,9 +204,9 @@ class UserRestrictionUpdateTable extends _i1.UpdateTable<UserRestrictionTable> {
       );
 
   _i1.ColumnValue<String, String> reason(String value) => _i1.ColumnValue(
-    table.reason,
-    value,
-  );
+        table.reason,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> expiresAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -215,9 +215,9 @@ class UserRestrictionUpdateTable extends _i1.UpdateTable<UserRestrictionTable> {
       );
 
   _i1.ColumnValue<bool, bool> active(bool value) => _i1.ColumnValue(
-    table.active,
-    value,
-  );
+        table.active,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -228,7 +228,7 @@ class UserRestrictionUpdateTable extends _i1.UpdateTable<UserRestrictionTable> {
 
 class UserRestrictionTable extends _i1.Table<int?> {
   UserRestrictionTable({super.tableRelation})
-    : super(tableName: 'user_restrictions') {
+      : super(tableName: 'user_restrictions') {
     updateTable = UserRestrictionUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -272,14 +272,14 @@ class UserRestrictionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    restrictionType,
-    reason,
-    expiresAt,
-    active,
-    createdAt,
-  ];
+        id,
+        userId,
+        restrictionType,
+        reason,
+        expiresAt,
+        active,
+        createdAt,
+      ];
 }
 
 class UserRestrictionInclude extends _i1.IncludeObject {
@@ -495,7 +495,7 @@ class UserRestrictionRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<UserRestrictionUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<UserRestriction>(
@@ -510,7 +510,7 @@ class UserRestrictionRepository {
   Future<List<UserRestriction>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<UserRestrictionUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<UserRestrictionTable> where,
     int? limit,
     int? offset,

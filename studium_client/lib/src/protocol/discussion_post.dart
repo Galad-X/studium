@@ -119,15 +119,15 @@ class _DiscussionPostImpl extends DiscussionPost {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         authorId: authorId,
-         acceptedCommentId: acceptedCommentId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          authorId: authorId,
+          acceptedCommentId: acceptedCommentId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [DiscussionPost]
   /// with some or all fields replaced by the given arguments.

@@ -162,15 +162,15 @@ class _StudyMaterialImpl extends StudyMaterial {
     int? size,
     String? contentText,
   }) : super._(
-         id: id,
-         userId: userId,
-         title: title,
-         fileType: fileType,
-         fileUrl: fileUrl,
-         uploadDate: uploadDate,
-         size: size,
-         contentText: contentText,
-       );
+          id: id,
+          userId: userId,
+          title: title,
+          fileType: fileType,
+          fileUrl: fileUrl,
+          uploadDate: uploadDate,
+          size: size,
+          contentText: contentText,
+        );
 
   /// Returns a shallow copy of this [StudyMaterial]
   /// with some or all fields replaced by the given arguments.
@@ -203,24 +203,24 @@ class StudyMaterialUpdateTable extends _i1.UpdateTable<StudyMaterialTable> {
   StudyMaterialUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> fileType(String value) => _i1.ColumnValue(
-    table.fileType,
-    value,
-  );
+        table.fileType,
+        value,
+      );
 
   _i1.ColumnValue<String, String> fileUrl(String value) => _i1.ColumnValue(
-    table.fileUrl,
-    value,
-  );
+        table.fileUrl,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> uploadDate(DateTime value) =>
       _i1.ColumnValue(
@@ -229,19 +229,19 @@ class StudyMaterialUpdateTable extends _i1.UpdateTable<StudyMaterialTable> {
       );
 
   _i1.ColumnValue<int, int> size(int? value) => _i1.ColumnValue(
-    table.size,
-    value,
-  );
+        table.size,
+        value,
+      );
 
   _i1.ColumnValue<String, String> contentText(String? value) => _i1.ColumnValue(
-    table.contentText,
-    value,
-  );
+        table.contentText,
+        value,
+      );
 }
 
 class StudyMaterialTable extends _i1.Table<int?> {
   StudyMaterialTable({super.tableRelation})
-    : super(tableName: 'study_materials') {
+      : super(tableName: 'study_materials') {
     updateTable = StudyMaterialUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -291,15 +291,15 @@ class StudyMaterialTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    title,
-    fileType,
-    fileUrl,
-    uploadDate,
-    size,
-    contentText,
-  ];
+        id,
+        userId,
+        title,
+        fileType,
+        fileUrl,
+        uploadDate,
+        size,
+        contentText,
+      ];
 }
 
 class StudyMaterialInclude extends _i1.IncludeObject {

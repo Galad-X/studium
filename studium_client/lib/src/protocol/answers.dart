@@ -109,14 +109,14 @@ class _AnswerImpl extends Answer {
     String? feedback,
     required DateTime submittedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         questionId: questionId,
-         answerText: answerText,
-         score: score,
-         feedback: feedback,
-         submittedAt: submittedAt,
-       );
+          id: id,
+          userId: userId,
+          questionId: questionId,
+          answerText: answerText,
+          score: score,
+          feedback: feedback,
+          submittedAt: submittedAt,
+        );
 
   /// Returns a shallow copy of this [Answer]
   /// with some or all fields replaced by the given arguments.

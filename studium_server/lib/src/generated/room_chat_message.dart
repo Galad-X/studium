@@ -144,13 +144,13 @@ class _RoomChatMessageImpl extends RoomChatMessage {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomId: roomId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomChatMessage]
   /// with some or all fields replaced by the given arguments.
@@ -179,24 +179,24 @@ class RoomChatMessageUpdateTable extends _i1.UpdateTable<RoomChatMessageTable> {
   RoomChatMessageUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> authorId(int value) => _i1.ColumnValue(
-    table.authorId,
-    value,
-  );
+        table.authorId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -207,7 +207,7 @@ class RoomChatMessageUpdateTable extends _i1.UpdateTable<RoomChatMessageTable> {
 
 class RoomChatMessageTable extends _i1.Table<int?> {
   RoomChatMessageTable({super.tableRelation})
-    : super(tableName: 'room_chat_messages') {
+      : super(tableName: 'room_chat_messages') {
     updateTable = RoomChatMessageUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -245,13 +245,13 @@ class RoomChatMessageTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    authorId,
-    body,
-    status,
-    createdAt,
-  ];
+        id,
+        roomId,
+        authorId,
+        body,
+        status,
+        createdAt,
+      ];
 }
 
 class RoomChatMessageInclude extends _i1.IncludeObject {
@@ -467,7 +467,7 @@ class RoomChatMessageRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<RoomChatMessageUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<RoomChatMessage>(
@@ -482,7 +482,7 @@ class RoomChatMessageRepository {
   Future<List<RoomChatMessage>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<RoomChatMessageUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<RoomChatMessageTable> where,
     int? limit,
     int? offset,

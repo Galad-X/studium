@@ -143,18 +143,18 @@ class _RoomResourceImpl extends RoomResource {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         resourceType: resourceType,
-         title: title,
-         uri: uri,
-         content: content,
-         citation: citation,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          resourceType: resourceType,
+          title: title,
+          uri: uri,
+          content: content,
+          citation: citation,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [RoomResource]
   /// with some or all fields replaced by the given arguments.

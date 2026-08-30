@@ -162,15 +162,15 @@ class _ModerationLogImpl extends ModerationLog {
     String? note,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         reportId: reportId,
-         moderatorId: moderatorId,
-         action: action,
-         targetType: targetType,
-         targetId: targetId,
-         note: note,
-         createdAt: createdAt,
-       );
+          id: id,
+          reportId: reportId,
+          moderatorId: moderatorId,
+          action: action,
+          targetType: targetType,
+          targetId: targetId,
+          note: note,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ModerationLog]
   /// with some or all fields replaced by the given arguments.
@@ -203,34 +203,34 @@ class ModerationLogUpdateTable extends _i1.UpdateTable<ModerationLogTable> {
   ModerationLogUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> reportId(int value) => _i1.ColumnValue(
-    table.reportId,
-    value,
-  );
+        table.reportId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> moderatorId(int value) => _i1.ColumnValue(
-    table.moderatorId,
-    value,
-  );
+        table.moderatorId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> action(String value) => _i1.ColumnValue(
-    table.action,
-    value,
-  );
+        table.action,
+        value,
+      );
 
   _i1.ColumnValue<String, String> targetType(String value) => _i1.ColumnValue(
-    table.targetType,
-    value,
-  );
+        table.targetType,
+        value,
+      );
 
   _i1.ColumnValue<int, int> targetId(int value) => _i1.ColumnValue(
-    table.targetId,
-    value,
-  );
+        table.targetId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> note(String? value) => _i1.ColumnValue(
-    table.note,
-    value,
-  );
+        table.note,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -241,7 +241,7 @@ class ModerationLogUpdateTable extends _i1.UpdateTable<ModerationLogTable> {
 
 class ModerationLogTable extends _i1.Table<int?> {
   ModerationLogTable({super.tableRelation})
-    : super(tableName: 'moderation_logs') {
+      : super(tableName: 'moderation_logs') {
     updateTable = ModerationLogUpdateTable(this);
     reportId = _i1.ColumnInt(
       'reportId',
@@ -291,15 +291,15 @@ class ModerationLogTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    reportId,
-    moderatorId,
-    action,
-    targetType,
-    targetId,
-    note,
-    createdAt,
-  ];
+        id,
+        reportId,
+        moderatorId,
+        action,
+        targetType,
+        targetId,
+        note,
+        createdAt,
+      ];
 }
 
 class ModerationLogInclude extends _i1.IncludeObject {

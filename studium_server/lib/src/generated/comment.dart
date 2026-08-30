@@ -164,15 +164,15 @@ class _CommentImpl extends Comment {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         postId: postId,
-         authorId: authorId,
-         parentCommentId: parentCommentId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          postId: postId,
+          authorId: authorId,
+          parentCommentId: parentCommentId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Comment]
   /// with some or all fields replaced by the given arguments.
@@ -192,9 +192,8 @@ class _CommentImpl extends Comment {
       id: id is int? ? id : this.id,
       postId: postId ?? this.postId,
       authorId: authorId ?? this.authorId,
-      parentCommentId: parentCommentId is int?
-          ? parentCommentId
-          : this.parentCommentId,
+      parentCommentId:
+          parentCommentId is int? ? parentCommentId : this.parentCommentId,
       body: body ?? this.body,
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
@@ -207,29 +206,29 @@ class CommentUpdateTable extends _i1.UpdateTable<CommentTable> {
   CommentUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> postId(int value) => _i1.ColumnValue(
-    table.postId,
-    value,
-  );
+        table.postId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> authorId(int value) => _i1.ColumnValue(
-    table.authorId,
-    value,
-  );
+        table.authorId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> parentCommentId(int? value) => _i1.ColumnValue(
-    table.parentCommentId,
-    value,
-  );
+        table.parentCommentId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -295,15 +294,15 @@ class CommentTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    postId,
-    authorId,
-    parentCommentId,
-    body,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        postId,
+        authorId,
+        parentCommentId,
+        body,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class CommentInclude extends _i1.IncludeObject {

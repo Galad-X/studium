@@ -22,9 +22,9 @@ abstract class UserReputation
     int? acceptedSolutions,
     int? verifiedContributions,
     required this.updatedAt,
-  }) : score = score ?? 0,
-       acceptedSolutions = acceptedSolutions ?? 0,
-       verifiedContributions = verifiedContributions ?? 0;
+  })  : score = score ?? 0,
+        acceptedSolutions = acceptedSolutions ?? 0,
+        verifiedContributions = verifiedContributions ?? 0;
 
   factory UserReputation({
     int? id,
@@ -146,13 +146,13 @@ class _UserReputationImpl extends UserReputation {
     int? verifiedContributions,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         score: score,
-         acceptedSolutions: acceptedSolutions,
-         verifiedContributions: verifiedContributions,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          score: score,
+          acceptedSolutions: acceptedSolutions,
+          verifiedContributions: verifiedContributions,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserReputation]
   /// with some or all fields replaced by the given arguments.
@@ -182,24 +182,24 @@ class UserReputationUpdateTable extends _i1.UpdateTable<UserReputationTable> {
   UserReputationUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> score(int value) => _i1.ColumnValue(
-    table.score,
-    value,
-  );
+        table.score,
+        value,
+      );
 
   _i1.ColumnValue<int, int> acceptedSolutions(int value) => _i1.ColumnValue(
-    table.acceptedSolutions,
-    value,
-  );
+        table.acceptedSolutions,
+        value,
+      );
 
   _i1.ColumnValue<int, int> verifiedContributions(int value) => _i1.ColumnValue(
-    table.verifiedContributions,
-    value,
-  );
+        table.verifiedContributions,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> updatedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -210,7 +210,7 @@ class UserReputationUpdateTable extends _i1.UpdateTable<UserReputationTable> {
 
 class UserReputationTable extends _i1.Table<int?> {
   UserReputationTable({super.tableRelation})
-    : super(tableName: 'user_reputation') {
+      : super(tableName: 'user_reputation') {
     updateTable = UserReputationUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -251,13 +251,13 @@ class UserReputationTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    score,
-    acceptedSolutions,
-    verifiedContributions,
-    updatedAt,
-  ];
+        id,
+        userId,
+        score,
+        acceptedSolutions,
+        verifiedContributions,
+        updatedAt,
+      ];
 }
 
 class UserReputationInclude extends _i1.IncludeObject {

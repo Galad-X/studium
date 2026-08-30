@@ -121,15 +121,15 @@ class _InstitutionMembershipImpl extends InstitutionMembership {
     required DateTime createdAt,
     DateTime? verifiedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         institutionId: institutionId,
-         role: role,
-         verificationMethod: verificationMethod,
-         status: status,
-         createdAt: createdAt,
-         verifiedAt: verifiedAt,
-       );
+          id: id,
+          userId: userId,
+          institutionId: institutionId,
+          role: role,
+          verificationMethod: verificationMethod,
+          status: status,
+          createdAt: createdAt,
+          verifiedAt: verifiedAt,
+        );
 
   /// Returns a shallow copy of this [InstitutionMembership]
   /// with some or all fields replaced by the given arguments.

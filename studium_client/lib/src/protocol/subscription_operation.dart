@@ -129,16 +129,16 @@ class _SubscriptionOperationImpl extends SubscriptionOperation {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         gateway: gateway,
-         idempotencyKey: idempotencyKey,
-         status: status,
-         subscriptionId: subscriptionId,
-         errorMessage: errorMessage,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          gateway: gateway,
+          idempotencyKey: idempotencyKey,
+          status: status,
+          subscriptionId: subscriptionId,
+          errorMessage: errorMessage,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [SubscriptionOperation]
   /// with some or all fields replaced by the given arguments.
@@ -161,9 +161,8 @@ class _SubscriptionOperationImpl extends SubscriptionOperation {
       gateway: gateway ?? this.gateway,
       idempotencyKey: idempotencyKey ?? this.idempotencyKey,
       status: status ?? this.status,
-      subscriptionId: subscriptionId is int?
-          ? subscriptionId
-          : this.subscriptionId,
+      subscriptionId:
+          subscriptionId is int? ? subscriptionId : this.subscriptionId,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

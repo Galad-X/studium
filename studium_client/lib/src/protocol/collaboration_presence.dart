@@ -103,13 +103,13 @@ class _CollaborationPresenceImpl extends CollaborationPresence {
     required String state,
     required DateTime lastSeenAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         scopeType: scopeType,
-         scopeId: scopeId,
-         state: state,
-         lastSeenAt: lastSeenAt,
-       );
+          id: id,
+          userId: userId,
+          scopeType: scopeType,
+          scopeId: scopeId,
+          state: state,
+          lastSeenAt: lastSeenAt,
+        );
 
   /// Returns a shallow copy of this [CollaborationPresence]
   /// with some or all fields replaced by the given arguments.

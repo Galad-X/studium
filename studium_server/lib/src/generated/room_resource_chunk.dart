@@ -153,14 +153,14 @@ class _RoomResourceChunkImpl extends RoomResourceChunk {
     String? embedding,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomResourceId: roomResourceId,
-         chunkIndex: chunkIndex,
-         content: content,
-         tokenCount: tokenCount,
-         embedding: embedding,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomResourceId: roomResourceId,
+          chunkIndex: chunkIndex,
+          content: content,
+          tokenCount: tokenCount,
+          embedding: embedding,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomResourceChunk]
   /// with some or all fields replaced by the given arguments.
@@ -192,29 +192,29 @@ class RoomResourceChunkUpdateTable
   RoomResourceChunkUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomResourceId(int value) => _i1.ColumnValue(
-    table.roomResourceId,
-    value,
-  );
+        table.roomResourceId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> chunkIndex(int value) => _i1.ColumnValue(
-    table.chunkIndex,
-    value,
-  );
+        table.chunkIndex,
+        value,
+      );
 
   _i1.ColumnValue<String, String> content(String value) => _i1.ColumnValue(
-    table.content,
-    value,
-  );
+        table.content,
+        value,
+      );
 
   _i1.ColumnValue<int, int> tokenCount(int value) => _i1.ColumnValue(
-    table.tokenCount,
-    value,
-  );
+        table.tokenCount,
+        value,
+      );
 
   _i1.ColumnValue<String, String> embedding(String? value) => _i1.ColumnValue(
-    table.embedding,
-    value,
-  );
+        table.embedding,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -225,7 +225,7 @@ class RoomResourceChunkUpdateTable
 
 class RoomResourceChunkTable extends _i1.Table<int?> {
   RoomResourceChunkTable({super.tableRelation})
-    : super(tableName: 'room_resource_chunks') {
+      : super(tableName: 'room_resource_chunks') {
     updateTable = RoomResourceChunkUpdateTable(this);
     roomResourceId = _i1.ColumnInt(
       'roomResourceId',
@@ -269,14 +269,14 @@ class RoomResourceChunkTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomResourceId,
-    chunkIndex,
-    content,
-    tokenCount,
-    embedding,
-    createdAt,
-  ];
+        id,
+        roomResourceId,
+        chunkIndex,
+        content,
+        tokenCount,
+        embedding,
+        createdAt,
+      ];
 }
 
 class RoomResourceChunkInclude extends _i1.IncludeObject {
@@ -492,7 +492,7 @@ class RoomResourceChunkRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<RoomResourceChunkUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<RoomResourceChunk>(
@@ -507,7 +507,7 @@ class RoomResourceChunkRepository {
   Future<List<RoomResourceChunk>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<RoomResourceChunkUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<RoomResourceChunkTable> where,
     int? limit,
     int? offset,

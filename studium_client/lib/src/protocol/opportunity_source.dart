@@ -167,20 +167,20 @@ class _OpportunitySourceImpl extends OpportunitySource {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         name: name,
-         provider: provider,
-         feedUrl: feedUrl,
-         verificationStatus: verificationStatus,
-         createdById: createdById,
-         lastSyncedAt: lastSyncedAt,
-         nextSyncAt: nextSyncAt,
-         lastSyncStatus: lastSyncStatus,
-         lastSyncError: lastSyncError,
-         staleAt: staleAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          name: name,
+          provider: provider,
+          feedUrl: feedUrl,
+          verificationStatus: verificationStatus,
+          createdById: createdById,
+          lastSyncedAt: lastSyncedAt,
+          nextSyncAt: nextSyncAt,
+          lastSyncStatus: lastSyncStatus,
+          lastSyncError: lastSyncError,
+          staleAt: staleAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunitySource]
   /// with some or all fields replaced by the given arguments.
@@ -208,16 +208,13 @@ class _OpportunitySourceImpl extends OpportunitySource {
       feedUrl: feedUrl ?? this.feedUrl,
       verificationStatus: verificationStatus ?? this.verificationStatus,
       createdById: createdById ?? this.createdById,
-      lastSyncedAt: lastSyncedAt is DateTime?
-          ? lastSyncedAt
-          : this.lastSyncedAt,
+      lastSyncedAt:
+          lastSyncedAt is DateTime? ? lastSyncedAt : this.lastSyncedAt,
       nextSyncAt: nextSyncAt is DateTime? ? nextSyncAt : this.nextSyncAt,
-      lastSyncStatus: lastSyncStatus is String?
-          ? lastSyncStatus
-          : this.lastSyncStatus,
-      lastSyncError: lastSyncError is String?
-          ? lastSyncError
-          : this.lastSyncError,
+      lastSyncStatus:
+          lastSyncStatus is String? ? lastSyncStatus : this.lastSyncStatus,
+      lastSyncError:
+          lastSyncError is String? ? lastSyncError : this.lastSyncError,
       staleAt: staleAt is DateTime? ? staleAt : this.staleAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

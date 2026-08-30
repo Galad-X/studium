@@ -95,12 +95,12 @@ class _ConversationReadReceiptImpl extends ConversationReadReceipt {
     required int lastReadMessageId,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         userId: userId,
-         lastReadMessageId: lastReadMessageId,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          userId: userId,
+          lastReadMessageId: lastReadMessageId,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ConversationReadReceipt]
   /// with some or all fields replaced by the given arguments.

@@ -111,14 +111,14 @@ class _PushDeviceImpl extends PushDevice {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         token: token,
-         platform: platform,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          token: token,
+          platform: platform,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [PushDevice]
   /// with some or all fields replaced by the given arguments.

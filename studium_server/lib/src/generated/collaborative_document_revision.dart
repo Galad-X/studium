@@ -146,13 +146,13 @@ class _CollaborativeDocumentRevisionImpl extends CollaborativeDocumentRevision {
     required String body,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         documentId: documentId,
-         editorId: editorId,
-         version: version,
-         body: body,
-         createdAt: createdAt,
-       );
+          id: id,
+          documentId: documentId,
+          editorId: editorId,
+          version: version,
+          body: body,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [CollaborativeDocumentRevision]
   /// with some or all fields replaced by the given arguments.
@@ -182,24 +182,24 @@ class CollaborativeDocumentRevisionUpdateTable
   CollaborativeDocumentRevisionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> documentId(int value) => _i1.ColumnValue(
-    table.documentId,
-    value,
-  );
+        table.documentId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> editorId(int value) => _i1.ColumnValue(
-    table.editorId,
-    value,
-  );
+        table.editorId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> version(int value) => _i1.ColumnValue(
-    table.version,
-    value,
-  );
+        table.version,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -210,7 +210,7 @@ class CollaborativeDocumentRevisionUpdateTable
 
 class CollaborativeDocumentRevisionTable extends _i1.Table<int?> {
   CollaborativeDocumentRevisionTable({super.tableRelation})
-    : super(tableName: 'collaborative_document_revisions') {
+      : super(tableName: 'collaborative_document_revisions') {
     updateTable = CollaborativeDocumentRevisionUpdateTable(this);
     documentId = _i1.ColumnInt(
       'documentId',
@@ -248,13 +248,13 @@ class CollaborativeDocumentRevisionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    documentId,
-    editorId,
-    version,
-    body,
-    createdAt,
-  ];
+        id,
+        documentId,
+        editorId,
+        version,
+        body,
+        createdAt,
+      ];
 }
 
 class CollaborativeDocumentRevisionInclude extends _i1.IncludeObject {
@@ -469,10 +469,9 @@ class CollaborativeDocumentRevisionRepository {
   Future<CollaborativeDocumentRevision?> updateById(
     _i1.DatabaseSession session,
     int id, {
-    required _i1.ColumnValueListBuilder<
-      CollaborativeDocumentRevisionUpdateTable
-    >
-    columnValues,
+    required _i1
+        .ColumnValueListBuilder<CollaborativeDocumentRevisionUpdateTable>
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<CollaborativeDocumentRevision>(
@@ -486,12 +485,11 @@ class CollaborativeDocumentRevisionRepository {
   /// Returns the list of updated rows.
   Future<List<CollaborativeDocumentRevision>> updateWhere(
     _i1.DatabaseSession session, {
-    required _i1.ColumnValueListBuilder<
-      CollaborativeDocumentRevisionUpdateTable
-    >
-    columnValues,
+    required _i1
+        .ColumnValueListBuilder<CollaborativeDocumentRevisionUpdateTable>
+        columnValues,
     required _i1.WhereExpressionBuilder<CollaborativeDocumentRevisionTable>
-    where,
+        where,
     int? limit,
     int? offset,
     _i1.OrderByBuilder<CollaborativeDocumentRevisionTable>? orderBy,
@@ -541,7 +539,7 @@ class CollaborativeDocumentRevisionRepository {
   Future<List<CollaborativeDocumentRevision>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<CollaborativeDocumentRevisionTable>
-    where,
+        where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<CollaborativeDocumentRevision>(
@@ -569,7 +567,7 @@ class CollaborativeDocumentRevisionRepository {
   Future<void> lockRows(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<CollaborativeDocumentRevisionTable>
-    where,
+        where,
     required _i1.LockMode lockMode,
     required _i1.Transaction transaction,
     _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,

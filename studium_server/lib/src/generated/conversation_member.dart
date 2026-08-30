@@ -144,13 +144,13 @@ class _ConversationMemberImpl extends ConversationMember {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [ConversationMember]
   /// with some or all fields replaced by the given arguments.
@@ -180,24 +180,24 @@ class ConversationMemberUpdateTable
   ConversationMemberUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> conversationId(int value) => _i1.ColumnValue(
-    table.conversationId,
-    value,
-  );
+        table.conversationId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> role(String value) => _i1.ColumnValue(
-    table.role,
-    value,
-  );
+        table.role,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> joinedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -208,7 +208,7 @@ class ConversationMemberUpdateTable
 
 class ConversationMemberTable extends _i1.Table<int?> {
   ConversationMemberTable({super.tableRelation})
-    : super(tableName: 'conversation_members') {
+      : super(tableName: 'conversation_members') {
     updateTable = ConversationMemberUpdateTable(this);
     conversationId = _i1.ColumnInt(
       'conversationId',
@@ -246,13 +246,13 @@ class ConversationMemberTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    conversationId,
-    userId,
-    role,
-    status,
-    joinedAt,
-  ];
+        id,
+        conversationId,
+        userId,
+        role,
+        status,
+        joinedAt,
+      ];
 }
 
 class ConversationMemberInclude extends _i1.IncludeObject {
@@ -468,7 +468,7 @@ class ConversationMemberRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ConversationMemberUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ConversationMember>(
@@ -483,7 +483,7 @@ class ConversationMemberRepository {
   Future<List<ConversationMember>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ConversationMemberUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ConversationMemberTable> where,
     int? limit,
     int? offset,

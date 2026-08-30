@@ -111,14 +111,14 @@ class _UserRestrictionImpl extends UserRestriction {
     required bool active,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         restrictionType: restrictionType,
-         reason: reason,
-         expiresAt: expiresAt,
-         active: active,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          restrictionType: restrictionType,
+          reason: reason,
+          expiresAt: expiresAt,
+          active: active,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [UserRestriction]
   /// with some or all fields replaced by the given arguments.

@@ -119,15 +119,15 @@ class _ChallengeTeamImpl extends ChallengeTeam {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         challengeId: challengeId,
-         ownerId: ownerId,
-         name: name,
-         description: description,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          challengeId: challengeId,
+          ownerId: ownerId,
+          name: name,
+          description: description,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeam]
   /// with some or all fields replaced by the given arguments.

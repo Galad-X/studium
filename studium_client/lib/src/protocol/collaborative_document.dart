@@ -129,16 +129,16 @@ class _CollaborativeDocumentImpl extends CollaborativeDocument {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         title: title,
-         body: body,
-         version: version,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          title: title,
+          body: body,
+          version: version,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [CollaborativeDocument]
   /// with some or all fields replaced by the given arguments.

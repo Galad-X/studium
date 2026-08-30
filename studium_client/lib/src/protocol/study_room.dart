@@ -143,18 +143,18 @@ class _StudyRoomImpl extends StudyRoom {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         institutionId: institutionId,
-         ownerId: ownerId,
-         title: title,
-         description: description,
-         subject: subject,
-         visibility: visibility,
-         membershipPolicy: membershipPolicy,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          institutionId: institutionId,
+          ownerId: ownerId,
+          title: title,
+          description: description,
+          subject: subject,
+          visibility: visibility,
+          membershipPolicy: membershipPolicy,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [StudyRoom]
   /// with some or all fields replaced by the given arguments.

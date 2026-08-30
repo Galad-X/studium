@@ -138,17 +138,17 @@ class _OpportunityAlertImpl extends OpportunityAlert {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         country: country,
-         field: field,
-         educationLevel: educationLevel,
-         opportunityTypes: opportunityTypes,
-         deadlineWithinDays: deadlineWithinDays,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          country: country,
+          field: field,
+          educationLevel: educationLevel,
+          opportunityTypes: opportunityTypes,
+          deadlineWithinDays: deadlineWithinDays,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunityAlert]
   /// with some or all fields replaced by the given arguments.
@@ -171,9 +171,8 @@ class _OpportunityAlertImpl extends OpportunityAlert {
       userId: userId ?? this.userId,
       country: country is String? ? country : this.country,
       field: field is String? ? field : this.field,
-      educationLevel: educationLevel is String?
-          ? educationLevel
-          : this.educationLevel,
+      educationLevel:
+          educationLevel is String? ? educationLevel : this.educationLevel,
       opportunityTypes:
           opportunityTypes ?? this.opportunityTypes.map((e0) => e0).toList(),
       deadlineWithinDays: deadlineWithinDays ?? this.deadlineWithinDays,

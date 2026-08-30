@@ -500,7 +500,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
       Uri(scheme: 'mailto', path: _supportEmail),
       mode: LaunchMode.externalApplication,
     );
-    if (!launched && mounted) _showErrorSnackBar('Could not open support email.');
+    if (!launched && mounted) {
+      _showErrorSnackBar('Could not open support email.');
+    }
   }
 
   Widget _buildNeuralPrivacySection() {
@@ -523,15 +525,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         _NeuralSettingsTile(
           title: 'Neural Analytics Opt-out',
           subtitle: 'Control AI learning data usage',
-          trailing:
-              Switch(
-                value: _analyticsOptOut,
-                onChanged: (value) async {
-                  HapticFeedback.lightImpact();
-                  setState(() => _analyticsOptOut = value);
-                  await _setPreference('settings.analytics_opt_out', value);
-                },
-              ),
+          trailing: Switch(
+            value: _analyticsOptOut,
+            onChanged: (value) async {
+              HapticFeedback.lightImpact();
+              setState(() => _analyticsOptOut = value);
+              await _setPreference('settings.analytics_opt_out', value);
+            },
+          ),
           onTap: () {
             HapticFeedback.lightImpact();
             _showInfoDialog(

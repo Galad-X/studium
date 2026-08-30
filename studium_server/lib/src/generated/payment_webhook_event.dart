@@ -175,16 +175,16 @@ class _PaymentWebhookEventImpl extends PaymentWebhookEvent {
     required DateTime receivedAt,
     DateTime? processedAt,
   }) : super._(
-         id: id,
-         gateway: gateway,
-         eventId: eventId,
-         eventType: eventType,
-         payload: payload,
-         status: status,
-         errorMessage: errorMessage,
-         receivedAt: receivedAt,
-         processedAt: processedAt,
-       );
+          id: id,
+          gateway: gateway,
+          eventId: eventId,
+          eventType: eventType,
+          payload: payload,
+          status: status,
+          errorMessage: errorMessage,
+          receivedAt: receivedAt,
+          processedAt: processedAt,
+        );
 
   /// Returns a shallow copy of this [PaymentWebhookEvent]
   /// with some or all fields replaced by the given arguments.
@@ -220,29 +220,29 @@ class PaymentWebhookEventUpdateTable
   PaymentWebhookEventUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
-    table.gateway,
-    value,
-  );
+        table.gateway,
+        value,
+      );
 
   _i1.ColumnValue<String, String> eventId(String value) => _i1.ColumnValue(
-    table.eventId,
-    value,
-  );
+        table.eventId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> eventType(String value) => _i1.ColumnValue(
-    table.eventType,
-    value,
-  );
+        table.eventType,
+        value,
+      );
 
   _i1.ColumnValue<String, String> payload(String value) => _i1.ColumnValue(
-    table.payload,
-    value,
-  );
+        table.payload,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<String, String> errorMessage(String? value) =>
       _i1.ColumnValue(
@@ -265,7 +265,7 @@ class PaymentWebhookEventUpdateTable
 
 class PaymentWebhookEventTable extends _i1.Table<int?> {
   PaymentWebhookEventTable({super.tableRelation})
-    : super(tableName: 'payment_webhook_events') {
+      : super(tableName: 'payment_webhook_events') {
     updateTable = PaymentWebhookEventUpdateTable(this);
     gateway = _i1.ColumnString(
       'gateway',
@@ -321,16 +321,16 @@ class PaymentWebhookEventTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    gateway,
-    eventId,
-    eventType,
-    payload,
-    status,
-    errorMessage,
-    receivedAt,
-    processedAt,
-  ];
+        id,
+        gateway,
+        eventId,
+        eventType,
+        payload,
+        status,
+        errorMessage,
+        receivedAt,
+        processedAt,
+      ];
 }
 
 class PaymentWebhookEventInclude extends _i1.IncludeObject {
@@ -546,7 +546,7 @@ class PaymentWebhookEventRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<PaymentWebhookEventUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<PaymentWebhookEvent>(
@@ -561,7 +561,7 @@ class PaymentWebhookEventRepository {
   Future<List<PaymentWebhookEvent>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<PaymentWebhookEventUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<PaymentWebhookEventTable> where,
     int? limit,
     int? offset,

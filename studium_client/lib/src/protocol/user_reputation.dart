@@ -21,9 +21,9 @@ abstract class UserReputation implements _i1.SerializableModel {
     int? acceptedSolutions,
     int? verifiedContributions,
     required this.updatedAt,
-  }) : score = score ?? 0,
-       acceptedSolutions = acceptedSolutions ?? 0,
-       verifiedContributions = verifiedContributions ?? 0;
+  })  : score = score ?? 0,
+        acceptedSolutions = acceptedSolutions ?? 0,
+        verifiedContributions = verifiedContributions ?? 0;
 
   factory UserReputation({
     int? id,
@@ -103,13 +103,13 @@ class _UserReputationImpl extends UserReputation {
     int? verifiedContributions,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         score: score,
-         acceptedSolutions: acceptedSolutions,
-         verifiedContributions: verifiedContributions,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          score: score,
+          acceptedSolutions: acceptedSolutions,
+          verifiedContributions: verifiedContributions,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserReputation]
   /// with some or all fields replaced by the given arguments.

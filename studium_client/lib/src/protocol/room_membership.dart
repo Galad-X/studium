@@ -101,13 +101,13 @@ class _RoomMembershipImpl extends RoomMembership {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          roomId: roomId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [RoomMembership]
   /// with some or all fields replaced by the given arguments.

@@ -53,8 +53,8 @@ abstract class PaymentTransaction implements _i1.SerializableModel {
       userId: jsonSerialization['userId'] as int,
       amount: (jsonSerialization['amount'] as num).toDouble(),
       currency: jsonSerialization['currency'] as String?,
-      settlementAmount: (jsonSerialization['settlementAmount'] as num?)
-          ?.toDouble(),
+      settlementAmount:
+          (jsonSerialization['settlementAmount'] as num?)?.toDouble(),
       settlementCurrency: jsonSerialization['settlementCurrency'] as String?,
       exchangeRate: (jsonSerialization['exchangeRate'] as num?)?.toDouble(),
       settlementSource: jsonSerialization['settlementSource'] as String?,
@@ -158,20 +158,20 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     required String transactionId,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         subscriptionId: subscriptionId,
-         userId: userId,
-         amount: amount,
-         currency: currency,
-         settlementAmount: settlementAmount,
-         settlementCurrency: settlementCurrency,
-         exchangeRate: exchangeRate,
-         settlementSource: settlementSource,
-         status: status,
-         gateway: gateway,
-         transactionId: transactionId,
-         createdAt: createdAt,
-       );
+          id: id,
+          subscriptionId: subscriptionId,
+          userId: userId,
+          amount: amount,
+          currency: currency,
+          settlementAmount: settlementAmount,
+          settlementCurrency: settlementCurrency,
+          exchangeRate: exchangeRate,
+          settlementSource: settlementSource,
+          status: status,
+          gateway: gateway,
+          transactionId: transactionId,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [PaymentTransaction]
   /// with some or all fields replaced by the given arguments.

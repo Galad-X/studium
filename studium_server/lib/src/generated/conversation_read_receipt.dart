@@ -137,12 +137,12 @@ class _ConversationReadReceiptImpl extends ConversationReadReceipt {
     required int lastReadMessageId,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         userId: userId,
-         lastReadMessageId: lastReadMessageId,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          userId: userId,
+          lastReadMessageId: lastReadMessageId,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ConversationReadReceipt]
   /// with some or all fields replaced by the given arguments.
@@ -170,19 +170,19 @@ class ConversationReadReceiptUpdateTable
   ConversationReadReceiptUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> conversationId(int value) => _i1.ColumnValue(
-    table.conversationId,
-    value,
-  );
+        table.conversationId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> lastReadMessageId(int value) => _i1.ColumnValue(
-    table.lastReadMessageId,
-    value,
-  );
+        table.lastReadMessageId,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> updatedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -193,7 +193,7 @@ class ConversationReadReceiptUpdateTable
 
 class ConversationReadReceiptTable extends _i1.Table<int?> {
   ConversationReadReceiptTable({super.tableRelation})
-    : super(tableName: 'conversation_read_receipts') {
+      : super(tableName: 'conversation_read_receipts') {
     updateTable = ConversationReadReceiptUpdateTable(this);
     conversationId = _i1.ColumnInt(
       'conversationId',
@@ -225,12 +225,12 @@ class ConversationReadReceiptTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    conversationId,
-    userId,
-    lastReadMessageId,
-    updatedAt,
-  ];
+        id,
+        conversationId,
+        userId,
+        lastReadMessageId,
+        updatedAt,
+      ];
 }
 
 class ConversationReadReceiptInclude extends _i1.IncludeObject {
@@ -446,7 +446,7 @@ class ConversationReadReceiptRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ConversationReadReceiptUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ConversationReadReceipt>(
@@ -461,7 +461,7 @@ class ConversationReadReceiptRepository {
   Future<List<ConversationReadReceipt>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ConversationReadReceiptUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ConversationReadReceiptTable> where,
     int? limit,
     int? offset,

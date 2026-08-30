@@ -171,15 +171,15 @@ class _StudyHistoryImpl extends StudyHistory {
     double? progress,
     required DateTime lastUpdated,
   }) : super._(
-         id: id,
-         userId: userId,
-         materialIds: materialIds,
-         questionIds: questionIds,
-         summaryIds: summaryIds,
-         writingIds: writingIds,
-         progress: progress,
-         lastUpdated: lastUpdated,
-       );
+          id: id,
+          userId: userId,
+          materialIds: materialIds,
+          questionIds: questionIds,
+          summaryIds: summaryIds,
+          writingIds: writingIds,
+          progress: progress,
+          lastUpdated: lastUpdated,
+        );
 
   /// Returns a shallow copy of this [StudyHistory]
   /// with some or all fields replaced by the given arguments.
@@ -212,9 +212,9 @@ class StudyHistoryUpdateTable extends _i1.UpdateTable<StudyHistoryTable> {
   StudyHistoryUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<List<int>, List<int>> materialIds(List<int> value) =>
       _i1.ColumnValue(
@@ -241,9 +241,9 @@ class StudyHistoryUpdateTable extends _i1.UpdateTable<StudyHistoryTable> {
       );
 
   _i1.ColumnValue<double, double> progress(double? value) => _i1.ColumnValue(
-    table.progress,
-    value,
-  );
+        table.progress,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> lastUpdated(DateTime value) =>
       _i1.ColumnValue(
@@ -303,15 +303,15 @@ class StudyHistoryTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    materialIds,
-    questionIds,
-    summaryIds,
-    writingIds,
-    progress,
-    lastUpdated,
-  ];
+        id,
+        userId,
+        materialIds,
+        questionIds,
+        summaryIds,
+        writingIds,
+        progress,
+        lastUpdated,
+      ];
 }
 
 class StudyHistoryInclude extends _i1.IncludeObject {

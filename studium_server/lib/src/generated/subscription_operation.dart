@@ -175,16 +175,16 @@ class _SubscriptionOperationImpl extends SubscriptionOperation {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         gateway: gateway,
-         idempotencyKey: idempotencyKey,
-         status: status,
-         subscriptionId: subscriptionId,
-         errorMessage: errorMessage,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          gateway: gateway,
+          idempotencyKey: idempotencyKey,
+          status: status,
+          subscriptionId: subscriptionId,
+          errorMessage: errorMessage,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [SubscriptionOperation]
   /// with some or all fields replaced by the given arguments.
@@ -207,9 +207,8 @@ class _SubscriptionOperationImpl extends SubscriptionOperation {
       gateway: gateway ?? this.gateway,
       idempotencyKey: idempotencyKey ?? this.idempotencyKey,
       status: status ?? this.status,
-      subscriptionId: subscriptionId is int?
-          ? subscriptionId
-          : this.subscriptionId,
+      subscriptionId:
+          subscriptionId is int? ? subscriptionId : this.subscriptionId,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -222,14 +221,14 @@ class SubscriptionOperationUpdateTable
   SubscriptionOperationUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
-    table.gateway,
-    value,
-  );
+        table.gateway,
+        value,
+      );
 
   _i1.ColumnValue<String, String> idempotencyKey(String value) =>
       _i1.ColumnValue(
@@ -238,14 +237,14 @@ class SubscriptionOperationUpdateTable
       );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> subscriptionId(int? value) => _i1.ColumnValue(
-    table.subscriptionId,
-    value,
-  );
+        table.subscriptionId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> errorMessage(String? value) =>
       _i1.ColumnValue(
@@ -268,7 +267,7 @@ class SubscriptionOperationUpdateTable
 
 class SubscriptionOperationTable extends _i1.Table<int?> {
   SubscriptionOperationTable({super.tableRelation})
-    : super(tableName: 'subscription_operations') {
+      : super(tableName: 'subscription_operations') {
     updateTable = SubscriptionOperationUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -324,16 +323,16 @@ class SubscriptionOperationTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    gateway,
-    idempotencyKey,
-    status,
-    subscriptionId,
-    errorMessage,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        userId,
+        gateway,
+        idempotencyKey,
+        status,
+        subscriptionId,
+        errorMessage,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class SubscriptionOperationInclude extends _i1.IncludeObject {
@@ -549,7 +548,7 @@ class SubscriptionOperationRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<SubscriptionOperationUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<SubscriptionOperation>(
@@ -564,7 +563,7 @@ class SubscriptionOperationRepository {
   Future<List<SubscriptionOperation>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<SubscriptionOperationUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<SubscriptionOperationTable> where,
     int? limit,
     int? offset,

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/collaboration_service.dart';
-import '../../../core/providers/service_providers.dart';
+import 'collaboration_provider.dart';
 
 enum PushPermissionState { unknown, denied, enabled }
 
@@ -45,8 +45,8 @@ class ReadReceiptState {
 }
 
 class ReadReceiptController extends StateNotifier<ReadReceiptState> {
-  ReadReceiptController(this._service) : super(const ReadReceiptState());
-  final CollaborationService _service;
+  ReadReceiptController([this._service]) : super(const ReadReceiptState());
+  final CollaborationService? _service;
 
   void markRead(int messageId) => state = ReadReceiptState(
         readMessageIds: {...state.readMessageIds, messageId},
@@ -54,12 +54,13 @@ class ReadReceiptController extends StateNotifier<ReadReceiptState> {
 
   Future<void> markReadRemotely(int messageId) async {
     markRead(messageId);
-    await _service.markConversationRead(_conversationId, messageId);
+    await _service?.markConversationRead(_conversationId, messageId);
   }
 
   late final int _conversationId;
 
-  void setConversationId(int conversationId) => _conversationId = conversationId;
+  void setConversationId(int conversationId) =>
+      _conversationId = conversationId;
 }
 
 final readReceiptProvider = StateNotifierProvider.autoDispose

@@ -157,14 +157,14 @@ class _UserSafetyRelationshipImpl extends UserSafetyRelationship {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         targetUserId: targetUserId,
-         relationshipType: relationshipType,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          targetUserId: targetUserId,
+          relationshipType: relationshipType,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserSafetyRelationship]
   /// with some or all fields replaced by the given arguments.
@@ -196,14 +196,14 @@ class UserSafetyRelationshipUpdateTable
   UserSafetyRelationshipUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> targetUserId(int value) => _i1.ColumnValue(
-    table.targetUserId,
-    value,
-  );
+        table.targetUserId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> relationshipType(String value) =>
       _i1.ColumnValue(
@@ -212,9 +212,9 @@ class UserSafetyRelationshipUpdateTable
       );
 
   _i1.ColumnValue<bool, bool> active(bool value) => _i1.ColumnValue(
-    table.active,
-    value,
-  );
+        table.active,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -231,7 +231,7 @@ class UserSafetyRelationshipUpdateTable
 
 class UserSafetyRelationshipTable extends _i1.Table<int?> {
   UserSafetyRelationshipTable({super.tableRelation})
-    : super(tableName: 'user_safety_relationships') {
+      : super(tableName: 'user_safety_relationships') {
     updateTable = UserSafetyRelationshipUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -275,14 +275,14 @@ class UserSafetyRelationshipTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    targetUserId,
-    relationshipType,
-    active,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        userId,
+        targetUserId,
+        relationshipType,
+        active,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class UserSafetyRelationshipInclude extends _i1.IncludeObject {
@@ -498,7 +498,7 @@ class UserSafetyRelationshipRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<UserSafetyRelationshipUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<UserSafetyRelationship>(
@@ -513,7 +513,7 @@ class UserSafetyRelationshipRepository {
   Future<List<UserSafetyRelationship>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<UserSafetyRelationshipUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<UserSafetyRelationshipTable> where,
     int? limit,
     int? offset,

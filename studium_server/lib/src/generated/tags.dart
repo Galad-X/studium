@@ -125,11 +125,11 @@ class _TagImpl extends Tag {
     required int studyMaterialId,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         name: name,
-         studyMaterialId: studyMaterialId,
-         createdAt: createdAt,
-       );
+          id: id,
+          name: name,
+          studyMaterialId: studyMaterialId,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Tag]
   /// with some or all fields replaced by the given arguments.
@@ -154,14 +154,14 @@ class TagUpdateTable extends _i1.UpdateTable<TagTable> {
   TagUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> name(String value) => _i1.ColumnValue(
-    table.name,
-    value,
-  );
+        table.name,
+        value,
+      );
 
   _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -197,11 +197,11 @@ class TagTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    name,
-    studyMaterialId,
-    createdAt,
-  ];
+        id,
+        name,
+        studyMaterialId,
+        createdAt,
+      ];
 }
 
 class TagInclude extends _i1.IncludeObject {

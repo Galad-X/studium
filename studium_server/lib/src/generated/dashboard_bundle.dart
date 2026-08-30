@@ -95,10 +95,10 @@ class _DashboardBundleImpl extends DashboardBundle {
     required List<_i3.StudyMaterial> recentMaterials,
     required List<_i4.Summary> recentSummaries,
   }) : super._(
-         history: history,
-         recentMaterials: recentMaterials,
-         recentSummaries: recentSummaries,
-       );
+          history: history,
+          recentMaterials: recentMaterials,
+          recentSummaries: recentSummaries,
+        );
 
   /// Returns a shallow copy of this [DashboardBundle]
   /// with some or all fields replaced by the given arguments.
@@ -111,11 +111,9 @@ class _DashboardBundleImpl extends DashboardBundle {
   }) {
     return DashboardBundle(
       history: history ?? this.history.copyWith(),
-      recentMaterials:
-          recentMaterials ??
+      recentMaterials: recentMaterials ??
           this.recentMaterials.map((e0) => e0.copyWith()).toList(),
-      recentSummaries:
-          recentSummaries ??
+      recentSummaries: recentSummaries ??
           this.recentSummaries.map((e0) => e0.copyWith()).toList(),
     );
   }

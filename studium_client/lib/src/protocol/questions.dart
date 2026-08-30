@@ -176,21 +176,21 @@ class _QuestionImpl extends Question {
     List<String>? labelingPoints,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         type: type,
-         questionText: questionText,
-         correctAnswer: correctAnswer,
-         options: options,
-         explanation: explanation,
-         difficulty: difficulty,
-         bloomsLevel: bloomsLevel,
-         estimatedTime: estimatedTime,
-         tags: tags,
-         diagramImageUrl: diagramImageUrl,
-         labelingPoints: labelingPoints,
-         createdAt: createdAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          type: type,
+          questionText: questionText,
+          correctAnswer: correctAnswer,
+          options: options,
+          explanation: explanation,
+          difficulty: difficulty,
+          bloomsLevel: bloomsLevel,
+          estimatedTime: estimatedTime,
+          tags: tags,
+          diagramImageUrl: diagramImageUrl,
+          labelingPoints: labelingPoints,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Question]
   /// with some or all fields replaced by the given arguments.
@@ -217,9 +217,8 @@ class _QuestionImpl extends Question {
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       type: type ?? this.type,
       questionText: questionText ?? this.questionText,
-      correctAnswer: correctAnswer is String?
-          ? correctAnswer
-          : this.correctAnswer,
+      correctAnswer:
+          correctAnswer is String? ? correctAnswer : this.correctAnswer,
       options: options is List<String>?
           ? options
           : this.options?.map((e0) => e0).toList(),
@@ -228,9 +227,8 @@ class _QuestionImpl extends Question {
       bloomsLevel: bloomsLevel ?? this.bloomsLevel,
       estimatedTime: estimatedTime ?? this.estimatedTime,
       tags: tags is List<String>? ? tags : this.tags?.map((e0) => e0).toList(),
-      diagramImageUrl: diagramImageUrl is String?
-          ? diagramImageUrl
-          : this.diagramImageUrl,
+      diagramImageUrl:
+          diagramImageUrl is String? ? diagramImageUrl : this.diagramImageUrl,
       labelingPoints: labelingPoints is List<String>?
           ? labelingPoints
           : this.labelingPoints?.map((e0) => e0).toList(),

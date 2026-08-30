@@ -101,13 +101,13 @@ class _DirectMessageImpl extends DirectMessage {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [DirectMessage]
   /// with some or all fields replaced by the given arguments.

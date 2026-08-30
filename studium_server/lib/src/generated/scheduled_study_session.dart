@@ -195,18 +195,18 @@ class _ScheduledStudySessionImpl extends ScheduledStudySession {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         organizerId: organizerId,
-         title: title,
-         description: description,
-         startsAt: startsAt,
-         endsAt: endsAt,
-         meetingUrl: meetingUrl,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          organizerId: organizerId,
+          title: title,
+          description: description,
+          startsAt: startsAt,
+          endsAt: endsAt,
+          meetingUrl: meetingUrl,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ScheduledStudySession]
   /// with some or all fields replaced by the given arguments.
@@ -246,24 +246,24 @@ class ScheduledStudySessionUpdateTable
   ScheduledStudySessionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> organizerId(int value) => _i1.ColumnValue(
-    table.organizerId,
-    value,
-  );
+        table.organizerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> description(String? value) => _i1.ColumnValue(
-    table.description,
-    value,
-  );
+        table.description,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> startsAt(DateTime value) =>
       _i1.ColumnValue(
@@ -272,19 +272,19 @@ class ScheduledStudySessionUpdateTable
       );
 
   _i1.ColumnValue<DateTime, DateTime> endsAt(DateTime value) => _i1.ColumnValue(
-    table.endsAt,
-    value,
-  );
+        table.endsAt,
+        value,
+      );
 
   _i1.ColumnValue<String, String> meetingUrl(String? value) => _i1.ColumnValue(
-    table.meetingUrl,
-    value,
-  );
+        table.meetingUrl,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -301,7 +301,7 @@ class ScheduledStudySessionUpdateTable
 
 class ScheduledStudySessionTable extends _i1.Table<int?> {
   ScheduledStudySessionTable({super.tableRelation})
-    : super(tableName: 'scheduled_study_sessions') {
+      : super(tableName: 'scheduled_study_sessions') {
     updateTable = ScheduledStudySessionUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -369,18 +369,18 @@ class ScheduledStudySessionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    organizerId,
-    title,
-    description,
-    startsAt,
-    endsAt,
-    meetingUrl,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        roomId,
+        organizerId,
+        title,
+        description,
+        startsAt,
+        endsAt,
+        meetingUrl,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class ScheduledStudySessionInclude extends _i1.IncludeObject {
@@ -596,7 +596,7 @@ class ScheduledStudySessionRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ScheduledStudySessionUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ScheduledStudySession>(
@@ -611,7 +611,7 @@ class ScheduledStudySessionRepository {
   Future<List<ScheduledStudySession>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ScheduledStudySessionUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ScheduledStudySessionTable> where,
     int? limit,
     int? offset,

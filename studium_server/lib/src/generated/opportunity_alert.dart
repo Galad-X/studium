@@ -185,17 +185,17 @@ class _OpportunityAlertImpl extends OpportunityAlert {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         country: country,
-         field: field,
-         educationLevel: educationLevel,
-         opportunityTypes: opportunityTypes,
-         deadlineWithinDays: deadlineWithinDays,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          country: country,
+          field: field,
+          educationLevel: educationLevel,
+          opportunityTypes: opportunityTypes,
+          deadlineWithinDays: deadlineWithinDays,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunityAlert]
   /// with some or all fields replaced by the given arguments.
@@ -218,9 +218,8 @@ class _OpportunityAlertImpl extends OpportunityAlert {
       userId: userId ?? this.userId,
       country: country is String? ? country : this.country,
       field: field is String? ? field : this.field,
-      educationLevel: educationLevel is String?
-          ? educationLevel
-          : this.educationLevel,
+      educationLevel:
+          educationLevel is String? ? educationLevel : this.educationLevel,
       opportunityTypes:
           opportunityTypes ?? this.opportunityTypes.map((e0) => e0).toList(),
       deadlineWithinDays: deadlineWithinDays ?? this.deadlineWithinDays,
@@ -236,19 +235,19 @@ class OpportunityAlertUpdateTable
   OpportunityAlertUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> country(String? value) => _i1.ColumnValue(
-    table.country,
-    value,
-  );
+        table.country,
+        value,
+      );
 
   _i1.ColumnValue<String, String> field(String? value) => _i1.ColumnValue(
-    table.field,
-    value,
-  );
+        table.field,
+        value,
+      );
 
   _i1.ColumnValue<String, String> educationLevel(String? value) =>
       _i1.ColumnValue(
@@ -258,20 +257,21 @@ class OpportunityAlertUpdateTable
 
   _i1.ColumnValue<List<String>, List<String>> opportunityTypes(
     List<String> value,
-  ) => _i1.ColumnValue(
-    table.opportunityTypes,
-    value,
-  );
+  ) =>
+      _i1.ColumnValue(
+        table.opportunityTypes,
+        value,
+      );
 
   _i1.ColumnValue<int, int> deadlineWithinDays(int value) => _i1.ColumnValue(
-    table.deadlineWithinDays,
-    value,
-  );
+        table.deadlineWithinDays,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> active(bool value) => _i1.ColumnValue(
-    table.active,
-    value,
-  );
+        table.active,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -288,7 +288,7 @@ class OpportunityAlertUpdateTable
 
 class OpportunityAlertTable extends _i1.Table<int?> {
   OpportunityAlertTable({super.tableRelation})
-    : super(tableName: 'opportunity_alerts') {
+      : super(tableName: 'opportunity_alerts') {
     updateTable = OpportunityAlertUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -350,17 +350,17 @@ class OpportunityAlertTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    country,
-    field,
-    educationLevel,
-    opportunityTypes,
-    deadlineWithinDays,
-    active,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        userId,
+        country,
+        field,
+        educationLevel,
+        opportunityTypes,
+        deadlineWithinDays,
+        active,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class OpportunityAlertInclude extends _i1.IncludeObject {
@@ -576,7 +576,7 @@ class OpportunityAlertRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<OpportunityAlertUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<OpportunityAlert>(
@@ -591,7 +591,7 @@ class OpportunityAlertRepository {
   Future<List<OpportunityAlert>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<OpportunityAlertUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<OpportunityAlertTable> where,
     int? limit,
     int? offset,

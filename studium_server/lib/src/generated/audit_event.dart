@@ -162,15 +162,15 @@ class _AuditEventImpl extends AuditEvent {
     String? metadata,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         actorId: actorId,
-         institutionId: institutionId,
-         action: action,
-         targetType: targetType,
-         targetId: targetId,
-         metadata: metadata,
-         createdAt: createdAt,
-       );
+          id: id,
+          actorId: actorId,
+          institutionId: institutionId,
+          action: action,
+          targetType: targetType,
+          targetId: targetId,
+          metadata: metadata,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [AuditEvent]
   /// with some or all fields replaced by the given arguments.
@@ -203,34 +203,34 @@ class AuditEventUpdateTable extends _i1.UpdateTable<AuditEventTable> {
   AuditEventUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> actorId(int value) => _i1.ColumnValue(
-    table.actorId,
-    value,
-  );
+        table.actorId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> institutionId(int? value) => _i1.ColumnValue(
-    table.institutionId,
-    value,
-  );
+        table.institutionId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> action(String value) => _i1.ColumnValue(
-    table.action,
-    value,
-  );
+        table.action,
+        value,
+      );
 
   _i1.ColumnValue<String, String> targetType(String value) => _i1.ColumnValue(
-    table.targetType,
-    value,
-  );
+        table.targetType,
+        value,
+      );
 
   _i1.ColumnValue<int, int> targetId(int value) => _i1.ColumnValue(
-    table.targetId,
-    value,
-  );
+        table.targetId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> metadata(String? value) => _i1.ColumnValue(
-    table.metadata,
-    value,
-  );
+        table.metadata,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -290,15 +290,15 @@ class AuditEventTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    actorId,
-    institutionId,
-    action,
-    targetType,
-    targetId,
-    metadata,
-    createdAt,
-  ];
+        id,
+        actorId,
+        institutionId,
+        action,
+        targetType,
+        targetId,
+        metadata,
+        createdAt,
+      ];
 }
 
 class AuditEventInclude extends _i1.IncludeObject {

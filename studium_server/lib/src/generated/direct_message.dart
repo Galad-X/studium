@@ -144,13 +144,13 @@ class _DirectMessageImpl extends DirectMessage {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [DirectMessage]
   /// with some or all fields replaced by the given arguments.
@@ -179,24 +179,24 @@ class DirectMessageUpdateTable extends _i1.UpdateTable<DirectMessageTable> {
   DirectMessageUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> conversationId(int value) => _i1.ColumnValue(
-    table.conversationId,
-    value,
-  );
+        table.conversationId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> authorId(int value) => _i1.ColumnValue(
-    table.authorId,
-    value,
-  );
+        table.authorId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -207,7 +207,7 @@ class DirectMessageUpdateTable extends _i1.UpdateTable<DirectMessageTable> {
 
 class DirectMessageTable extends _i1.Table<int?> {
   DirectMessageTable({super.tableRelation})
-    : super(tableName: 'direct_messages') {
+      : super(tableName: 'direct_messages') {
     updateTable = DirectMessageUpdateTable(this);
     conversationId = _i1.ColumnInt(
       'conversationId',
@@ -245,13 +245,13 @@ class DirectMessageTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    conversationId,
-    authorId,
-    body,
-    status,
-    createdAt,
-  ];
+        id,
+        conversationId,
+        authorId,
+        body,
+        status,
+        createdAt,
+      ];
 }
 
 class DirectMessageInclude extends _i1.IncludeObject {

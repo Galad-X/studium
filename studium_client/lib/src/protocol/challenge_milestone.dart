@@ -133,16 +133,16 @@ class _ChallengeMilestoneImpl extends ChallengeMilestone {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         title: title,
-         description: description,
-         status: status,
-         dueAt: dueAt,
-         completedAt: completedAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          teamId: teamId,
+          title: title,
+          description: description,
+          status: status,
+          dueAt: dueAt,
+          completedAt: completedAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeMilestone]
   /// with some or all fields replaced by the given arguments.

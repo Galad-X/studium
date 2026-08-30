@@ -1071,7 +1071,8 @@ class _ActionList extends ConsumerWidget {
           ),
           FilledButton(
             onPressed: () async {
-              await launchUrl(Uri(scheme: 'mailto', path: 'support@studium.app'));
+              await launchUrl(
+                  Uri(scheme: 'mailto', path: 'support@studium.app'));
             },
             child: const Text('Email support'),
           ),

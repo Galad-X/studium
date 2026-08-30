@@ -164,15 +164,15 @@ class _SubscriptionImpl extends Subscription {
     required DateTime startDate,
     DateTime? endDate,
   }) : super._(
-         id: id,
-         userId: userId,
-         gateway: gateway,
-         subscriptionId: subscriptionId,
-         gatewayToken: gatewayToken,
-         status: status,
-         startDate: startDate,
-         endDate: endDate,
-       );
+          id: id,
+          userId: userId,
+          gateway: gateway,
+          subscriptionId: subscriptionId,
+          gatewayToken: gatewayToken,
+          status: status,
+          startDate: startDate,
+          endDate: endDate,
+        );
 
   /// Returns a shallow copy of this [Subscription]
   /// with some or all fields replaced by the given arguments.
@@ -205,14 +205,14 @@ class SubscriptionUpdateTable extends _i1.UpdateTable<SubscriptionTable> {
   SubscriptionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
-    table.gateway,
-    value,
-  );
+        table.gateway,
+        value,
+      );
 
   _i1.ColumnValue<String, String> subscriptionId(String value) =>
       _i1.ColumnValue(
@@ -227,9 +227,9 @@ class SubscriptionUpdateTable extends _i1.UpdateTable<SubscriptionTable> {
       );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> startDate(DateTime value) =>
       _i1.ColumnValue(
@@ -295,15 +295,15 @@ class SubscriptionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    gateway,
-    subscriptionId,
-    gatewayToken,
-    status,
-    startDate,
-    endDate,
-  ];
+        id,
+        userId,
+        gateway,
+        subscriptionId,
+        gatewayToken,
+        status,
+        startDate,
+        endDate,
+      ];
 }
 
 class SubscriptionInclude extends _i1.IncludeObject {

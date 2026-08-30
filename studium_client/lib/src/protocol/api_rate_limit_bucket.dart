@@ -95,12 +95,12 @@ class _ApiRateLimitBucketImpl extends ApiRateLimitBucket {
     required int requestCount,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         scopeKey: scopeKey,
-         windowStart: windowStart,
-         requestCount: requestCount,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          scopeKey: scopeKey,
+          windowStart: windowStart,
+          requestCount: requestCount,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ApiRateLimitBucket]
   /// with some or all fields replaced by the given arguments.

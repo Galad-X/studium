@@ -181,22 +181,22 @@ class _EmailDeliveryImpl extends EmailDelivery {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         recipient: recipient,
-         subject: subject,
-         htmlBody: htmlBody,
-         dedupeKey: dedupeKey,
-         status: status,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         availableAt: availableAt,
-         lockedAt: lockedAt,
-         lockToken: lockToken,
-         lastError: lastError,
-         sentAt: sentAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          recipient: recipient,
+          subject: subject,
+          htmlBody: htmlBody,
+          dedupeKey: dedupeKey,
+          status: status,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          availableAt: availableAt,
+          lockedAt: lockedAt,
+          lockToken: lockToken,
+          lastError: lastError,
+          sentAt: sentAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [EmailDelivery]
   /// with some or all fields replaced by the given arguments.

@@ -269,26 +269,26 @@ class _OpportunityImpl extends Opportunity {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         title: title,
-         opportunityType: opportunityType,
-         provider: provider,
-         country: country,
-         eligibilityRegion: eligibilityRegion,
-         field: field,
-         educationLevel: educationLevel,
-         deadline: deadline,
-         fundingDetails: fundingDetails,
-         officialUrl: officialUrl,
-         verificationStatus: verificationStatus,
-         sourceId: sourceId,
-         externalId: externalId,
-         submittedById: submittedById,
-         lastSeenAt: lastSeenAt,
-         staleAt: staleAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          title: title,
+          opportunityType: opportunityType,
+          provider: provider,
+          country: country,
+          eligibilityRegion: eligibilityRegion,
+          field: field,
+          educationLevel: educationLevel,
+          deadline: deadline,
+          fundingDetails: fundingDetails,
+          officialUrl: officialUrl,
+          verificationStatus: verificationStatus,
+          sourceId: sourceId,
+          externalId: externalId,
+          submittedById: submittedById,
+          lastSeenAt: lastSeenAt,
+          staleAt: staleAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Opportunity]
   /// with some or all fields replaced by the given arguments.
@@ -345,9 +345,9 @@ class OpportunityUpdateTable extends _i1.UpdateTable<OpportunityTable> {
   OpportunityUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> opportunityType(String value) =>
       _i1.ColumnValue(
@@ -356,14 +356,14 @@ class OpportunityUpdateTable extends _i1.UpdateTable<OpportunityTable> {
       );
 
   _i1.ColumnValue<String, String> provider(String value) => _i1.ColumnValue(
-    table.provider,
-    value,
-  );
+        table.provider,
+        value,
+      );
 
   _i1.ColumnValue<String, String> country(String value) => _i1.ColumnValue(
-    table.country,
-    value,
-  );
+        table.country,
+        value,
+      );
 
   _i1.ColumnValue<String, String> eligibilityRegion(String? value) =>
       _i1.ColumnValue(
@@ -372,9 +372,9 @@ class OpportunityUpdateTable extends _i1.UpdateTable<OpportunityTable> {
       );
 
   _i1.ColumnValue<String, String> field(String value) => _i1.ColumnValue(
-    table.field,
-    value,
-  );
+        table.field,
+        value,
+      );
 
   _i1.ColumnValue<String, String> educationLevel(String value) =>
       _i1.ColumnValue(
@@ -395,9 +395,9 @@ class OpportunityUpdateTable extends _i1.UpdateTable<OpportunityTable> {
       );
 
   _i1.ColumnValue<String, String> officialUrl(String value) => _i1.ColumnValue(
-    table.officialUrl,
-    value,
-  );
+        table.officialUrl,
+        value,
+      );
 
   _i1.ColumnValue<String, String> verificationStatus(String value) =>
       _i1.ColumnValue(
@@ -406,19 +406,19 @@ class OpportunityUpdateTable extends _i1.UpdateTable<OpportunityTable> {
       );
 
   _i1.ColumnValue<int, int> sourceId(int? value) => _i1.ColumnValue(
-    table.sourceId,
-    value,
-  );
+        table.sourceId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> externalId(String? value) => _i1.ColumnValue(
-    table.externalId,
-    value,
-  );
+        table.externalId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> submittedById(int? value) => _i1.ColumnValue(
-    table.submittedById,
-    value,
-  );
+        table.submittedById,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> lastSeenAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -562,26 +562,26 @@ class OpportunityTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    title,
-    opportunityType,
-    provider,
-    country,
-    eligibilityRegion,
-    field,
-    educationLevel,
-    deadline,
-    fundingDetails,
-    officialUrl,
-    verificationStatus,
-    sourceId,
-    externalId,
-    submittedById,
-    lastSeenAt,
-    staleAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        title,
+        opportunityType,
+        provider,
+        country,
+        eligibilityRegion,
+        field,
+        educationLevel,
+        deadline,
+        fundingDetails,
+        officialUrl,
+        verificationStatus,
+        sourceId,
+        externalId,
+        submittedById,
+        lastSeenAt,
+        staleAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class OpportunityInclude extends _i1.IncludeObject {

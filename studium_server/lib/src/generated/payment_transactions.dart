@@ -54,8 +54,8 @@ abstract class PaymentTransaction
       userId: jsonSerialization['userId'] as int,
       amount: (jsonSerialization['amount'] as num).toDouble(),
       currency: jsonSerialization['currency'] as String?,
-      settlementAmount: (jsonSerialization['settlementAmount'] as num?)
-          ?.toDouble(),
+      settlementAmount:
+          (jsonSerialization['settlementAmount'] as num?)?.toDouble(),
       settlementCurrency: jsonSerialization['settlementCurrency'] as String?,
       exchangeRate: (jsonSerialization['exchangeRate'] as num?)?.toDouble(),
       settlementSource: jsonSerialization['settlementSource'] as String?,
@@ -208,20 +208,20 @@ class _PaymentTransactionImpl extends PaymentTransaction {
     required String transactionId,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         subscriptionId: subscriptionId,
-         userId: userId,
-         amount: amount,
-         currency: currency,
-         settlementAmount: settlementAmount,
-         settlementCurrency: settlementCurrency,
-         exchangeRate: exchangeRate,
-         settlementSource: settlementSource,
-         status: status,
-         gateway: gateway,
-         transactionId: transactionId,
-         createdAt: createdAt,
-       );
+          id: id,
+          subscriptionId: subscriptionId,
+          userId: userId,
+          amount: amount,
+          currency: currency,
+          settlementAmount: settlementAmount,
+          settlementCurrency: settlementCurrency,
+          exchangeRate: exchangeRate,
+          settlementSource: settlementSource,
+          status: status,
+          gateway: gateway,
+          transactionId: transactionId,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [PaymentTransaction]
   /// with some or all fields replaced by the given arguments.
@@ -271,24 +271,24 @@ class PaymentTransactionUpdateTable
   PaymentTransactionUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> subscriptionId(int value) => _i1.ColumnValue(
-    table.subscriptionId,
-    value,
-  );
+        table.subscriptionId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<double, double> amount(double value) => _i1.ColumnValue(
-    table.amount,
-    value,
-  );
+        table.amount,
+        value,
+      );
 
   _i1.ColumnValue<String, String> currency(String? value) => _i1.ColumnValue(
-    table.currency,
-    value,
-  );
+        table.currency,
+        value,
+      );
 
   _i1.ColumnValue<double, double> settlementAmount(double? value) =>
       _i1.ColumnValue(
@@ -315,14 +315,14 @@ class PaymentTransactionUpdateTable
       );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<String, String> gateway(String value) => _i1.ColumnValue(
-    table.gateway,
-    value,
-  );
+        table.gateway,
+        value,
+      );
 
   _i1.ColumnValue<String, String> transactionId(String value) =>
       _i1.ColumnValue(
@@ -339,7 +339,7 @@ class PaymentTransactionUpdateTable
 
 class PaymentTransactionTable extends _i1.Table<int?> {
   PaymentTransactionTable({super.tableRelation})
-    : super(tableName: 'payment_transactions') {
+      : super(tableName: 'payment_transactions') {
     updateTable = PaymentTransactionUpdateTable(this);
     subscriptionId = _i1.ColumnInt(
       'subscriptionId',
@@ -419,20 +419,20 @@ class PaymentTransactionTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    subscriptionId,
-    userId,
-    amount,
-    currency,
-    settlementAmount,
-    settlementCurrency,
-    exchangeRate,
-    settlementSource,
-    status,
-    gateway,
-    transactionId,
-    createdAt,
-  ];
+        id,
+        subscriptionId,
+        userId,
+        amount,
+        currency,
+        settlementAmount,
+        settlementCurrency,
+        exchangeRate,
+        settlementSource,
+        status,
+        gateway,
+        transactionId,
+        createdAt,
+      ];
 }
 
 class PaymentTransactionInclude extends _i1.IncludeObject {
@@ -648,7 +648,7 @@ class PaymentTransactionRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<PaymentTransactionUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<PaymentTransaction>(
@@ -663,7 +663,7 @@ class PaymentTransactionRepository {
   Future<List<PaymentTransaction>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<PaymentTransactionUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<PaymentTransactionTable> where,
     int? limit,
     int? offset,

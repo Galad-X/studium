@@ -146,13 +146,13 @@ class _ConversationImpl extends Conversation {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         conversationType: conversationType,
-         title: title,
-         createdById: createdById,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          conversationType: conversationType,
+          title: title,
+          createdById: createdById,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Conversation]
   /// with some or all fields replaced by the given arguments.
@@ -187,14 +187,14 @@ class ConversationUpdateTable extends _i1.UpdateTable<ConversationTable> {
       );
 
   _i1.ColumnValue<String, String> title(String? value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<int, int> createdById(int value) => _i1.ColumnValue(
-    table.createdById,
-    value,
-  );
+        table.createdById,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -248,13 +248,13 @@ class ConversationTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    conversationType,
-    title,
-    createdById,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        conversationType,
+        title,
+        createdById,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class ConversationInclude extends _i1.IncludeObject {

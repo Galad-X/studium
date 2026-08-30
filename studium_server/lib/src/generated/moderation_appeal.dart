@@ -173,16 +173,16 @@ class _ModerationAppealImpl extends ModerationAppeal {
     required DateTime createdAt,
     DateTime? reviewedAt,
   }) : super._(
-         id: id,
-         reportId: reportId,
-         appellantId: appellantId,
-         reason: reason,
-         status: status,
-         reviewerId: reviewerId,
-         reviewNotes: reviewNotes,
-         createdAt: createdAt,
-         reviewedAt: reviewedAt,
-       );
+          id: id,
+          reportId: reportId,
+          appellantId: appellantId,
+          reason: reason,
+          status: status,
+          reviewerId: reviewerId,
+          reviewNotes: reviewNotes,
+          createdAt: createdAt,
+          reviewedAt: reviewedAt,
+        );
 
   /// Returns a shallow copy of this [ModerationAppeal]
   /// with some or all fields replaced by the given arguments.
@@ -218,34 +218,34 @@ class ModerationAppealUpdateTable
   ModerationAppealUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> reportId(int value) => _i1.ColumnValue(
-    table.reportId,
-    value,
-  );
+        table.reportId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> appellantId(int value) => _i1.ColumnValue(
-    table.appellantId,
-    value,
-  );
+        table.appellantId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> reason(String value) => _i1.ColumnValue(
-    table.reason,
-    value,
-  );
+        table.reason,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> reviewerId(int? value) => _i1.ColumnValue(
-    table.reviewerId,
-    value,
-  );
+        table.reviewerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> reviewNotes(String? value) => _i1.ColumnValue(
-    table.reviewNotes,
-    value,
-  );
+        table.reviewNotes,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -262,7 +262,7 @@ class ModerationAppealUpdateTable
 
 class ModerationAppealTable extends _i1.Table<int?> {
   ModerationAppealTable({super.tableRelation})
-    : super(tableName: 'moderation_appeals') {
+      : super(tableName: 'moderation_appeals') {
     updateTable = ModerationAppealUpdateTable(this);
     reportId = _i1.ColumnInt(
       'reportId',
@@ -318,16 +318,16 @@ class ModerationAppealTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    reportId,
-    appellantId,
-    reason,
-    status,
-    reviewerId,
-    reviewNotes,
-    createdAt,
-    reviewedAt,
-  ];
+        id,
+        reportId,
+        appellantId,
+        reason,
+        status,
+        reviewerId,
+        reviewNotes,
+        createdAt,
+        reviewedAt,
+      ];
 }
 
 class ModerationAppealInclude extends _i1.IncludeObject {
@@ -543,7 +543,7 @@ class ModerationAppealRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ModerationAppealUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ModerationAppeal>(
@@ -558,7 +558,7 @@ class ModerationAppealRepository {
   Future<List<ModerationAppeal>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ModerationAppealUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ModerationAppealTable> where,
     int? limit,
     int? offset,

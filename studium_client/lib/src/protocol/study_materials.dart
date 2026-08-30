@@ -117,15 +117,15 @@ class _StudyMaterialImpl extends StudyMaterial {
     int? size,
     String? contentText,
   }) : super._(
-         id: id,
-         userId: userId,
-         title: title,
-         fileType: fileType,
-         fileUrl: fileUrl,
-         uploadDate: uploadDate,
-         size: size,
-         contentText: contentText,
-       );
+          id: id,
+          userId: userId,
+          title: title,
+          fileType: fileType,
+          fileUrl: fileUrl,
+          uploadDate: uploadDate,
+          size: size,
+          contentText: contentText,
+        );
 
   /// Returns a shallow copy of this [StudyMaterial]
   /// with some or all fields replaced by the given arguments.

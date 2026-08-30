@@ -191,18 +191,18 @@ class _RoomResourceImpl extends RoomResource {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         resourceType: resourceType,
-         title: title,
-         uri: uri,
-         content: content,
-         citation: citation,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          resourceType: resourceType,
+          title: title,
+          uri: uri,
+          content: content,
+          citation: citation,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [RoomResource]
   /// with some or all fields replaced by the given arguments.
@@ -241,44 +241,44 @@ class RoomResourceUpdateTable extends _i1.UpdateTable<RoomResourceTable> {
   RoomResourceUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> ownerId(int value) => _i1.ColumnValue(
-    table.ownerId,
-    value,
-  );
+        table.ownerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> resourceType(String value) => _i1.ColumnValue(
-    table.resourceType,
-    value,
-  );
+        table.resourceType,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> uri(String? value) => _i1.ColumnValue(
-    table.uri,
-    value,
-  );
+        table.uri,
+        value,
+      );
 
   _i1.ColumnValue<String, String> content(String? value) => _i1.ColumnValue(
-    table.content,
-    value,
-  );
+        table.content,
+        value,
+      );
 
   _i1.ColumnValue<String, String> citation(String? value) => _i1.ColumnValue(
-    table.citation,
-    value,
-  );
+        table.citation,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -295,7 +295,7 @@ class RoomResourceUpdateTable extends _i1.UpdateTable<RoomResourceTable> {
 
 class RoomResourceTable extends _i1.Table<int?> {
   RoomResourceTable({super.tableRelation})
-    : super(tableName: 'room_resources') {
+      : super(tableName: 'room_resources') {
     updateTable = RoomResourceUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -363,18 +363,18 @@ class RoomResourceTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    ownerId,
-    resourceType,
-    title,
-    uri,
-    content,
-    citation,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        roomId,
+        ownerId,
+        resourceType,
+        title,
+        uri,
+        content,
+        citation,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class RoomResourceInclude extends _i1.IncludeObject {

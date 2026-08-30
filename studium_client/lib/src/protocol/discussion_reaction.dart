@@ -103,13 +103,13 @@ class _DiscussionReactionImpl extends DiscussionReaction {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         postId: postId,
-         userId: userId,
-         reaction: reaction,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          postId: postId,
+          userId: userId,
+          reaction: reaction,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [DiscussionReaction]
   /// with some or all fields replaced by the given arguments.

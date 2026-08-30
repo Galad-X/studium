@@ -20,8 +20,8 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
     bool? isMinor,
     bool? allowUnknownDirectMessages,
     required this.updatedAt,
-  }) : isMinor = isMinor ?? false,
-       allowUnknownDirectMessages = allowUnknownDirectMessages ?? true;
+  })  : isMinor = isMinor ?? false,
+        allowUnknownDirectMessages = allowUnknownDirectMessages ?? true;
 
   factory UserPrivacySettings({
     int? id,
@@ -40,10 +40,10 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
           : _i1.BoolJsonExtension.fromJson(jsonSerialization['isMinor']),
       allowUnknownDirectMessages:
           jsonSerialization['allowUnknownDirectMessages'] == null
-          ? null
-          : _i1.BoolJsonExtension.fromJson(
-              jsonSerialization['allowUnknownDirectMessages'],
-            ),
+              ? null
+              : _i1.BoolJsonExtension.fromJson(
+                  jsonSerialization['allowUnknownDirectMessages'],
+                ),
       updatedAt: _i1.DateTimeJsonExtension.fromJson(
         jsonSerialization['updatedAt'],
       ),
@@ -101,12 +101,12 @@ class _UserPrivacySettingsImpl extends UserPrivacySettings {
     bool? allowUnknownDirectMessages,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         isMinor: isMinor,
-         allowUnknownDirectMessages: allowUnknownDirectMessages,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          isMinor: isMinor,
+          allowUnknownDirectMessages: allowUnknownDirectMessages,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserPrivacySettings]
   /// with some or all fields replaced by the given arguments.

@@ -127,16 +127,16 @@ class _ModerationAppealImpl extends ModerationAppeal {
     required DateTime createdAt,
     DateTime? reviewedAt,
   }) : super._(
-         id: id,
-         reportId: reportId,
-         appellantId: appellantId,
-         reason: reason,
-         status: status,
-         reviewerId: reviewerId,
-         reviewNotes: reviewNotes,
-         createdAt: createdAt,
-         reviewedAt: reviewedAt,
-       );
+          id: id,
+          reportId: reportId,
+          appellantId: appellantId,
+          reason: reason,
+          status: status,
+          reviewerId: reviewerId,
+          reviewNotes: reviewNotes,
+          createdAt: createdAt,
+          reviewedAt: reviewedAt,
+        );
 
   /// Returns a shallow copy of this [ModerationAppeal]
   /// with some or all fields replaced by the given arguments.

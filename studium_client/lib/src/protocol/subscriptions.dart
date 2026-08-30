@@ -119,15 +119,15 @@ class _SubscriptionImpl extends Subscription {
     required DateTime startDate,
     DateTime? endDate,
   }) : super._(
-         id: id,
-         userId: userId,
-         gateway: gateway,
-         subscriptionId: subscriptionId,
-         gatewayToken: gatewayToken,
-         status: status,
-         startDate: startDate,
-         endDate: endDate,
-       );
+          id: id,
+          userId: userId,
+          gateway: gateway,
+          subscriptionId: subscriptionId,
+          gatewayToken: gatewayToken,
+          status: status,
+          startDate: startDate,
+          endDate: endDate,
+        );
 
   /// Returns a shallow copy of this [Subscription]
   /// with some or all fields replaced by the given arguments.

@@ -144,13 +144,13 @@ class _RoomMembershipImpl extends RoomMembership {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          roomId: roomId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [RoomMembership]
   /// with some or all fields replaced by the given arguments.
@@ -179,24 +179,24 @@ class RoomMembershipUpdateTable extends _i1.UpdateTable<RoomMembershipTable> {
   RoomMembershipUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> role(String value) => _i1.ColumnValue(
-    table.role,
-    value,
-  );
+        table.role,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> joinedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -207,7 +207,7 @@ class RoomMembershipUpdateTable extends _i1.UpdateTable<RoomMembershipTable> {
 
 class RoomMembershipTable extends _i1.Table<int?> {
   RoomMembershipTable({super.tableRelation})
-    : super(tableName: 'room_memberships') {
+      : super(tableName: 'room_memberships') {
     updateTable = RoomMembershipUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -245,13 +245,13 @@ class RoomMembershipTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    userId,
-    role,
-    status,
-    joinedAt,
-  ];
+        id,
+        roomId,
+        userId,
+        role,
+        status,
+        joinedAt,
+      ];
 }
 
 class RoomMembershipInclude extends _i1.IncludeObject {

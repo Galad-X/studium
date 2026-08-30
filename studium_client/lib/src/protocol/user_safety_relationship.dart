@@ -113,14 +113,14 @@ class _UserSafetyRelationshipImpl extends UserSafetyRelationship {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         targetUserId: targetUserId,
-         relationshipType: relationshipType,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          targetUserId: targetUserId,
+          relationshipType: relationshipType,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserSafetyRelationship]
   /// with some or all fields replaced by the given arguments.

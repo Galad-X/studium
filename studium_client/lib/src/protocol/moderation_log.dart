@@ -117,15 +117,15 @@ class _ModerationLogImpl extends ModerationLog {
     String? note,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         reportId: reportId,
-         moderatorId: moderatorId,
-         action: action,
-         targetType: targetType,
-         targetId: targetId,
-         note: note,
-         createdAt: createdAt,
-       );
+          id: id,
+          reportId: reportId,
+          moderatorId: moderatorId,
+          action: action,
+          targetType: targetType,
+          targetId: targetId,
+          note: note,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ModerationLog]
   /// with some or all fields replaced by the given arguments.

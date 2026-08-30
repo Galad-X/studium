@@ -191,18 +191,18 @@ class _StudyRoomImpl extends StudyRoom {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         institutionId: institutionId,
-         ownerId: ownerId,
-         title: title,
-         description: description,
-         subject: subject,
-         visibility: visibility,
-         membershipPolicy: membershipPolicy,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          institutionId: institutionId,
+          ownerId: ownerId,
+          title: title,
+          description: description,
+          subject: subject,
+          visibility: visibility,
+          membershipPolicy: membershipPolicy,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [StudyRoom]
   /// with some or all fields replaced by the given arguments.
@@ -241,34 +241,34 @@ class StudyRoomUpdateTable extends _i1.UpdateTable<StudyRoomTable> {
   StudyRoomUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> institutionId(int? value) => _i1.ColumnValue(
-    table.institutionId,
-    value,
-  );
+        table.institutionId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> ownerId(int value) => _i1.ColumnValue(
-    table.ownerId,
-    value,
-  );
+        table.ownerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> description(String value) => _i1.ColumnValue(
-    table.description,
-    value,
-  );
+        table.description,
+        value,
+      );
 
   _i1.ColumnValue<String, String> subject(String? value) => _i1.ColumnValue(
-    table.subject,
-    value,
-  );
+        table.subject,
+        value,
+      );
 
   _i1.ColumnValue<String, String> visibility(String value) => _i1.ColumnValue(
-    table.visibility,
-    value,
-  );
+        table.visibility,
+        value,
+      );
 
   _i1.ColumnValue<String, String> membershipPolicy(String value) =>
       _i1.ColumnValue(
@@ -277,9 +277,9 @@ class StudyRoomUpdateTable extends _i1.UpdateTable<StudyRoomTable> {
       );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -363,18 +363,18 @@ class StudyRoomTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    institutionId,
-    ownerId,
-    title,
-    description,
-    subject,
-    visibility,
-    membershipPolicy,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        institutionId,
+        ownerId,
+        title,
+        description,
+        subject,
+        visibility,
+        membershipPolicy,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class StudyRoomInclude extends _i1.IncludeObject {

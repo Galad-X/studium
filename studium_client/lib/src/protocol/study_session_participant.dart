@@ -95,12 +95,12 @@ class _StudySessionParticipantImpl extends StudySessionParticipant {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         sessionId: sessionId,
-         userId: userId,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          sessionId: sessionId,
+          userId: userId,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [StudySessionParticipant]
   /// with some or all fields replaced by the given arguments.

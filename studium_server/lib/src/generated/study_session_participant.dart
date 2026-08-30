@@ -137,12 +137,12 @@ class _StudySessionParticipantImpl extends StudySessionParticipant {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         sessionId: sessionId,
-         userId: userId,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          sessionId: sessionId,
+          userId: userId,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [StudySessionParticipant]
   /// with some or all fields replaced by the given arguments.
@@ -170,19 +170,19 @@ class StudySessionParticipantUpdateTable
   StudySessionParticipantUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> sessionId(int value) => _i1.ColumnValue(
-    table.sessionId,
-    value,
-  );
+        table.sessionId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> joinedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -193,7 +193,7 @@ class StudySessionParticipantUpdateTable
 
 class StudySessionParticipantTable extends _i1.Table<int?> {
   StudySessionParticipantTable({super.tableRelation})
-    : super(tableName: 'study_session_participants') {
+      : super(tableName: 'study_session_participants') {
     updateTable = StudySessionParticipantUpdateTable(this);
     sessionId = _i1.ColumnInt(
       'sessionId',
@@ -225,12 +225,12 @@ class StudySessionParticipantTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    sessionId,
-    userId,
-    status,
-    joinedAt,
-  ];
+        id,
+        sessionId,
+        userId,
+        status,
+        joinedAt,
+      ];
 }
 
 class StudySessionParticipantInclude extends _i1.IncludeObject {
@@ -446,7 +446,7 @@ class StudySessionParticipantRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<StudySessionParticipantUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<StudySessionParticipant>(
@@ -461,7 +461,7 @@ class StudySessionParticipantRepository {
   Future<List<StudySessionParticipant>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<StudySessionParticipantUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<StudySessionParticipantTable> where,
     int? limit,
     int? offset,

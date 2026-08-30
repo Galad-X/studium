@@ -146,18 +146,18 @@ class _SummaryImpl extends Summary {
     required List<String> nuggets,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         userId: userId,
-         isPremium: isPremium,
-         subject: subject,
-         topic: topic,
-         wordCount: wordCount,
-         introduction: introduction,
-         subtopics: subtopics,
-         nuggets: nuggets,
-         createdAt: createdAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          userId: userId,
+          isPremium: isPremium,
+          subject: subject,
+          topic: topic,
+          wordCount: wordCount,
+          introduction: introduction,
+          subtopics: subtopics,
+          nuggets: nuggets,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Summary]
   /// with some or all fields replaced by the given arguments.

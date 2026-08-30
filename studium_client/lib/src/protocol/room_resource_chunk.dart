@@ -109,14 +109,14 @@ class _RoomResourceChunkImpl extends RoomResourceChunk {
     String? embedding,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomResourceId: roomResourceId,
-         chunkIndex: chunkIndex,
-         content: content,
-         tokenCount: tokenCount,
-         embedding: embedding,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomResourceId: roomResourceId,
+          chunkIndex: chunkIndex,
+          content: content,
+          tokenCount: tokenCount,
+          embedding: embedding,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomResourceChunk]
   /// with some or all fields replaced by the given arguments.

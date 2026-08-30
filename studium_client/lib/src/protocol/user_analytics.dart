@@ -93,12 +93,12 @@ class _UserAnalyticsImpl extends UserAnalytics {
     required DateTime timestamp,
     String? metadata,
   }) : super._(
-         id: id,
-         userId: userId,
-         action: action,
-         timestamp: timestamp,
-         metadata: metadata,
-       );
+          id: id,
+          userId: userId,
+          action: action,
+          timestamp: timestamp,
+          metadata: metadata,
+        );
 
   /// Returns a shallow copy of this [UserAnalytics]
   /// with some or all fields replaced by the given arguments.

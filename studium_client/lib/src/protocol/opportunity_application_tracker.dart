@@ -121,15 +121,15 @@ class _OpportunityApplicationTrackerImpl extends OpportunityApplicationTracker {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         opportunityId: opportunityId,
-         userId: userId,
-         status: status,
-         notes: notes,
-         applicationUrl: applicationUrl,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          opportunityId: opportunityId,
+          userId: userId,
+          status: status,
+          notes: notes,
+          applicationUrl: applicationUrl,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunityApplicationTracker]
   /// with some or all fields replaced by the given arguments.
@@ -151,9 +151,8 @@ class _OpportunityApplicationTrackerImpl extends OpportunityApplicationTracker {
       userId: userId ?? this.userId,
       status: status ?? this.status,
       notes: notes is String? ? notes : this.notes,
-      applicationUrl: applicationUrl is String?
-          ? applicationUrl
-          : this.applicationUrl,
+      applicationUrl:
+          applicationUrl is String? ? applicationUrl : this.applicationUrl,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

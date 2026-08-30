@@ -126,15 +126,15 @@ class _StudyHistoryImpl extends StudyHistory {
     double? progress,
     required DateTime lastUpdated,
   }) : super._(
-         id: id,
-         userId: userId,
-         materialIds: materialIds,
-         questionIds: questionIds,
-         summaryIds: summaryIds,
-         writingIds: writingIds,
-         progress: progress,
-         lastUpdated: lastUpdated,
-       );
+          id: id,
+          userId: userId,
+          materialIds: materialIds,
+          questionIds: questionIds,
+          summaryIds: summaryIds,
+          writingIds: writingIds,
+          progress: progress,
+          lastUpdated: lastUpdated,
+        );
 
   /// Returns a shallow copy of this [StudyHistory]
   /// with some or all fields replaced by the given arguments.

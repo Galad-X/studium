@@ -312,14 +312,21 @@ class _MySummariesScreenState extends ConsumerState<MySummariesScreen>
     }
 
     // Filter summaries based on search and subject
-    final filteredSummaries = summaries.where((summary) {
-      final matchesSearch = _searchQuery.isEmpty ||
-          summary.topic.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          summary.subject.toLowerCase().contains(_searchQuery.toLowerCase());
-      final matchesSubject = _selectedSubject == 'all' ||
-          summary.subject.toLowerCase() == _selectedSubject;
-      return matchesSearch && matchesSubject;
-    }).cast<Summary>().toList()
+    final filteredSummaries = summaries
+        .where((summary) {
+          final matchesSearch = _searchQuery.isEmpty ||
+              summary.topic
+                  .toLowerCase()
+                  .contains(_searchQuery.toLowerCase()) ||
+              summary.subject
+                  .toLowerCase()
+                  .contains(_searchQuery.toLowerCase());
+          final matchesSubject = _selectedSubject == 'all' ||
+              summary.subject.toLowerCase() == _selectedSubject;
+          return matchesSearch && matchesSubject;
+        })
+        .cast<Summary>()
+        .toList()
       ..sort((a, b) => _sortNewestFirst
           ? b.createdAt.compareTo(a.createdAt)
           : a.createdAt.compareTo(b.createdAt));
@@ -888,7 +895,7 @@ class _SummaryPreviewSheet extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                child: OutlinedButton.icon(
+                  child: OutlinedButton.icon(
                     onPressed: () async {
                       HapticFeedback.lightImpact();
                       await _shareSummary(context);
@@ -899,7 +906,7 @@ class _SummaryPreviewSheet extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                child: FilledButton.icon(
+                  child: FilledButton.icon(
                     onPressed: () async {
                       HapticFeedback.lightImpact();
                       await _exportSummary(context);
@@ -924,7 +931,8 @@ class _SummaryPreviewSheet extends StatelessWidget {
       ].join('\n');
 
   Future<void> _shareSummary(BuildContext context) async {
-    await SharePlus.instance.share(ShareParams(text: _summaryText(), subject: summary.topic));
+    await SharePlus.instance
+        .share(ShareParams(text: _summaryText(), subject: summary.topic));
   }
 
   Future<void> _exportSummary(BuildContext context) async {

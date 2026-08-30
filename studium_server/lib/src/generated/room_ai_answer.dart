@@ -176,16 +176,16 @@ class _RoomAiAnswerImpl extends RoomAiAnswer {
     required String confidence,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         askerId: askerId,
-         question: question,
-         answer: answer,
-         sourceResourceIds: sourceResourceIds,
-         citations: citations,
-         confidence: confidence,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomId: roomId,
+          askerId: askerId,
+          question: question,
+          answer: answer,
+          sourceResourceIds: sourceResourceIds,
+          citations: citations,
+          confidence: confidence,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomAiAnswer]
   /// with some or all fields replaced by the given arguments.
@@ -221,24 +221,24 @@ class RoomAiAnswerUpdateTable extends _i1.UpdateTable<RoomAiAnswerTable> {
   RoomAiAnswerUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> askerId(int value) => _i1.ColumnValue(
-    table.askerId,
-    value,
-  );
+        table.askerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> question(String value) => _i1.ColumnValue(
-    table.question,
-    value,
-  );
+        table.question,
+        value,
+      );
 
   _i1.ColumnValue<String, String> answer(String value) => _i1.ColumnValue(
-    table.answer,
-    value,
-  );
+        table.answer,
+        value,
+      );
 
   _i1.ColumnValue<List<int>, List<int>> sourceResourceIds(List<int> value) =>
       _i1.ColumnValue(
@@ -253,9 +253,9 @@ class RoomAiAnswerUpdateTable extends _i1.UpdateTable<RoomAiAnswerTable> {
       );
 
   _i1.ColumnValue<String, String> confidence(String value) => _i1.ColumnValue(
-    table.confidence,
-    value,
-  );
+        table.confidence,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -266,7 +266,7 @@ class RoomAiAnswerUpdateTable extends _i1.UpdateTable<RoomAiAnswerTable> {
 
 class RoomAiAnswerTable extends _i1.Table<int?> {
   RoomAiAnswerTable({super.tableRelation})
-    : super(tableName: 'room_ai_answers') {
+      : super(tableName: 'room_ai_answers') {
     updateTable = RoomAiAnswerUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -322,16 +322,16 @@ class RoomAiAnswerTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    askerId,
-    question,
-    answer,
-    sourceResourceIds,
-    citations,
-    confidence,
-    createdAt,
-  ];
+        id,
+        roomId,
+        askerId,
+        question,
+        answer,
+        sourceResourceIds,
+        citations,
+        confidence,
+        createdAt,
+      ];
 }
 
 class RoomAiAnswerInclude extends _i1.IncludeObject {

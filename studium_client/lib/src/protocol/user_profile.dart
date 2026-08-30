@@ -117,15 +117,15 @@ class _UserProfileImpl extends UserProfile {
     String? stripeCustomerId,
     String? paystackCustomerCode,
   }) : super._(
-         id: id,
-         userId: userId,
-         name: name,
-         role: role,
-         subscriptionId: subscriptionId,
-         studyHistoryId: studyHistoryId,
-         stripeCustomerId: stripeCustomerId,
-         paystackCustomerCode: paystackCustomerCode,
-       );
+          id: id,
+          userId: userId,
+          name: name,
+          role: role,
+          subscriptionId: subscriptionId,
+          studyHistoryId: studyHistoryId,
+          stripeCustomerId: stripeCustomerId,
+          paystackCustomerCode: paystackCustomerCode,
+        );
 
   /// Returns a shallow copy of this [UserProfile]
   /// with some or all fields replaced by the given arguments.
@@ -146,12 +146,10 @@ class _UserProfileImpl extends UserProfile {
       userId: userId ?? this.userId,
       name: name is String? ? name : this.name,
       role: role ?? this.role,
-      subscriptionId: subscriptionId is String?
-          ? subscriptionId
-          : this.subscriptionId,
-      studyHistoryId: studyHistoryId is int?
-          ? studyHistoryId
-          : this.studyHistoryId,
+      subscriptionId:
+          subscriptionId is String? ? subscriptionId : this.subscriptionId,
+      studyHistoryId:
+          studyHistoryId is int? ? studyHistoryId : this.studyHistoryId,
       stripeCustomerId: stripeCustomerId is String?
           ? stripeCustomerId
           : this.stripeCustomerId,

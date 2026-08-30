@@ -103,13 +103,13 @@ class _CollaborativeDocumentRevisionImpl extends CollaborativeDocumentRevision {
     required String body,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         documentId: documentId,
-         editorId: editorId,
-         version: version,
-         body: body,
-         createdAt: createdAt,
-       );
+          id: id,
+          documentId: documentId,
+          editorId: editorId,
+          version: version,
+          body: body,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [CollaborativeDocumentRevision]
   /// with some or all fields replaced by the given arguments.

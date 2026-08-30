@@ -192,18 +192,18 @@ class _ChallengeImpl extends Challenge {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         title: title,
-         problemStatement: problemStatement,
-         field: field,
-         tags: tags,
-         difficulty: difficulty,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          title: title,
+          problemStatement: problemStatement,
+          field: field,
+          tags: tags,
+          difficulty: difficulty,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Challenge]
   /// with some or all fields replaced by the given arguments.
@@ -242,19 +242,19 @@ class ChallengeUpdateTable extends _i1.UpdateTable<ChallengeTable> {
   ChallengeUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int? value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> ownerId(int value) => _i1.ColumnValue(
-    table.ownerId,
-    value,
-  );
+        table.ownerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> problemStatement(String value) =>
       _i1.ColumnValue(
@@ -263,9 +263,9 @@ class ChallengeUpdateTable extends _i1.UpdateTable<ChallengeTable> {
       );
 
   _i1.ColumnValue<String, String> field(String value) => _i1.ColumnValue(
-    table.field,
-    value,
-  );
+        table.field,
+        value,
+      );
 
   _i1.ColumnValue<List<String>, List<String>> tags(List<String> value) =>
       _i1.ColumnValue(
@@ -274,14 +274,14 @@ class ChallengeUpdateTable extends _i1.UpdateTable<ChallengeTable> {
       );
 
   _i1.ColumnValue<String, String> difficulty(String value) => _i1.ColumnValue(
-    table.difficulty,
-    value,
-  );
+        table.difficulty,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -365,18 +365,18 @@ class ChallengeTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    ownerId,
-    title,
-    problemStatement,
-    field,
-    tags,
-    difficulty,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        roomId,
+        ownerId,
+        title,
+        problemStatement,
+        field,
+        tags,
+        difficulty,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class ChallengeInclude extends _i1.IncludeObject {

@@ -164,15 +164,15 @@ class _VerificationRequestImpl extends VerificationRequest {
     required DateTime createdAt,
     DateTime? reviewedAt,
   }) : super._(
-         id: id,
-         membershipId: membershipId,
-         method: method,
-         evidenceUrl: evidenceUrl,
-         status: status,
-         reviewerId: reviewerId,
-         createdAt: createdAt,
-         reviewedAt: reviewedAt,
-       );
+          id: id,
+          membershipId: membershipId,
+          method: method,
+          evidenceUrl: evidenceUrl,
+          status: status,
+          reviewerId: reviewerId,
+          createdAt: createdAt,
+          reviewedAt: reviewedAt,
+        );
 
   /// Returns a shallow copy of this [VerificationRequest]
   /// with some or all fields replaced by the given arguments.
@@ -206,29 +206,29 @@ class VerificationRequestUpdateTable
   VerificationRequestUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> membershipId(int value) => _i1.ColumnValue(
-    table.membershipId,
-    value,
-  );
+        table.membershipId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> method(String value) => _i1.ColumnValue(
-    table.method,
-    value,
-  );
+        table.method,
+        value,
+      );
 
   _i1.ColumnValue<String, String> evidenceUrl(String? value) => _i1.ColumnValue(
-    table.evidenceUrl,
-    value,
-  );
+        table.evidenceUrl,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> reviewerId(int? value) => _i1.ColumnValue(
-    table.reviewerId,
-    value,
-  );
+        table.reviewerId,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -245,7 +245,7 @@ class VerificationRequestUpdateTable
 
 class VerificationRequestTable extends _i1.Table<int?> {
   VerificationRequestTable({super.tableRelation})
-    : super(tableName: 'verification_requests') {
+      : super(tableName: 'verification_requests') {
     updateTable = VerificationRequestUpdateTable(this);
     membershipId = _i1.ColumnInt(
       'membershipId',
@@ -295,15 +295,15 @@ class VerificationRequestTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    membershipId,
-    method,
-    evidenceUrl,
-    status,
-    reviewerId,
-    createdAt,
-    reviewedAt,
-  ];
+        id,
+        membershipId,
+        method,
+        evidenceUrl,
+        status,
+        reviewerId,
+        createdAt,
+        reviewedAt,
+      ];
 }
 
 class VerificationRequestInclude extends _i1.IncludeObject {
@@ -519,7 +519,7 @@ class VerificationRequestRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<VerificationRequestUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<VerificationRequest>(
@@ -534,7 +534,7 @@ class VerificationRequestRepository {
   Future<List<VerificationRequest>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<VerificationRequestUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<VerificationRequestTable> where,
     int? limit,
     int? offset,

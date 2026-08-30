@@ -175,16 +175,16 @@ class _CollaborativeDocumentImpl extends CollaborativeDocument {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         title: title,
-         body: body,
-         version: version,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          title: title,
+          body: body,
+          version: version,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [CollaborativeDocument]
   /// with some or all fields replaced by the given arguments.
@@ -220,34 +220,34 @@ class CollaborativeDocumentUpdateTable
   CollaborativeDocumentUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> ownerId(int value) => _i1.ColumnValue(
-    table.ownerId,
-    value,
-  );
+        table.ownerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<int, int> version(int value) => _i1.ColumnValue(
-    table.version,
-    value,
-  );
+        table.version,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -264,7 +264,7 @@ class CollaborativeDocumentUpdateTable
 
 class CollaborativeDocumentTable extends _i1.Table<int?> {
   CollaborativeDocumentTable({super.tableRelation})
-    : super(tableName: 'collaborative_documents') {
+      : super(tableName: 'collaborative_documents') {
     updateTable = CollaborativeDocumentUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -320,16 +320,16 @@ class CollaborativeDocumentTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    ownerId,
-    title,
-    body,
-    version,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        roomId,
+        ownerId,
+        title,
+        body,
+        version,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class CollaborativeDocumentInclude extends _i1.IncludeObject {
@@ -545,7 +545,7 @@ class CollaborativeDocumentRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<CollaborativeDocumentUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<CollaborativeDocument>(
@@ -560,7 +560,7 @@ class CollaborativeDocumentRepository {
   Future<List<CollaborativeDocument>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<CollaborativeDocumentUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<CollaborativeDocumentTable> where,
     int? limit,
     int? offset,

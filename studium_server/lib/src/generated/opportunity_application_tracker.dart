@@ -166,15 +166,15 @@ class _OpportunityApplicationTrackerImpl extends OpportunityApplicationTracker {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         opportunityId: opportunityId,
-         userId: userId,
-         status: status,
-         notes: notes,
-         applicationUrl: applicationUrl,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          opportunityId: opportunityId,
+          userId: userId,
+          status: status,
+          notes: notes,
+          applicationUrl: applicationUrl,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunityApplicationTracker]
   /// with some or all fields replaced by the given arguments.
@@ -196,9 +196,8 @@ class _OpportunityApplicationTrackerImpl extends OpportunityApplicationTracker {
       userId: userId ?? this.userId,
       status: status ?? this.status,
       notes: notes is String? ? notes : this.notes,
-      applicationUrl: applicationUrl is String?
-          ? applicationUrl
-          : this.applicationUrl,
+      applicationUrl:
+          applicationUrl is String? ? applicationUrl : this.applicationUrl,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -210,24 +209,24 @@ class OpportunityApplicationTrackerUpdateTable
   OpportunityApplicationTrackerUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> opportunityId(int value) => _i1.ColumnValue(
-    table.opportunityId,
-    value,
-  );
+        table.opportunityId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<String, String> notes(String? value) => _i1.ColumnValue(
-    table.notes,
-    value,
-  );
+        table.notes,
+        value,
+      );
 
   _i1.ColumnValue<String, String> applicationUrl(String? value) =>
       _i1.ColumnValue(
@@ -250,7 +249,7 @@ class OpportunityApplicationTrackerUpdateTable
 
 class OpportunityApplicationTrackerTable extends _i1.Table<int?> {
   OpportunityApplicationTrackerTable({super.tableRelation})
-    : super(tableName: 'opportunity_application_trackers') {
+      : super(tableName: 'opportunity_application_trackers') {
     updateTable = OpportunityApplicationTrackerUpdateTable(this);
     opportunityId = _i1.ColumnInt(
       'opportunityId',
@@ -300,15 +299,15 @@ class OpportunityApplicationTrackerTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    opportunityId,
-    userId,
-    status,
-    notes,
-    applicationUrl,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        opportunityId,
+        userId,
+        status,
+        notes,
+        applicationUrl,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class OpportunityApplicationTrackerInclude extends _i1.IncludeObject {
@@ -523,10 +522,9 @@ class OpportunityApplicationTrackerRepository {
   Future<OpportunityApplicationTracker?> updateById(
     _i1.DatabaseSession session,
     int id, {
-    required _i1.ColumnValueListBuilder<
-      OpportunityApplicationTrackerUpdateTable
-    >
-    columnValues,
+    required _i1
+        .ColumnValueListBuilder<OpportunityApplicationTrackerUpdateTable>
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<OpportunityApplicationTracker>(
@@ -540,12 +538,11 @@ class OpportunityApplicationTrackerRepository {
   /// Returns the list of updated rows.
   Future<List<OpportunityApplicationTracker>> updateWhere(
     _i1.DatabaseSession session, {
-    required _i1.ColumnValueListBuilder<
-      OpportunityApplicationTrackerUpdateTable
-    >
-    columnValues,
+    required _i1
+        .ColumnValueListBuilder<OpportunityApplicationTrackerUpdateTable>
+        columnValues,
     required _i1.WhereExpressionBuilder<OpportunityApplicationTrackerTable>
-    where,
+        where,
     int? limit,
     int? offset,
     _i1.OrderByBuilder<OpportunityApplicationTrackerTable>? orderBy,
@@ -595,7 +592,7 @@ class OpportunityApplicationTrackerRepository {
   Future<List<OpportunityApplicationTracker>> deleteWhere(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<OpportunityApplicationTrackerTable>
-    where,
+        where,
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteWhere<OpportunityApplicationTracker>(
@@ -623,7 +620,7 @@ class OpportunityApplicationTrackerRepository {
   Future<void> lockRows(
     _i1.DatabaseSession session, {
     required _i1.WhereExpressionBuilder<OpportunityApplicationTrackerTable>
-    where,
+        where,
     required _i1.LockMode lockMode,
     required _i1.Transaction transaction,
     _i1.LockBehavior lockBehavior = _i1.LockBehavior.wait,

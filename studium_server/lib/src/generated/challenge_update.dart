@@ -146,13 +146,13 @@ class _ChallengeProgressUpdateImpl extends ChallengeProgressUpdate {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          teamId: teamId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeProgressUpdate]
   /// with some or all fields replaced by the given arguments.
@@ -182,24 +182,24 @@ class ChallengeProgressUpdateUpdateTable
   ChallengeProgressUpdateUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> teamId(int value) => _i1.ColumnValue(
-    table.teamId,
-    value,
-  );
+        table.teamId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> authorId(int value) => _i1.ColumnValue(
-    table.authorId,
-    value,
-  );
+        table.authorId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -210,7 +210,7 @@ class ChallengeProgressUpdateUpdateTable
 
 class ChallengeProgressUpdateTable extends _i1.Table<int?> {
   ChallengeProgressUpdateTable({super.tableRelation})
-    : super(tableName: 'challenge_updates') {
+      : super(tableName: 'challenge_updates') {
     updateTable = ChallengeProgressUpdateUpdateTable(this);
     teamId = _i1.ColumnInt(
       'teamId',
@@ -248,13 +248,13 @@ class ChallengeProgressUpdateTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    teamId,
-    authorId,
-    body,
-    status,
-    createdAt,
-  ];
+        id,
+        teamId,
+        authorId,
+        body,
+        status,
+        createdAt,
+      ];
 }
 
 class ChallengeProgressUpdateInclude extends _i1.IncludeObject {
@@ -470,7 +470,7 @@ class ChallengeProgressUpdateRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ChallengeProgressUpdateUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ChallengeProgressUpdate>(
@@ -485,7 +485,7 @@ class ChallengeProgressUpdateRepository {
   Future<List<ChallengeProgressUpdate>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ChallengeProgressUpdateUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ChallengeProgressUpdateTable> where,
     int? limit,
     int? offset,

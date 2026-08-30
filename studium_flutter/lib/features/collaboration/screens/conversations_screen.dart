@@ -4,6 +4,7 @@ import 'package:studium_client/studium_client.dart';
 
 import '../../../core/widgets/async_value_view.dart';
 import '../../../core/widgets/neural_widgets.dart';
+import '../providers/collaboration_interaction_providers.dart';
 import '../providers/collaboration_provider.dart';
 import 'safety_relationships_screen.dart';
 import 'privacy_controls_screen.dart';

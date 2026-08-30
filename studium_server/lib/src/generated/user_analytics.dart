@@ -135,12 +135,12 @@ class _UserAnalyticsImpl extends UserAnalytics {
     required DateTime timestamp,
     String? metadata,
   }) : super._(
-         id: id,
-         userId: userId,
-         action: action,
-         timestamp: timestamp,
-         metadata: metadata,
-       );
+          id: id,
+          userId: userId,
+          action: action,
+          timestamp: timestamp,
+          metadata: metadata,
+        );
 
   /// Returns a shallow copy of this [UserAnalytics]
   /// with some or all fields replaced by the given arguments.
@@ -167,14 +167,14 @@ class UserAnalyticsUpdateTable extends _i1.UpdateTable<UserAnalyticsTable> {
   UserAnalyticsUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> action(String value) => _i1.ColumnValue(
-    table.action,
-    value,
-  );
+        table.action,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> timestamp(DateTime value) =>
       _i1.ColumnValue(
@@ -183,14 +183,14 @@ class UserAnalyticsUpdateTable extends _i1.UpdateTable<UserAnalyticsTable> {
       );
 
   _i1.ColumnValue<String, String> metadata(String? value) => _i1.ColumnValue(
-    table.metadata,
-    value,
-  );
+        table.metadata,
+        value,
+      );
 }
 
 class UserAnalyticsTable extends _i1.Table<int?> {
   UserAnalyticsTable({super.tableRelation})
-    : super(tableName: 'user_analytics') {
+      : super(tableName: 'user_analytics') {
     updateTable = UserAnalyticsUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -222,12 +222,12 @@ class UserAnalyticsTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    action,
-    timestamp,
-    metadata,
-  ];
+        id,
+        userId,
+        action,
+        timestamp,
+        metadata,
+      ];
 }
 
 class UserAnalyticsInclude extends _i1.IncludeObject {

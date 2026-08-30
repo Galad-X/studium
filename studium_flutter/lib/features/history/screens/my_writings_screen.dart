@@ -201,13 +201,16 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
     }
 
     // Filter writings based on search and filter
-    final filteredWritings = writings.where((writing) {
-      final matchesSearch = _searchQuery.isEmpty ||
-          writing.title.toLowerCase().contains(_searchQuery.toLowerCase());
-      final matchesFilter =
-          _selectedFilter == 'all' || writing.type == _selectedFilter;
-      return matchesSearch && matchesFilter;
-    }).cast<AcademicWriting>().toList()
+    final filteredWritings = writings
+        .where((writing) {
+          final matchesSearch = _searchQuery.isEmpty ||
+              writing.title.toLowerCase().contains(_searchQuery.toLowerCase());
+          final matchesFilter =
+              _selectedFilter == 'all' || writing.type == _selectedFilter;
+          return matchesSearch && matchesFilter;
+        })
+        .cast<AcademicWriting>()
+        .toList()
       ..sort((a, b) => _sortNewestFirst
           ? b.createdAt.compareTo(a.createdAt)
           : a.createdAt.compareTo(b.createdAt));
@@ -247,16 +250,19 @@ class _MyWritingsScreenState extends ConsumerState<MyWritingsScreen>
 
   Future<void> _exportAll(List<AcademicWriting> writings) async {
     try {
-      final content = writings.map((writing) => [
-            'Title: ${writing.title}',
-            'Type: ${writing.type}',
-            'Created: ${DateFormat.yMMMd().format(writing.createdAt)}',
-            '',
-            writing.content,
-            '\n========================================\n',
-          ].join('\n')).join();
+      final content = writings
+          .map((writing) => [
+                'Title: ${writing.title}',
+                'Type: ${writing.type}',
+                'Created: ${DateFormat.yMMMd().format(writing.createdAt)}',
+                '',
+                writing.content,
+                '\n========================================\n',
+              ].join('\n'))
+          .join();
       final path = await ref.read(exportServiceProvider).exportDocument(
-            title: 'All_Writings_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
+            title:
+                'All_Writings_${DateFormat('yyyy-MM-dd').format(DateTime.now())}',
             content: content,
             format: ExportFormat.pdf,
           );

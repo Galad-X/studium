@@ -144,13 +144,13 @@ class _ChallengeTeamMemberImpl extends ChallengeTeamMember {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          teamId: teamId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeamMember]
   /// with some or all fields replaced by the given arguments.
@@ -180,24 +180,24 @@ class ChallengeTeamMemberUpdateTable
   ChallengeTeamMemberUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> teamId(int value) => _i1.ColumnValue(
-    table.teamId,
-    value,
-  );
+        table.teamId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> role(String value) => _i1.ColumnValue(
-    table.role,
-    value,
-  );
+        table.role,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> joinedAt(DateTime value) =>
       _i1.ColumnValue(
@@ -208,7 +208,7 @@ class ChallengeTeamMemberUpdateTable
 
 class ChallengeTeamMemberTable extends _i1.Table<int?> {
   ChallengeTeamMemberTable({super.tableRelation})
-    : super(tableName: 'challenge_team_members') {
+      : super(tableName: 'challenge_team_members') {
     updateTable = ChallengeTeamMemberUpdateTable(this);
     teamId = _i1.ColumnInt(
       'teamId',
@@ -246,13 +246,13 @@ class ChallengeTeamMemberTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    teamId,
-    userId,
-    role,
-    status,
-    joinedAt,
-  ];
+        id,
+        teamId,
+        userId,
+        role,
+        status,
+        joinedAt,
+      ];
 }
 
 class ChallengeTeamMemberInclude extends _i1.IncludeObject {
@@ -468,7 +468,7 @@ class ChallengeTeamMemberRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ChallengeTeamMemberUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ChallengeTeamMember>(
@@ -483,7 +483,7 @@ class ChallengeTeamMemberRepository {
   Future<List<ChallengeTeamMember>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ChallengeTeamMemberUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ChallengeTeamMemberTable> where,
     int? limit,
     int? offset,

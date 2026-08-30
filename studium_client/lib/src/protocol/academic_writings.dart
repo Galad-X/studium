@@ -133,17 +133,17 @@ class _AcademicWritingImpl extends AcademicWriting {
     required String fileUrl,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         studyMaterialId: studyMaterialId,
-         type: type,
-         title: title,
-         wordCount: wordCount,
-         content: content,
-         format: format,
-         fileUrl: fileUrl,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          studyMaterialId: studyMaterialId,
+          type: type,
+          title: title,
+          wordCount: wordCount,
+          content: content,
+          format: format,
+          fileUrl: fileUrl,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [AcademicWriting]
   /// with some or all fields replaced by the given arguments.
@@ -164,9 +164,8 @@ class _AcademicWritingImpl extends AcademicWriting {
     return AcademicWriting(
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
-      studyMaterialId: studyMaterialId is int?
-          ? studyMaterialId
-          : this.studyMaterialId,
+      studyMaterialId:
+          studyMaterialId is int? ? studyMaterialId : this.studyMaterialId,
       type: type ?? this.type,
       title: title ?? this.title,
       wordCount: wordCount is int? ? wordCount : this.wordCount,

@@ -164,15 +164,15 @@ class _DiscussionPostImpl extends DiscussionPost {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         authorId: authorId,
-         acceptedCommentId: acceptedCommentId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          authorId: authorId,
+          acceptedCommentId: acceptedCommentId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [DiscussionPost]
   /// with some or all fields replaced by the given arguments.
@@ -207,29 +207,29 @@ class DiscussionPostUpdateTable extends _i1.UpdateTable<DiscussionPostTable> {
   DiscussionPostUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> roomId(int value) => _i1.ColumnValue(
-    table.roomId,
-    value,
-  );
+        table.roomId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> authorId(int value) => _i1.ColumnValue(
-    table.authorId,
-    value,
-  );
+        table.authorId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> acceptedCommentId(int? value) => _i1.ColumnValue(
-    table.acceptedCommentId,
-    value,
-  );
+        table.acceptedCommentId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> body(String value) => _i1.ColumnValue(
-    table.body,
-    value,
-  );
+        table.body,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -246,7 +246,7 @@ class DiscussionPostUpdateTable extends _i1.UpdateTable<DiscussionPostTable> {
 
 class DiscussionPostTable extends _i1.Table<int?> {
   DiscussionPostTable({super.tableRelation})
-    : super(tableName: 'discussion_posts') {
+      : super(tableName: 'discussion_posts') {
     updateTable = DiscussionPostUpdateTable(this);
     roomId = _i1.ColumnInt(
       'roomId',
@@ -296,15 +296,15 @@ class DiscussionPostTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    roomId,
-    authorId,
-    acceptedCommentId,
-    body,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        roomId,
+        authorId,
+        acceptedCommentId,
+        body,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class DiscussionPostInclude extends _i1.IncludeObject {

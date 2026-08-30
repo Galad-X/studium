@@ -85,11 +85,11 @@ class _TagImpl extends Tag {
     required int studyMaterialId,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         name: name,
-         studyMaterialId: studyMaterialId,
-         createdAt: createdAt,
-       );
+          id: id,
+          name: name,
+          studyMaterialId: studyMaterialId,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Tag]
   /// with some or all fields replaced by the given arguments.

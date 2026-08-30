@@ -7761,9 +7761,8 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<_i18.CollaborativeDocumentRevision?>()) {
       return (data != null
-              ? _i18.CollaborativeDocumentRevision.fromJson(data)
-              : null)
-          as T;
+          ? _i18.CollaborativeDocumentRevision.fromJson(data)
+          : null) as T;
     }
     if (t == _i1.getType<_i19.Comment?>()) {
       return (data != null ? _i19.Comment.fromJson(data) : null) as T;
@@ -7828,9 +7827,8 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<_i38.OpportunityApplicationTracker?>()) {
       return (data != null
-              ? _i38.OpportunityApplicationTracker.fromJson(data)
-              : null)
-          as T;
+          ? _i38.OpportunityApplicationTracker.fromJson(data)
+          : null) as T;
     }
     if (t == _i1.getType<_i39.OpportunitySave?>()) {
       return (data != null ? _i39.OpportunitySave.fromJson(data) : null) as T;
@@ -7936,9 +7934,8 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i54.StudyMaterial>) {
       return (data as List)
-              .map((e) => deserialize<_i54.StudyMaterial>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i54.StudyMaterial>(e))
+          .toList() as T;
     }
     if (t == List<_i59.Summary>) {
       return (data as List).map((e) => deserialize<_i59.Summary>(e)).toList()
@@ -7946,18 +7943,16 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
-              ? (data as List).map((e) => deserialize<String>(e)).toList()
-              : null)
-          as T;
+          ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
     if (t == List<_i69.AcademicWriting>) {
       return (data as List)
-              .map((e) => deserialize<_i69.AcademicWriting>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i69.AcademicWriting>(e))
+          .toList() as T;
     }
     if (t == List<_i70.Question>) {
       return (data as List).map((e) => deserialize<_i70.Question>(e)).toList()
@@ -7968,33 +7963,28 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<List<String>?>()) {
       return (data != null
-              ? (data as List).map((e) => deserialize<String>(e)).toList()
-              : null)
-          as T;
+          ? (data as List).map((e) => deserialize<String>(e)).toList()
+          : null) as T;
     }
     if (t == List<_i71.UserAnalytics>) {
       return (data as List)
-              .map((e) => deserialize<_i71.UserAnalytics>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i71.UserAnalytics>(e))
+          .toList() as T;
     }
     if (t == List<_i72.Institution>) {
       return (data as List)
-              .map((e) => deserialize<_i72.Institution>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i72.Institution>(e))
+          .toList() as T;
     }
     if (t == List<_i73.InstitutionMembership>) {
       return (data as List)
-              .map((e) => deserialize<_i73.InstitutionMembership>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i73.InstitutionMembership>(e))
+          .toList() as T;
     }
     if (t == List<_i74.VerificationRequest>) {
       return (data as List)
-              .map((e) => deserialize<_i74.VerificationRequest>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i74.VerificationRequest>(e))
+          .toList() as T;
     }
     if (t == List<_i75.StudyRoom>) {
       return (data as List).map((e) => deserialize<_i75.StudyRoom>(e)).toList()
@@ -8002,9 +7992,8 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i76.DiscussionPost>) {
       return (data as List)
-              .map((e) => deserialize<_i76.DiscussionPost>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i76.DiscussionPost>(e))
+          .toList() as T;
     }
     if (t == List<_i77.Challenge>) {
       return (data as List).map((e) => deserialize<_i77.Challenge>(e)).toList()
@@ -8012,39 +8001,33 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i78.RoomResource>) {
       return (data as List)
-              .map((e) => deserialize<_i78.RoomResource>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i78.RoomResource>(e))
+          .toList() as T;
     }
     if (t == List<_i79.RoomResourceChunk>) {
       return (data as List)
-              .map((e) => deserialize<_i79.RoomResourceChunk>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i79.RoomResourceChunk>(e))
+          .toList() as T;
     }
     if (t == List<_i80.ChallengeTeam>) {
       return (data as List)
-              .map((e) => deserialize<_i80.ChallengeTeam>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i80.ChallengeTeam>(e))
+          .toList() as T;
     }
     if (t == List<_i81.ChallengeTeamMember>) {
       return (data as List)
-              .map((e) => deserialize<_i81.ChallengeTeamMember>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i81.ChallengeTeamMember>(e))
+          .toList() as T;
     }
     if (t == List<_i82.ChallengeMilestone>) {
       return (data as List)
-              .map((e) => deserialize<_i82.ChallengeMilestone>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i82.ChallengeMilestone>(e))
+          .toList() as T;
     }
     if (t == List<_i83.ChallengeProgressUpdate>) {
       return (data as List)
-              .map((e) => deserialize<_i83.ChallengeProgressUpdate>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i83.ChallengeProgressUpdate>(e))
+          .toList() as T;
     }
     if (t == List<_i84.Comment>) {
       return (data as List).map((e) => deserialize<_i84.Comment>(e)).toList()
@@ -8052,33 +8035,28 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i85.RoomChatMessage>) {
       return (data as List)
-              .map((e) => deserialize<_i85.RoomChatMessage>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i85.RoomChatMessage>(e))
+          .toList() as T;
     }
     if (t == List<_i86.RoomAiAnswer>) {
       return (data as List)
-              .map((e) => deserialize<_i86.RoomAiAnswer>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i86.RoomAiAnswer>(e))
+          .toList() as T;
     }
     if (t == List<_i87.CollaborationPresence>) {
       return (data as List)
-              .map((e) => deserialize<_i87.CollaborationPresence>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i87.CollaborationPresence>(e))
+          .toList() as T;
     }
     if (t == List<_i88.ScheduledStudySession>) {
       return (data as List)
-              .map((e) => deserialize<_i88.ScheduledStudySession>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i88.ScheduledStudySession>(e))
+          .toList() as T;
     }
     if (t == List<_i89.ContentReport>) {
       return (data as List)
-              .map((e) => deserialize<_i89.ContentReport>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i89.ContentReport>(e))
+          .toList() as T;
     }
     if (t == List<_i90.AuditEvent>) {
       return (data as List).map((e) => deserialize<_i90.AuditEvent>(e)).toList()
@@ -8086,99 +8064,84 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == List<_i91.ModerationAppeal>) {
       return (data as List)
-              .map((e) => deserialize<_i91.ModerationAppeal>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i91.ModerationAppeal>(e))
+          .toList() as T;
     }
     if (t == List<_i92.CollaborativeDocument>) {
       return (data as List)
-              .map((e) => deserialize<_i92.CollaborativeDocument>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i92.CollaborativeDocument>(e))
+          .toList() as T;
     }
     if (t == List<_i93.UserSafetyRelationship>) {
       return (data as List)
-              .map((e) => deserialize<_i93.UserSafetyRelationship>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i93.UserSafetyRelationship>(e))
+          .toList() as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
     if (t == List<_i94.Conversation>) {
       return (data as List)
-              .map((e) => deserialize<_i94.Conversation>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i94.Conversation>(e))
+          .toList() as T;
     }
     if (t == List<_i95.DirectMessage>) {
       return (data as List)
-              .map((e) => deserialize<_i95.DirectMessage>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i95.DirectMessage>(e))
+          .toList() as T;
     }
     if (t == List<_i96.ConversationReadReceipt>) {
       return (data as List)
-              .map((e) => deserialize<_i96.ConversationReadReceipt>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i96.ConversationReadReceipt>(e))
+          .toList() as T;
     }
     if (t == List<_i97.Notification>) {
       return (data as List)
-              .map((e) => deserialize<_i97.Notification>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i97.Notification>(e))
+          .toList() as T;
     }
     if (t == Map<String, int>) {
       return (data as Map).map(
-            (k, v) => MapEntry(deserialize<String>(k), deserialize<int>(v)),
-          )
-          as T;
+        (k, v) => MapEntry(deserialize<String>(k), deserialize<int>(v)),
+      ) as T;
     }
     if (t == List<_i98.Opportunity>) {
       return (data as List)
-              .map((e) => deserialize<_i98.Opportunity>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i98.Opportunity>(e))
+          .toList() as T;
     }
     if (t == List<_i99.OpportunitySave>) {
       return (data as List)
-              .map((e) => deserialize<_i99.OpportunitySave>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i99.OpportunitySave>(e))
+          .toList() as T;
     }
     if (t == List<_i100.OpportunityAlert>) {
       return (data as List)
-              .map((e) => deserialize<_i100.OpportunityAlert>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i100.OpportunityAlert>(e))
+          .toList() as T;
     }
     if (t == List<_i101.OpportunityApplicationTracker>) {
       return (data as List)
-              .map((e) => deserialize<_i101.OpportunityApplicationTracker>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i101.OpportunityApplicationTracker>(e))
+          .toList() as T;
     }
     if (t == List<_i102.StudyMaterial>) {
       return (data as List)
-              .map((e) => deserialize<_i102.StudyMaterial>(e))
-              .toList()
-          as T;
+          .map((e) => deserialize<_i102.StudyMaterial>(e))
+          .toList() as T;
     }
     if (t == Map<String, dynamic>) {
       return (data as Map).map(
-            (k, v) => MapEntry(deserialize<String>(k), deserialize<dynamic>(v)),
-          )
-          as T;
+        (k, v) => MapEntry(deserialize<String>(k), deserialize<dynamic>(v)),
+      ) as T;
     }
     if (t == _i1.getType<Map<String, dynamic>?>()) {
       return (data != null
-              ? (data as Map).map(
-                  (k, v) =>
-                      MapEntry(deserialize<String>(k), deserialize<dynamic>(v)),
-                )
-              : null)
-          as T;
+          ? (data as Map).map(
+              (k, v) =>
+                  MapEntry(deserialize<String>(k), deserialize<dynamic>(v)),
+            )
+          : null) as T;
     }
     if (t == List<_i103.Summary>) {
       return (data as List).map((e) => deserialize<_i103.Summary>(e)).toList()

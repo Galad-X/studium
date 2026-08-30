@@ -173,16 +173,16 @@ class _InstitutionInviteImpl extends InstitutionInvite {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         institutionId: institutionId,
-         createdById: createdById,
-         tokenHash: tokenHash,
-         expiresAt: expiresAt,
-         maxUses: maxUses,
-         uses: uses,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          institutionId: institutionId,
+          createdById: createdById,
+          tokenHash: tokenHash,
+          expiresAt: expiresAt,
+          maxUses: maxUses,
+          uses: uses,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [InstitutionInvite]
   /// with some or all fields replaced by the given arguments.
@@ -218,19 +218,19 @@ class InstitutionInviteUpdateTable
   InstitutionInviteUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> institutionId(int value) => _i1.ColumnValue(
-    table.institutionId,
-    value,
-  );
+        table.institutionId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> createdById(int value) => _i1.ColumnValue(
-    table.createdById,
-    value,
-  );
+        table.createdById,
+        value,
+      );
 
   _i1.ColumnValue<String, String> tokenHash(String value) => _i1.ColumnValue(
-    table.tokenHash,
-    value,
-  );
+        table.tokenHash,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> expiresAt(DateTime value) =>
       _i1.ColumnValue(
@@ -239,19 +239,19 @@ class InstitutionInviteUpdateTable
       );
 
   _i1.ColumnValue<int, int> maxUses(int value) => _i1.ColumnValue(
-    table.maxUses,
-    value,
-  );
+        table.maxUses,
+        value,
+      );
 
   _i1.ColumnValue<int, int> uses(int value) => _i1.ColumnValue(
-    table.uses,
-    value,
-  );
+        table.uses,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -262,7 +262,7 @@ class InstitutionInviteUpdateTable
 
 class InstitutionInviteTable extends _i1.Table<int?> {
   InstitutionInviteTable({super.tableRelation})
-    : super(tableName: 'institution_invites') {
+      : super(tableName: 'institution_invites') {
     updateTable = InstitutionInviteUpdateTable(this);
     institutionId = _i1.ColumnInt(
       'institutionId',
@@ -318,16 +318,16 @@ class InstitutionInviteTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    institutionId,
-    createdById,
-    tokenHash,
-    expiresAt,
-    maxUses,
-    uses,
-    status,
-    createdAt,
-  ];
+        id,
+        institutionId,
+        createdById,
+        tokenHash,
+        expiresAt,
+        maxUses,
+        uses,
+        status,
+        createdAt,
+      ];
 }
 
 class InstitutionInviteInclude extends _i1.IncludeObject {
@@ -543,7 +543,7 @@ class InstitutionInviteRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<InstitutionInviteUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<InstitutionInvite>(
@@ -558,7 +558,7 @@ class InstitutionInviteRepository {
   Future<List<InstitutionInvite>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<InstitutionInviteUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<InstitutionInviteTable> where,
     int? limit,
     int? offset,

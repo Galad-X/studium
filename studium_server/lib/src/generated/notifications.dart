@@ -155,14 +155,14 @@ class _NotificationImpl extends Notification {
     bool? isRead,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         message: message,
-         relatedId: relatedId,
-         type: type,
-         isRead: isRead,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          message: message,
+          relatedId: relatedId,
+          type: type,
+          isRead: isRead,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Notification]
   /// with some or all fields replaced by the given arguments.
@@ -193,29 +193,29 @@ class NotificationUpdateTable extends _i1.UpdateTable<NotificationTable> {
   NotificationUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> message(String value) => _i1.ColumnValue(
-    table.message,
-    value,
-  );
+        table.message,
+        value,
+      );
 
   _i1.ColumnValue<int, int> relatedId(int? value) => _i1.ColumnValue(
-    table.relatedId,
-    value,
-  );
+        table.relatedId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> type(String value) => _i1.ColumnValue(
-    table.type,
-    value,
-  );
+        table.type,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> isRead(bool value) => _i1.ColumnValue(
-    table.isRead,
-    value,
-  );
+        table.isRead,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -270,14 +270,14 @@ class NotificationTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    message,
-    relatedId,
-    type,
-    isRead,
-    createdAt,
-  ];
+        id,
+        userId,
+        message,
+        relatedId,
+        type,
+        isRead,
+        createdAt,
+      ];
 }
 
 class NotificationInclude extends _i1.IncludeObject {

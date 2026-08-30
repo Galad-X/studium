@@ -166,15 +166,15 @@ class _InstitutionMembershipImpl extends InstitutionMembership {
     required DateTime createdAt,
     DateTime? verifiedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         institutionId: institutionId,
-         role: role,
-         verificationMethod: verificationMethod,
-         status: status,
-         createdAt: createdAt,
-         verifiedAt: verifiedAt,
-       );
+          id: id,
+          userId: userId,
+          institutionId: institutionId,
+          role: role,
+          verificationMethod: verificationMethod,
+          status: status,
+          createdAt: createdAt,
+          verifiedAt: verifiedAt,
+        );
 
   /// Returns a shallow copy of this [InstitutionMembership]
   /// with some or all fields replaced by the given arguments.
@@ -208,19 +208,19 @@ class InstitutionMembershipUpdateTable
   InstitutionMembershipUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> institutionId(int value) => _i1.ColumnValue(
-    table.institutionId,
-    value,
-  );
+        table.institutionId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> role(String value) => _i1.ColumnValue(
-    table.role,
-    value,
-  );
+        table.role,
+        value,
+      );
 
   _i1.ColumnValue<String, String> verificationMethod(String value) =>
       _i1.ColumnValue(
@@ -229,9 +229,9 @@ class InstitutionMembershipUpdateTable
       );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -248,7 +248,7 @@ class InstitutionMembershipUpdateTable
 
 class InstitutionMembershipTable extends _i1.Table<int?> {
   InstitutionMembershipTable({super.tableRelation})
-    : super(tableName: 'institution_memberships') {
+      : super(tableName: 'institution_memberships') {
     updateTable = InstitutionMembershipUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -298,15 +298,15 @@ class InstitutionMembershipTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    institutionId,
-    role,
-    verificationMethod,
-    status,
-    createdAt,
-    verifiedAt,
-  ];
+        id,
+        userId,
+        institutionId,
+        role,
+        verificationMethod,
+        status,
+        createdAt,
+        verifiedAt,
+      ];
 }
 
 class InstitutionMembershipInclude extends _i1.IncludeObject {
@@ -522,7 +522,7 @@ class InstitutionMembershipRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<InstitutionMembershipUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<InstitutionMembership>(
@@ -537,7 +537,7 @@ class InstitutionMembershipRepository {
   Future<List<InstitutionMembership>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<InstitutionMembershipUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<InstitutionMembershipTable> where,
     int? limit,
     int? offset,

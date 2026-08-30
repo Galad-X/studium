@@ -139,17 +139,17 @@ class _FileProcessingImpl extends FileProcessing {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         status: status,
-         processedText: processedText,
-         errorMessage: errorMessage,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         lastStartedAt: lastStartedAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          status: status,
+          processedText: processedText,
+          errorMessage: errorMessage,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          lastStartedAt: lastStartedAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [FileProcessing]
   /// with some or all fields replaced by the given arguments.
@@ -171,15 +171,13 @@ class _FileProcessingImpl extends FileProcessing {
       id: id is int? ? id : this.id,
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       status: status ?? this.status,
-      processedText: processedText is String?
-          ? processedText
-          : this.processedText,
+      processedText:
+          processedText is String? ? processedText : this.processedText,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
       attempts: attempts ?? this.attempts,
       maxAttempts: maxAttempts ?? this.maxAttempts,
-      lastStartedAt: lastStartedAt is DateTime?
-          ? lastStartedAt
-          : this.lastStartedAt,
+      lastStartedAt:
+          lastStartedAt is DateTime? ? lastStartedAt : this.lastStartedAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

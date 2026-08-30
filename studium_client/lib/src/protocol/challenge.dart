@@ -144,18 +144,18 @@ class _ChallengeImpl extends Challenge {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         ownerId: ownerId,
-         title: title,
-         problemStatement: problemStatement,
-         field: field,
-         tags: tags,
-         difficulty: difficulty,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          roomId: roomId,
+          ownerId: ownerId,
+          title: title,
+          problemStatement: problemStatement,
+          field: field,
+          tags: tags,
+          difficulty: difficulty,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [Challenge]
   /// with some or all fields replaced by the given arguments.

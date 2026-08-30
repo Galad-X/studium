@@ -127,16 +127,16 @@ class _ContentReportImpl extends ContentReport {
     required DateTime createdAt,
     DateTime? resolvedAt,
   }) : super._(
-         id: id,
-         reporterId: reporterId,
-         contentType: contentType,
-         contentId: contentId,
-         reason: reason,
-         details: details,
-         status: status,
-         createdAt: createdAt,
-         resolvedAt: resolvedAt,
-       );
+          id: id,
+          reporterId: reporterId,
+          contentType: contentType,
+          contentId: contentId,
+          reason: reason,
+          details: details,
+          status: status,
+          createdAt: createdAt,
+          resolvedAt: resolvedAt,
+        );
 
   /// Returns a shallow copy of this [ContentReport]
   /// with some or all fields replaced by the given arguments.

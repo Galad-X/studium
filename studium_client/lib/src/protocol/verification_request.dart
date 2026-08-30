@@ -119,15 +119,15 @@ class _VerificationRequestImpl extends VerificationRequest {
     required DateTime createdAt,
     DateTime? reviewedAt,
   }) : super._(
-         id: id,
-         membershipId: membershipId,
-         method: method,
-         evidenceUrl: evidenceUrl,
-         status: status,
-         reviewerId: reviewerId,
-         createdAt: createdAt,
-         reviewedAt: reviewedAt,
-       );
+          id: id,
+          membershipId: membershipId,
+          method: method,
+          evidenceUrl: evidenceUrl,
+          status: status,
+          reviewerId: reviewerId,
+          createdAt: createdAt,
+          reviewedAt: reviewedAt,
+        );
 
   /// Returns a shallow copy of this [VerificationRequest]
   /// with some or all fields replaced by the given arguments.

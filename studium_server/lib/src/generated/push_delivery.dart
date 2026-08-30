@@ -242,23 +242,23 @@ class _PushDeliveryImpl extends PushDelivery {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         title: title,
-         message: message,
-         type: type,
-         relatedId: relatedId,
-         status: status,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         availableAt: availableAt,
-         lockedAt: lockedAt,
-         lockToken: lockToken,
-         lastError: lastError,
-         sentAt: sentAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          title: title,
+          message: message,
+          type: type,
+          relatedId: relatedId,
+          status: status,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          availableAt: availableAt,
+          lockedAt: lockedAt,
+          lockToken: lockToken,
+          lastError: lastError,
+          sentAt: sentAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [PushDelivery]
   /// with some or all fields replaced by the given arguments.
@@ -307,44 +307,44 @@ class PushDeliveryUpdateTable extends _i1.UpdateTable<PushDeliveryTable> {
   PushDeliveryUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> message(String value) => _i1.ColumnValue(
-    table.message,
-    value,
-  );
+        table.message,
+        value,
+      );
 
   _i1.ColumnValue<String, String> type(String? value) => _i1.ColumnValue(
-    table.type,
-    value,
-  );
+        table.type,
+        value,
+      );
 
   _i1.ColumnValue<int, int> relatedId(int? value) => _i1.ColumnValue(
-    table.relatedId,
-    value,
-  );
+        table.relatedId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<int, int> attempts(int value) => _i1.ColumnValue(
-    table.attempts,
-    value,
-  );
+        table.attempts,
+        value,
+      );
 
   _i1.ColumnValue<int, int> maxAttempts(int value) => _i1.ColumnValue(
-    table.maxAttempts,
-    value,
-  );
+        table.maxAttempts,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> availableAt(DateTime value) =>
       _i1.ColumnValue(
@@ -359,14 +359,14 @@ class PushDeliveryUpdateTable extends _i1.UpdateTable<PushDeliveryTable> {
       );
 
   _i1.ColumnValue<String, String> lockToken(String? value) => _i1.ColumnValue(
-    table.lockToken,
-    value,
-  );
+        table.lockToken,
+        value,
+      );
 
   _i1.ColumnValue<String, String> lastError(String? value) => _i1.ColumnValue(
-    table.lastError,
-    value,
-  );
+        table.lastError,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> sentAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -389,7 +389,7 @@ class PushDeliveryUpdateTable extends _i1.UpdateTable<PushDeliveryTable> {
 
 class PushDeliveryTable extends _i1.Table<int?> {
   PushDeliveryTable({super.tableRelation})
-    : super(tableName: 'push_deliveries') {
+      : super(tableName: 'push_deliveries') {
     updateTable = PushDeliveryUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -487,23 +487,23 @@ class PushDeliveryTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    title,
-    message,
-    type,
-    relatedId,
-    status,
-    attempts,
-    maxAttempts,
-    availableAt,
-    lockedAt,
-    lockToken,
-    lastError,
-    sentAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        userId,
+        title,
+        message,
+        type,
+        relatedId,
+        status,
+        attempts,
+        maxAttempts,
+        availableAt,
+        lockedAt,
+        lockToken,
+        lastError,
+        sentAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class PushDeliveryInclude extends _i1.IncludeObject {

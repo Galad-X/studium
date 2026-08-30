@@ -194,18 +194,18 @@ class _SummaryImpl extends Summary {
     required List<String> nuggets,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         userId: userId,
-         isPremium: isPremium,
-         subject: subject,
-         topic: topic,
-         wordCount: wordCount,
-         introduction: introduction,
-         subtopics: subtopics,
-         nuggets: nuggets,
-         createdAt: createdAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          userId: userId,
+          isPremium: isPremium,
+          subject: subject,
+          topic: topic,
+          wordCount: wordCount,
+          introduction: introduction,
+          subtopics: subtopics,
+          nuggets: nuggets,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Summary]
   /// with some or all fields replaced by the given arguments.
@@ -244,34 +244,34 @@ class SummaryUpdateTable extends _i1.UpdateTable<SummaryTable> {
   SummaryUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> isPremium(bool value) => _i1.ColumnValue(
-    table.isPremium,
-    value,
-  );
+        table.isPremium,
+        value,
+      );
 
   _i1.ColumnValue<String, String> subject(String value) => _i1.ColumnValue(
-    table.subject,
-    value,
-  );
+        table.subject,
+        value,
+      );
 
   _i1.ColumnValue<String, String> topic(String value) => _i1.ColumnValue(
-    table.topic,
-    value,
-  );
+        table.topic,
+        value,
+      );
 
   _i1.ColumnValue<int, int> wordCount(int? value) => _i1.ColumnValue(
-    table.wordCount,
-    value,
-  );
+        table.wordCount,
+        value,
+      );
 
   _i1.ColumnValue<String, String> introduction(String? value) =>
       _i1.ColumnValue(
@@ -367,18 +367,18 @@ class SummaryTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    studyMaterialId,
-    userId,
-    isPremium,
-    subject,
-    topic,
-    wordCount,
-    introduction,
-    subtopics,
-    nuggets,
-    createdAt,
-  ];
+        id,
+        studyMaterialId,
+        userId,
+        isPremium,
+        subject,
+        topic,
+        wordCount,
+        introduction,
+        subtopics,
+        nuggets,
+        createdAt,
+      ];
 }
 
 class SummaryInclude extends _i1.IncludeObject {

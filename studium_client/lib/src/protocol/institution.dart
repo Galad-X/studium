@@ -152,18 +152,18 @@ class _InstitutionImpl extends Institution {
     required String verificationStatus,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         name: name,
-         country: country,
-         region: region,
-         domains: domains,
-         subjects: subjects,
-         languages: languages,
-         submittedById: submittedById,
-         logoUrl: logoUrl,
-         verificationStatus: verificationStatus,
-         createdAt: createdAt,
-       );
+          id: id,
+          name: name,
+          country: country,
+          region: region,
+          domains: domains,
+          subjects: subjects,
+          languages: languages,
+          submittedById: submittedById,
+          logoUrl: logoUrl,
+          verificationStatus: verificationStatus,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Institution]
   /// with some or all fields replaced by the given arguments.

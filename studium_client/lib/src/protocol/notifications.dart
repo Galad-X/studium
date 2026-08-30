@@ -111,14 +111,14 @@ class _NotificationImpl extends Notification {
     bool? isRead,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         message: message,
-         relatedId: relatedId,
-         type: type,
-         isRead: isRead,
-         createdAt: createdAt,
-       );
+          id: id,
+          userId: userId,
+          message: message,
+          relatedId: relatedId,
+          type: type,
+          isRead: isRead,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [Notification]
   /// with some or all fields replaced by the given arguments.

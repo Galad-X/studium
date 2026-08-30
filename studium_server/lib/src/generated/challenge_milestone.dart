@@ -179,16 +179,16 @@ class _ChallengeMilestoneImpl extends ChallengeMilestone {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         title: title,
-         description: description,
-         status: status,
-         dueAt: dueAt,
-         completedAt: completedAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          teamId: teamId,
+          title: title,
+          description: description,
+          status: status,
+          dueAt: dueAt,
+          completedAt: completedAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeMilestone]
   /// with some or all fields replaced by the given arguments.
@@ -224,29 +224,29 @@ class ChallengeMilestoneUpdateTable
   ChallengeMilestoneUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> teamId(int value) => _i1.ColumnValue(
-    table.teamId,
-    value,
-  );
+        table.teamId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> title(String value) => _i1.ColumnValue(
-    table.title,
-    value,
-  );
+        table.title,
+        value,
+      );
 
   _i1.ColumnValue<String, String> description(String? value) => _i1.ColumnValue(
-    table.description,
-    value,
-  );
+        table.description,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> dueAt(DateTime? value) => _i1.ColumnValue(
-    table.dueAt,
-    value,
-  );
+        table.dueAt,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> completedAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -269,7 +269,7 @@ class ChallengeMilestoneUpdateTable
 
 class ChallengeMilestoneTable extends _i1.Table<int?> {
   ChallengeMilestoneTable({super.tableRelation})
-    : super(tableName: 'challenge_milestones') {
+      : super(tableName: 'challenge_milestones') {
     updateTable = ChallengeMilestoneUpdateTable(this);
     teamId = _i1.ColumnInt(
       'teamId',
@@ -325,16 +325,16 @@ class ChallengeMilestoneTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    teamId,
-    title,
-    description,
-    status,
-    dueAt,
-    completedAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        teamId,
+        title,
+        description,
+        status,
+        dueAt,
+        completedAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class ChallengeMilestoneInclude extends _i1.IncludeObject {
@@ -550,7 +550,7 @@ class ChallengeMilestoneRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ChallengeMilestoneUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ChallengeMilestone>(
@@ -565,7 +565,7 @@ class ChallengeMilestoneRepository {
   Future<List<ChallengeMilestone>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ChallengeMilestoneUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ChallengeMilestoneTable> where,
     int? limit,
     int? offset,

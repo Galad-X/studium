@@ -103,13 +103,13 @@ class _ChallengeProgressUpdateImpl extends ChallengeProgressUpdate {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          teamId: teamId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeProgressUpdate]
   /// with some or all fields replaced by the given arguments.

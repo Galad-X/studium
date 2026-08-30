@@ -164,15 +164,15 @@ class _ChallengeTeamImpl extends ChallengeTeam {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         challengeId: challengeId,
-         ownerId: ownerId,
-         name: name,
-         description: description,
-         status: status,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          challengeId: challengeId,
+          ownerId: ownerId,
+          name: name,
+          description: description,
+          status: status,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeam]
   /// with some or all fields replaced by the given arguments.
@@ -205,29 +205,29 @@ class ChallengeTeamUpdateTable extends _i1.UpdateTable<ChallengeTeamTable> {
   ChallengeTeamUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> challengeId(int value) => _i1.ColumnValue(
-    table.challengeId,
-    value,
-  );
+        table.challengeId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> ownerId(int value) => _i1.ColumnValue(
-    table.ownerId,
-    value,
-  );
+        table.ownerId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> name(String value) => _i1.ColumnValue(
-    table.name,
-    value,
-  );
+        table.name,
+        value,
+      );
 
   _i1.ColumnValue<String, String> description(String? value) => _i1.ColumnValue(
-    table.description,
-    value,
-  );
+        table.description,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -244,7 +244,7 @@ class ChallengeTeamUpdateTable extends _i1.UpdateTable<ChallengeTeamTable> {
 
 class ChallengeTeamTable extends _i1.Table<int?> {
   ChallengeTeamTable({super.tableRelation})
-    : super(tableName: 'challenge_teams') {
+      : super(tableName: 'challenge_teams') {
     updateTable = ChallengeTeamUpdateTable(this);
     challengeId = _i1.ColumnInt(
       'challengeId',
@@ -294,15 +294,15 @@ class ChallengeTeamTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    challengeId,
-    ownerId,
-    name,
-    description,
-    status,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        challengeId,
+        ownerId,
+        name,
+        description,
+        status,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class ChallengeTeamInclude extends _i1.IncludeObject {

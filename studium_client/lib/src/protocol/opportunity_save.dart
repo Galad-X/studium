@@ -93,12 +93,12 @@ class _OpportunitySaveImpl extends OpportunitySave {
     required bool alertEnabled,
     required DateTime savedAt,
   }) : super._(
-         id: id,
-         opportunityId: opportunityId,
-         userId: userId,
-         alertEnabled: alertEnabled,
-         savedAt: savedAt,
-       );
+          id: id,
+          opportunityId: opportunityId,
+          userId: userId,
+          alertEnabled: alertEnabled,
+          savedAt: savedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunitySave]
   /// with some or all fields replaced by the given arguments.

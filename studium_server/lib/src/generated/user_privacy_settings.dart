@@ -21,8 +21,8 @@ abstract class UserPrivacySettings
     bool? isMinor,
     bool? allowUnknownDirectMessages,
     required this.updatedAt,
-  }) : isMinor = isMinor ?? false,
-       allowUnknownDirectMessages = allowUnknownDirectMessages ?? true;
+  })  : isMinor = isMinor ?? false,
+        allowUnknownDirectMessages = allowUnknownDirectMessages ?? true;
 
   factory UserPrivacySettings({
     int? id,
@@ -41,10 +41,10 @@ abstract class UserPrivacySettings
           : _i1.BoolJsonExtension.fromJson(jsonSerialization['isMinor']),
       allowUnknownDirectMessages:
           jsonSerialization['allowUnknownDirectMessages'] == null
-          ? null
-          : _i1.BoolJsonExtension.fromJson(
-              jsonSerialization['allowUnknownDirectMessages'],
-            ),
+              ? null
+              : _i1.BoolJsonExtension.fromJson(
+                  jsonSerialization['allowUnknownDirectMessages'],
+                ),
       updatedAt: _i1.DateTimeJsonExtension.fromJson(
         jsonSerialization['updatedAt'],
       ),
@@ -143,12 +143,12 @@ class _UserPrivacySettingsImpl extends UserPrivacySettings {
     bool? allowUnknownDirectMessages,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         isMinor: isMinor,
-         allowUnknownDirectMessages: allowUnknownDirectMessages,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          isMinor: isMinor,
+          allowUnknownDirectMessages: allowUnknownDirectMessages,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [UserPrivacySettings]
   /// with some or all fields replaced by the given arguments.
@@ -177,14 +177,14 @@ class UserPrivacySettingsUpdateTable
   UserPrivacySettingsUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> isMinor(bool value) => _i1.ColumnValue(
-    table.isMinor,
-    value,
-  );
+        table.isMinor,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> allowUnknownDirectMessages(bool value) =>
       _i1.ColumnValue(
@@ -201,7 +201,7 @@ class UserPrivacySettingsUpdateTable
 
 class UserPrivacySettingsTable extends _i1.Table<int?> {
   UserPrivacySettingsTable({super.tableRelation})
-    : super(tableName: 'user_privacy_settings') {
+      : super(tableName: 'user_privacy_settings') {
     updateTable = UserPrivacySettingsUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -235,12 +235,12 @@ class UserPrivacySettingsTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    isMinor,
-    allowUnknownDirectMessages,
-    updatedAt,
-  ];
+        id,
+        userId,
+        isMinor,
+        allowUnknownDirectMessages,
+        updatedAt,
+      ];
 }
 
 class UserPrivacySettingsInclude extends _i1.IncludeObject {
@@ -456,7 +456,7 @@ class UserPrivacySettingsRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<UserPrivacySettingsUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<UserPrivacySettings>(
@@ -471,7 +471,7 @@ class UserPrivacySettingsRepository {
   Future<List<UserPrivacySettings>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<UserPrivacySettingsUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<UserPrivacySettingsTable> where,
     int? limit,
     int? offset,

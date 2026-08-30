@@ -217,20 +217,20 @@ class _OpportunitySourceImpl extends OpportunitySource {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         name: name,
-         provider: provider,
-         feedUrl: feedUrl,
-         verificationStatus: verificationStatus,
-         createdById: createdById,
-         lastSyncedAt: lastSyncedAt,
-         nextSyncAt: nextSyncAt,
-         lastSyncStatus: lastSyncStatus,
-         lastSyncError: lastSyncError,
-         staleAt: staleAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          name: name,
+          provider: provider,
+          feedUrl: feedUrl,
+          verificationStatus: verificationStatus,
+          createdById: createdById,
+          lastSyncedAt: lastSyncedAt,
+          nextSyncAt: nextSyncAt,
+          lastSyncStatus: lastSyncStatus,
+          lastSyncError: lastSyncError,
+          staleAt: staleAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [OpportunitySource]
   /// with some or all fields replaced by the given arguments.
@@ -258,16 +258,13 @@ class _OpportunitySourceImpl extends OpportunitySource {
       feedUrl: feedUrl ?? this.feedUrl,
       verificationStatus: verificationStatus ?? this.verificationStatus,
       createdById: createdById ?? this.createdById,
-      lastSyncedAt: lastSyncedAt is DateTime?
-          ? lastSyncedAt
-          : this.lastSyncedAt,
+      lastSyncedAt:
+          lastSyncedAt is DateTime? ? lastSyncedAt : this.lastSyncedAt,
       nextSyncAt: nextSyncAt is DateTime? ? nextSyncAt : this.nextSyncAt,
-      lastSyncStatus: lastSyncStatus is String?
-          ? lastSyncStatus
-          : this.lastSyncStatus,
-      lastSyncError: lastSyncError is String?
-          ? lastSyncError
-          : this.lastSyncError,
+      lastSyncStatus:
+          lastSyncStatus is String? ? lastSyncStatus : this.lastSyncStatus,
+      lastSyncError:
+          lastSyncError is String? ? lastSyncError : this.lastSyncError,
       staleAt: staleAt is DateTime? ? staleAt : this.staleAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -280,19 +277,19 @@ class OpportunitySourceUpdateTable
   OpportunitySourceUpdateTable(super.table);
 
   _i1.ColumnValue<String, String> name(String value) => _i1.ColumnValue(
-    table.name,
-    value,
-  );
+        table.name,
+        value,
+      );
 
   _i1.ColumnValue<String, String> provider(String value) => _i1.ColumnValue(
-    table.provider,
-    value,
-  );
+        table.provider,
+        value,
+      );
 
   _i1.ColumnValue<String, String> feedUrl(String value) => _i1.ColumnValue(
-    table.feedUrl,
-    value,
-  );
+        table.feedUrl,
+        value,
+      );
 
   _i1.ColumnValue<String, String> verificationStatus(String value) =>
       _i1.ColumnValue(
@@ -301,9 +298,9 @@ class OpportunitySourceUpdateTable
       );
 
   _i1.ColumnValue<int, int> createdById(int value) => _i1.ColumnValue(
-    table.createdById,
-    value,
-  );
+        table.createdById,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> lastSyncedAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -350,7 +347,7 @@ class OpportunitySourceUpdateTable
 
 class OpportunitySourceTable extends _i1.Table<int?> {
   OpportunitySourceTable({super.tableRelation})
-    : super(tableName: 'opportunity_sources') {
+      : super(tableName: 'opportunity_sources') {
     updateTable = OpportunitySourceUpdateTable(this);
     name = _i1.ColumnString(
       'name',
@@ -430,20 +427,20 @@ class OpportunitySourceTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    name,
-    provider,
-    feedUrl,
-    verificationStatus,
-    createdById,
-    lastSyncedAt,
-    nextSyncAt,
-    lastSyncStatus,
-    lastSyncError,
-    staleAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        name,
+        provider,
+        feedUrl,
+        verificationStatus,
+        createdById,
+        lastSyncedAt,
+        nextSyncAt,
+        lastSyncStatus,
+        lastSyncError,
+        staleAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class OpportunitySourceInclude extends _i1.IncludeObject {
@@ -659,7 +656,7 @@ class OpportunitySourceRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<OpportunitySourceUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<OpportunitySource>(
@@ -674,7 +671,7 @@ class OpportunitySourceRepository {
   Future<List<OpportunitySource>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<OpportunitySourceUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<OpportunitySourceTable> where,
     int? limit,
     int? offset,

@@ -155,19 +155,19 @@ class _BackgroundJobImpl extends BackgroundJob {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         jobType: jobType,
-         payload: payload,
-         status: status,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         availableAt: availableAt,
-         lockedAt: lockedAt,
-         lockToken: lockToken,
-         lastError: lastError,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          jobType: jobType,
+          payload: payload,
+          status: status,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          availableAt: availableAt,
+          lockedAt: lockedAt,
+          lockToken: lockToken,
+          lastError: lastError,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [BackgroundJob]
   /// with some or all fields replaced by the given arguments.

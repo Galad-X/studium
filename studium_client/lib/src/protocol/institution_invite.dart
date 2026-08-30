@@ -127,16 +127,16 @@ class _InstitutionInviteImpl extends InstitutionInvite {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         institutionId: institutionId,
-         createdById: createdById,
-         tokenHash: tokenHash,
-         expiresAt: expiresAt,
-         maxUses: maxUses,
-         uses: uses,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          institutionId: institutionId,
+          createdById: createdById,
+          tokenHash: tokenHash,
+          expiresAt: expiresAt,
+          maxUses: maxUses,
+          uses: uses,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [InstitutionInvite]
   /// with some or all fields replaced by the given arguments.

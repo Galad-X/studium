@@ -173,16 +173,16 @@ class _ContentReportImpl extends ContentReport {
     required DateTime createdAt,
     DateTime? resolvedAt,
   }) : super._(
-         id: id,
-         reporterId: reporterId,
-         contentType: contentType,
-         contentId: contentId,
-         reason: reason,
-         details: details,
-         status: status,
-         createdAt: createdAt,
-         resolvedAt: resolvedAt,
-       );
+          id: id,
+          reporterId: reporterId,
+          contentType: contentType,
+          contentId: contentId,
+          reason: reason,
+          details: details,
+          status: status,
+          createdAt: createdAt,
+          resolvedAt: resolvedAt,
+        );
 
   /// Returns a shallow copy of this [ContentReport]
   /// with some or all fields replaced by the given arguments.
@@ -217,34 +217,34 @@ class ContentReportUpdateTable extends _i1.UpdateTable<ContentReportTable> {
   ContentReportUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> reporterId(int value) => _i1.ColumnValue(
-    table.reporterId,
-    value,
-  );
+        table.reporterId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> contentType(String value) => _i1.ColumnValue(
-    table.contentType,
-    value,
-  );
+        table.contentType,
+        value,
+      );
 
   _i1.ColumnValue<int, int> contentId(int value) => _i1.ColumnValue(
-    table.contentId,
-    value,
-  );
+        table.contentId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> reason(String value) => _i1.ColumnValue(
-    table.reason,
-    value,
-  );
+        table.reason,
+        value,
+      );
 
   _i1.ColumnValue<String, String> details(String? value) => _i1.ColumnValue(
-    table.details,
-    value,
-  );
+        table.details,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -261,7 +261,7 @@ class ContentReportUpdateTable extends _i1.UpdateTable<ContentReportTable> {
 
 class ContentReportTable extends _i1.Table<int?> {
   ContentReportTable({super.tableRelation})
-    : super(tableName: 'content_reports') {
+      : super(tableName: 'content_reports') {
     updateTable = ContentReportUpdateTable(this);
     reporterId = _i1.ColumnInt(
       'reporterId',
@@ -317,16 +317,16 @@ class ContentReportTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    reporterId,
-    contentType,
-    contentId,
-    reason,
-    details,
-    status,
-    createdAt,
-    resolvedAt,
-  ];
+        id,
+        reporterId,
+        contentType,
+        contentId,
+        reason,
+        details,
+        status,
+        createdAt,
+        resolvedAt,
+      ];
 }
 
 class ContentReportInclude extends _i1.IncludeObject {

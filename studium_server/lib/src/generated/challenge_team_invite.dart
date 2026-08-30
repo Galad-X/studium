@@ -175,16 +175,16 @@ class _ChallengeTeamInviteImpl extends ChallengeTeamInvite {
     required DateTime createdAt,
     DateTime? acceptedAt,
   }) : super._(
-         id: id,
-         teamId: teamId,
-         inviterId: inviterId,
-         inviteeId: inviteeId,
-         tokenHash: tokenHash,
-         status: status,
-         expiresAt: expiresAt,
-         createdAt: createdAt,
-         acceptedAt: acceptedAt,
-       );
+          id: id,
+          teamId: teamId,
+          inviterId: inviterId,
+          inviteeId: inviteeId,
+          tokenHash: tokenHash,
+          status: status,
+          expiresAt: expiresAt,
+          createdAt: createdAt,
+          acceptedAt: acceptedAt,
+        );
 
   /// Returns a shallow copy of this [ChallengeTeamInvite]
   /// with some or all fields replaced by the given arguments.
@@ -220,29 +220,29 @@ class ChallengeTeamInviteUpdateTable
   ChallengeTeamInviteUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> teamId(int value) => _i1.ColumnValue(
-    table.teamId,
-    value,
-  );
+        table.teamId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> inviterId(int value) => _i1.ColumnValue(
-    table.inviterId,
-    value,
-  );
+        table.inviterId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> inviteeId(int value) => _i1.ColumnValue(
-    table.inviteeId,
-    value,
-  );
+        table.inviteeId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> tokenHash(String value) => _i1.ColumnValue(
-    table.tokenHash,
-    value,
-  );
+        table.tokenHash,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> expiresAt(DateTime value) =>
       _i1.ColumnValue(
@@ -265,7 +265,7 @@ class ChallengeTeamInviteUpdateTable
 
 class ChallengeTeamInviteTable extends _i1.Table<int?> {
   ChallengeTeamInviteTable({super.tableRelation})
-    : super(tableName: 'challenge_team_invites') {
+      : super(tableName: 'challenge_team_invites') {
     updateTable = ChallengeTeamInviteUpdateTable(this);
     teamId = _i1.ColumnInt(
       'teamId',
@@ -321,16 +321,16 @@ class ChallengeTeamInviteTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    teamId,
-    inviterId,
-    inviteeId,
-    tokenHash,
-    status,
-    expiresAt,
-    createdAt,
-    acceptedAt,
-  ];
+        id,
+        teamId,
+        inviterId,
+        inviteeId,
+        tokenHash,
+        status,
+        expiresAt,
+        createdAt,
+        acceptedAt,
+      ];
 }
 
 class ChallengeTeamInviteInclude extends _i1.IncludeObject {
@@ -546,7 +546,7 @@ class ChallengeTeamInviteRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ChallengeTeamInviteUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ChallengeTeamInvite>(
@@ -561,7 +561,7 @@ class ChallengeTeamInviteRepository {
   Future<List<ChallengeTeamInvite>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ChallengeTeamInviteUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ChallengeTeamInviteTable> where,
     int? limit,
     int? offset,

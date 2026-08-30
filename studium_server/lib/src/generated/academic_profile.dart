@@ -196,18 +196,18 @@ class _AcademicProfileImpl extends AcademicProfile {
     String? availability,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         institutionId: institutionId,
-         department: department,
-         programme: programme,
-         level: level,
-         subjects: subjects,
-         interests: interests,
-         languages: languages,
-         availability: availability,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          institutionId: institutionId,
+          department: department,
+          programme: programme,
+          level: level,
+          subjects: subjects,
+          interests: interests,
+          languages: languages,
+          availability: availability,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [AcademicProfile]
   /// with some or all fields replaced by the given arguments.
@@ -246,29 +246,29 @@ class AcademicProfileUpdateTable extends _i1.UpdateTable<AcademicProfileTable> {
   AcademicProfileUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> institutionId(int value) => _i1.ColumnValue(
-    table.institutionId,
-    value,
-  );
+        table.institutionId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> department(String? value) => _i1.ColumnValue(
-    table.department,
-    value,
-  );
+        table.department,
+        value,
+      );
 
   _i1.ColumnValue<String, String> programme(String? value) => _i1.ColumnValue(
-    table.programme,
-    value,
-  );
+        table.programme,
+        value,
+      );
 
   _i1.ColumnValue<String, String> level(String? value) => _i1.ColumnValue(
-    table.level,
-    value,
-  );
+        table.level,
+        value,
+      );
 
   _i1.ColumnValue<List<String>, List<String>> subjects(List<String> value) =>
       _i1.ColumnValue(
@@ -303,7 +303,7 @@ class AcademicProfileUpdateTable extends _i1.UpdateTable<AcademicProfileTable> {
 
 class AcademicProfileTable extends _i1.Table<int?> {
   AcademicProfileTable({super.tableRelation})
-    : super(tableName: 'academic_profiles') {
+      : super(tableName: 'academic_profiles') {
     updateTable = AcademicProfileUpdateTable(this);
     userId = _i1.ColumnInt(
       'userId',
@@ -371,18 +371,18 @@ class AcademicProfileTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    institutionId,
-    department,
-    programme,
-    level,
-    subjects,
-    interests,
-    languages,
-    availability,
-    updatedAt,
-  ];
+        id,
+        userId,
+        institutionId,
+        department,
+        programme,
+        level,
+        subjects,
+        interests,
+        languages,
+        availability,
+        updatedAt,
+      ];
 }
 
 class AcademicProfileInclude extends _i1.IncludeObject {
@@ -598,7 +598,7 @@ class AcademicProfileRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<AcademicProfileUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<AcademicProfile>(
@@ -613,7 +613,7 @@ class AcademicProfileRepository {
   Future<List<AcademicProfile>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<AcademicProfileUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<AcademicProfileTable> where,
     int? limit,
     int? offset,

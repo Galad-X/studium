@@ -155,14 +155,14 @@ class _PushDeviceImpl extends PushDevice {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         userId: userId,
-         token: token,
-         platform: platform,
-         active: active,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          userId: userId,
+          token: token,
+          platform: platform,
+          active: active,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [PushDevice]
   /// with some or all fields replaced by the given arguments.
@@ -193,24 +193,24 @@ class PushDeviceUpdateTable extends _i1.UpdateTable<PushDeviceTable> {
   PushDeviceUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> userId(int value) => _i1.ColumnValue(
-    table.userId,
-    value,
-  );
+        table.userId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> token(String value) => _i1.ColumnValue(
-    table.token,
-    value,
-  );
+        table.token,
+        value,
+      );
 
   _i1.ColumnValue<String, String> platform(String value) => _i1.ColumnValue(
-    table.platform,
-    value,
-  );
+        table.platform,
+        value,
+      );
 
   _i1.ColumnValue<bool, bool> active(bool value) => _i1.ColumnValue(
-    table.active,
-    value,
-  );
+        table.active,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -270,14 +270,14 @@ class PushDeviceTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    userId,
-    token,
-    platform,
-    active,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        userId,
+        token,
+        platform,
+        active,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class PushDeviceInclude extends _i1.IncludeObject {

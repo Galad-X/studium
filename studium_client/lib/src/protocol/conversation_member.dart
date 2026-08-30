@@ -101,13 +101,13 @@ class _ConversationMemberImpl extends ConversationMember {
     required String status,
     required DateTime joinedAt,
   }) : super._(
-         id: id,
-         conversationId: conversationId,
-         userId: userId,
-         role: role,
-         status: status,
-         joinedAt: joinedAt,
-       );
+          id: id,
+          conversationId: conversationId,
+          userId: userId,
+          role: role,
+          status: status,
+          joinedAt: joinedAt,
+        );
 
   /// Returns a shallow copy of this [ConversationMember]
   /// with some or all fields replaced by the given arguments.

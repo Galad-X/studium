@@ -101,13 +101,13 @@ class _RoomChatMessageImpl extends RoomChatMessage {
     required String status,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         roomId: roomId,
-         authorId: authorId,
-         body: body,
-         status: status,
-         createdAt: createdAt,
-       );
+          id: id,
+          roomId: roomId,
+          authorId: authorId,
+          body: body,
+          status: status,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [RoomChatMessage]
   /// with some or all fields replaced by the given arguments.

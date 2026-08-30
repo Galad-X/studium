@@ -186,17 +186,17 @@ class _FileProcessingImpl extends FileProcessing {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
-         id: id,
-         studyMaterialId: studyMaterialId,
-         status: status,
-         processedText: processedText,
-         errorMessage: errorMessage,
-         attempts: attempts,
-         maxAttempts: maxAttempts,
-         lastStartedAt: lastStartedAt,
-         createdAt: createdAt,
-         updatedAt: updatedAt,
-       );
+          id: id,
+          studyMaterialId: studyMaterialId,
+          status: status,
+          processedText: processedText,
+          errorMessage: errorMessage,
+          attempts: attempts,
+          maxAttempts: maxAttempts,
+          lastStartedAt: lastStartedAt,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
 
   /// Returns a shallow copy of this [FileProcessing]
   /// with some or all fields replaced by the given arguments.
@@ -218,15 +218,13 @@ class _FileProcessingImpl extends FileProcessing {
       id: id is int? ? id : this.id,
       studyMaterialId: studyMaterialId ?? this.studyMaterialId,
       status: status ?? this.status,
-      processedText: processedText is String?
-          ? processedText
-          : this.processedText,
+      processedText:
+          processedText is String? ? processedText : this.processedText,
       errorMessage: errorMessage is String? ? errorMessage : this.errorMessage,
       attempts: attempts ?? this.attempts,
       maxAttempts: maxAttempts ?? this.maxAttempts,
-      lastStartedAt: lastStartedAt is DateTime?
-          ? lastStartedAt
-          : this.lastStartedAt,
+      lastStartedAt:
+          lastStartedAt is DateTime? ? lastStartedAt : this.lastStartedAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -237,14 +235,14 @@ class FileProcessingUpdateTable extends _i1.UpdateTable<FileProcessingTable> {
   FileProcessingUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> status(String value) => _i1.ColumnValue(
-    table.status,
-    value,
-  );
+        table.status,
+        value,
+      );
 
   _i1.ColumnValue<String, String> processedText(String? value) =>
       _i1.ColumnValue(
@@ -259,14 +257,14 @@ class FileProcessingUpdateTable extends _i1.UpdateTable<FileProcessingTable> {
       );
 
   _i1.ColumnValue<int, int> attempts(int value) => _i1.ColumnValue(
-    table.attempts,
-    value,
-  );
+        table.attempts,
+        value,
+      );
 
   _i1.ColumnValue<int, int> maxAttempts(int value) => _i1.ColumnValue(
-    table.maxAttempts,
-    value,
-  );
+        table.maxAttempts,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> lastStartedAt(DateTime? value) =>
       _i1.ColumnValue(
@@ -289,7 +287,7 @@ class FileProcessingUpdateTable extends _i1.UpdateTable<FileProcessingTable> {
 
 class FileProcessingTable extends _i1.Table<int?> {
   FileProcessingTable({super.tableRelation})
-    : super(tableName: 'file_processing') {
+      : super(tableName: 'file_processing') {
     updateTable = FileProcessingUpdateTable(this);
     studyMaterialId = _i1.ColumnInt(
       'studyMaterialId',
@@ -351,17 +349,17 @@ class FileProcessingTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    studyMaterialId,
-    status,
-    processedText,
-    errorMessage,
-    attempts,
-    maxAttempts,
-    lastStartedAt,
-    createdAt,
-    updatedAt,
-  ];
+        id,
+        studyMaterialId,
+        status,
+        processedText,
+        errorMessage,
+        attempts,
+        maxAttempts,
+        lastStartedAt,
+        createdAt,
+        updatedAt,
+      ];
 }
 
 class FileProcessingInclude extends _i1.IncludeObject {

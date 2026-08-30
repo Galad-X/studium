@@ -147,13 +147,13 @@ class _ResearchComparisonImpl extends ResearchComparison {
     required List<String> unsolvedProblems,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         summaryId: summaryId,
-         studyMaterialId: studyMaterialId,
-         newerFindings: newerFindings,
-         unsolvedProblems: unsolvedProblems,
-         createdAt: createdAt,
-       );
+          id: id,
+          summaryId: summaryId,
+          studyMaterialId: studyMaterialId,
+          newerFindings: newerFindings,
+          unsolvedProblems: unsolvedProblems,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ResearchComparison]
   /// with some or all fields replaced by the given arguments.
@@ -184,14 +184,14 @@ class ResearchComparisonUpdateTable
   ResearchComparisonUpdateTable(super.table);
 
   _i1.ColumnValue<int, int> summaryId(int? value) => _i1.ColumnValue(
-    table.summaryId,
-    value,
-  );
+        table.summaryId,
+        value,
+      );
 
   _i1.ColumnValue<int, int> studyMaterialId(int value) => _i1.ColumnValue(
-    table.studyMaterialId,
-    value,
-  );
+        table.studyMaterialId,
+        value,
+      );
 
   _i1.ColumnValue<String, String> newerFindings(String value) =>
       _i1.ColumnValue(
@@ -201,10 +201,11 @@ class ResearchComparisonUpdateTable
 
   _i1.ColumnValue<List<String>, List<String>> unsolvedProblems(
     List<String> value,
-  ) => _i1.ColumnValue(
-    table.unsolvedProblems,
-    value,
-  );
+  ) =>
+      _i1.ColumnValue(
+        table.unsolvedProblems,
+        value,
+      );
 
   _i1.ColumnValue<DateTime, DateTime> createdAt(DateTime value) =>
       _i1.ColumnValue(
@@ -215,7 +216,7 @@ class ResearchComparisonUpdateTable
 
 class ResearchComparisonTable extends _i1.Table<int?> {
   ResearchComparisonTable({super.tableRelation})
-    : super(tableName: 'research_comparisons') {
+      : super(tableName: 'research_comparisons') {
     updateTable = ResearchComparisonUpdateTable(this);
     summaryId = _i1.ColumnInt(
       'summaryId',
@@ -253,13 +254,13 @@ class ResearchComparisonTable extends _i1.Table<int?> {
 
   @override
   List<_i1.Column> get columns => [
-    id,
-    summaryId,
-    studyMaterialId,
-    newerFindings,
-    unsolvedProblems,
-    createdAt,
-  ];
+        id,
+        summaryId,
+        studyMaterialId,
+        newerFindings,
+        unsolvedProblems,
+        createdAt,
+      ];
 }
 
 class ResearchComparisonInclude extends _i1.IncludeObject {
@@ -475,7 +476,7 @@ class ResearchComparisonRepository {
     _i1.DatabaseSession session,
     int id, {
     required _i1.ColumnValueListBuilder<ResearchComparisonUpdateTable>
-    columnValues,
+        columnValues,
     _i1.Transaction? transaction,
   }) async {
     return session.db.updateById<ResearchComparison>(
@@ -490,7 +491,7 @@ class ResearchComparisonRepository {
   Future<List<ResearchComparison>> updateWhere(
     _i1.DatabaseSession session, {
     required _i1.ColumnValueListBuilder<ResearchComparisonUpdateTable>
-    columnValues,
+        columnValues,
     required _i1.WhereExpressionBuilder<ResearchComparisonTable> where,
     int? limit,
     int? offset,

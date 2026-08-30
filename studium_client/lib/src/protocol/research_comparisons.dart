@@ -104,13 +104,13 @@ class _ResearchComparisonImpl extends ResearchComparison {
     required List<String> unsolvedProblems,
     required DateTime createdAt,
   }) : super._(
-         id: id,
-         summaryId: summaryId,
-         studyMaterialId: studyMaterialId,
-         newerFindings: newerFindings,
-         unsolvedProblems: unsolvedProblems,
-         createdAt: createdAt,
-       );
+          id: id,
+          summaryId: summaryId,
+          studyMaterialId: studyMaterialId,
+          newerFindings: newerFindings,
+          unsolvedProblems: unsolvedProblems,
+          createdAt: createdAt,
+        );
 
   /// Returns a shallow copy of this [ResearchComparison]
   /// with some or all fields replaced by the given arguments.
