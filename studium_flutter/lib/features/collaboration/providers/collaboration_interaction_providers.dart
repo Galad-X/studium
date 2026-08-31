@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/services/notification_service.dart';
+import '../../../core/providers/service_providers.dart';
 import '../services/collaboration_service.dart';
 import 'collaboration_provider.dart';
 
@@ -74,13 +76,39 @@ final readReceiptProvider = StateNotifierProvider.autoDispose
 });
 
 class PushNotificationController extends StateNotifier<PushPermissionState> {
-  PushNotificationController() : super(PushPermissionState.unknown);
+  PushNotificationController(this._service)
+      : super(PushPermissionState.unknown);
+
+  final NotificationService _service;
+  String? _registeredToken;
+
   void setPermission(PushPermissionState value) => state = value;
+
+  /// Called by the platform notification adapter after it obtains a token.
+  /// FCM/APNs setup can plug into this stable backend registration boundary.
+  Future<void> registerToken(String token, String platform) async {
+    final normalized = token.trim();
+    if (normalized.isEmpty) {
+      state = PushPermissionState.denied;
+      return;
+    }
+    await _service.registerPushDevice(normalized, platform);
+    _registeredToken = normalized;
+    state = PushPermissionState.enabled;
+  }
+
+  Future<void> unregisterToken() async {
+    final token = _registeredToken;
+    if (token != null) await _service.unregisterPushDevice(token);
+    _registeredToken = null;
+    state = PushPermissionState.denied;
+  }
 }
 
 final pushNotificationProvider = StateNotifierProvider.autoDispose
     .family<PushNotificationController, PushPermissionState, String>(
-        (ref, scope) => PushNotificationController());
+        (ref, scope) =>
+            PushNotificationController(ref.read(notificationServiceProvider)));
 
 class WhiteboardState {
   const WhiteboardState({this.strokes = const []});

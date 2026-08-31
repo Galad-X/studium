@@ -56,9 +56,7 @@ void main() {
         value: const AsyncValue.data([]),
         onRetry: () {},
         emptyMessage: 'Nothing here',
-        builder: (items) => items.isEmpty
-            ? const EmptyListMessage('Nothing here')
-            : Text(items.join(', ')),
+        builder: (items) => Text(items.join(', ')),
       ),
     ));
     expect(find.text('Nothing here'), findsOneWidget);

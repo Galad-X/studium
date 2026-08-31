@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:studium_client/studium_client.dart';
 import 'package:intl/intl.dart';
 import '../providers/notification_provider.dart';
+import '../../../core/routing/notification_deep_link.dart';
 import '../../../core/providers/service_providers.dart';
 
 class NotificationsScreen extends ConsumerStatefulWidget {
@@ -394,24 +395,11 @@ class _NotificationTileState extends ConsumerState<_NotificationTile>
     BuildContext context,
     Notification notification,
   ) {
-    final relatedId = notification.relatedId;
-    if (relatedId == null) return;
-    switch (notification.type) {
-      case 'room_post':
-      case 'room_chat':
-      case 'study_session':
-        context.push('/collaboration/rooms/$relatedId');
-      case 'challenge':
-      case 'challenge_team':
-        context.push('/collaboration/challenges/$relatedId');
-      case 'institution_membership':
-      case 'moderation_report':
-        context.push('/collaboration/institutions');
-      case 'moderation_appeal':
-        context.push('/moderation/appeals');
-      default:
-        break;
-    }
+    final destination = notificationDeepLink(
+      notification.type,
+      notification.relatedId,
+    );
+    if (destination != null) context.push(destination);
   }
 
   IconData _getIconForType(String type) {

@@ -159,6 +159,7 @@ void main() {
       () async {
     final container = ProviderContainer(
       overrides: [
+        collaborationCacheProvider.overrideWithValue(CollaborationCache()),
         collaborationServiceProvider.overrideWithValue(
           _FakeCollaborationService(),
         ),

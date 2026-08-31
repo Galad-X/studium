@@ -37,7 +37,7 @@ class CollaborationCache {
       final value = jsonDecode(raw) as Map<String, dynamic>;
       final savedAt = DateTime.tryParse(value['savedAt'] as String? ?? '');
       if (savedAt == null ||
-          DateTime.now().toUtc().difference(savedAt) > maxAge) {
+          DateTime.now().toUtc().difference(savedAt) >= maxAge) {
         return const [];
       }
       return (value['items'] as List<dynamic>)

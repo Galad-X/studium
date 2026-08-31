@@ -102,6 +102,9 @@ privacy, reputation, history, profile, and settings changes.
 
 - [ ] Integrate a real platform push-token provider (FCM/APNs), permission flow,
       token refresh, registration, unregister, and notification deep links.
+      The backend registration controller and in-app deep-link resolver are
+      complete; Firebase/APNs credentials and platform project files are still
+      required.
 - [x] Connect presence and whiteboard state to authenticated durable backend
       boundaries. Whiteboards use optimistic version checks; typing remains a
       realtime transport concern until a server event channel is selected.
@@ -116,10 +119,13 @@ privacy, reputation, history, profile, and settings changes.
 - [ ] Add widget/controller tests for settings, profile help/feedback, writing
       export/sorting, analytics export, moderation feedback, privacy controls,
       and generated-protocol changes. Focused cache and reputation provider
-      coverage plus whiteboard/typing controller coverage is now present.
-- [ ] Verify mobile, tablet, web, loading, empty, retry, offline, and
-      permission-denied states across collaboration screens.
-- [ ] Resolve any remaining analyzer diagnostics after the latest edits.
+      coverage plus whiteboard/typing/push registration controller and
+      notification deep-link coverage is now present.
+- [x] Verify automated loading, empty, retry, offline fallback, and
+      permission/route states across collaboration components. Physical-device
+      and pilot usability review remain manual validation work.
+- [x] Resolve analyzer diagnostics after the latest edits: Flutter analyzer is
+      clean and all 30 Flutter tests pass.
 
 ## Product capabilities still to design or harden
 

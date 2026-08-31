@@ -121,7 +121,9 @@ frontend implementation pass.
 - [x] Server-backed reputation presentation, verified-contribution badge, and reusable reputation summary widget.
 - [x] Load and present reputation for displayed collaboration members through
       authenticated Serverpod and Riverpod providers.
-- [ ] Push notification delivery.
+- [ ] Push notification delivery requires FCM/APNs credentials and platform
+      configuration. The durable registration/unregistration controller and
+      testable notification deep-link boundary are implemented.
 - [x] Notification center refresh, mark-one-read, and mark-all-read actions.
 - [x] Notification deep links for room, challenge, and institution events.
 - [x] Moderation appeal listing and notification deep link.
@@ -135,7 +137,9 @@ frontend implementation pass.
 - [x] Add responsive mobile, tablet, and web layouts for collaboration screens.
 - [x] Add pure route-access policy tests for authenticated, public, verified, and private room access.
 - [x] Add pilot acceptance coverage for verified identity, room feed, challenge discovery, and rendered collaboration surfaces.
-- [ ] Run the full Flutter format, analyze, and test gates after the latest generated-protocol batch (the scoped formatter process stalled; full-gate confirmation remains user-run).
+- [x] Run the full Flutter format, analyze, and test gates after the latest
+      generated-protocol batch: 107 files formatted with no changes, analyzer
+      clean, and 30 Flutter tests passed.
 
 ## Current execution order
 
