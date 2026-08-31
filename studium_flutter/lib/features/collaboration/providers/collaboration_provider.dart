@@ -22,6 +22,12 @@ final myReputationProvider = FutureProvider.autoDispose<UserReputation>(
   (ref) => ref.watch(collaborationServiceProvider).getMyReputation(),
 );
 
+final userReputationProvider =
+    FutureProvider.autoDispose.family<UserReputation, int>(
+  (ref, userId) =>
+      ref.watch(collaborationServiceProvider).getUserReputation(userId),
+);
+
 final studyRoomsProvider =
     FutureProvider.autoDispose.family<List<StudyRoom>, String?>(
   (ref, subject) async {
@@ -40,7 +46,18 @@ final studyRoomsProvider =
 );
 
 final challengesProvider = FutureProvider.autoDispose<List<Challenge>>(
-  (ref) => ref.watch(collaborationServiceProvider).getChallenges(),
+  (ref) async {
+    final cache = ref.read(collaborationCacheProvider);
+    const key = 'collaboration.challenges.all';
+    try {
+      final values =
+          await ref.read(collaborationServiceProvider).getChallenges();
+      await cache.writeList(key, values, (value) => value.toJson());
+      return values;
+    } catch (_) {
+      return cache.readList(key, Challenge.fromJson);
+    }
+  },
 );
 
 final challengeTeamsProvider =
@@ -103,13 +120,24 @@ class OpportunityFilters {
 
 final opportunitiesQueryProvider =
     FutureProvider.autoDispose.family<List<Opportunity>, OpportunityFilters>(
-  (ref, filters) => ref.watch(collaborationServiceProvider).getOpportunities(
-        country: filters.country,
-        field: filters.field,
-        educationLevel: filters.educationLevel,
-        opportunityType: filters.opportunityType,
-        deadlineBefore: filters.deadlineBefore,
-      ),
+  (ref, filters) async {
+    final cache = ref.read(collaborationCacheProvider);
+    final key = 'collaboration.opportunities.${filters.hashCode}';
+    try {
+      final values =
+          await ref.read(collaborationServiceProvider).getOpportunities(
+                country: filters.country,
+                field: filters.field,
+                educationLevel: filters.educationLevel,
+                opportunityType: filters.opportunityType,
+                deadlineBefore: filters.deadlineBefore,
+              );
+      await cache.writeList(key, values, (value) => value.toJson());
+      return values;
+    } catch (_) {
+      return cache.readList(key, Opportunity.fromJson);
+    }
+  },
 );
 
 final opportunitiesProvider = FutureProvider.autoDispose<List<Opportunity>>(
@@ -124,8 +152,18 @@ final roomPostsProvider =
 
 final roomResourcesProvider =
     FutureProvider.autoDispose.family<List<RoomResource>, int>(
-  (ref, roomId) =>
-      ref.watch(collaborationServiceProvider).getRoomResources(roomId),
+  (ref, roomId) async {
+    final cache = ref.read(collaborationCacheProvider);
+    final key = 'collaboration.room_resources.$roomId';
+    try {
+      final values =
+          await ref.read(collaborationServiceProvider).getRoomResources(roomId);
+      await cache.writeList(key, values, (value) => value.toJson());
+      return values;
+    } catch (_) {
+      return cache.readList(key, RoomResource.fromJson);
+    }
+  },
 );
 
 final myRoomMembershipProvider =
@@ -183,6 +221,12 @@ final roomPresenceControllerProvider =
       RoomPresenceController(ref.watch(collaborationServiceProvider), roomId),
 );
 
+final roomWhiteboardProvider =
+    FutureProvider.autoDispose.family<RoomWhiteboardState?, int>(
+  (ref, roomId) =>
+      ref.watch(collaborationServiceProvider).getRoomWhiteboard(roomId),
+);
+
 final roomStudySessionsProvider =
     FutureProvider.autoDispose.family<List<ScheduledStudySession>, int>(
   (ref, roomId) =>
@@ -226,9 +270,19 @@ final conversationsProvider = FutureProvider.autoDispose<List<Conversation>>(
 
 final conversationMessagesProvider =
     FutureProvider.autoDispose.family<List<DirectMessage>, int>(
-  (ref, conversationId) => ref
-      .watch(collaborationServiceProvider)
-      .getConversationMessages(conversationId),
+  (ref, conversationId) async {
+    final cache = ref.read(collaborationCacheProvider);
+    final key = 'collaboration.conversation_messages.$conversationId';
+    try {
+      final values = await ref
+          .read(collaborationServiceProvider)
+          .getConversationMessages(conversationId);
+      await cache.writeList(key, values, (value) => value.toJson());
+      return values;
+    } catch (_) {
+      return cache.readList(key, DirectMessage.fromJson);
+    }
+  },
 );
 
 final conversationStreamProvider =

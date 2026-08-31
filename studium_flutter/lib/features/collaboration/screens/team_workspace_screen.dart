@@ -5,6 +5,7 @@ import 'package:studium_client/studium_client.dart';
 import '../../../core/widgets/async_value_view.dart';
 import '../../../core/widgets/neural_widgets.dart';
 import '../providers/collaboration_provider.dart';
+import '../widgets/reputation_badge.dart';
 
 class TeamWorkspaceScreen extends ConsumerStatefulWidget {
   final ChallengeTeam team;
@@ -55,19 +56,39 @@ class _TeamWorkspaceScreenState extends ConsumerState<TeamWorkspaceScreen> {
                           leading: const Icon(Icons.person_outline),
                           title: Text('User #${member.userId}'),
                           subtitle: Text('${member.role} • ${member.status}'),
-                          trailing: PopupMenuButton<String>(
-                            onSelected: (value) => _updateMember(member, value),
-                            itemBuilder: (_) => const [
-                              PopupMenuItem(
-                                  value: 'lead', child: Text('Make lead')),
-                              PopupMenuItem(
-                                  value: 'researcher',
-                                  child: Text('Make researcher')),
-                              PopupMenuItem(
-                                  value: 'member', child: Text('Make member')),
-                              PopupMenuItem(
-                                  value: 'removed',
-                                  child: Text('Remove access')),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Consumer(
+                                builder: (context, ref, _) {
+                                  final reputation = ref.watch(
+                                    userReputationProvider(member.userId),
+                                  );
+                                  return reputation.maybeWhen(
+                                    data: (value) => ReputationBadge(
+                                      reputation: value,
+                                    ),
+                                    orElse: () => const SizedBox.shrink(),
+                                  );
+                                },
+                              ),
+                              PopupMenuButton<String>(
+                                onSelected: (value) =>
+                                    _updateMember(member, value),
+                                itemBuilder: (_) => const [
+                                  PopupMenuItem(
+                                      value: 'lead', child: Text('Make lead')),
+                                  PopupMenuItem(
+                                      value: 'researcher',
+                                      child: Text('Make researcher')),
+                                  PopupMenuItem(
+                                      value: 'member',
+                                      child: Text('Make member')),
+                                  PopupMenuItem(
+                                      value: 'removed',
+                                      child: Text('Remove access')),
+                                ],
+                              ),
                             ],
                           ),
                         ))

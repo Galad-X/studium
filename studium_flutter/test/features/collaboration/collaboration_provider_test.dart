@@ -25,6 +25,15 @@ class _FakeCollaborationService extends CollaborationService {
   final List<DiscussionPost> posts;
 
   @override
+  Future<UserReputation> getUserReputation(int userId) async => UserReputation(
+        userId: userId,
+        score: userId * 10,
+        acceptedSolutions: 1,
+        verifiedContributions: 2,
+        updatedAt: DateTime(2026),
+      );
+
+  @override
   Future<List<Institution>> searchInstitutions(String query,
       {int page = 0, int limit = 30}) async {
     return institutions
@@ -168,6 +177,23 @@ void main() {
     expect(
         await container.read(conversationMessagesProvider(4).future), isEmpty);
     expect(await container.read(mySafetyRelationshipsProvider.future), isEmpty);
+  });
+
+  test('loads reputation for a displayed member through the provider',
+      () async {
+    final container = ProviderContainer(
+      overrides: [
+        collaborationServiceProvider.overrideWithValue(
+          _FakeCollaborationService(),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final value = await container.read(userReputationProvider(12).future);
+    expect(value.userId, 12);
+    expect(value.score, 120);
+    expect(value.verifiedContributions, 2);
   });
 
   test(

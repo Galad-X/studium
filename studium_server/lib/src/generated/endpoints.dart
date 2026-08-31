@@ -461,6 +461,75 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['collaboration'] as _i6.CollaborationEndpoint)
                   .getMyReputation(session),
         ),
+        'getRoomWhiteboard': _i1.MethodConnector(
+          name: 'getRoomWhiteboard',
+          params: {
+            'roomId': _i1.ParameterDescription(
+              name: 'roomId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['collaboration'] as _i6.CollaborationEndpoint)
+                  .getRoomWhiteboard(
+            session,
+            params['roomId'],
+          ),
+        ),
+        'saveRoomWhiteboard': _i1.MethodConnector(
+          name: 'saveRoomWhiteboard',
+          params: {
+            'roomId': _i1.ParameterDescription(
+              name: 'roomId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'expectedVersion': _i1.ParameterDescription(
+              name: 'expectedVersion',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'strokesJson': _i1.ParameterDescription(
+              name: 'strokesJson',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['collaboration'] as _i6.CollaborationEndpoint)
+                  .saveRoomWhiteboard(
+            session,
+            params['roomId'],
+            params['expectedVersion'],
+            params['strokesJson'],
+          ),
+        ),
+        'getUserReputation': _i1.MethodConnector(
+          name: 'getUserReputation',
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['collaboration'] as _i6.CollaborationEndpoint)
+                  .getUserReputation(
+            session,
+            params['userId'],
+          ),
+        ),
         'searchInstitutions': _i1.MethodConnector(
           name: 'searchInstitutions',
           params: {
@@ -2574,6 +2643,16 @@ class Endpoints extends _i1.EndpointDispatch {
               type: _i1.getType<bool?>(),
               nullable: true,
             ),
+            'dateOfBirth': _i1.ParameterDescription(
+              name: 'dateOfBirth',
+              type: _i1.getType<DateTime?>(),
+              nullable: true,
+            ),
+            'guardianConsent': _i1.ParameterDescription(
+              name: 'guardianConsent',
+              type: _i1.getType<bool>(),
+              nullable: false,
+            ),
             'allowUnknownDirectMessages': _i1.ParameterDescription(
               name: 'allowUnknownDirectMessages',
               type: _i1.getType<bool?>(),
@@ -2588,6 +2667,8 @@ class Endpoints extends _i1.EndpointDispatch {
                   .updateMyPrivacySettings(
             session,
             isMinor: params['isMinor'],
+            dateOfBirth: params['dateOfBirth'],
+            guardianConsent: params['guardianConsent'],
             allowUnknownDirectMessages: params['allowUnknownDirectMessages'],
           ),
         ),

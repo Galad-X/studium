@@ -16,6 +16,9 @@ billingWebhook:
   - handleWebhook:
 collaboration:
   - getMyReputation:
+  - getRoomWhiteboard:
+  - saveRoomWhiteboard:
+  - getUserReputation:
   - searchInstitutions:
   - submitInstitution:
   - reviewInstitution:

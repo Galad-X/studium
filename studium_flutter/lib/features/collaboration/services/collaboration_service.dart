@@ -222,6 +222,9 @@ class CollaborationService {
   Future<UserReputation> getMyReputation() =>
       client.collaboration.getMyReputation();
 
+  Future<UserReputation> getUserReputation(int userId) =>
+      client.collaboration.getUserReputation(userId);
+
   Future<List<ChallengeTeamMember>> getChallengeTeamMembers(int teamId,
           {int page = 0, int limit = 100}) =>
       client.collaboration.getChallengeTeamMembers(teamId, page, limit);
@@ -426,10 +429,14 @@ class CollaborationService {
 
   Future<UserPrivacySettings> updateMyPrivacySettings({
     bool? isMinor,
+    DateTime? dateOfBirth,
+    bool guardianConsent = false,
     bool? allowUnknownDirectMessages,
   }) =>
       client.messaging.updateMyPrivacySettings(
         isMinor: isMinor,
+        dateOfBirth: dateOfBirth,
+        guardianConsent: guardianConsent,
         allowUnknownDirectMessages: allowUnknownDirectMessages,
       );
 
@@ -438,6 +445,20 @@ class CollaborationService {
     String state,
   ) =>
       client.collaboration.updateRoomPresence(roomId, state);
+
+  Future<RoomWhiteboardState?> getRoomWhiteboard(int roomId) =>
+      client.collaboration.getRoomWhiteboard(roomId);
+
+  Future<RoomWhiteboardState> saveRoomWhiteboard(
+    int roomId,
+    int expectedVersion,
+    String strokesJson,
+  ) =>
+      client.collaboration.saveRoomWhiteboard(
+        roomId,
+        expectedVersion,
+        strokesJson,
+      );
 
   Future<List<CollaborationPresence>> getRoomPresence(int roomId) =>
       client.collaboration.getRoomPresence(roomId);

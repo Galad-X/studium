@@ -58,8 +58,30 @@ class PrivacyControlsScreen extends ConsumerWidget {
                 const Text('Restrict direct messages from unknown people.'),
             value: isMinor,
             onChanged: (value) async {
+              if (value) {
+                final confirmed = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Guardian confirmation'),
+                    content: const Text(
+                      'Please confirm that a parent or guardian has approved minor safety mode. The server will keep this consent timestamp.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: const Text('Cancel'),
+                      ),
+                      FilledButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: const Text('Confirm'),
+                      ),
+                    ],
+                  ),
+                );
+                if (confirmed != true || !context.mounted) return;
+              }
               controller.setMinor(value);
-              await _save(ref, isMinor: value);
+              await _save(ref, isMinor: value, guardianConsent: value);
             },
           ),
           SwitchListTile(
@@ -80,11 +102,13 @@ class PrivacyControlsScreen extends ConsumerWidget {
   static Future<void> _save(
     WidgetRef ref, {
     bool? isMinor,
+    bool guardianConsent = false,
     bool? allowUnknownDirectMessages,
   }) async {
     try {
       await ref.read(collaborationServiceProvider).updateMyPrivacySettings(
             isMinor: isMinor,
+            guardianConsent: guardianConsent,
             allowUnknownDirectMessages: allowUnknownDirectMessages,
           );
       ref.invalidate(myPrivacySettingsProvider);

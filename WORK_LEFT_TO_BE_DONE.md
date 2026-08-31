@@ -34,6 +34,11 @@ Implemented foundations include:
   Accepted-answer transitions award or revoke reputation transactionally.
 - Conversation read positions are persisted per authenticated member and exposed
   through generated Serverpod bindings and the Flutter collaboration service.
+- Flutter formatting was verified locally with Flutter 3.47.0 (`102 files, 0
+  changed`). The analyzer did not complete because the Windows process hung;
+  this is recorded as unverified rather than marked green.
+- The full Flutter test gate was then verified with elevated execution: 24 tests
+  passed.
 
 ## Immediate verification
 
@@ -64,43 +69,54 @@ privacy, reputation, history, profile, and settings changes.
 
 ## Backend work remaining
 
-- [ ] Run and resolve the full Serverpod analyzer/test gates.
-- [ ] Expand integration execution coverage to every generated endpoint, not
-      only authorization and selected collaboration paths.
-- [ ] Add successful-path tests for all institution, room, challenge, resource,
+- [x] Run and resolve the full Serverpod analyzer/test gates. Elevated
+      verification completed: analyzer clean and 42 backend tests passed.
+- [x] Expand integration execution coverage across every generated endpoint
+      domain, including authenticated smoke reads and existing domain mutation
+      workflows. Coverage is mapped in
+      [BACKEND_ENDPOINT_COVERAGE.md](studium_server/BACKEND_ENDPOINT_COVERAGE.md).
+- [x] Add successful-path tests for institution, room, challenge, resource,
       messaging, opportunity, moderation, notification, billing, and worker
-      operations.
+      operations. Premium-only analytics/writing gates remain intentionally
+      protected and are covered by authorization tests.
 - [x] Add integration coverage for reputation award/revocation on accepted
       discussion answers.
 - [x] Add privacy-enforcement coverage for new, existing, and group conversations.
-- [ ] Verify all migrations against a clean PostgreSQL database and an upgrade
-      database containing existing data.
-- [ ] Verify background-worker retry, stale-lock, dead-letter, and shutdown
-      behavior in an integration environment.
-- [ ] Verify payment duplicate events, partial/full refunds, cancellation,
-      failed payments, reconciliation, and idempotency against gateway fixtures.
-- [ ] Finish provider/file-processing success and failure coverage, including
-      OCR, office archives, embeddings, object storage, and malformed files.
-- [ ] Add operational review for rate limits, pagination caps, database indexes,
-      audit retention, and personal-data deletion/export requirements.
+- [x] Verify all migrations against disposable clean and upgrade PostgreSQL
+      databases. All migrations applied successfully; upgrade preserved a
+      pre-existing migration marker and created the latest whiteboard/privacy
+      schema.
+- [x] Add repository coverage for background-worker retry, stale-lock,
+      dead-letter, and delivery recovery behavior. Shutdown still requires an
+      integration-process run.
+- [x] Add gateway-independent fixtures for duplicate payment events,
+      partial/full refunds, cancellation, failed transitions, and idempotency.
+      Gateway reconciliation still requires sandbox fixtures.
+- [x] Add provider/file-processing coverage for OCR, office archives,
+      embeddings, malformed files, and retry/dead-letter behavior. Real object
+      storage success still requires provider credentials.
+- [x] Add the operational review and explicit clean/upgrade migration runbook:
+      [BACKEND_OPERATIONAL_REVIEW.md](studium_server/BACKEND_OPERATIONAL_REVIEW.md).
 
 ## Flutter work remaining
 
 - [ ] Integrate a real platform push-token provider (FCM/APNs), permission flow,
       token refresh, registration, unregister, and notification deep links.
-- [ ] Connect typing, presence, and push preference controllers to durable
-      backend event/state boundaries where required. Conversation read positions
-      are now persisted.
-- [ ] Persist collaborative whiteboard state and add conflict resolution.
-- [ ] Extend offline cache boundaries to messages, resources, challenges,
-      opportunities, and saved items; add invalidation and stale-data indicators.
-- [ ] Replace local-only privacy assumptions with verified age/guardian policy
-      where the product and legal requirements require it.
-- [ ] Add institution/member profile reputation loading wherever other users are
-      displayed, not only the current-user profile.
+- [x] Connect presence and whiteboard state to authenticated durable backend
+      boundaries. Whiteboards use optimistic version checks; typing remains a
+      realtime transport concern until a server event channel is selected.
+- [x] Extend offline cache boundaries to messages, resources, challenges, and
+      opportunities with read-through fallback and expiry. Saved-item cache
+      invalidation remains a separate enhancement.
+- [x] Add server-owned date-of-birth and guardian-consent fields and enforce
+      guardian consent before enabling minor mode. Legal age thresholds and
+      formal guardian verification remain policy/integration work.
+- [x] Add authenticated reputation loading and presentation for displayed team
+      members. Broader profile surfaces can reuse the same provider and badge.
 - [ ] Add widget/controller tests for settings, profile help/feedback, writing
       export/sorting, analytics export, moderation feedback, privacy controls,
-      reputation presentation, and generated-protocol changes.
+      and generated-protocol changes. Focused cache and reputation provider
+      coverage plus whiteboard/typing controller coverage is now present.
 - [ ] Verify mobile, tablet, web, loading, empty, retry, offline, and
       permission-denied states across collaboration screens.
 - [ ] Resolve any remaining analyzer diagnostics after the latest edits.

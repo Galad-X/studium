@@ -14,7 +14,13 @@ frontend implementation pass.
 - [x] Add provider tests for institution, room, challenge-team, and team-workspace data.
 - [x] Resolve identified analyzer infos in history, routing, and theme code (local analyzer confirmation remains pending because the scoped analyzer process hung).
 - [x] Add shared pagination and refresh controllers.
-- [x] Add offline cache boundaries for collaboration room reads.
+- [x] Add offline cache boundaries for rooms, messages, resources, challenges,
+      and opportunities with stale-data expiry and read-through fallback.
+- [x] Persist room whiteboard state with optimistic conflict detection and
+      restore it when entering a room.
+- [x] Add focused typing/whiteboard controller transition coverage.
+- [x] Add guardian-consent confirmation before enabling minor safety mode;
+      server-side consent timestamps are persisted.
 - [x] Add regression coverage for pagination refresh/retry and age-aware privacy transitions.
 - [x] Replace settings-screen notification, privacy, export, policy, terms, and support placeholders with persisted controls and real actions.
 - [x] Replace profile help/feedback, writing sort/export, and analytics export placeholders with working actions.
@@ -113,6 +119,8 @@ frontend implementation pass.
 - [x] Restrict and appeal initiation UI.
 - [x] Age-aware privacy controls and direct-message restriction states backed by persisted server policy.
 - [x] Server-backed reputation presentation, verified-contribution badge, and reusable reputation summary widget.
+- [x] Load and present reputation for displayed collaboration members through
+      authenticated Serverpod and Riverpod providers.
 - [ ] Push notification delivery.
 - [x] Notification center refresh, mark-one-read, and mark-all-read actions.
 - [x] Notification deep links for room, challenge, and institution events.
@@ -127,11 +135,11 @@ frontend implementation pass.
 - [x] Add responsive mobile, tablet, and web layouts for collaboration screens.
 - [x] Add pure route-access policy tests for authenticated, public, verified, and private room access.
 - [x] Add pilot acceptance coverage for verified identity, room feed, challenge discovery, and rendered collaboration surfaces.
-- [ ] Run the full Flutter format, analyze, and test gates after the latest generated-protocol batch (formatter syntax issue was fixed; user-side verification remains).
+- [ ] Run the full Flutter format, analyze, and test gates after the latest generated-protocol batch (the scoped formatter process stalled; full-gate confirmation remains user-run).
 
 ## Current execution order
 
 1. Connect typing/read-receipt/push controllers to backend delivery events.
 2. Persist whiteboard state and add collaborative conflict resolution.
-3. Extend cache boundaries from room reads to messages, resources, and opportunities.
+3. Integrate a real platform push-token provider and notification deep links.
 4. Run the full Flutter format, analyze, and test gates after the generated-protocol batch.

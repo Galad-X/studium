@@ -18,6 +18,8 @@ class MessagingEndpoint extends Endpoint with EndpointUtils {
     return UserPrivacySettings(
       userId: userId,
       isMinor: false,
+      dateOfBirth: null,
+      guardianConsentAt: null,
       allowUnknownDirectMessages: true,
       updatedAt: DateTime.now(),
     );
@@ -26,6 +28,8 @@ class MessagingEndpoint extends Endpoint with EndpointUtils {
   Future<UserPrivacySettings> updateMyPrivacySettings(
     Session session, {
     bool? isMinor,
+    DateTime? dateOfBirth,
+    bool guardianConsent = false,
     bool? allowUnknownDirectMessages,
   }) async {
     final userId = await getAuthenticatedUserId(session);
@@ -39,14 +43,23 @@ class MessagingEndpoint extends Endpoint with EndpointUtils {
         : (allowUnknownDirectMessages ??
             existing?.allowUnknownDirectMessages ??
             true);
+    if (nextIsMinor &&
+        !guardianConsent &&
+        existing?.guardianConsentAt == null) {
+      throw Exception('Guardian consent is required for minor mode.');
+    }
     final settings = existing ??
         UserPrivacySettings(
           userId: userId,
           isMinor: nextIsMinor,
+          dateOfBirth: dateOfBirth,
+          guardianConsentAt: guardianConsent ? DateTime.now() : null,
           allowUnknownDirectMessages: nextAllowUnknown,
           updatedAt: DateTime.now(),
         );
     settings.isMinor = nextIsMinor;
+    if (dateOfBirth != null) settings.dateOfBirth = dateOfBirth;
+    if (guardianConsent) settings.guardianConsentAt = DateTime.now();
     settings.allowUnknownDirectMessages = nextAllowUnknown;
     settings.updatedAt = DateTime.now();
     return settings.id == null

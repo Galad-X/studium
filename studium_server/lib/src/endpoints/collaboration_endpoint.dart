@@ -33,6 +33,76 @@ class CollaborationEndpoint extends Endpoint with EndpointUtils {
 
   Future<UserReputation> getMyReputation(Session session) async {
     final userId = await getAuthenticatedUserId(session);
+    return _getReputation(session, userId);
+  }
+
+  Future<RoomWhiteboardState?> getRoomWhiteboard(
+    Session session,
+    int roomId,
+  ) async {
+    await _requireActiveMember(session, roomId);
+    return RoomWhiteboardState.db.findFirstRow(
+      session,
+      where: (t) => t.roomId.equals(roomId),
+    );
+  }
+
+  Future<RoomWhiteboardState> saveRoomWhiteboard(
+    Session session,
+    int roomId,
+    int expectedVersion,
+    String strokesJson,
+  ) async {
+    final userId = await _requireActiveMember(session, roomId);
+    if (strokesJson.length > 2 * 1024 * 1024) {
+      throw Exception('Whiteboard payload is too large.');
+    }
+    return session.db.transaction((transaction) async {
+      final existing = await RoomWhiteboardState.db.findFirstRow(
+        session,
+        where: (t) => t.roomId.equals(roomId),
+        transaction: transaction,
+      );
+      if (existing != null && existing.version != expectedVersion) {
+        throw Exception('Whiteboard changed remotely. Reload before saving.');
+      }
+      final now = DateTime.now();
+      if (existing == null) {
+        return RoomWhiteboardState.db.insertRow(
+          session,
+          RoomWhiteboardState(
+            roomId: roomId,
+            version: 1,
+            strokesJson: strokesJson,
+            updatedById: userId,
+            updatedAt: now,
+          ),
+          transaction: transaction,
+        );
+      }
+      existing.version += 1;
+      existing.strokesJson = strokesJson;
+      existing.updatedById = userId;
+      existing.updatedAt = now;
+      return RoomWhiteboardState.db
+          .updateRow(session, existing, transaction: transaction);
+    });
+  }
+
+  /// Returns the public contribution signal for an authenticated member.
+  /// Detailed moderation history is intentionally not exposed here.
+  Future<UserReputation> getUserReputation(
+    Session session,
+    int userId,
+  ) async {
+    await getAuthenticatedUserId(session);
+    if (userId <= 0) {
+      throw Exception('Invalid user id.');
+    }
+    return _getReputation(session, userId);
+  }
+
+  Future<UserReputation> _getReputation(Session session, int userId) async {
     final existing = await UserReputation.db.findFirstRow(
       session,
       where: (t) => t.userId.equals(userId),

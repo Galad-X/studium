@@ -3,6 +3,8 @@ table: user_privacy_settings
 fields:
   userId: int, relation(parent=serverpod_user_info)
   isMinor: bool, default=false
+  dateOfBirth: DateTime?
+  guardianConsentAt: DateTime?
   allowUnknownDirectMessages: bool, default=true
   updatedAt: DateTime
 indexes:

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/collaboration_service.dart';
@@ -93,7 +94,37 @@ class OffsetPoint {
 }
 
 class WhiteboardController extends StateNotifier<WhiteboardState> {
-  WhiteboardController() : super(const WhiteboardState());
+  WhiteboardController(this._service, this.roomId)
+      : super(const WhiteboardState());
+  final CollaborationService _service;
+  final int roomId;
+  int _version = 0;
+
+  Future<void> load() async {
+    final remote = await _service.getRoomWhiteboard(roomId);
+    if (remote == null) return;
+    final decoded = jsonDecode(remote.strokesJson) as List<dynamic>;
+    _version = remote.version;
+    state = WhiteboardState(
+      strokes: decoded
+          .map((stroke) => (stroke as List<dynamic>)
+              .map((point) => OffsetPoint(
+                    ((point as Map<String, dynamic>)['x'] as num).toDouble(),
+                    (point['y'] as num).toDouble(),
+                  ))
+              .toList())
+          .toList(),
+    );
+  }
+
+  Future<void> persist() async {
+    final payload = jsonEncode(state.strokes
+        .map((stroke) => stroke.map((point) => {'x': point.x, 'y': point.y}))
+        .toList());
+    final saved = await _service.saveRoomWhiteboard(roomId, _version, payload);
+    _version = saved.version;
+  }
+
   void addStroke(List<OffsetPoint> stroke) {
     if (stroke.isEmpty) return;
     state =
@@ -110,5 +141,11 @@ class WhiteboardController extends StateNotifier<WhiteboardState> {
 }
 
 final whiteboardProvider = StateNotifierProvider.autoDispose
-    .family<WhiteboardController, WhiteboardState, int>(
-        (ref, roomId) => WhiteboardController());
+    .family<WhiteboardController, WhiteboardState, int>((ref, roomId) {
+  final controller = WhiteboardController(
+    ref.read(collaborationServiceProvider),
+    roomId,
+  );
+  unawaited(controller.load());
+  return controller;
+});

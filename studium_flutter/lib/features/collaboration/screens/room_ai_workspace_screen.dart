@@ -215,13 +215,21 @@ class RoomWhiteboardScreen extends ConsumerWidget {
             tooltip: 'Undo',
             onPressed: state.strokes.isEmpty
                 ? null
-                : () => ref.read(whiteboardProvider(roomId).notifier).undo(),
+                : () async {
+                    final controller =
+                        ref.read(whiteboardProvider(roomId).notifier);
+                    controller.undo();
+                    await controller.persist();
+                  },
             icon: const Icon(Icons.undo),
           ),
           IconButton(
             tooltip: 'Clear',
-            onPressed: () =>
-                ref.read(whiteboardProvider(roomId).notifier).clear(),
+            onPressed: () async {
+              final controller = ref.read(whiteboardProvider(roomId).notifier);
+              controller.clear();
+              await controller.persist();
+            },
             icon: const Icon(Icons.delete_outline),
           ),
         ],
@@ -242,6 +250,8 @@ class RoomWhiteboardScreen extends ConsumerWidget {
           ref.read(whiteboardProvider(roomId).notifier).undo();
           ref.read(whiteboardProvider(roomId).notifier).addStroke(current);
         },
+        onPanEnd: (_) =>
+            ref.read(whiteboardProvider(roomId).notifier).persist(),
         child: CustomPaint(
           painter: _WhiteboardPainter(state.strokes),
           child: const SizedBox.expand(),

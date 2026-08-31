@@ -78,6 +78,16 @@ void main() {
       expect(reputation.userId, 1005);
       expect(reputation.score, 0);
       expect(reputation.acceptedSolutions, 0);
+      final memberReputation = await endpoints.collaboration.getUserReputation(
+        authenticated,
+        1006,
+      );
+      expect(memberReputation.userId, 1006);
+      expect(memberReputation.score, 0);
+      await expectLater(
+        endpoints.collaboration.getUserReputation(sessionBuilder, 1006),
+        throwsA(isA<Exception>()),
+      );
     });
 
     test('profile updates cannot change the authorization role', () async {
@@ -165,6 +175,7 @@ void main() {
         final settings = await MessagingEndpoint().updateMyPrivacySettings(
           recipientSession,
           isMinor: true,
+          guardianConsent: true,
           allowUnknownDirectMessages: true,
         );
         expect(settings.isMinor, isTrue);

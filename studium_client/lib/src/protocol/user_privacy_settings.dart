@@ -18,6 +18,8 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
     this.id,
     required this.userId,
     bool? isMinor,
+    this.dateOfBirth,
+    this.guardianConsentAt,
     bool? allowUnknownDirectMessages,
     required this.updatedAt,
   })  : isMinor = isMinor ?? false,
@@ -27,6 +29,8 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
     int? id,
     required int userId,
     bool? isMinor,
+    DateTime? dateOfBirth,
+    DateTime? guardianConsentAt,
     bool? allowUnknownDirectMessages,
     required DateTime updatedAt,
   }) = _UserPrivacySettingsImpl;
@@ -38,6 +42,16 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
       isMinor: jsonSerialization['isMinor'] == null
           ? null
           : _i1.BoolJsonExtension.fromJson(jsonSerialization['isMinor']),
+      dateOfBirth: jsonSerialization['dateOfBirth'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['dateOfBirth'],
+            ),
+      guardianConsentAt: jsonSerialization['guardianConsentAt'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(
+              jsonSerialization['guardianConsentAt'],
+            ),
       allowUnknownDirectMessages:
           jsonSerialization['allowUnknownDirectMessages'] == null
               ? null
@@ -59,6 +73,10 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
 
   bool isMinor;
 
+  DateTime? dateOfBirth;
+
+  DateTime? guardianConsentAt;
+
   bool allowUnknownDirectMessages;
 
   DateTime updatedAt;
@@ -70,6 +88,8 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
     int? id,
     int? userId,
     bool? isMinor,
+    DateTime? dateOfBirth,
+    DateTime? guardianConsentAt,
     bool? allowUnknownDirectMessages,
     DateTime? updatedAt,
   });
@@ -80,6 +100,9 @@ abstract class UserPrivacySettings implements _i1.SerializableModel {
       if (id != null) 'id': id,
       'userId': userId,
       'isMinor': isMinor,
+      if (dateOfBirth != null) 'dateOfBirth': dateOfBirth?.toJson(),
+      if (guardianConsentAt != null)
+        'guardianConsentAt': guardianConsentAt?.toJson(),
       'allowUnknownDirectMessages': allowUnknownDirectMessages,
       'updatedAt': updatedAt.toJson(),
     };
@@ -98,12 +121,16 @@ class _UserPrivacySettingsImpl extends UserPrivacySettings {
     int? id,
     required int userId,
     bool? isMinor,
+    DateTime? dateOfBirth,
+    DateTime? guardianConsentAt,
     bool? allowUnknownDirectMessages,
     required DateTime updatedAt,
   }) : super._(
           id: id,
           userId: userId,
           isMinor: isMinor,
+          dateOfBirth: dateOfBirth,
+          guardianConsentAt: guardianConsentAt,
           allowUnknownDirectMessages: allowUnknownDirectMessages,
           updatedAt: updatedAt,
         );
@@ -116,6 +143,8 @@ class _UserPrivacySettingsImpl extends UserPrivacySettings {
     Object? id = _Undefined,
     int? userId,
     bool? isMinor,
+    Object? dateOfBirth = _Undefined,
+    Object? guardianConsentAt = _Undefined,
     bool? allowUnknownDirectMessages,
     DateTime? updatedAt,
   }) {
@@ -123,6 +152,10 @@ class _UserPrivacySettingsImpl extends UserPrivacySettings {
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
       isMinor: isMinor ?? this.isMinor,
+      dateOfBirth: dateOfBirth is DateTime? ? dateOfBirth : this.dateOfBirth,
+      guardianConsentAt: guardianConsentAt is DateTime?
+          ? guardianConsentAt
+          : this.guardianConsentAt,
       allowUnknownDirectMessages:
           allowUnknownDirectMessages ?? this.allowUnknownDirectMessages,
       updatedAt: updatedAt ?? this.updatedAt,

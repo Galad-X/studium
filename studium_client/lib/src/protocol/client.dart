@@ -20,61 +20,62 @@ import 'package:studium_client/src/protocol/summaries.dart' as _i6;
 import 'package:studium_client/src/protocol/research_comparisons.dart' as _i7;
 import 'package:studium_client/src/protocol/user_analytics.dart' as _i8;
 import 'package:studium_client/src/protocol/user_reputation.dart' as _i9;
-import 'package:studium_client/src/protocol/institution.dart' as _i10;
+import 'package:studium_client/src/protocol/room_whiteboard_state.dart' as _i10;
+import 'package:studium_client/src/protocol/institution.dart' as _i11;
 import 'package:studium_client/src/protocol/institution_membership.dart'
-    as _i11;
-import 'package:studium_client/src/protocol/verification_request.dart' as _i12;
-import 'package:studium_client/src/protocol/academic_profile.dart' as _i13;
-import 'package:studium_client/src/protocol/study_room.dart' as _i14;
-import 'package:studium_client/src/protocol/room_membership.dart' as _i15;
-import 'package:studium_client/src/protocol/discussion_post.dart' as _i16;
-import 'package:studium_client/src/protocol/challenge.dart' as _i17;
-import 'package:studium_client/src/protocol/room_resource.dart' as _i18;
-import 'dart:typed_data' as _i19;
-import 'package:studium_client/src/protocol/room_resource_chunk.dart' as _i20;
-import 'package:studium_client/src/protocol/challenge_team.dart' as _i21;
-import 'package:studium_client/src/protocol/challenge_team_member.dart' as _i22;
-import 'package:studium_client/src/protocol/challenge_milestone.dart' as _i23;
-import 'package:studium_client/src/protocol/challenge_update.dart' as _i24;
-import 'package:studium_client/src/protocol/comment.dart' as _i25;
-import 'package:studium_client/src/protocol/discussion_reaction.dart' as _i26;
-import 'package:studium_client/src/protocol/room_chat_message.dart' as _i27;
-import 'package:studium_client/src/protocol/room_ai_answer.dart' as _i28;
+    as _i12;
+import 'package:studium_client/src/protocol/verification_request.dart' as _i13;
+import 'package:studium_client/src/protocol/academic_profile.dart' as _i14;
+import 'package:studium_client/src/protocol/study_room.dart' as _i15;
+import 'package:studium_client/src/protocol/room_membership.dart' as _i16;
+import 'package:studium_client/src/protocol/discussion_post.dart' as _i17;
+import 'package:studium_client/src/protocol/challenge.dart' as _i18;
+import 'package:studium_client/src/protocol/room_resource.dart' as _i19;
+import 'dart:typed_data' as _i20;
+import 'package:studium_client/src/protocol/room_resource_chunk.dart' as _i21;
+import 'package:studium_client/src/protocol/challenge_team.dart' as _i22;
+import 'package:studium_client/src/protocol/challenge_team_member.dart' as _i23;
+import 'package:studium_client/src/protocol/challenge_milestone.dart' as _i24;
+import 'package:studium_client/src/protocol/challenge_update.dart' as _i25;
+import 'package:studium_client/src/protocol/comment.dart' as _i26;
+import 'package:studium_client/src/protocol/discussion_reaction.dart' as _i27;
+import 'package:studium_client/src/protocol/room_chat_message.dart' as _i28;
+import 'package:studium_client/src/protocol/room_ai_answer.dart' as _i29;
 import 'package:studium_client/src/protocol/collaboration_presence.dart'
-    as _i29;
-import 'package:studium_client/src/protocol/scheduled_study_session.dart'
     as _i30;
-import 'package:studium_client/src/protocol/study_session_participant.dart'
+import 'package:studium_client/src/protocol/scheduled_study_session.dart'
     as _i31;
-import 'package:studium_client/src/protocol/content_report.dart' as _i32;
-import 'package:studium_client/src/protocol/audit_event.dart' as _i33;
-import 'package:studium_client/src/protocol/moderation_appeal.dart' as _i34;
+import 'package:studium_client/src/protocol/study_session_participant.dart'
+    as _i32;
+import 'package:studium_client/src/protocol/content_report.dart' as _i33;
+import 'package:studium_client/src/protocol/audit_event.dart' as _i34;
+import 'package:studium_client/src/protocol/moderation_appeal.dart' as _i35;
 import 'package:studium_client/src/protocol/collaborative_document.dart'
-    as _i35;
-import 'package:studium_client/src/protocol/user_privacy_settings.dart' as _i36;
+    as _i36;
+import 'package:studium_client/src/protocol/user_privacy_settings.dart' as _i37;
 import 'package:studium_client/src/protocol/user_safety_relationship.dart'
-    as _i37;
-import 'package:studium_client/src/protocol/conversation.dart' as _i38;
-import 'package:studium_client/src/protocol/direct_message.dart' as _i39;
+    as _i38;
+import 'package:studium_client/src/protocol/conversation.dart' as _i39;
+import 'package:studium_client/src/protocol/direct_message.dart' as _i40;
 import 'package:studium_client/src/protocol/conversation_read_receipt.dart'
-    as _i40;
-import 'package:studium_client/src/protocol/notifications.dart' as _i41;
-import 'package:studium_client/src/protocol/push_device.dart' as _i42;
-import 'package:studium_client/src/protocol/opportunity_source.dart' as _i43;
-import 'package:studium_client/src/protocol/opportunity.dart' as _i44;
-import 'package:studium_client/src/protocol/opportunity_save.dart' as _i45;
-import 'package:studium_client/src/protocol/opportunity_alert.dart' as _i46;
+    as _i41;
+import 'package:studium_client/src/protocol/notifications.dart' as _i42;
+import 'package:studium_client/src/protocol/push_device.dart' as _i43;
+import 'package:studium_client/src/protocol/opportunity_source.dart' as _i44;
+import 'package:studium_client/src/protocol/opportunity.dart' as _i45;
+import 'package:studium_client/src/protocol/opportunity_save.dart' as _i46;
+import 'package:studium_client/src/protocol/opportunity_alert.dart' as _i47;
 import 'package:studium_client/src/protocol/opportunity_application_tracker.dart'
-    as _i47;
-import 'package:studium_client/src/protocol/study_materials.dart' as _i48;
-import 'package:studium_client/src/protocol/file_processing.dart' as _i49;
-import 'package:studium_client/src/protocol/subscriptions.dart' as _i50;
-import 'package:studium_client/src/protocol/user_profile_bundle.dart' as _i51;
-import 'package:studium_client/src/protocol/user_profile.dart' as _i52;
-import 'package:studium_client/src/protocol/dashboard_bundle.dart' as _i53;
-import 'package:studium_client/src/protocol/study_history.dart' as _i54;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i55;
-import 'protocol.dart' as _i56;
+    as _i48;
+import 'package:studium_client/src/protocol/study_materials.dart' as _i49;
+import 'package:studium_client/src/protocol/file_processing.dart' as _i50;
+import 'package:studium_client/src/protocol/subscriptions.dart' as _i51;
+import 'package:studium_client/src/protocol/user_profile_bundle.dart' as _i52;
+import 'package:studium_client/src/protocol/user_profile.dart' as _i53;
+import 'package:studium_client/src/protocol/dashboard_bundle.dart' as _i54;
+import 'package:studium_client/src/protocol/study_history.dart' as _i55;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i56;
+import 'protocol.dart' as _i57;
 
 /// {@category Endpoint}
 class EndpointAcademicWriting extends _i1.EndpointRef {
@@ -271,12 +272,43 @@ class EndpointCollaboration extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Future<List<_i10.Institution>> searchInstitutions(
+  _i2.Future<_i10.RoomWhiteboardState?> getRoomWhiteboard(int roomId) =>
+      caller.callServerEndpoint<_i10.RoomWhiteboardState?>(
+        'collaboration',
+        'getRoomWhiteboard',
+        {'roomId': roomId},
+      );
+
+  _i2.Future<_i10.RoomWhiteboardState> saveRoomWhiteboard(
+    int roomId,
+    int expectedVersion,
+    String strokesJson,
+  ) =>
+      caller.callServerEndpoint<_i10.RoomWhiteboardState>(
+        'collaboration',
+        'saveRoomWhiteboard',
+        {
+          'roomId': roomId,
+          'expectedVersion': expectedVersion,
+          'strokesJson': strokesJson,
+        },
+      );
+
+  /// Returns the public contribution signal for an authenticated member.
+  /// Detailed moderation history is intentionally not exposed here.
+  _i2.Future<_i9.UserReputation> getUserReputation(int userId) =>
+      caller.callServerEndpoint<_i9.UserReputation>(
+        'collaboration',
+        'getUserReputation',
+        {'userId': userId},
+      );
+
+  _i2.Future<List<_i11.Institution>> searchInstitutions(
     String query,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i10.Institution>>(
+      caller.callServerEndpoint<List<_i11.Institution>>(
         'collaboration',
         'searchInstitutions',
         {
@@ -286,14 +318,14 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i10.Institution> submitInstitution(
+  _i2.Future<_i11.Institution> submitInstitution(
     String name,
     String country,
     String? region,
     List<String> domains,
     String? logoUrl,
   ) =>
-      caller.callServerEndpoint<_i10.Institution>(
+      caller.callServerEndpoint<_i11.Institution>(
         'collaboration',
         'submitInstitution',
         {
@@ -305,11 +337,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i10.Institution> reviewInstitution(
+  _i2.Future<_i11.Institution> reviewInstitution(
     int institutionId,
     String decision,
   ) =>
-      caller.callServerEndpoint<_i10.Institution>(
+      caller.callServerEndpoint<_i11.Institution>(
         'collaboration',
         'reviewInstitution',
         {
@@ -318,11 +350,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i10.Institution>> getPendingInstitutionReviews(
+  _i2.Future<List<_i11.Institution>> getPendingInstitutionReviews(
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i10.Institution>>(
+      caller.callServerEndpoint<List<_i11.Institution>>(
         'collaboration',
         'getPendingInstitutionReviews',
         {
@@ -331,28 +363,28 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i11.InstitutionMembership>> getMyMemberships() =>
-      caller.callServerEndpoint<List<_i11.InstitutionMembership>>(
+  _i2.Future<List<_i12.InstitutionMembership>> getMyMemberships() =>
+      caller.callServerEndpoint<List<_i12.InstitutionMembership>>(
         'collaboration',
         'getMyMemberships',
         {},
       );
 
-  _i2.Future<List<_i12.VerificationRequest>> getMyVerificationRequests() =>
-      caller.callServerEndpoint<List<_i12.VerificationRequest>>(
+  _i2.Future<List<_i13.VerificationRequest>> getMyVerificationRequests() =>
+      caller.callServerEndpoint<List<_i13.VerificationRequest>>(
         'collaboration',
         'getMyVerificationRequests',
         {},
       );
 
-  _i2.Future<_i13.AcademicProfile?> getAcademicProfile(int institutionId) =>
-      caller.callServerEndpoint<_i13.AcademicProfile?>(
+  _i2.Future<_i14.AcademicProfile?> getAcademicProfile(int institutionId) =>
+      caller.callServerEndpoint<_i14.AcademicProfile?>(
         'collaboration',
         'getAcademicProfile',
         {'institutionId': institutionId},
       );
 
-  _i2.Future<_i13.AcademicProfile> upsertAcademicProfile(
+  _i2.Future<_i14.AcademicProfile> upsertAcademicProfile(
     int institutionId,
     String? department,
     String? programme,
@@ -362,7 +394,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
     List<String> languages,
     String? availability,
   ) =>
-      caller.callServerEndpoint<_i13.AcademicProfile>(
+      caller.callServerEndpoint<_i14.AcademicProfile>(
         'collaboration',
         'upsertAcademicProfile',
         {
@@ -392,21 +424,21 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i11.InstitutionMembership> acceptInstitutionInvite(
+  _i2.Future<_i12.InstitutionMembership> acceptInstitutionInvite(
     String token,
   ) =>
-      caller.callServerEndpoint<_i11.InstitutionMembership>(
+      caller.callServerEndpoint<_i12.InstitutionMembership>(
         'collaboration',
         'acceptInstitutionInvite',
         {'token': token},
       );
 
-  _i2.Future<List<_i11.InstitutionMembership>> getInstitutionMembers(
+  _i2.Future<List<_i12.InstitutionMembership>> getInstitutionMembers(
     int institutionId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i11.InstitutionMembership>>(
+      caller.callServerEndpoint<List<_i12.InstitutionMembership>>(
         'collaboration',
         'getInstitutionMembers',
         {
@@ -416,12 +448,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i12.VerificationRequest>> getInstitutionVerificationRequests(
+  _i2.Future<List<_i13.VerificationRequest>> getInstitutionVerificationRequests(
     int institutionId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i12.VerificationRequest>>(
+      caller.callServerEndpoint<List<_i13.VerificationRequest>>(
         'collaboration',
         'getInstitutionVerificationRequests',
         {
@@ -431,12 +463,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i11.InstitutionMembership> updateInstitutionMember(
+  _i2.Future<_i12.InstitutionMembership> updateInstitutionMember(
     int membershipId,
     String role,
     String status,
   ) =>
-      caller.callServerEndpoint<_i11.InstitutionMembership>(
+      caller.callServerEndpoint<_i12.InstitutionMembership>(
         'collaboration',
         'updateInstitutionMember',
         {
@@ -446,11 +478,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i11.InstitutionMembership> requestMembership(
+  _i2.Future<_i12.InstitutionMembership> requestMembership(
     int institutionId,
     String verificationMethod,
   ) =>
-      caller.callServerEndpoint<_i11.InstitutionMembership>(
+      caller.callServerEndpoint<_i12.InstitutionMembership>(
         'collaboration',
         'requestMembership',
         {
@@ -459,11 +491,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i12.VerificationRequest> submitVerificationEvidence(
+  _i2.Future<_i13.VerificationRequest> submitVerificationEvidence(
     int membershipId,
     String evidenceUrl,
   ) =>
-      caller.callServerEndpoint<_i12.VerificationRequest>(
+      caller.callServerEndpoint<_i13.VerificationRequest>(
         'collaboration',
         'submitVerificationEvidence',
         {
@@ -472,11 +504,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i11.InstitutionMembership> reviewMembership(
+  _i2.Future<_i12.InstitutionMembership> reviewMembership(
     int membershipId,
     String decision,
   ) =>
-      caller.callServerEndpoint<_i11.InstitutionMembership>(
+      caller.callServerEndpoint<_i12.InstitutionMembership>(
         'collaboration',
         'reviewMembership',
         {
@@ -485,13 +517,13 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i14.StudyRoom>> getRooms(
+  _i2.Future<List<_i15.StudyRoom>> getRooms(
     int page,
     int limit, [
     int? institutionId,
     String? subject,
   ]) =>
-      caller.callServerEndpoint<List<_i14.StudyRoom>>(
+      caller.callServerEndpoint<List<_i15.StudyRoom>>(
         'collaboration',
         'getRooms',
         {
@@ -502,14 +534,14 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i14.StudyRoom> createRoom(
+  _i2.Future<_i15.StudyRoom> createRoom(
     int? institutionId,
     String title,
     String description,
     String? subject,
     String visibility,
   ) =>
-      caller.callServerEndpoint<_i14.StudyRoom>(
+      caller.callServerEndpoint<_i15.StudyRoom>(
         'collaboration',
         'createRoom',
         {
@@ -521,26 +553,26 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i15.RoomMembership> joinRoom(int roomId) =>
-      caller.callServerEndpoint<_i15.RoomMembership>(
+  _i2.Future<_i16.RoomMembership> joinRoom(int roomId) =>
+      caller.callServerEndpoint<_i16.RoomMembership>(
         'collaboration',
         'joinRoom',
         {'roomId': roomId},
       );
 
-  _i2.Future<_i15.RoomMembership?> getMyRoomMembership(int roomId) =>
-      caller.callServerEndpoint<_i15.RoomMembership?>(
+  _i2.Future<_i16.RoomMembership?> getMyRoomMembership(int roomId) =>
+      caller.callServerEndpoint<_i16.RoomMembership?>(
         'collaboration',
         'getMyRoomMembership',
         {'roomId': roomId},
       );
 
-  _i2.Future<List<_i16.DiscussionPost>> getRoomPosts(
+  _i2.Future<List<_i17.DiscussionPost>> getRoomPosts(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i16.DiscussionPost>>(
+      caller.callServerEndpoint<List<_i17.DiscussionPost>>(
         'collaboration',
         'getRoomPosts',
         {
@@ -550,11 +582,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i16.DiscussionPost> createPost(
+  _i2.Future<_i17.DiscussionPost> createPost(
     int roomId,
     String body,
   ) =>
-      caller.callServerEndpoint<_i16.DiscussionPost>(
+      caller.callServerEndpoint<_i17.DiscussionPost>(
         'collaboration',
         'createPost',
         {
@@ -563,12 +595,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i17.Challenge>> getChallenges(
+  _i2.Future<List<_i18.Challenge>> getChallenges(
     int page,
     int limit,
     int? roomId,
   ) =>
-      caller.callServerEndpoint<List<_i17.Challenge>>(
+      caller.callServerEndpoint<List<_i18.Challenge>>(
         'collaboration',
         'getChallenges',
         {
@@ -578,7 +610,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i17.Challenge> createChallenge(
+  _i2.Future<_i18.Challenge> createChallenge(
     int? roomId,
     String title,
     String problemStatement,
@@ -586,7 +618,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
     List<String> tags,
     String difficulty,
   ) =>
-      caller.callServerEndpoint<_i17.Challenge>(
+      caller.callServerEndpoint<_i18.Challenge>(
         'collaboration',
         'createChallenge',
         {
@@ -599,12 +631,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i18.RoomResource>> getRoomResources(
+  _i2.Future<List<_i19.RoomResource>> getRoomResources(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i18.RoomResource>>(
+      caller.callServerEndpoint<List<_i19.RoomResource>>(
         'collaboration',
         'getRoomResources',
         {
@@ -614,7 +646,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i18.RoomResource> addRoomResource(
+  _i2.Future<_i19.RoomResource> addRoomResource(
     int roomId,
     String resourceType,
     String title,
@@ -622,7 +654,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
     String? content,
     String? citation,
   ) =>
-      caller.callServerEndpoint<_i18.RoomResource>(
+      caller.callServerEndpoint<_i19.RoomResource>(
         'collaboration',
         'addRoomResource',
         {
@@ -635,15 +667,15 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i18.RoomResource> uploadRoomResource(
+  _i2.Future<_i19.RoomResource> uploadRoomResource(
     int roomId,
     String resourceType,
     String title,
     String fileType,
-    _i19.ByteData fileData,
+    _i20.ByteData fileData,
     String? citation,
   ) =>
-      caller.callServerEndpoint<_i18.RoomResource>(
+      caller.callServerEndpoint<_i19.RoomResource>(
         'collaboration',
         'uploadRoomResource',
         {
@@ -656,13 +688,13 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i20.RoomResourceChunk>> getRoomResourceChunks(
+  _i2.Future<List<_i21.RoomResourceChunk>> getRoomResourceChunks(
     int roomId,
     int resourceId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i20.RoomResourceChunk>>(
+      caller.callServerEndpoint<List<_i21.RoomResourceChunk>>(
         'collaboration',
         'getRoomResourceChunks',
         {
@@ -686,12 +718,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i20.RoomResourceChunk>> searchRoomKnowledge(
+  _i2.Future<List<_i21.RoomResourceChunk>> searchRoomKnowledge(
     int roomId,
     String query,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i20.RoomResourceChunk>>(
+      caller.callServerEndpoint<List<_i21.RoomResourceChunk>>(
         'collaboration',
         'searchRoomKnowledge',
         {
@@ -701,19 +733,19 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i21.ChallengeTeam>> getChallengeTeams(int challengeId) =>
-      caller.callServerEndpoint<List<_i21.ChallengeTeam>>(
+  _i2.Future<List<_i22.ChallengeTeam>> getChallengeTeams(int challengeId) =>
+      caller.callServerEndpoint<List<_i22.ChallengeTeam>>(
         'collaboration',
         'getChallengeTeams',
         {'challengeId': challengeId},
       );
 
-  _i2.Future<List<_i22.ChallengeTeamMember>> getChallengeTeamMembers(
+  _i2.Future<List<_i23.ChallengeTeamMember>> getChallengeTeamMembers(
     int teamId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i22.ChallengeTeamMember>>(
+      caller.callServerEndpoint<List<_i23.ChallengeTeamMember>>(
         'collaboration',
         'getChallengeTeamMembers',
         {
@@ -723,12 +755,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i21.ChallengeTeam> createChallengeTeam(
+  _i2.Future<_i22.ChallengeTeam> createChallengeTeam(
     int challengeId,
     String name,
     String? description,
   ) =>
-      caller.callServerEndpoint<_i21.ChallengeTeam>(
+      caller.callServerEndpoint<_i22.ChallengeTeam>(
         'collaboration',
         'createChallengeTeam',
         {
@@ -738,8 +770,8 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i22.ChallengeTeamMember> joinChallengeTeam(int teamId) =>
-      caller.callServerEndpoint<_i22.ChallengeTeamMember>(
+  _i2.Future<_i23.ChallengeTeamMember> joinChallengeTeam(int teamId) =>
+      caller.callServerEndpoint<_i23.ChallengeTeamMember>(
         'collaboration',
         'joinChallengeTeam',
         {'teamId': teamId},
@@ -760,21 +792,21 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i22.ChallengeTeamMember> acceptChallengeTeamInvite(
+  _i2.Future<_i23.ChallengeTeamMember> acceptChallengeTeamInvite(
     String token,
   ) =>
-      caller.callServerEndpoint<_i22.ChallengeTeamMember>(
+      caller.callServerEndpoint<_i23.ChallengeTeamMember>(
         'collaboration',
         'acceptChallengeTeamInvite',
         {'token': token},
       );
 
-  _i2.Future<List<_i23.ChallengeMilestone>> getTeamMilestones(
+  _i2.Future<List<_i24.ChallengeMilestone>> getTeamMilestones(
     int teamId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i23.ChallengeMilestone>>(
+      caller.callServerEndpoint<List<_i24.ChallengeMilestone>>(
         'collaboration',
         'getTeamMilestones',
         {
@@ -784,13 +816,13 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i23.ChallengeMilestone> createMilestone(
+  _i2.Future<_i24.ChallengeMilestone> createMilestone(
     int teamId,
     String title,
     String? description,
     DateTime? dueAt,
   ) =>
-      caller.callServerEndpoint<_i23.ChallengeMilestone>(
+      caller.callServerEndpoint<_i24.ChallengeMilestone>(
         'collaboration',
         'createMilestone',
         {
@@ -801,14 +833,14 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i23.ChallengeMilestone> updateChallengeMilestone(
+  _i2.Future<_i24.ChallengeMilestone> updateChallengeMilestone(
     int milestoneId,
     String title,
     String? description,
     String status,
     DateTime? dueAt,
   ) =>
-      caller.callServerEndpoint<_i23.ChallengeMilestone>(
+      caller.callServerEndpoint<_i24.ChallengeMilestone>(
         'collaboration',
         'updateChallengeMilestone',
         {
@@ -820,12 +852,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i22.ChallengeTeamMember> updateChallengeTeamMember(
+  _i2.Future<_i23.ChallengeTeamMember> updateChallengeTeamMember(
     int membershipId,
     String role,
     String status,
   ) =>
-      caller.callServerEndpoint<_i22.ChallengeTeamMember>(
+      caller.callServerEndpoint<_i23.ChallengeTeamMember>(
         'collaboration',
         'updateChallengeTeamMember',
         {
@@ -835,12 +867,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i24.ChallengeProgressUpdate>> getTeamUpdates(
+  _i2.Future<List<_i25.ChallengeProgressUpdate>> getTeamUpdates(
     int teamId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i24.ChallengeProgressUpdate>>(
+      caller.callServerEndpoint<List<_i25.ChallengeProgressUpdate>>(
         'collaboration',
         'getTeamUpdates',
         {
@@ -850,11 +882,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i24.ChallengeProgressUpdate> postChallengeUpdate(
+  _i2.Future<_i25.ChallengeProgressUpdate> postChallengeUpdate(
     int teamId,
     String body,
   ) =>
-      caller.callServerEndpoint<_i24.ChallengeProgressUpdate>(
+      caller.callServerEndpoint<_i25.ChallengeProgressUpdate>(
         'collaboration',
         'postChallengeUpdate',
         {
@@ -863,12 +895,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i25.Comment>> getPostComments(
+  _i2.Future<List<_i26.Comment>> getPostComments(
     int postId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i25.Comment>>(
+      caller.callServerEndpoint<List<_i26.Comment>>(
         'collaboration',
         'getPostComments',
         {
@@ -878,12 +910,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i25.Comment> createComment(
+  _i2.Future<_i26.Comment> createComment(
     int postId,
     String body,
     int? parentCommentId,
   ) =>
-      caller.callServerEndpoint<_i25.Comment>(
+      caller.callServerEndpoint<_i26.Comment>(
         'collaboration',
         'createComment',
         {
@@ -893,11 +925,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i16.DiscussionPost> acceptPostComment(
+  _i2.Future<_i17.DiscussionPost> acceptPostComment(
     int postId,
     int? commentId,
   ) =>
-      caller.callServerEndpoint<_i16.DiscussionPost>(
+      caller.callServerEndpoint<_i17.DiscussionPost>(
         'collaboration',
         'acceptPostComment',
         {
@@ -906,11 +938,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i26.DiscussionReaction?> setPostReaction(
+  _i2.Future<_i27.DiscussionReaction?> setPostReaction(
     int postId,
     String? reaction,
   ) =>
-      caller.callServerEndpoint<_i26.DiscussionReaction?>(
+      caller.callServerEndpoint<_i27.DiscussionReaction?>(
         'collaboration',
         'setPostReaction',
         {
@@ -919,21 +951,21 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Stream<_i16.DiscussionPost> roomPostStream(int roomId) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i16.DiscussionPost>,
-          _i16.DiscussionPost>(
+  _i2.Stream<_i17.DiscussionPost> roomPostStream(int roomId) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i17.DiscussionPost>,
+          _i17.DiscussionPost>(
         'collaboration',
         'roomPostStream',
         {'roomId': roomId},
         {},
       );
 
-  _i2.Future<List<_i27.RoomChatMessage>> getRoomChatMessages(
+  _i2.Future<List<_i28.RoomChatMessage>> getRoomChatMessages(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i27.RoomChatMessage>>(
+      caller.callServerEndpoint<List<_i28.RoomChatMessage>>(
         'collaboration',
         'getRoomChatMessages',
         {
@@ -943,20 +975,20 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Stream<_i27.RoomChatMessage> roomChatStream(int roomId) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i27.RoomChatMessage>,
-          _i27.RoomChatMessage>(
+  _i2.Stream<_i28.RoomChatMessage> roomChatStream(int roomId) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i28.RoomChatMessage>,
+          _i28.RoomChatMessage>(
         'collaboration',
         'roomChatStream',
         {'roomId': roomId},
         {},
       );
 
-  _i2.Future<_i27.RoomChatMessage> createRoomChatMessage(
+  _i2.Future<_i28.RoomChatMessage> createRoomChatMessage(
     int roomId,
     String body,
   ) =>
-      caller.callServerEndpoint<_i27.RoomChatMessage>(
+      caller.callServerEndpoint<_i28.RoomChatMessage>(
         'collaboration',
         'createRoomChatMessage',
         {
@@ -965,12 +997,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i28.RoomAiAnswer>> getRoomAiAnswers(
+  _i2.Future<List<_i29.RoomAiAnswer>> getRoomAiAnswers(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i28.RoomAiAnswer>>(
+      caller.callServerEndpoint<List<_i29.RoomAiAnswer>>(
         'collaboration',
         'getRoomAiAnswers',
         {
@@ -980,11 +1012,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i28.RoomAiAnswer> askRoom(
+  _i2.Future<_i29.RoomAiAnswer> askRoom(
     int roomId,
     String question,
   ) =>
-      caller.callServerEndpoint<_i28.RoomAiAnswer>(
+      caller.callServerEndpoint<_i29.RoomAiAnswer>(
         'collaboration',
         'askRoom',
         {
@@ -993,11 +1025,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i29.CollaborationPresence> updateRoomPresence(
+  _i2.Future<_i30.CollaborationPresence> updateRoomPresence(
     int roomId,
     String state,
   ) =>
-      caller.callServerEndpoint<_i29.CollaborationPresence>(
+      caller.callServerEndpoint<_i30.CollaborationPresence>(
         'collaboration',
         'updateRoomPresence',
         {
@@ -1006,19 +1038,19 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i29.CollaborationPresence>> getRoomPresence(int roomId) =>
-      caller.callServerEndpoint<List<_i29.CollaborationPresence>>(
+  _i2.Future<List<_i30.CollaborationPresence>> getRoomPresence(int roomId) =>
+      caller.callServerEndpoint<List<_i30.CollaborationPresence>>(
         'collaboration',
         'getRoomPresence',
         {'roomId': roomId},
       );
 
-  _i2.Future<List<_i30.ScheduledStudySession>> getRoomStudySessions(
+  _i2.Future<List<_i31.ScheduledStudySession>> getRoomStudySessions(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i30.ScheduledStudySession>>(
+      caller.callServerEndpoint<List<_i31.ScheduledStudySession>>(
         'collaboration',
         'getRoomStudySessions',
         {
@@ -1028,7 +1060,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i30.ScheduledStudySession> createStudySession(
+  _i2.Future<_i31.ScheduledStudySession> createStudySession(
     int roomId,
     String title,
     String? description,
@@ -1036,7 +1068,7 @@ class EndpointCollaboration extends _i1.EndpointRef {
     DateTime endsAt,
     String? meetingUrl,
   ) =>
-      caller.callServerEndpoint<_i30.ScheduledStudySession>(
+      caller.callServerEndpoint<_i31.ScheduledStudySession>(
         'collaboration',
         'createStudySession',
         {
@@ -1049,20 +1081,20 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i31.StudySessionParticipant> joinStudySession(int sessionId) =>
-      caller.callServerEndpoint<_i31.StudySessionParticipant>(
+  _i2.Future<_i32.StudySessionParticipant> joinStudySession(int sessionId) =>
+      caller.callServerEndpoint<_i32.StudySessionParticipant>(
         'collaboration',
         'joinStudySession',
         {'sessionId': sessionId},
       );
 
-  _i2.Future<_i32.ContentReport> reportContent(
+  _i2.Future<_i33.ContentReport> reportContent(
     String contentType,
     int contentId,
     String reason,
     String? details,
   ) =>
-      caller.callServerEndpoint<_i32.ContentReport>(
+      caller.callServerEndpoint<_i33.ContentReport>(
         'collaboration',
         'reportContent',
         {
@@ -1073,11 +1105,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i32.ContentReport>> getOpenReports({
+  _i2.Future<List<_i33.ContentReport>> getOpenReports({
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i32.ContentReport>>(
+      caller.callServerEndpoint<List<_i33.ContentReport>>(
         'collaboration',
         'getOpenReports',
         {
@@ -1086,11 +1118,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i32.ContentReport>> getMyContentReports({
+  _i2.Future<List<_i33.ContentReport>> getMyContentReports({
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i32.ContentReport>>(
+      caller.callServerEndpoint<List<_i33.ContentReport>>(
         'collaboration',
         'getMyContentReports',
         {
@@ -1099,13 +1131,13 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i33.AuditEvent>> getAuditEvents({
+  _i2.Future<List<_i34.AuditEvent>> getAuditEvents({
     String? targetType,
     int? targetId,
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i33.AuditEvent>>(
+      caller.callServerEndpoint<List<_i34.AuditEvent>>(
         'collaboration',
         'getAuditEvents',
         {
@@ -1116,12 +1148,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i33.AuditEvent>> getInstitutionAuditEvents(
+  _i2.Future<List<_i34.AuditEvent>> getInstitutionAuditEvents(
     int institutionId, {
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i33.AuditEvent>>(
+      caller.callServerEndpoint<List<_i34.AuditEvent>>(
         'collaboration',
         'getInstitutionAuditEvents',
         {
@@ -1131,11 +1163,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i34.ModerationAppeal> submitModerationAppeal(
+  _i2.Future<_i35.ModerationAppeal> submitModerationAppeal(
     int reportId,
     String reason,
   ) =>
-      caller.callServerEndpoint<_i34.ModerationAppeal>(
+      caller.callServerEndpoint<_i35.ModerationAppeal>(
         'collaboration',
         'submitModerationAppeal',
         {
@@ -1144,11 +1176,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i34.ModerationAppeal>> getMyModerationAppeals(
+  _i2.Future<List<_i35.ModerationAppeal>> getMyModerationAppeals(
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i34.ModerationAppeal>>(
+      caller.callServerEndpoint<List<_i35.ModerationAppeal>>(
         'collaboration',
         'getMyModerationAppeals',
         {
@@ -1157,11 +1189,11 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i34.ModerationAppeal>> getPendingModerationAppeals({
+  _i2.Future<List<_i35.ModerationAppeal>> getPendingModerationAppeals({
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i34.ModerationAppeal>>(
+      caller.callServerEndpoint<List<_i35.ModerationAppeal>>(
         'collaboration',
         'getPendingModerationAppeals',
         {
@@ -1170,12 +1202,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i34.ModerationAppeal> reviewModerationAppeal(
+  _i2.Future<_i35.ModerationAppeal> reviewModerationAppeal(
     int appealId,
     String decision,
     String? notes,
   ) =>
-      caller.callServerEndpoint<_i34.ModerationAppeal>(
+      caller.callServerEndpoint<_i35.ModerationAppeal>(
         'collaboration',
         'reviewModerationAppeal',
         {
@@ -1185,12 +1217,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i32.ContentReport> resolveReport(
+  _i2.Future<_i33.ContentReport> resolveReport(
     int reportId,
     String action,
     String? notes,
   ) =>
-      caller.callServerEndpoint<_i32.ContentReport>(
+      caller.callServerEndpoint<_i33.ContentReport>(
         'collaboration',
         'resolveReport',
         {
@@ -1200,12 +1232,12 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i35.CollaborativeDocument>> getRoomDocuments(
+  _i2.Future<List<_i36.CollaborativeDocument>> getRoomDocuments(
     int roomId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i35.CollaborativeDocument>>(
+      caller.callServerEndpoint<List<_i36.CollaborativeDocument>>(
         'collaboration',
         'getRoomDocuments',
         {
@@ -1215,21 +1247,21 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Stream<_i35.CollaborativeDocument> documentStream(int documentId) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i35.CollaborativeDocument>,
-          _i35.CollaborativeDocument>(
+  _i2.Stream<_i36.CollaborativeDocument> documentStream(int documentId) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i36.CollaborativeDocument>,
+          _i36.CollaborativeDocument>(
         'collaboration',
         'documentStream',
         {'documentId': documentId},
         {},
       );
 
-  _i2.Future<_i35.CollaborativeDocument> createDocument(
+  _i2.Future<_i36.CollaborativeDocument> createDocument(
     int roomId,
     String title,
     String body,
   ) =>
-      caller.callServerEndpoint<_i35.CollaborativeDocument>(
+      caller.callServerEndpoint<_i36.CollaborativeDocument>(
         'collaboration',
         'createDocument',
         {
@@ -1239,13 +1271,13 @@ class EndpointCollaboration extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i35.CollaborativeDocument> updateDocument(
+  _i2.Future<_i36.CollaborativeDocument> updateDocument(
     int documentId,
     String title,
     String body,
     int expectedVersion,
   ) =>
-      caller.callServerEndpoint<_i35.CollaborativeDocument>(
+      caller.callServerEndpoint<_i36.CollaborativeDocument>(
         'collaboration',
         'updateDocument',
         {
@@ -1264,31 +1296,35 @@ class EndpointMessaging extends _i1.EndpointRef {
   @override
   String get name => 'messaging';
 
-  _i2.Future<_i36.UserPrivacySettings> getMyPrivacySettings() =>
-      caller.callServerEndpoint<_i36.UserPrivacySettings>(
+  _i2.Future<_i37.UserPrivacySettings> getMyPrivacySettings() =>
+      caller.callServerEndpoint<_i37.UserPrivacySettings>(
         'messaging',
         'getMyPrivacySettings',
         {},
       );
 
-  _i2.Future<_i36.UserPrivacySettings> updateMyPrivacySettings({
+  _i2.Future<_i37.UserPrivacySettings> updateMyPrivacySettings({
     bool? isMinor,
+    DateTime? dateOfBirth,
+    required bool guardianConsent,
     bool? allowUnknownDirectMessages,
   }) =>
-      caller.callServerEndpoint<_i36.UserPrivacySettings>(
+      caller.callServerEndpoint<_i37.UserPrivacySettings>(
         'messaging',
         'updateMyPrivacySettings',
         {
           'isMinor': isMinor,
+          'dateOfBirth': dateOfBirth,
+          'guardianConsent': guardianConsent,
           'allowUnknownDirectMessages': allowUnknownDirectMessages,
         },
       );
 
-  _i2.Future<_i37.UserSafetyRelationship> setSafetyRelationship(
+  _i2.Future<_i38.UserSafetyRelationship> setSafetyRelationship(
     int targetUserId,
     String relationshipType,
   ) =>
-      caller.callServerEndpoint<_i37.UserSafetyRelationship>(
+      caller.callServerEndpoint<_i38.UserSafetyRelationship>(
         'messaging',
         'setSafetyRelationship',
         {
@@ -1310,11 +1346,11 @@ class EndpointMessaging extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i37.UserSafetyRelationship>> getMySafetyRelationships(
+  _i2.Future<List<_i38.UserSafetyRelationship>> getMySafetyRelationships(
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i37.UserSafetyRelationship>>(
+      caller.callServerEndpoint<List<_i38.UserSafetyRelationship>>(
         'messaging',
         'getMySafetyRelationships',
         {
@@ -1323,11 +1359,11 @@ class EndpointMessaging extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i38.Conversation> createConversation(
+  _i2.Future<_i39.Conversation> createConversation(
     List<int> participantIds,
     String? title,
   ) =>
-      caller.callServerEndpoint<_i38.Conversation>(
+      caller.callServerEndpoint<_i39.Conversation>(
         'messaging',
         'createConversation',
         {
@@ -1336,19 +1372,19 @@ class EndpointMessaging extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i38.Conversation>> getMyConversations() =>
-      caller.callServerEndpoint<List<_i38.Conversation>>(
+  _i2.Future<List<_i39.Conversation>> getMyConversations() =>
+      caller.callServerEndpoint<List<_i39.Conversation>>(
         'messaging',
         'getMyConversations',
         {},
       );
 
-  _i2.Future<List<_i39.DirectMessage>> getConversationMessages(
+  _i2.Future<List<_i40.DirectMessage>> getConversationMessages(
     int conversationId,
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i39.DirectMessage>>(
+      caller.callServerEndpoint<List<_i40.DirectMessage>>(
         'messaging',
         'getConversationMessages',
         {
@@ -1358,11 +1394,11 @@ class EndpointMessaging extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i40.ConversationReadReceipt> markConversationRead(
+  _i2.Future<_i41.ConversationReadReceipt> markConversationRead(
     int conversationId,
     int messageId,
   ) =>
-      caller.callServerEndpoint<_i40.ConversationReadReceipt>(
+      caller.callServerEndpoint<_i41.ConversationReadReceipt>(
         'messaging',
         'markConversationRead',
         {
@@ -1371,29 +1407,29 @@ class EndpointMessaging extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i40.ConversationReadReceipt>> getConversationReadReceipts(
+  _i2.Future<List<_i41.ConversationReadReceipt>> getConversationReadReceipts(
     int conversationId,
   ) =>
-      caller.callServerEndpoint<List<_i40.ConversationReadReceipt>>(
+      caller.callServerEndpoint<List<_i41.ConversationReadReceipt>>(
         'messaging',
         'getConversationReadReceipts',
         {'conversationId': conversationId},
       );
 
-  _i2.Stream<_i39.DirectMessage> conversationStream(int conversationId) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i39.DirectMessage>,
-          _i39.DirectMessage>(
+  _i2.Stream<_i40.DirectMessage> conversationStream(int conversationId) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i40.DirectMessage>,
+          _i40.DirectMessage>(
         'messaging',
         'conversationStream',
         {'conversationId': conversationId},
         {},
       );
 
-  _i2.Future<_i39.DirectMessage> sendMessage(
+  _i2.Future<_i40.DirectMessage> sendMessage(
     int conversationId,
     String body,
   ) =>
-      caller.callServerEndpoint<_i39.DirectMessage>(
+      caller.callServerEndpoint<_i40.DirectMessage>(
         'messaging',
         'sendMessage',
         {
@@ -1410,12 +1446,12 @@ class EndpointNotification extends _i1.EndpointRef {
   @override
   String get name => 'notification';
 
-  _i2.Future<List<_i41.Notification>> getNotifications({
+  _i2.Future<List<_i42.Notification>> getNotifications({
     required bool isRead,
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i41.Notification>>(
+      caller.callServerEndpoint<List<_i42.Notification>>(
         'notification',
         'getNotifications',
         {
@@ -1438,11 +1474,11 @@ class EndpointNotification extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Future<_i42.PushDevice> registerPushDevice(
+  _i2.Future<_i43.PushDevice> registerPushDevice(
     String token,
     String platform,
   ) =>
-      caller.callServerEndpoint<_i42.PushDevice>(
+      caller.callServerEndpoint<_i43.PushDevice>(
         'notification',
         'registerPushDevice',
         {
@@ -1488,12 +1524,12 @@ class EndpointOpportunity extends _i1.EndpointRef {
   @override
   String get name => 'opportunity';
 
-  _i2.Future<_i43.OpportunitySource> registerOpportunitySource(
+  _i2.Future<_i44.OpportunitySource> registerOpportunitySource(
     String name,
     String provider,
     String feedUrl,
   ) =>
-      caller.callServerEndpoint<_i43.OpportunitySource>(
+      caller.callServerEndpoint<_i44.OpportunitySource>(
         'opportunity',
         'registerOpportunitySource',
         {
@@ -1503,7 +1539,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i44.Opportunity> ingestOpportunity(
+  _i2.Future<_i45.Opportunity> ingestOpportunity(
     int sourceId,
     String externalId,
     String title,
@@ -1517,7 +1553,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
     String fundingDetails,
     String officialUrl,
   ) =>
-      caller.callServerEndpoint<_i44.Opportunity>(
+      caller.callServerEndpoint<_i45.Opportunity>(
         'opportunity',
         'ingestOpportunity',
         {
@@ -1543,7 +1579,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
         {'sourceId': sourceId},
       );
 
-  _i2.Future<List<_i44.Opportunity>> getOpportunities(
+  _i2.Future<List<_i45.Opportunity>> getOpportunities(
     int page,
     int limit,
     String? country,
@@ -1552,7 +1588,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
     String? opportunityType,
     DateTime? deadlineBefore,
   ) =>
-      caller.callServerEndpoint<List<_i44.Opportunity>>(
+      caller.callServerEndpoint<List<_i45.Opportunity>>(
         'opportunity',
         'getOpportunities',
         {
@@ -1566,7 +1602,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i44.Opportunity> submitOpportunity(
+  _i2.Future<_i45.Opportunity> submitOpportunity(
     String title,
     String opportunityType,
     String provider,
@@ -1578,7 +1614,7 @@ class EndpointOpportunity extends _i1.EndpointRef {
     String fundingDetails,
     String officialUrl,
   ) =>
-      caller.callServerEndpoint<_i44.Opportunity>(
+      caller.callServerEndpoint<_i45.Opportunity>(
         'opportunity',
         'submitOpportunity',
         {
@@ -1595,11 +1631,11 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i45.OpportunitySave> saveOpportunity(
+  _i2.Future<_i46.OpportunitySave> saveOpportunity(
     int opportunityId,
     bool alertEnabled,
   ) =>
-      caller.callServerEndpoint<_i45.OpportunitySave>(
+      caller.callServerEndpoint<_i46.OpportunitySave>(
         'opportunity',
         'saveOpportunity',
         {
@@ -1608,11 +1644,11 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i45.OpportunitySave>> getSavedOpportunities(
+  _i2.Future<List<_i46.OpportunitySave>> getSavedOpportunities(
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i45.OpportunitySave>>(
+      caller.callServerEndpoint<List<_i46.OpportunitySave>>(
         'opportunity',
         'getSavedOpportunities',
         {
@@ -1621,11 +1657,11 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i44.Opportunity> reviewOpportunity(
+  _i2.Future<_i45.Opportunity> reviewOpportunity(
     int opportunityId,
     String verificationStatus,
   ) =>
-      caller.callServerEndpoint<_i44.Opportunity>(
+      caller.callServerEndpoint<_i45.Opportunity>(
         'opportunity',
         'reviewOpportunity',
         {
@@ -1634,11 +1670,11 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i44.Opportunity>> getPendingOpportunityReviews({
+  _i2.Future<List<_i45.Opportunity>> getPendingOpportunityReviews({
     required int page,
     required int limit,
   }) =>
-      caller.callServerEndpoint<List<_i44.Opportunity>>(
+      caller.callServerEndpoint<List<_i45.Opportunity>>(
         'opportunity',
         'getPendingOpportunityReviews',
         {
@@ -1647,14 +1683,14 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i46.OpportunityAlert> createOpportunityAlert(
+  _i2.Future<_i47.OpportunityAlert> createOpportunityAlert(
     String? country,
     String? field,
     String? educationLevel,
     List<String> opportunityTypes,
     int deadlineWithinDays,
   ) =>
-      caller.callServerEndpoint<_i46.OpportunityAlert>(
+      caller.callServerEndpoint<_i47.OpportunityAlert>(
         'opportunity',
         'createOpportunityAlert',
         {
@@ -1666,8 +1702,8 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<List<_i46.OpportunityAlert>> getOpportunityAlerts() =>
-      caller.callServerEndpoint<List<_i46.OpportunityAlert>>(
+  _i2.Future<List<_i47.OpportunityAlert>> getOpportunityAlerts() =>
+      caller.callServerEndpoint<List<_i47.OpportunityAlert>>(
         'opportunity',
         'getOpportunityAlerts',
         {},
@@ -1680,11 +1716,11 @@ class EndpointOpportunity extends _i1.EndpointRef {
         {'alertId': alertId},
       );
 
-  _i2.Future<List<_i47.OpportunityApplicationTracker>> getApplicationTrackers(
+  _i2.Future<List<_i48.OpportunityApplicationTracker>> getApplicationTrackers(
     int page,
     int limit,
   ) =>
-      caller.callServerEndpoint<List<_i47.OpportunityApplicationTracker>>(
+      caller.callServerEndpoint<List<_i48.OpportunityApplicationTracker>>(
         'opportunity',
         'getApplicationTrackers',
         {
@@ -1693,13 +1729,13 @@ class EndpointOpportunity extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i47.OpportunityApplicationTracker> upsertApplicationTracker(
+  _i2.Future<_i48.OpportunityApplicationTracker> upsertApplicationTracker(
     int opportunityId,
     String status,
     String? notes,
     String? applicationUrl,
   ) =>
-      caller.callServerEndpoint<_i47.OpportunityApplicationTracker>(
+      caller.callServerEndpoint<_i48.OpportunityApplicationTracker>(
         'opportunity',
         'upsertApplicationTracker',
         {
@@ -1735,13 +1771,13 @@ class EndpointStudyMaterial extends _i1.EndpointRef {
   String get name => 'studyMaterial';
 
   /// Upload study material
-  _i2.Future<_i48.StudyMaterial> uploadMaterial(
+  _i2.Future<_i49.StudyMaterial> uploadMaterial(
     String title,
     String fileType,
-    _i19.ByteData? fileData,
+    _i20.ByteData? fileData,
     String? fileUrl,
   ) =>
-      caller.callServerEndpoint<_i48.StudyMaterial>(
+      caller.callServerEndpoint<_i49.StudyMaterial>(
         'studyMaterial',
         'uploadMaterial',
         {
@@ -1753,16 +1789,16 @@ class EndpointStudyMaterial extends _i1.EndpointRef {
       );
 
   /// Get all materials for authenticated user
-  _i2.Future<List<_i48.StudyMaterial>> getMaterials() =>
-      caller.callServerEndpoint<List<_i48.StudyMaterial>>(
+  _i2.Future<List<_i49.StudyMaterial>> getMaterials() =>
+      caller.callServerEndpoint<List<_i49.StudyMaterial>>(
         'studyMaterial',
         'getMaterials',
         {},
       );
 
   /// Get sample material for demo purposes
-  _i2.Future<_i48.StudyMaterial> getSampleMaterial() =>
-      caller.callServerEndpoint<_i48.StudyMaterial>(
+  _i2.Future<_i49.StudyMaterial> getSampleMaterial() =>
+      caller.callServerEndpoint<_i49.StudyMaterial>(
         'studyMaterial',
         'getSampleMaterial',
         {},
@@ -1777,12 +1813,12 @@ class EndpointStudyMaterial extends _i1.EndpointRef {
       );
 
   /// Update study material metadata
-  _i2.Future<_i48.StudyMaterial> updateMaterial(
+  _i2.Future<_i49.StudyMaterial> updateMaterial(
     int materialId,
     String? title,
     Map<String, dynamic>? metadata,
   ) =>
-      caller.callServerEndpoint<_i48.StudyMaterial>(
+      caller.callServerEndpoint<_i49.StudyMaterial>(
         'studyMaterial',
         'updateMaterial',
         {
@@ -1793,24 +1829,24 @@ class EndpointStudyMaterial extends _i1.EndpointRef {
       );
 
   /// Get processing status of a material
-  _i2.Future<_i49.FileProcessing?> getProcessingStatus(int materialId) =>
-      caller.callServerEndpoint<_i49.FileProcessing?>(
+  _i2.Future<_i50.FileProcessing?> getProcessingStatus(int materialId) =>
+      caller.callServerEndpoint<_i50.FileProcessing?>(
         'studyMaterial',
         'getProcessingStatus',
         {'materialId': materialId},
       );
 
   /// Get materials by file type (for authenticated user)
-  _i2.Future<List<_i48.StudyMaterial>> getMaterialsByType(String fileType) =>
-      caller.callServerEndpoint<List<_i48.StudyMaterial>>(
+  _i2.Future<List<_i49.StudyMaterial>> getMaterialsByType(String fileType) =>
+      caller.callServerEndpoint<List<_i49.StudyMaterial>>(
         'studyMaterial',
         'getMaterialsByType',
         {'fileType': fileType},
       );
 
   /// Search materials by title
-  _i2.Future<List<_i48.StudyMaterial>> searchMaterials(String query) =>
-      caller.callServerEndpoint<List<_i48.StudyMaterial>>(
+  _i2.Future<List<_i49.StudyMaterial>> searchMaterials(String query) =>
+      caller.callServerEndpoint<List<_i49.StudyMaterial>>(
         'studyMaterial',
         'searchMaterials',
         {'query': query},
@@ -1825,8 +1861,8 @@ class EndpointStudyMaterial extends _i1.EndpointRef {
       );
 
   /// Requeues a failed or dead-lettered material for its owner.
-  _i2.Future<_i49.FileProcessing> retryFileProcessing(int materialId) =>
-      caller.callServerEndpoint<_i49.FileProcessing>(
+  _i2.Future<_i50.FileProcessing> retryFileProcessing(int materialId) =>
+      caller.callServerEndpoint<_i50.FileProcessing>(
         'studyMaterial',
         'retryFileProcessing',
         {'materialId': materialId},
@@ -1840,12 +1876,12 @@ class EndpointSubscription extends _i1.EndpointRef {
   @override
   String get name => 'subscription';
 
-  _i2.Future<_i50.Subscription> createSubscription(
+  _i2.Future<_i51.Subscription> createSubscription(
     String gateway,
     String paymentToken, [
     String? idempotencyKey,
   ]) =>
-      caller.callServerEndpoint<_i50.Subscription>(
+      caller.callServerEndpoint<_i51.Subscription>(
         'subscription',
         'createSubscription',
         {
@@ -1862,8 +1898,8 @@ class EndpointSubscription extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Future<_i50.Subscription?> getSubscriptionStatus() =>
-      caller.callServerEndpoint<_i50.Subscription?>(
+  _i2.Future<_i51.Subscription?> getSubscriptionStatus() =>
+      caller.callServerEndpoint<_i51.Subscription?>(
         'subscription',
         'getSubscriptionStatus',
         {},
@@ -1901,31 +1937,31 @@ class EndpointUser extends _i1.EndpointRef {
 
   /// Fetches the user's profile and their active subscription in one call.
   /// Creates a default profile if none exists (for new users).
-  _i2.Future<_i51.UserProfileBundle> getProfileBundle() =>
-      caller.callServerEndpoint<_i51.UserProfileBundle>(
+  _i2.Future<_i52.UserProfileBundle> getProfileBundle() =>
+      caller.callServerEndpoint<_i52.UserProfileBundle>(
         'user',
         'getProfileBundle',
         {},
       );
 
   /// Updates the user's profile information
-  _i2.Future<_i52.UserProfile> updateProfile({String? name}) =>
-      caller.callServerEndpoint<_i52.UserProfile>(
+  _i2.Future<_i53.UserProfile> updateProfile({String? name}) =>
+      caller.callServerEndpoint<_i53.UserProfile>(
         'user',
         'updateProfile',
         {'name': name},
       );
 
-  _i2.Future<_i53.DashboardBundle> getDashboardBundle() =>
-      caller.callServerEndpoint<_i53.DashboardBundle>(
+  _i2.Future<_i54.DashboardBundle> getDashboardBundle() =>
+      caller.callServerEndpoint<_i54.DashboardBundle>(
         'user',
         'getDashboardBundle',
         {},
       );
 
   /// Helper method to create initial study history for new users
-  _i2.Future<_i54.StudyHistory> createStudyHistory() =>
-      caller.callServerEndpoint<_i54.StudyHistory>(
+  _i2.Future<_i55.StudyHistory> createStudyHistory() =>
+      caller.callServerEndpoint<_i55.StudyHistory>(
         'user',
         'createStudyHistory',
         {},
@@ -1934,10 +1970,10 @@ class EndpointUser extends _i1.EndpointRef {
 
 class Modules {
   Modules(Client client) {
-    auth = _i55.Caller(client);
+    auth = _i56.Caller(client);
   }
 
-  late final _i55.Caller auth;
+  late final _i56.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -1959,7 +1995,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i56.Protocol(),
+          _i57.Protocol(),
           securityContext: securityContext,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,

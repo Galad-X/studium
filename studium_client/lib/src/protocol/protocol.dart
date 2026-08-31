@@ -60,66 +60,67 @@ import 'room_chat_message.dart' as _i46;
 import 'room_membership.dart' as _i47;
 import 'room_resource.dart' as _i48;
 import 'room_resource_chunk.dart' as _i49;
-import 'scheduled_study_session.dart' as _i50;
-import 'study_history.dart' as _i51;
-import 'study_materials.dart' as _i52;
-import 'study_room.dart' as _i53;
-import 'study_session_participant.dart' as _i54;
-import 'subscription_operation.dart' as _i55;
-import 'subscriptions.dart' as _i56;
-import 'summaries.dart' as _i57;
-import 'tags.dart' as _i58;
-import 'user_analytics.dart' as _i59;
-import 'user_privacy_settings.dart' as _i60;
-import 'user_profile.dart' as _i61;
-import 'user_profile_bundle.dart' as _i62;
-import 'user_reputation.dart' as _i63;
-import 'user_restriction.dart' as _i64;
-import 'user_safety_relationship.dart' as _i65;
-import 'verification_request.dart' as _i66;
-import 'package:studium_client/src/protocol/academic_writings.dart' as _i67;
-import 'package:studium_client/src/protocol/questions.dart' as _i68;
-import 'package:studium_client/src/protocol/user_analytics.dart' as _i69;
-import 'package:studium_client/src/protocol/institution.dart' as _i70;
+import 'room_whiteboard_state.dart' as _i50;
+import 'scheduled_study_session.dart' as _i51;
+import 'study_history.dart' as _i52;
+import 'study_materials.dart' as _i53;
+import 'study_room.dart' as _i54;
+import 'study_session_participant.dart' as _i55;
+import 'subscription_operation.dart' as _i56;
+import 'subscriptions.dart' as _i57;
+import 'summaries.dart' as _i58;
+import 'tags.dart' as _i59;
+import 'user_analytics.dart' as _i60;
+import 'user_privacy_settings.dart' as _i61;
+import 'user_profile.dart' as _i62;
+import 'user_profile_bundle.dart' as _i63;
+import 'user_reputation.dart' as _i64;
+import 'user_restriction.dart' as _i65;
+import 'user_safety_relationship.dart' as _i66;
+import 'verification_request.dart' as _i67;
+import 'package:studium_client/src/protocol/academic_writings.dart' as _i68;
+import 'package:studium_client/src/protocol/questions.dart' as _i69;
+import 'package:studium_client/src/protocol/user_analytics.dart' as _i70;
+import 'package:studium_client/src/protocol/institution.dart' as _i71;
 import 'package:studium_client/src/protocol/institution_membership.dart'
-    as _i71;
-import 'package:studium_client/src/protocol/verification_request.dart' as _i72;
-import 'package:studium_client/src/protocol/study_room.dart' as _i73;
-import 'package:studium_client/src/protocol/discussion_post.dart' as _i74;
-import 'package:studium_client/src/protocol/challenge.dart' as _i75;
-import 'package:studium_client/src/protocol/room_resource.dart' as _i76;
-import 'package:studium_client/src/protocol/room_resource_chunk.dart' as _i77;
-import 'package:studium_client/src/protocol/challenge_team.dart' as _i78;
-import 'package:studium_client/src/protocol/challenge_team_member.dart' as _i79;
-import 'package:studium_client/src/protocol/challenge_milestone.dart' as _i80;
-import 'package:studium_client/src/protocol/challenge_update.dart' as _i81;
-import 'package:studium_client/src/protocol/comment.dart' as _i82;
-import 'package:studium_client/src/protocol/room_chat_message.dart' as _i83;
-import 'package:studium_client/src/protocol/room_ai_answer.dart' as _i84;
+    as _i72;
+import 'package:studium_client/src/protocol/verification_request.dart' as _i73;
+import 'package:studium_client/src/protocol/study_room.dart' as _i74;
+import 'package:studium_client/src/protocol/discussion_post.dart' as _i75;
+import 'package:studium_client/src/protocol/challenge.dart' as _i76;
+import 'package:studium_client/src/protocol/room_resource.dart' as _i77;
+import 'package:studium_client/src/protocol/room_resource_chunk.dart' as _i78;
+import 'package:studium_client/src/protocol/challenge_team.dart' as _i79;
+import 'package:studium_client/src/protocol/challenge_team_member.dart' as _i80;
+import 'package:studium_client/src/protocol/challenge_milestone.dart' as _i81;
+import 'package:studium_client/src/protocol/challenge_update.dart' as _i82;
+import 'package:studium_client/src/protocol/comment.dart' as _i83;
+import 'package:studium_client/src/protocol/room_chat_message.dart' as _i84;
+import 'package:studium_client/src/protocol/room_ai_answer.dart' as _i85;
 import 'package:studium_client/src/protocol/collaboration_presence.dart'
-    as _i85;
-import 'package:studium_client/src/protocol/scheduled_study_session.dart'
     as _i86;
-import 'package:studium_client/src/protocol/content_report.dart' as _i87;
-import 'package:studium_client/src/protocol/audit_event.dart' as _i88;
-import 'package:studium_client/src/protocol/moderation_appeal.dart' as _i89;
+import 'package:studium_client/src/protocol/scheduled_study_session.dart'
+    as _i87;
+import 'package:studium_client/src/protocol/content_report.dart' as _i88;
+import 'package:studium_client/src/protocol/audit_event.dart' as _i89;
+import 'package:studium_client/src/protocol/moderation_appeal.dart' as _i90;
 import 'package:studium_client/src/protocol/collaborative_document.dart'
-    as _i90;
-import 'package:studium_client/src/protocol/user_safety_relationship.dart'
     as _i91;
-import 'package:studium_client/src/protocol/conversation.dart' as _i92;
-import 'package:studium_client/src/protocol/direct_message.dart' as _i93;
+import 'package:studium_client/src/protocol/user_safety_relationship.dart'
+    as _i92;
+import 'package:studium_client/src/protocol/conversation.dart' as _i93;
+import 'package:studium_client/src/protocol/direct_message.dart' as _i94;
 import 'package:studium_client/src/protocol/conversation_read_receipt.dart'
-    as _i94;
-import 'package:studium_client/src/protocol/notifications.dart' as _i95;
-import 'package:studium_client/src/protocol/opportunity.dart' as _i96;
-import 'package:studium_client/src/protocol/opportunity_save.dart' as _i97;
-import 'package:studium_client/src/protocol/opportunity_alert.dart' as _i98;
+    as _i95;
+import 'package:studium_client/src/protocol/notifications.dart' as _i96;
+import 'package:studium_client/src/protocol/opportunity.dart' as _i97;
+import 'package:studium_client/src/protocol/opportunity_save.dart' as _i98;
+import 'package:studium_client/src/protocol/opportunity_alert.dart' as _i99;
 import 'package:studium_client/src/protocol/opportunity_application_tracker.dart'
-    as _i99;
-import 'package:studium_client/src/protocol/study_materials.dart' as _i100;
-import 'package:studium_client/src/protocol/summaries.dart' as _i101;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i102;
+    as _i100;
+import 'package:studium_client/src/protocol/study_materials.dart' as _i101;
+import 'package:studium_client/src/protocol/summaries.dart' as _i102;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i103;
 export 'academic_profile.dart';
 export 'academic_writings.dart';
 export 'answers.dart';
@@ -168,6 +169,7 @@ export 'room_chat_message.dart';
 export 'room_membership.dart';
 export 'room_resource.dart';
 export 'room_resource_chunk.dart';
+export 'room_whiteboard_state.dart';
 export 'scheduled_study_session.dart';
 export 'study_history.dart';
 export 'study_materials.dart';
@@ -365,56 +367,59 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i49.RoomResourceChunk) {
       return _i49.RoomResourceChunk.fromJson(data) as T;
     }
-    if (t == _i50.ScheduledStudySession) {
-      return _i50.ScheduledStudySession.fromJson(data) as T;
+    if (t == _i50.RoomWhiteboardState) {
+      return _i50.RoomWhiteboardState.fromJson(data) as T;
     }
-    if (t == _i51.StudyHistory) {
-      return _i51.StudyHistory.fromJson(data) as T;
+    if (t == _i51.ScheduledStudySession) {
+      return _i51.ScheduledStudySession.fromJson(data) as T;
     }
-    if (t == _i52.StudyMaterial) {
-      return _i52.StudyMaterial.fromJson(data) as T;
+    if (t == _i52.StudyHistory) {
+      return _i52.StudyHistory.fromJson(data) as T;
     }
-    if (t == _i53.StudyRoom) {
-      return _i53.StudyRoom.fromJson(data) as T;
+    if (t == _i53.StudyMaterial) {
+      return _i53.StudyMaterial.fromJson(data) as T;
     }
-    if (t == _i54.StudySessionParticipant) {
-      return _i54.StudySessionParticipant.fromJson(data) as T;
+    if (t == _i54.StudyRoom) {
+      return _i54.StudyRoom.fromJson(data) as T;
     }
-    if (t == _i55.SubscriptionOperation) {
-      return _i55.SubscriptionOperation.fromJson(data) as T;
+    if (t == _i55.StudySessionParticipant) {
+      return _i55.StudySessionParticipant.fromJson(data) as T;
     }
-    if (t == _i56.Subscription) {
-      return _i56.Subscription.fromJson(data) as T;
+    if (t == _i56.SubscriptionOperation) {
+      return _i56.SubscriptionOperation.fromJson(data) as T;
     }
-    if (t == _i57.Summary) {
-      return _i57.Summary.fromJson(data) as T;
+    if (t == _i57.Subscription) {
+      return _i57.Subscription.fromJson(data) as T;
     }
-    if (t == _i58.Tag) {
-      return _i58.Tag.fromJson(data) as T;
+    if (t == _i58.Summary) {
+      return _i58.Summary.fromJson(data) as T;
     }
-    if (t == _i59.UserAnalytics) {
-      return _i59.UserAnalytics.fromJson(data) as T;
+    if (t == _i59.Tag) {
+      return _i59.Tag.fromJson(data) as T;
     }
-    if (t == _i60.UserPrivacySettings) {
-      return _i60.UserPrivacySettings.fromJson(data) as T;
+    if (t == _i60.UserAnalytics) {
+      return _i60.UserAnalytics.fromJson(data) as T;
     }
-    if (t == _i61.UserProfile) {
-      return _i61.UserProfile.fromJson(data) as T;
+    if (t == _i61.UserPrivacySettings) {
+      return _i61.UserPrivacySettings.fromJson(data) as T;
     }
-    if (t == _i62.UserProfileBundle) {
-      return _i62.UserProfileBundle.fromJson(data) as T;
+    if (t == _i62.UserProfile) {
+      return _i62.UserProfile.fromJson(data) as T;
     }
-    if (t == _i63.UserReputation) {
-      return _i63.UserReputation.fromJson(data) as T;
+    if (t == _i63.UserProfileBundle) {
+      return _i63.UserProfileBundle.fromJson(data) as T;
     }
-    if (t == _i64.UserRestriction) {
-      return _i64.UserRestriction.fromJson(data) as T;
+    if (t == _i64.UserReputation) {
+      return _i64.UserReputation.fromJson(data) as T;
     }
-    if (t == _i65.UserSafetyRelationship) {
-      return _i65.UserSafetyRelationship.fromJson(data) as T;
+    if (t == _i65.UserRestriction) {
+      return _i65.UserRestriction.fromJson(data) as T;
     }
-    if (t == _i66.VerificationRequest) {
-      return _i66.VerificationRequest.fromJson(data) as T;
+    if (t == _i66.UserSafetyRelationship) {
+      return _i66.UserSafetyRelationship.fromJson(data) as T;
+    }
+    if (t == _i67.VerificationRequest) {
+      return _i67.VerificationRequest.fromJson(data) as T;
     }
     if (t == _i1.getType<_i2.AcademicProfile?>()) {
       return (data != null ? _i2.AcademicProfile.fromJson(data) : null) as T;
@@ -576,73 +581,77 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i49.RoomResourceChunk?>()) {
       return (data != null ? _i49.RoomResourceChunk.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i50.ScheduledStudySession?>()) {
-      return (data != null ? _i50.ScheduledStudySession.fromJson(data) : null)
+    if (t == _i1.getType<_i50.RoomWhiteboardState?>()) {
+      return (data != null ? _i50.RoomWhiteboardState.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i51.StudyHistory?>()) {
-      return (data != null ? _i51.StudyHistory.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i52.StudyMaterial?>()) {
-      return (data != null ? _i52.StudyMaterial.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i53.StudyRoom?>()) {
-      return (data != null ? _i53.StudyRoom.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i54.StudySessionParticipant?>()) {
-      return (data != null ? _i54.StudySessionParticipant.fromJson(data) : null)
+    if (t == _i1.getType<_i51.ScheduledStudySession?>()) {
+      return (data != null ? _i51.ScheduledStudySession.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i55.SubscriptionOperation?>()) {
-      return (data != null ? _i55.SubscriptionOperation.fromJson(data) : null)
+    if (t == _i1.getType<_i52.StudyHistory?>()) {
+      return (data != null ? _i52.StudyHistory.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i53.StudyMaterial?>()) {
+      return (data != null ? _i53.StudyMaterial.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i54.StudyRoom?>()) {
+      return (data != null ? _i54.StudyRoom.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i55.StudySessionParticipant?>()) {
+      return (data != null ? _i55.StudySessionParticipant.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i56.Subscription?>()) {
-      return (data != null ? _i56.Subscription.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i57.Summary?>()) {
-      return (data != null ? _i57.Summary.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i58.Tag?>()) {
-      return (data != null ? _i58.Tag.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i59.UserAnalytics?>()) {
-      return (data != null ? _i59.UserAnalytics.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i60.UserPrivacySettings?>()) {
-      return (data != null ? _i60.UserPrivacySettings.fromJson(data) : null)
+    if (t == _i1.getType<_i56.SubscriptionOperation?>()) {
+      return (data != null ? _i56.SubscriptionOperation.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i61.UserProfile?>()) {
-      return (data != null ? _i61.UserProfile.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i57.Subscription?>()) {
+      return (data != null ? _i57.Subscription.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i62.UserProfileBundle?>()) {
-      return (data != null ? _i62.UserProfileBundle.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i58.Summary?>()) {
+      return (data != null ? _i58.Summary.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i63.UserReputation?>()) {
-      return (data != null ? _i63.UserReputation.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i59.Tag?>()) {
+      return (data != null ? _i59.Tag.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i64.UserRestriction?>()) {
-      return (data != null ? _i64.UserRestriction.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i60.UserAnalytics?>()) {
+      return (data != null ? _i60.UserAnalytics.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i65.UserSafetyRelationship?>()) {
-      return (data != null ? _i65.UserSafetyRelationship.fromJson(data) : null)
+    if (t == _i1.getType<_i61.UserPrivacySettings?>()) {
+      return (data != null ? _i61.UserPrivacySettings.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i66.VerificationRequest?>()) {
-      return (data != null ? _i66.VerificationRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i62.UserProfile?>()) {
+      return (data != null ? _i62.UserProfile.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i63.UserProfileBundle?>()) {
+      return (data != null ? _i63.UserProfileBundle.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i64.UserReputation?>()) {
+      return (data != null ? _i64.UserReputation.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i65.UserRestriction?>()) {
+      return (data != null ? _i65.UserRestriction.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i66.UserSafetyRelationship?>()) {
+      return (data != null ? _i66.UserSafetyRelationship.fromJson(data) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i67.VerificationRequest?>()) {
+      return (data != null ? _i67.VerificationRequest.fromJson(data) : null)
           as T;
     }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList() as T;
     }
-    if (t == List<_i52.StudyMaterial>) {
+    if (t == List<_i53.StudyMaterial>) {
       return (data as List)
-          .map((e) => deserialize<_i52.StudyMaterial>(e))
+          .map((e) => deserialize<_i53.StudyMaterial>(e))
           .toList() as T;
     }
-    if (t == List<_i57.Summary>) {
-      return (data as List).map((e) => deserialize<_i57.Summary>(e)).toList()
+    if (t == List<_i58.Summary>) {
+      return (data as List).map((e) => deserialize<_i58.Summary>(e)).toList()
           as T;
     }
     if (t == _i1.getType<List<String>?>()) {
@@ -653,13 +662,13 @@ class Protocol extends _i1.SerializationManager {
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
-    if (t == List<_i67.AcademicWriting>) {
+    if (t == List<_i68.AcademicWriting>) {
       return (data as List)
-          .map((e) => deserialize<_i67.AcademicWriting>(e))
+          .map((e) => deserialize<_i68.AcademicWriting>(e))
           .toList() as T;
     }
-    if (t == List<_i68.Question>) {
-      return (data as List).map((e) => deserialize<_i68.Question>(e)).toList()
+    if (t == List<_i69.Question>) {
+      return (data as List).map((e) => deserialize<_i69.Question>(e)).toList()
           as T;
     }
     if (t == List<String>) {
@@ -670,138 +679,138 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<String>(e)).toList()
           : null) as T;
     }
-    if (t == List<_i69.UserAnalytics>) {
+    if (t == List<_i70.UserAnalytics>) {
       return (data as List)
-          .map((e) => deserialize<_i69.UserAnalytics>(e))
+          .map((e) => deserialize<_i70.UserAnalytics>(e))
           .toList() as T;
     }
-    if (t == List<_i70.Institution>) {
+    if (t == List<_i71.Institution>) {
       return (data as List)
-          .map((e) => deserialize<_i70.Institution>(e))
+          .map((e) => deserialize<_i71.Institution>(e))
           .toList() as T;
     }
-    if (t == List<_i71.InstitutionMembership>) {
+    if (t == List<_i72.InstitutionMembership>) {
       return (data as List)
-          .map((e) => deserialize<_i71.InstitutionMembership>(e))
+          .map((e) => deserialize<_i72.InstitutionMembership>(e))
           .toList() as T;
     }
-    if (t == List<_i72.VerificationRequest>) {
+    if (t == List<_i73.VerificationRequest>) {
       return (data as List)
-          .map((e) => deserialize<_i72.VerificationRequest>(e))
+          .map((e) => deserialize<_i73.VerificationRequest>(e))
           .toList() as T;
     }
-    if (t == List<_i73.StudyRoom>) {
-      return (data as List).map((e) => deserialize<_i73.StudyRoom>(e)).toList()
+    if (t == List<_i74.StudyRoom>) {
+      return (data as List).map((e) => deserialize<_i74.StudyRoom>(e)).toList()
           as T;
     }
-    if (t == List<_i74.DiscussionPost>) {
+    if (t == List<_i75.DiscussionPost>) {
       return (data as List)
-          .map((e) => deserialize<_i74.DiscussionPost>(e))
+          .map((e) => deserialize<_i75.DiscussionPost>(e))
           .toList() as T;
     }
-    if (t == List<_i75.Challenge>) {
-      return (data as List).map((e) => deserialize<_i75.Challenge>(e)).toList()
+    if (t == List<_i76.Challenge>) {
+      return (data as List).map((e) => deserialize<_i76.Challenge>(e)).toList()
           as T;
     }
-    if (t == List<_i76.RoomResource>) {
+    if (t == List<_i77.RoomResource>) {
       return (data as List)
-          .map((e) => deserialize<_i76.RoomResource>(e))
+          .map((e) => deserialize<_i77.RoomResource>(e))
           .toList() as T;
     }
-    if (t == List<_i77.RoomResourceChunk>) {
+    if (t == List<_i78.RoomResourceChunk>) {
       return (data as List)
-          .map((e) => deserialize<_i77.RoomResourceChunk>(e))
+          .map((e) => deserialize<_i78.RoomResourceChunk>(e))
           .toList() as T;
     }
-    if (t == List<_i78.ChallengeTeam>) {
+    if (t == List<_i79.ChallengeTeam>) {
       return (data as List)
-          .map((e) => deserialize<_i78.ChallengeTeam>(e))
+          .map((e) => deserialize<_i79.ChallengeTeam>(e))
           .toList() as T;
     }
-    if (t == List<_i79.ChallengeTeamMember>) {
+    if (t == List<_i80.ChallengeTeamMember>) {
       return (data as List)
-          .map((e) => deserialize<_i79.ChallengeTeamMember>(e))
+          .map((e) => deserialize<_i80.ChallengeTeamMember>(e))
           .toList() as T;
     }
-    if (t == List<_i80.ChallengeMilestone>) {
+    if (t == List<_i81.ChallengeMilestone>) {
       return (data as List)
-          .map((e) => deserialize<_i80.ChallengeMilestone>(e))
+          .map((e) => deserialize<_i81.ChallengeMilestone>(e))
           .toList() as T;
     }
-    if (t == List<_i81.ChallengeProgressUpdate>) {
+    if (t == List<_i82.ChallengeProgressUpdate>) {
       return (data as List)
-          .map((e) => deserialize<_i81.ChallengeProgressUpdate>(e))
+          .map((e) => deserialize<_i82.ChallengeProgressUpdate>(e))
           .toList() as T;
     }
-    if (t == List<_i82.Comment>) {
-      return (data as List).map((e) => deserialize<_i82.Comment>(e)).toList()
+    if (t == List<_i83.Comment>) {
+      return (data as List).map((e) => deserialize<_i83.Comment>(e)).toList()
           as T;
     }
-    if (t == List<_i83.RoomChatMessage>) {
+    if (t == List<_i84.RoomChatMessage>) {
       return (data as List)
-          .map((e) => deserialize<_i83.RoomChatMessage>(e))
+          .map((e) => deserialize<_i84.RoomChatMessage>(e))
           .toList() as T;
     }
-    if (t == List<_i84.RoomAiAnswer>) {
+    if (t == List<_i85.RoomAiAnswer>) {
       return (data as List)
-          .map((e) => deserialize<_i84.RoomAiAnswer>(e))
+          .map((e) => deserialize<_i85.RoomAiAnswer>(e))
           .toList() as T;
     }
-    if (t == List<_i85.CollaborationPresence>) {
+    if (t == List<_i86.CollaborationPresence>) {
       return (data as List)
-          .map((e) => deserialize<_i85.CollaborationPresence>(e))
+          .map((e) => deserialize<_i86.CollaborationPresence>(e))
           .toList() as T;
     }
-    if (t == List<_i86.ScheduledStudySession>) {
+    if (t == List<_i87.ScheduledStudySession>) {
       return (data as List)
-          .map((e) => deserialize<_i86.ScheduledStudySession>(e))
+          .map((e) => deserialize<_i87.ScheduledStudySession>(e))
           .toList() as T;
     }
-    if (t == List<_i87.ContentReport>) {
+    if (t == List<_i88.ContentReport>) {
       return (data as List)
-          .map((e) => deserialize<_i87.ContentReport>(e))
+          .map((e) => deserialize<_i88.ContentReport>(e))
           .toList() as T;
     }
-    if (t == List<_i88.AuditEvent>) {
-      return (data as List).map((e) => deserialize<_i88.AuditEvent>(e)).toList()
+    if (t == List<_i89.AuditEvent>) {
+      return (data as List).map((e) => deserialize<_i89.AuditEvent>(e)).toList()
           as T;
     }
-    if (t == List<_i89.ModerationAppeal>) {
+    if (t == List<_i90.ModerationAppeal>) {
       return (data as List)
-          .map((e) => deserialize<_i89.ModerationAppeal>(e))
+          .map((e) => deserialize<_i90.ModerationAppeal>(e))
           .toList() as T;
     }
-    if (t == List<_i90.CollaborativeDocument>) {
+    if (t == List<_i91.CollaborativeDocument>) {
       return (data as List)
-          .map((e) => deserialize<_i90.CollaborativeDocument>(e))
+          .map((e) => deserialize<_i91.CollaborativeDocument>(e))
           .toList() as T;
     }
-    if (t == List<_i91.UserSafetyRelationship>) {
+    if (t == List<_i92.UserSafetyRelationship>) {
       return (data as List)
-          .map((e) => deserialize<_i91.UserSafetyRelationship>(e))
+          .map((e) => deserialize<_i92.UserSafetyRelationship>(e))
           .toList() as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as T;
     }
-    if (t == List<_i92.Conversation>) {
+    if (t == List<_i93.Conversation>) {
       return (data as List)
-          .map((e) => deserialize<_i92.Conversation>(e))
+          .map((e) => deserialize<_i93.Conversation>(e))
           .toList() as T;
     }
-    if (t == List<_i93.DirectMessage>) {
+    if (t == List<_i94.DirectMessage>) {
       return (data as List)
-          .map((e) => deserialize<_i93.DirectMessage>(e))
+          .map((e) => deserialize<_i94.DirectMessage>(e))
           .toList() as T;
     }
-    if (t == List<_i94.ConversationReadReceipt>) {
+    if (t == List<_i95.ConversationReadReceipt>) {
       return (data as List)
-          .map((e) => deserialize<_i94.ConversationReadReceipt>(e))
+          .map((e) => deserialize<_i95.ConversationReadReceipt>(e))
           .toList() as T;
     }
-    if (t == List<_i95.Notification>) {
+    if (t == List<_i96.Notification>) {
       return (data as List)
-          .map((e) => deserialize<_i95.Notification>(e))
+          .map((e) => deserialize<_i96.Notification>(e))
           .toList() as T;
     }
     if (t == Map<String, int>) {
@@ -809,29 +818,29 @@ class Protocol extends _i1.SerializationManager {
         (k, v) => MapEntry(deserialize<String>(k), deserialize<int>(v)),
       ) as T;
     }
-    if (t == List<_i96.Opportunity>) {
+    if (t == List<_i97.Opportunity>) {
       return (data as List)
-          .map((e) => deserialize<_i96.Opportunity>(e))
+          .map((e) => deserialize<_i97.Opportunity>(e))
           .toList() as T;
     }
-    if (t == List<_i97.OpportunitySave>) {
+    if (t == List<_i98.OpportunitySave>) {
       return (data as List)
-          .map((e) => deserialize<_i97.OpportunitySave>(e))
+          .map((e) => deserialize<_i98.OpportunitySave>(e))
           .toList() as T;
     }
-    if (t == List<_i98.OpportunityAlert>) {
+    if (t == List<_i99.OpportunityAlert>) {
       return (data as List)
-          .map((e) => deserialize<_i98.OpportunityAlert>(e))
+          .map((e) => deserialize<_i99.OpportunityAlert>(e))
           .toList() as T;
     }
-    if (t == List<_i99.OpportunityApplicationTracker>) {
+    if (t == List<_i100.OpportunityApplicationTracker>) {
       return (data as List)
-          .map((e) => deserialize<_i99.OpportunityApplicationTracker>(e))
+          .map((e) => deserialize<_i100.OpportunityApplicationTracker>(e))
           .toList() as T;
     }
-    if (t == List<_i100.StudyMaterial>) {
+    if (t == List<_i101.StudyMaterial>) {
       return (data as List)
-          .map((e) => deserialize<_i100.StudyMaterial>(e))
+          .map((e) => deserialize<_i101.StudyMaterial>(e))
           .toList() as T;
     }
     if (t == Map<String, dynamic>) {
@@ -847,12 +856,12 @@ class Protocol extends _i1.SerializationManager {
             )
           : null) as T;
     }
-    if (t == List<_i101.Summary>) {
-      return (data as List).map((e) => deserialize<_i101.Summary>(e)).toList()
+    if (t == List<_i102.Summary>) {
+      return (data as List).map((e) => deserialize<_i102.Summary>(e)).toList()
           as T;
     }
     try {
-      return _i102.Protocol().deserialize<T>(data, t);
+      return _i103.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -907,23 +916,24 @@ class Protocol extends _i1.SerializationManager {
       _i47.RoomMembership => 'RoomMembership',
       _i48.RoomResource => 'RoomResource',
       _i49.RoomResourceChunk => 'RoomResourceChunk',
-      _i50.ScheduledStudySession => 'ScheduledStudySession',
-      _i51.StudyHistory => 'StudyHistory',
-      _i52.StudyMaterial => 'StudyMaterial',
-      _i53.StudyRoom => 'StudyRoom',
-      _i54.StudySessionParticipant => 'StudySessionParticipant',
-      _i55.SubscriptionOperation => 'SubscriptionOperation',
-      _i56.Subscription => 'Subscription',
-      _i57.Summary => 'Summary',
-      _i58.Tag => 'Tag',
-      _i59.UserAnalytics => 'UserAnalytics',
-      _i60.UserPrivacySettings => 'UserPrivacySettings',
-      _i61.UserProfile => 'UserProfile',
-      _i62.UserProfileBundle => 'UserProfileBundle',
-      _i63.UserReputation => 'UserReputation',
-      _i64.UserRestriction => 'UserRestriction',
-      _i65.UserSafetyRelationship => 'UserSafetyRelationship',
-      _i66.VerificationRequest => 'VerificationRequest',
+      _i50.RoomWhiteboardState => 'RoomWhiteboardState',
+      _i51.ScheduledStudySession => 'ScheduledStudySession',
+      _i52.StudyHistory => 'StudyHistory',
+      _i53.StudyMaterial => 'StudyMaterial',
+      _i54.StudyRoom => 'StudyRoom',
+      _i55.StudySessionParticipant => 'StudySessionParticipant',
+      _i56.SubscriptionOperation => 'SubscriptionOperation',
+      _i57.Subscription => 'Subscription',
+      _i58.Summary => 'Summary',
+      _i59.Tag => 'Tag',
+      _i60.UserAnalytics => 'UserAnalytics',
+      _i61.UserPrivacySettings => 'UserPrivacySettings',
+      _i62.UserProfile => 'UserProfile',
+      _i63.UserProfileBundle => 'UserProfileBundle',
+      _i64.UserReputation => 'UserReputation',
+      _i65.UserRestriction => 'UserRestriction',
+      _i66.UserSafetyRelationship => 'UserSafetyRelationship',
+      _i67.VerificationRequest => 'VerificationRequest',
       _ => null,
     };
   }
@@ -1034,42 +1044,44 @@ class Protocol extends _i1.SerializationManager {
         return 'RoomResource';
       case _i49.RoomResourceChunk():
         return 'RoomResourceChunk';
-      case _i50.ScheduledStudySession():
+      case _i50.RoomWhiteboardState():
+        return 'RoomWhiteboardState';
+      case _i51.ScheduledStudySession():
         return 'ScheduledStudySession';
-      case _i51.StudyHistory():
+      case _i52.StudyHistory():
         return 'StudyHistory';
-      case _i52.StudyMaterial():
+      case _i53.StudyMaterial():
         return 'StudyMaterial';
-      case _i53.StudyRoom():
+      case _i54.StudyRoom():
         return 'StudyRoom';
-      case _i54.StudySessionParticipant():
+      case _i55.StudySessionParticipant():
         return 'StudySessionParticipant';
-      case _i55.SubscriptionOperation():
+      case _i56.SubscriptionOperation():
         return 'SubscriptionOperation';
-      case _i56.Subscription():
+      case _i57.Subscription():
         return 'Subscription';
-      case _i57.Summary():
+      case _i58.Summary():
         return 'Summary';
-      case _i58.Tag():
+      case _i59.Tag():
         return 'Tag';
-      case _i59.UserAnalytics():
+      case _i60.UserAnalytics():
         return 'UserAnalytics';
-      case _i60.UserPrivacySettings():
+      case _i61.UserPrivacySettings():
         return 'UserPrivacySettings';
-      case _i61.UserProfile():
+      case _i62.UserProfile():
         return 'UserProfile';
-      case _i62.UserProfileBundle():
+      case _i63.UserProfileBundle():
         return 'UserProfileBundle';
-      case _i63.UserReputation():
+      case _i64.UserReputation():
         return 'UserReputation';
-      case _i64.UserRestriction():
+      case _i65.UserRestriction():
         return 'UserRestriction';
-      case _i65.UserSafetyRelationship():
+      case _i66.UserSafetyRelationship():
         return 'UserSafetyRelationship';
-      case _i66.VerificationRequest():
+      case _i67.VerificationRequest():
         return 'VerificationRequest';
     }
-    className = _i102.Protocol().getClassNameForObject(data);
+    className = _i103.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -1226,60 +1238,63 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName == 'RoomResourceChunk') {
       return deserialize<_i49.RoomResourceChunk>(data['data']);
     }
+    if (dataClassName == 'RoomWhiteboardState') {
+      return deserialize<_i50.RoomWhiteboardState>(data['data']);
+    }
     if (dataClassName == 'ScheduledStudySession') {
-      return deserialize<_i50.ScheduledStudySession>(data['data']);
+      return deserialize<_i51.ScheduledStudySession>(data['data']);
     }
     if (dataClassName == 'StudyHistory') {
-      return deserialize<_i51.StudyHistory>(data['data']);
+      return deserialize<_i52.StudyHistory>(data['data']);
     }
     if (dataClassName == 'StudyMaterial') {
-      return deserialize<_i52.StudyMaterial>(data['data']);
+      return deserialize<_i53.StudyMaterial>(data['data']);
     }
     if (dataClassName == 'StudyRoom') {
-      return deserialize<_i53.StudyRoom>(data['data']);
+      return deserialize<_i54.StudyRoom>(data['data']);
     }
     if (dataClassName == 'StudySessionParticipant') {
-      return deserialize<_i54.StudySessionParticipant>(data['data']);
+      return deserialize<_i55.StudySessionParticipant>(data['data']);
     }
     if (dataClassName == 'SubscriptionOperation') {
-      return deserialize<_i55.SubscriptionOperation>(data['data']);
+      return deserialize<_i56.SubscriptionOperation>(data['data']);
     }
     if (dataClassName == 'Subscription') {
-      return deserialize<_i56.Subscription>(data['data']);
+      return deserialize<_i57.Subscription>(data['data']);
     }
     if (dataClassName == 'Summary') {
-      return deserialize<_i57.Summary>(data['data']);
+      return deserialize<_i58.Summary>(data['data']);
     }
     if (dataClassName == 'Tag') {
-      return deserialize<_i58.Tag>(data['data']);
+      return deserialize<_i59.Tag>(data['data']);
     }
     if (dataClassName == 'UserAnalytics') {
-      return deserialize<_i59.UserAnalytics>(data['data']);
+      return deserialize<_i60.UserAnalytics>(data['data']);
     }
     if (dataClassName == 'UserPrivacySettings') {
-      return deserialize<_i60.UserPrivacySettings>(data['data']);
+      return deserialize<_i61.UserPrivacySettings>(data['data']);
     }
     if (dataClassName == 'UserProfile') {
-      return deserialize<_i61.UserProfile>(data['data']);
+      return deserialize<_i62.UserProfile>(data['data']);
     }
     if (dataClassName == 'UserProfileBundle') {
-      return deserialize<_i62.UserProfileBundle>(data['data']);
+      return deserialize<_i63.UserProfileBundle>(data['data']);
     }
     if (dataClassName == 'UserReputation') {
-      return deserialize<_i63.UserReputation>(data['data']);
+      return deserialize<_i64.UserReputation>(data['data']);
     }
     if (dataClassName == 'UserRestriction') {
-      return deserialize<_i64.UserRestriction>(data['data']);
+      return deserialize<_i65.UserRestriction>(data['data']);
     }
     if (dataClassName == 'UserSafetyRelationship') {
-      return deserialize<_i65.UserSafetyRelationship>(data['data']);
+      return deserialize<_i66.UserSafetyRelationship>(data['data']);
     }
     if (dataClassName == 'VerificationRequest') {
-      return deserialize<_i66.VerificationRequest>(data['data']);
+      return deserialize<_i67.VerificationRequest>(data['data']);
     }
     if (dataClassName.startsWith('serverpod_auth.')) {
       data['className'] = dataClassName.substring(15);
-      return _i102.Protocol().deserializeByClassName(data);
+      return _i103.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -1294,7 +1309,7 @@ class Protocol extends _i1.SerializationManager {
       return null;
     }
     try {
-      return _i102.Protocol().mapRecordToJson(record);
+      return _i103.Protocol().mapRecordToJson(record);
     } catch (_) {}
     throw Exception('Unsupported record type ${record.runtimeType}');
   }
